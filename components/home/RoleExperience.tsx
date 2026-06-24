@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import type { LucideIcon } from "lucide-react";
 import {
   GraduationCap,
   Users,
@@ -20,8 +21,6 @@ import {
   Globe,
   Sparkles,
   ArrowRight,
-  Play,
-  CheckCircle2,
   Zap
 } from 'lucide-react';
 
@@ -32,11 +31,11 @@ interface RoleData {
   title: string;
   subtitle: string;
   description: string;
-  icon: any;
+  icon: LucideIcon;
   color: string;
   gradient: string;
   features: {
-    icon: any;
+    icon: LucideIcon;
     title: string;
     description: string;
   }[];
@@ -53,7 +52,7 @@ interface RoleData {
       title: string;
       value: string;
       change: string;
-      icon: any;
+      icon: LucideIcon;
       color: string;
     }[];
     charts: {

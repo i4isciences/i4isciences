@@ -53,7 +53,7 @@ export default function Footer() {
               
               <p className="text-base leading-relaxed text-slate-400 max-w-lg">
                 We design comprehensive learning networks for children, immigrant families, 
-                and educators worldwide. Our focus isn't on maximizing automation—it's on 
+                and educators worldwide. Our focus isn&apos;t on maximizing automation—it&apos;s on 
                 deepening human capability, cultural transition, and authentic academic success.
               </p>
             </div>

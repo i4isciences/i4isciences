@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { 
   Sparkles, 
   Calendar, 
@@ -11,14 +11,15 @@ import {
 
 export default function FinalCTASection() {
   // Pencil Drawing Animation Settings
-  const pencilVariants = {
+  const pencilVariants: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: {
       pathLength: 1,
       opacity: 1,
       transition: {
         duration: 1.8,
-        ease: "easeInOut",
+        // Framer Motion expects easing as an array or function, not a string
+        ease: [0.42, 0, 0.58, 1],
         delay: 0.2,
       },
     },

@@ -7,6 +7,9 @@ import {
   ArrowRight, Play,
 } from "lucide-react";
 
+/* Easing used for framer-motion transitions */
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 /* ─────────────────────────────────────────
    Scrolling ticker data
 ───────────────────────────────────────── */
@@ -278,7 +281,7 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.85, ease: EASE }}
           style={{
             fontFamily: "'Geist','Geist Variable',sans-serif",
             fontWeight: 800,
@@ -300,7 +303,7 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.75, delay: 0.14, ease: EASE }}
           style={{
             fontFamily: "'Geist','Geist Variable',sans-serif",
             fontSize: "clamp(0.88rem,1.35vw,1.05rem)",
@@ -320,7 +323,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.65, delay: 0.26, ease: EASE }}
           style={{
             display: "flex",
             alignItems: "center",

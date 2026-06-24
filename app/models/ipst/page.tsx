@@ -254,7 +254,16 @@ const langs = [
   { code: "ZH", name: "中文", phrase: "欢迎回家!", bg: "#DCEAF8", text: "#0A2E8A" },
 ];
 
-const stories = [
+type Story = {
+  name: string;
+  role: string;
+  story: string;
+  bg: string;
+  rot: string;
+  tag?: string;
+};
+
+const stories: Story[] = [
   { name: "Maria S.", role: "Parent — Colombian Family", story: "When we arrived I understood nothing about how the school system worked. IPST gave me a mentor who spoke Spanish and walked me through every single step. Today my daughter is on the honor roll.", bg: "#DCEAF8", rot: "-1.5deg" },
   { name: "Tariq A.", role: "Student — Syrian Family", story: "In my first week I was afraid to speak in class. IPST gave me language tools and a study partner. I went from completely silent to presenting in front of the class in just three months.", bg: "#BFD9B8", rot: "1.2deg" },
   { name: "The Nguyen Family", role: "Vietnamese Family — Canada", story: "As a family we were lost. IPST helped all of us — our children found a study group and we joined parent workshops. It became our community. We are no longer alone.", bg: "#FDE6D2", rot: "-0.8deg" },
@@ -658,7 +667,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                 marginBottom: "1rem",
                 boxShadow: "0 6px 16px rgba(245,166,35,0.25)"
               }}>
-                YOUR FAMILY'S JOURNEY
+                YOUR FAMILY&apos;S JOURNEY
               </div>
               <h2 style={{ 
                 fontSize: "clamp(2.4rem, 4.8vw, 3.9rem)", 
@@ -1486,7 +1495,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                 Every Transition Has a Story. We Guide <G>Every Single One.</G>
               </h2>
               <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 15, lineHeight: 1.8, marginBottom: 40 }}>
-                From different horizons, languages, and cultures — immigrant families cross oceans to build new paths. IPST stands as the bridge between your legacy and your child's brilliant future.
+                From different horizons, languages, and cultures — immigrant families cross oceans to build new paths. IPST stands as the bridge between your legacy and your child&apos;s brilliant future.
               </p>
               <div className="stat-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 {[
@@ -1664,7 +1673,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                   </div>
 
                   <p style={{ color: "#3B4A6B", fontSize: 14, lineHeight: 1.75, flex: 1, marginBottom: 20, fontStyle: "italic" }}>
-                    "{s.story}"
+                    &quot;{s.story}&quot;
                   </p>
 
                   <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 16, borderTop: "1px solid rgba(10,46,138,0.1)" }}>

@@ -4,6 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 
+// Shared easing curve for framer-motion transitions
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 /* ═══════════════════════════════════
    TYPEWRITER — heading only
 ═══════════════════════════════════ */
@@ -27,13 +30,16 @@ function Typewriter({ segments, delay = 0.8 }: { segments: { text: string; color
     return () => clearTimeout(t);
   }, [go, count, full]);
 
-  let remaining = count;
   const rendered = segments.map((seg, si) => {
-    const chars = seg.text.slice(0, Math.max(0, remaining));
-    remaining = Math.max(0, remaining - seg.text.length);
+    const charsBefore = segments
+      .slice(0, si)
+      .reduce((total, current) => total + current.text.length, 0);
+  
+    const visibleChars = Math.max(0, count - charsBefore);
+  
     return (
       <span key={si} style={{ color: seg.color }}>
-        {chars}
+        {seg.text.slice(0, visibleChars)}
       </span>
     );
   });
@@ -222,7 +228,7 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, delay: index * 0.11, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, delay: index * 0.11, ease: EASE }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -252,7 +258,7 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
           src={card.imageUrl}
           alt={card.imageAlt}
           animate={{ scale: hovered ? 1.06 : 1 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.55, ease: EASE }}
           style={{
             width: "100%",
             height: "100%",

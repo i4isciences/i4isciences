@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 /* ─────────────────────────────────────────────
    ICON COMPONENTS (fully custom SVG, no emojis)
@@ -570,11 +570,8 @@ const PlatformPreview = () => (
    ───────────────────────────────────────────── */
 export default function OneCentTutorsPage() {
   const [activeSubject, setActiveSubject] = useState("All");
-  const [heroVisible, setHeroVisible] = useState(false);
-
-  useEffect(() => {
-    setHeroVisible(true);
-  }, []);
+  const [heroVisible] = useState(true);
+  
 
   const filteredTutors = activeSubject === "All" ? tutors : tutors.filter(t =>
     t.subject.toLowerCase().includes(activeSubject.toLowerCase())
@@ -775,26 +772,88 @@ style={{
                 Like Airbnb connects travellers with unique homes worldwide, OneCent Tutors connects learners with the perfect educator — wherever they are, whatever they need.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                {[
-                  [<ShieldIcon size={18} />, "Verified Tutors", "Every educator is background-checked, degree-verified, and skills-assessed before they can teach."],
-                  [<VideoIcon size={18} />, "Live Learning", "Real-time classes with interactive whiteboards, screen sharing and session recordings."],
-                  [<DollarIcon size={18} />, "Secure Payments", "Stripe-powered payments with escrow protection. Pay only when you're happy."],
-                  [<CalendarIcon size={18} />, "Flexible Schedules", "Book 1-hour or recurring sessions. Change, reschedule or cancel anytime."],
-                  [<GlobeIcon size={18} />, "Worldwide Access", "Connect with tutors across 100+ countries in multiple languages."],
-                ].map(([icon, title, desc]) => (
-                  <div key={title as string} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                    <div style={{
-                      width: 42, height: 42, borderRadius: 12,
-                      background: C.white, display: "flex", alignItems: "center", justifyContent: "center",
-                      color: C.navy, flexShrink: 0, boxShadow: "0 2px 12px rgba(27,45,91,0.08)",
-                      border: `1px solid ${C.border}`,
-                    }}>{icon as React.ReactNode}</div>
-                    <div>
-                      <div style={{ fontWeight: 700, fontSize: 14, color: C.navy }}>{title as string}</div>
-                      <div style={{ fontSize: 13, color: C.textMuted, marginTop: 3, lineHeight: 1.6 }}>{desc as string}</div>
-                    </div>
-                  </div>
-                ))}
+              {[
+  {
+    key: "verified",
+    icon: <ShieldIcon size={18} />,
+    title: "Verified Tutors",
+    desc: "Every educator is background-checked, degree-verified, and skills-assessed before they can teach.",
+  },
+  {
+    key: "live",
+    icon: <VideoIcon size={18} />,
+    title: "Live Learning",
+    desc: "Real-time classes with interactive whiteboards, screen sharing and session recordings.",
+  },
+  {
+    key: "payments",
+    icon: <DollarIcon size={18} />,
+    title: "Secure Payments",
+    desc: "Stripe-powered payments with escrow protection. Pay only when you're happy.",
+  },
+  {
+    key: "schedule",
+    icon: <CalendarIcon size={18} />,
+    title: "Flexible Schedules",
+    desc: "Book 1-hour or recurring sessions. Change, reschedule or cancel anytime.",
+  },
+  {
+    key: "global",
+    icon: <GlobeIcon size={18} />,
+    title: "Worldwide Access",
+    desc: "Connect with tutors across 100+ countries in multiple languages.",
+  },
+].map(({ key, icon, title, desc }) => (
+  <div
+    key={key}
+    style={{
+      display: "flex",
+      gap: 16,
+      alignItems: "flex-start",
+    }}
+  >
+    <div
+      style={{
+        width: 42,
+        height: 42,
+        borderRadius: 12,
+        background: C.white,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: C.navy,
+        flexShrink: 0,
+        boxShadow: "0 2px 12px rgba(27,45,91,0.08)",
+        border: `1px solid ${C.border}`,
+      }}
+    >
+      {icon}
+    </div>
+
+    <div>
+      <div
+        style={{
+          fontWeight: 700,
+          fontSize: 14,
+          color: C.navy,
+        }}
+      >
+        {title}
+      </div>
+
+      <div
+        style={{
+          fontSize: 13,
+          color: C.textMuted,
+          marginTop: 3,
+          lineHeight: 1.6,
+        }}
+      >
+        {desc}
+      </div>
+    </div>
+  </div>
+))}
               </div>
             </div>
           </div>
@@ -895,20 +954,31 @@ style={{
                 }} />
             </div>
             {[
-              [<GlobeIcon size={14} />, "Country"],
-              [<GlobeIcon size={14} />, "Language"],
-              [<CalendarIcon size={14} />, "Availability"],
-              [<DollarIcon size={14} />, "Price"],
-            ].map(([icon, label]) => (
-              <div key={label as string} style={{
-                display: "flex", alignItems: "center", gap: 6,
-                background: C.white, border: `1.5px solid ${C.border}`,
-                borderRadius: 12, padding: "10px 14px",
-                fontSize: 13, color: C.navy, fontWeight: 600, cursor: "pointer",
-              }}>
-                {icon as React.ReactNode} {label as string}
-              </div>
-            ))}
+  { key: "country", icon: <GlobeIcon size={14} />, label: "Country" },
+  { key: "language", icon: <GlobeIcon size={14} />, label: "Language" },
+  { key: "availability", icon: <CalendarIcon size={14} />, label: "Availability" },
+  { key: "price", icon: <DollarIcon size={14} />, label: "Price" },
+].map(({ key, icon, label }) => (
+  <div
+    key={key}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
+      background: C.white,
+      border: `1.5px solid ${C.border}`,
+      borderRadius: 12,
+      padding: "10px 14px",
+      fontSize: 13,
+      color: C.navy,
+      fontWeight: 600,
+      cursor: "pointer",
+    }}
+  >
+    {icon}
+    {label}
+  </div>
+))}
             <button style={{
               background: C.navy, color: C.white, border: "none",
               borderRadius: 12, padding: "12px 24px", fontSize: 13, fontWeight: 700,
@@ -923,7 +993,7 @@ style={{
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 36 }}>
             {subjects.map(s => (
               <button key={s} onClick={() => setActiveSubject(s)} style={{
-                padding: "8px 18px", borderRadius: 100, border: "none",
+                padding: "8px 18px", borderRadius: 100,
                 background: activeSubject === s ? C.navy : C.white,
                 color: activeSubject === s ? C.white : C.navy,
                 fontSize: 13, fontWeight: 600, cursor: "pointer",

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, JSX } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
 /* ═══════════════════════════════════════
@@ -636,7 +636,7 @@ function AIPowersSection() {
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.22 }}>
             <Body center style={{ maxWidth: 540, margin: "1.2rem auto 0" }}>
-              AI isn't a separate product. It's the invisible layer that makes every interaction smarter, faster, and more personal.
+              AI isn&apos;t a separate product. It&apos;s the invisible layer that makes every interaction smarter, faster, and more personal.
             </Body>
           </motion.div>
         </div>

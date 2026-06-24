@@ -517,10 +517,26 @@ const GeistStyle = () => (
 /* ─────────────────────────────────────────────
    CUSTOM SVG ICON LIBRARY  (zero emojis)
 ───────────────────────────────────────────── */
-const Icon = ({ name, size = 22, color = "currentColor", strokeWidth = 1.7 }) => {
-  const s = { width: size, height: size, display: "block" };
-  const p = { stroke: color, strokeWidth, strokeLinecap: "round", strokeLinejoin: "round", fill: "none" };
-  switch (name) {
+type IconProps = {
+  name: string;
+  size?: number;
+  color?: string;
+  strokeWidth?: number;
+};
+
+const Icon = ({
+  name,
+  size = 22,
+  color = "currentColor",
+  strokeWidth = 1.7,
+}: IconProps) => {  const s = { width: size, height: size, display: "block" };
+const p = {
+  stroke: color,
+  strokeWidth,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  fill: "none" as const,
+};  switch (name) {
     /* nav live dot */
     case "live": return (
       <svg style={s} viewBox="0 0 24 24" {...p}>
@@ -819,7 +835,12 @@ function useReveal() {
 /* ─────────────────────────────────────────────
    ANIMATED COUNTER
 ───────────────────────────────────────────── */
-function Counter({ target, suffix = "" }) {
+type CounterProps = {
+  target: number;
+  suffix?: string;
+};
+
+function Counter({ target, suffix = "" }: CounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const started = useRef(false);
@@ -1183,7 +1204,7 @@ export default function LabTricksPage() {
                   Your <span style={{color:_gold}}>Moment.</span>
                 </h2>
                 <p className="section-sub">
-                  Whether you're preparing for board exams or hungry to understand how the world works, LabTricks puts a fully equipped laboratory within reach.
+                  Whether you&apos;re preparing for board exams or hungry to understand how the world works, LabTricks puts a fully equipped laboratory within reach.
                 </p>
               </div>
               <div className="student-cards">
@@ -1400,8 +1421,8 @@ export default function LabTricksPage() {
           <div className="fade-up">
             <span className="section-label">Where It Leads</span>
             <h2 className="section-title" style={{color:"#fff"}}>
-              Today's Experiment.<br/>
-              <span style={{color:_gold}}>Tomorrow's Innovation.</span>
+              Today&apos;s Experiment.<br/>
+              <span style={{color:_gold}}>Tomorrow&apos;s Innovation.</span>
             </h2>
             <p className="careers-sub">
               Every great scientist, engineer, and doctor once held a test tube for the first time.<br/>

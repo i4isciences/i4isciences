@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { LucideIcon } from "lucide-react";
 import { ArrowDown, Users, BookOpen, Globe2, Sparkles, 
   Award, 
   Heart, 
@@ -13,191 +14,10 @@ import { useRef } from "react";
 
 
 
-export default function AboutHero() {
-  const COUNTRIES = [
-    {
-      flag: "🇺🇸",
-      name: "United States",
-      short: "USA",
-      detail: "Serving immigrant families, K–12 districts, and university programs across 48 states.",
-      color: "#0a2e8a",
-    },
-    {
-      flag: "🇨🇦",
-      name: "Canada",
-      short: "CANADA",
-      detail: "Supporting newcomer integration programs, bilingual education, and provincial school boards.",
-      color: "#c8102e",
-    },
-    {
-      flag: "🇮🇳",
-      name: "India",
-      short: "INDIA",
-      detail: "Powering teacher certification, competitive exam prep, and rural EdTech infrastructure.",
-      color: "#f5a623",
-    },
-    {
-      flag: "🇿🇦",
-      name: "South Africa",
-      short: "S. AFRICA",
-      detail: "Bridging educational gaps across provinces with multilingual AI tutoring and teacher training.",
-      color: "#007a4d",
-    },
-  ];
-  
-  const STATS = [
-    { value: "4", suffix: " Countries", label: "Active Markets" },
-    { value: "10M", suffix: "+", label: "Scalable Users" },
-    { value: "120", suffix: "+", label: "Languages Supported" },
-    { value: "500K", suffix: "+", label: "Concurrent Learners" },
-  ];
-  
-  const PILLARS = [
-    {
-      icon: Globe2,
-      label: "Access",
-      color: { bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-100" },
-      desc: "Premium education pathways available to every learner, everywhere.",
-    },
-    {
-      icon: Award,
-      label: "Empowerment",
-      color: { bg: "bg-amber-50", text: "text-amber-600", border: "border-amber-100" },
-      desc: "Students and educators growing together with confidence and mentorship.",
-    },
-    {
-      icon: Heart,
-      label: "Community",
-      color: { bg: "bg-rose-50", text: "text-rose-600", border: "border-rose-100" },
-      extra: "fill-rose-500/10",
-      desc: "Uniting families, schools, and tutoring networks in shared support.",
-    },
-    {
-      icon: Activity,
-      label: "Innovation",
-      color: { bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-100" },
-      desc: "Responsible AI personalising learning without replacing its human core.",
-    },
-  ];
-  const headingRef = useRef(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(headingRef, { once: true, margin: "-60px" });
-  const PROBLEMS = [
-    {
-      icon: AlertTriangle,
-      stat: "300M+",
-      statLabel: "children out of school globally",
-      headline: "Access is broken",
-      body: "Millions of students never reach a qualified teacher. Geography, cost, and language put quality education out of reach for the families who need it most.",
-      accent: "#E8F0FF",
-      iconColor: "#0F2D7A",
-      border: "rgba(15,45,122,0.12)",
-    },
-    {
-      icon: TrendingUp,
-      stat: "60%",
-      statLabel: "of teachers feel under-supported",
-      headline: "Teachers are stretched thin",
-      body: "Great educators exist everywhere — but without training, tools, or recognition, they burn out. The system consumes talent instead of multiplying it.",
-      accent: "#FFF5E0",
-      iconColor: "#C07C00",
-      border: "rgba(192,124,0,0.15)",
-    },
-    {
-      icon: Globe,
-      stat: "50M+",
-      statLabel: "immigrant families navigating new systems",
-      headline: "Families get left behind",
-      body: "Immigrant parents want to support their children's education — but language barriers and unfamiliar systems make that nearly impossible without a guide.",
-      accent: "#E6F7F1",
-      iconColor: "#0A6B47",
-      border: "rgba(10,107,71,0.12)",
-    },
-    {
-      icon: Users,
-      stat: "1 in 3",
-      statLabel: "students struggle silently without tutoring",
-      headline: "1-on-1 support is a luxury",
-      body: "Private tutoring changes outcomes dramatically — yet it remains reserved for those who can afford it. Personalised help shouldn't be a privilege.",
-      accent: "#FBF0FF",
-      iconColor: "#6B21A8",
-      border: "rgba(107,33,168,0.12)",
-    },
-  ];
-  
-  const BELIEFS = [
-    { text: "Every child deserves a teacher who believes in them.", icon: "✦" },
-    { text: "Education is the only investment with infinite returns.", icon: "✦" },
-    { text: "Technology should widen access, not deepen divides.", icon: "✦" },
-  ];
-  
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 22 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-40px" },
-  transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-});
-
-const TEAM = [
-  {
-    name: "Nishi Patel",
-    role: "Head of Curriculum & Learning Design",
-    line: "Spent a decade inside classrooms before she started redesigning them.",
-    initials: "NP",
-    hue: "#DCEBFF",
-    textColor: "#0F2D7A",
-  },
-  {
-    name: "Nicole",
-    role: "Director of Community & Immigrant Programs",
-    line: "Her family navigated three school systems across two continents. She makes sure others don't have to figure it out alone.",
-    initials: "N",
-    hue: "#FFF5E0",
-    textColor: "#92400E",
-  },
-  {
-    name: "Victoria",
-    role: "Lead AI & Product Engineer",
-    line: "Believes the best technology is the kind students never notice — because it just works.",
-    initials: "V",
-    hue: "#E6F7F1",
-    textColor: "#065F46",
-  },
-];
-const partners = [
-  "/logos/google.svg",
-  "/logos/unacademy.svg",
-  "/logos/redhat.svg",
-  "/logos/pearson.svg",
-  "/logos/coursera.svg",
-  "/logos/zoom.svg",
-  "/logos/khanacademy.svg",
-  "/logos/academia.svg",
-  "/logos/microsoft.svg",
-];
-const row1 = [
-  "/logos/google.svg",
-  "/logos/khanacademy.svg",
-  "/logos/unacademy.svg",
-];
-
-const row2 = [
-  "/logos/redhat.svg",
-  "/logos/zoom.svg",
-  "/logos/academia.svg",
-];
-
-const row3 = [
-  "/logos/pearson.svg",
-  "/logos/coursera.svg",
-  "/logos/microsoft.svg",
-  
-];
-
-
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 /* ── Thin rule with label ── */
-function SectionRule({ label }) {
+function SectionRule({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-4 mb-14">
       <span
@@ -293,16 +113,32 @@ function SketchLine({ color = "#F4A623" }) {
       </motion.svg>
     );
   }
-  
+
+type ProblemItem = {
+  icon: LucideIcon;
+  stat: string;
+  statLabel: string;
+  headline: string;
+  body: string;
+  accent: string;
+  iconColor: string;
+  border: string;
+};
   /* ─── PROBLEM CARD ──────────────────────────────── */
-  function ProblemCard({ item, index }) {
+  function ProblemCard({
+    item,
+    index,
+  }: {
+    item: ProblemItem;
+    index: number;
+  }) {
     const Icon = item.icon;
     return (
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-30px" }}
-        transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.55, delay: index * 0.1, ease: EASE }}
         whileHover={{ y: -5 }}
         className="group relative rounded-[22px] p-6 transition-all duration-300"
         style={{
@@ -401,13 +237,167 @@ function SketchLine({ color = "#F4A623" }) {
       </motion.div>
     );
   }
+export default function AboutHero() {
+  const COUNTRIES = [
+    {
+      flag: "🇺🇸",
+      name: "United States",
+      short: "USA",
+      detail: "Serving immigrant families, K–12 districts, and university programs across 48 states.",
+      color: "#0a2e8a",
+    },
+    {
+      flag: "🇨🇦",
+      name: "Canada",
+      short: "CANADA",
+      detail: "Supporting newcomer integration programs, bilingual education, and provincial school boards.",
+      color: "#c8102e",
+    },
+    {
+      flag: "🇮🇳",
+      name: "India",
+      short: "INDIA",
+      detail: "Powering teacher certification, competitive exam prep, and rural EdTech infrastructure.",
+      color: "#f5a623",
+    },
+    {
+      flag: "🇿🇦",
+      name: "South Africa",
+      short: "S. AFRICA",
+      detail: "Bridging educational gaps across provinces with multilingual AI tutoring and teacher training.",
+      color: "#007a4d",
+    },
+  ];
+  
+  const STATS = [
+    { value: "4", suffix: " Countries", label: "Active Markets" },
+    { value: "10M", suffix: "+", label: "Scalable Users" },
+    { value: "120", suffix: "+", label: "Languages Supported" },
+    { value: "500K", suffix: "+", label: "Concurrent Learners" },
+  ];
+  
+ 
+  const headingRef = useRef(null);
+  const inView = useInView(headingRef, { once: true, margin: "-60px" });
+  const PROBLEMS = [
+    {
+      icon: AlertTriangle,
+      stat: "300M+",
+      statLabel: "children out of school globally",
+      headline: "Access is broken",
+      body: "Millions of students never reach a qualified teacher. Geography, cost, and language put quality education out of reach for the families who need it most.",
+      accent: "#E8F0FF",
+      iconColor: "#0F2D7A",
+      border: "rgba(15,45,122,0.12)",
+    },
+    {
+      icon: TrendingUp,
+      stat: "60%",
+      statLabel: "of teachers feel under-supported",
+      headline: "Teachers are stretched thin",
+      body: "Great educators exist everywhere — but without training, tools, or recognition, they burn out. The system consumes talent instead of multiplying it.",
+      accent: "#FFF5E0",
+      iconColor: "#C07C00",
+      border: "rgba(192,124,0,0.15)",
+    },
+    {
+      icon: Globe,
+      stat: "50M+",
+      statLabel: "immigrant families navigating new systems",
+      headline: "Families get left behind",
+      body: "Immigrant parents want to support their children's education — but language barriers and unfamiliar systems make that nearly impossible without a guide.",
+      accent: "#E6F7F1",
+      iconColor: "#0A6B47",
+      border: "rgba(10,107,71,0.12)",
+    },
+    {
+      icon: Users,
+      stat: "1 in 3",
+      statLabel: "students struggle silently without tutoring",
+      headline: "1-on-1 support is a luxury",
+      body: "Private tutoring changes outcomes dramatically — yet it remains reserved for those who can afford it. Personalised help shouldn't be a privilege.",
+      accent: "#FBF0FF",
+      iconColor: "#6B21A8",
+      border: "rgba(107,33,168,0.12)",
+    },
+  ];
+  
+  const BELIEFS = [
+    { text: "Every child deserves a teacher who believes in them.", icon: "✦" },
+    { text: "Education is the only investment with infinite returns.", icon: "✦" },
+    { text: "Technology should widen access, not deepen divides.", icon: "✦" },
+  ];
+  
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 22 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.65, delay, ease: EASE },
+});
+
+const TEAM = [
+  {
+    name: "Nishi Patel",
+    role: "Head of Curriculum & Learning Design",
+    line: "Spent a decade inside classrooms before she started redesigning them.",
+    initials: "NP",
+    hue: "#DCEBFF",
+    textColor: "#0F2D7A",
+  },
+  {
+    name: "Nicole",
+    role: "Director of Community & Immigrant Programs",
+    line: "Her family navigated three school systems across two continents. She makes sure others don't have to figure it out alone.",
+    initials: "N",
+    hue: "#FFF5E0",
+    textColor: "#92400E",
+  },
+  {
+    name: "Victoria",
+    role: "Lead AI & Product Engineer",
+    line: "Believes the best technology is the kind students never notice — because it just works.",
+    initials: "V",
+    hue: "#E6F7F1",
+    textColor: "#065F46",
+  },
+];
+const partners = [
+  "/logos/google.svg",
+  "/logos/unacademy.svg",
+  "/logos/redhat.svg",
+  "/logos/pearson.svg",
+  "/logos/coursera.svg",
+  "/logos/zoom.svg",
+  "/logos/khanacademy.svg",
+  "/logos/academia.svg",
+  "/logos/microsoft.svg",
+];
+const row1 = [
+  "/logos/google.svg",
+  "/logos/khanacademy.svg",
+  "/logos/unacademy.svg",
+];
+
+const row2 = [
+  "/logos/redhat.svg",
+  "/logos/zoom.svg",
+  "/logos/academia.svg",
+];
+
+const row3 = [
+  "/logos/pearson.svg",
+  "/logos/coursera.svg",
+  "/logos/microsoft.svg",
+  
+];
+
+
   const globalRef = useRef(null);
 
 const globalInView = useInView(globalRef, {
   once: true,
   margin: "-100px",
 });
-const repeated = [...partners, ...partners];
 
   return (
     <>
@@ -478,7 +468,7 @@ const repeated = [...partners, ...partners];
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mx-auto mt-12 max-w-2xl text-lg md:text-xl leading-relaxed text-slate-300 font-medium"
         >
-          WingsUP wasn't created to automate away the beauty of learning. We design 
+          WingsUP wasn&apos;t created to automate away the beauty of learning. We design 
           asymmetrical, culturally supportive frameworks that anchor new immigrant communities, 
           empower local tutors, and return authentic wonder back to education.
         </motion.p>
@@ -732,8 +722,8 @@ const repeated = [...partners, ...partners];
               lineHeight: 1.75,
             }}
           >
-            Four systemic problems. One integrated platform. Here's exactly what we saw,
-            and why we couldn't look away.
+            Four systemic problems. One integrated platform. Here&apos;s exactly what we saw,
+            and why we couldn&apos;t look away.
           </motion.p>
 
           {/* Decorative hand-drawn arrow pointing down to cards */}
@@ -1120,7 +1110,7 @@ const repeated = [...partners, ...partners];
                 color: "#0F2D7A",
               }}
             >
-              He didn't set out to build{" "}
+              He didn&apos;t set out to build{" "}
               <span className="relative inline-block">
                 a platform.
                 <SketchLine color="#F4A623" />
@@ -1160,9 +1150,9 @@ const repeated = [...partners, ...partners];
                   fontStyle: "italic",
                 }}
               >
-                "I watched brilliant students lose confidence not because they weren't
+                &quot;I watched brilliant students lose confidence not because they weren&lsquo;t
                 capable — but because nobody ever showed up for them at the right moment.
-                I couldn't un-see that."
+                I couldn&apos;t un-see that.&quot;
               </p>
             </motion.blockquote>
 
@@ -1343,7 +1333,7 @@ const repeated = [...partners, ...partners];
               }}
             >
               Small team. Enormous belief. Each person here chose this work
-              because they've lived some version of the problem we're solving.
+              because they&apos;ve lived some version of the problem we&apos;re solving.
             </p>
           </div>
         </motion.div>
@@ -1449,8 +1439,8 @@ const repeated = [...partners, ...partners];
               fontStyle: "italic",
             }}
           >
-            We're a small team building something we genuinely believe the world needs.
-            If that resonates — we'd love to hear from you.
+            We&apos;re a small team building something we genuinely believe the world needs.
+            If that resonates — we&apos;d love to hear from you.
           </p>
           <div className="flex justify-center mt-7">
             <a
@@ -1587,7 +1577,7 @@ const repeated = [...partners, ...partners];
   transition={{
     duration: 0.9,
     delay: 0.22,
-    ease: [0.22, 1, 0.36, 1],
+    ease: EASE,
   }}
   style={{
     position: "relative",
@@ -1635,7 +1625,7 @@ const repeated = [...partners, ...partners];
             transition={{
               duration: 0.55,
               delay: 0.35 + i * 0.1,
-              ease: [0.22, 1, 0.36, 1],
+              ease: EASE,
             }}
             style={{
               background: "rgba(255,255,255,0.72)",
@@ -2032,7 +2022,7 @@ const repeated = [...partners, ...partners];
             leading-relaxed
             "
           >
-            Whether you're a student seeking
+            Whether you&apos;re a student seeking
             opportunity, a tutor creating impact,
             or an institution shaping the future,
             WingsUP is building the platform that
