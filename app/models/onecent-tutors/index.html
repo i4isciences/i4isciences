@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OneCent Tutors – Find the Right Tutor. Learn Without Limits.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --navy:   #1B2E6B;
+  --gold:   #F5A623;
+  --gold-lt:#FFC94D;
+  --white:  #FFFFFF;
+  --beige:  #F8F4EC;
+  --blue-lt:#F4F8FF;
+  --text:   #1A1A2E;
+  --muted:  #6B7280;
+  --border: #E5E7EB;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(27,46,107,.08);
+  --shadow-lg: 0 12px 40px rgba(27,46,107,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Geist',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────── */
+.curvy{font-family:'Caveat',cursive;color:var(--gold);font-weight:700}
+h1{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1.1;letter-spacing:-0.03em}
+h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.15;letter-spacing:-0.02em}
+h3{font-size:1.25rem;font-weight:700}
+p{color:var(--muted);line-height:1.75}
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.container{max-width:1200px;margin:0 auto;padding:0 48px}
+section{padding:96px 0}
+.bg-white{background:var(--white)}
+.bg-beige{background:var(--beige)}
+.bg-blue{background:var(--blue-lt)}
+
+/* ─── NAV ─────────────────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  padding:0 48px;
+  height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-mark{
+  width:36px;height:36px;background:var(--navy);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-logo-mark svg{width:20px;height:20px}
+.nav-logo-text{font-size:1.1rem;font-weight:800;color:var(--navy)}
+.nav-logo-text span{color:var(--gold)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--text);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{display:flex;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:10px;font-size:.9rem;font-weight:600;
+  text-decoration:none;cursor:pointer;border:none;transition:all .2s;font-family:'Geist',sans-serif;
+}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:#15245a;transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn-outline:hover{background:var(--navy);color:#fff}
+.btn-lg{padding:14px 32px;font-size:1rem;border-radius:12px}
+
+/* ─── S1 HERO ─────────────────────────────────────────────── */
+.hero{
+  background:var(--beige);
+  padding:80px 0 0;
+  overflow:hidden;
+  min-height:calc(100vh - 68px);
+  display:flex;align-items:center;
+}
+.hero-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  max-width:1200px;margin:0 auto;padding:0 48px;
+  width:100%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--border);border-radius:100px;
+  padding:6px 16px;font-size:.82rem;font-weight:600;color:var(--navy);
+  margin-bottom:24px;
+  box-shadow:0 2px 8px rgba(27,46,107,.06);
+}
+.hero-badge-dot{width:7px;height:7px;background:#22C55E;border-radius:50%}
+.hero-title{margin-bottom:20px}
+.hero-title .line2{color:var(--navy)}
+.hero-sub{font-size:1.1rem;margin-bottom:36px;max-width:460px;color:#4B5563}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.hero-stat-num{font-size:1.5rem;font-weight:800;color:var(--navy);line-height:1}
+.hero-stat-lbl{font-size:.78rem;color:var(--muted);font-weight:500;margin-top:4px}
+
+.hero-visual-wrap{
+  position:relative;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-top:20px;
+}
+.hero-img-blob{
+  position:relative;
+  width:100%;max-width:560px;
+}
+/* organic shape behind image */
+.hero-img-blob::before{
+  content:'';
+  position:absolute;
+  inset:-24px -16px -0px -16px;
+  background:linear-gradient(135deg,#FFF3D4 0%,#E8F0FF 100%);
+  border-radius:60% 40% 55% 45% / 45% 55% 40% 60%;
+  z-index:0;
+}
+.hero-img-blob img{
+  position:relative;z-index:1;
+  width:100%;
+  border-radius:32px;
+  filter:drop-shadow(0 20px 48px rgba(27,46,107,.15));
+}
+/* floating badges on hero */
+.hero-float{
+  position:absolute;z-index:2;
+  background:#fff;border-radius:14px;padding:10px 16px;
+  box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:10px;
+  font-size:.82rem;font-weight:600;color:var(--navy);
+  white-space:nowrap;
+}
+.hero-float-tl{top:10%;left:-24px;animation:floatA 4s ease-in-out infinite}
+.hero-float-br{bottom:18%;right:-20px;animation:floatB 4.5s ease-in-out infinite}
+.hero-float-tm{top:5%;right:10%;animation:floatA 3.8s ease-in-out infinite .6s}
+.float-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.fi-gold{background:#FFF3D4}
+.fi-blue{background:#EFF4FF}
+.fi-green{background:#F0FDF4}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* ─── S2 WHAT IS OCT ─────────────────────────────────────── */
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.what-img-wrap{position:relative}
+.what-img-wrap img{
+  width:100%;border-radius:28px;
+  box-shadow:var(--shadow-lg);
+}
+.what-img-badge{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--navy);color:#fff;
+  border-radius:16px;padding:16px 20px;
+  box-shadow:var(--shadow-lg);
+  font-size:.85rem;font-weight:600;line-height:1.4;
+}
+.what-img-badge strong{font-size:1.4rem;display:block;color:var(--gold)}
+.tag-section{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.section-tag{
+  font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--navy);background:#EFF4FF;padding:4px 12px;border-radius:100px;
+}
+.what-features{margin-top:36px;display:flex;flex-direction:column;gap:16px}
+.what-feat{
+  display:flex;align-items:flex-start;gap:14px;
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  padding:16px 20px;transition:box-shadow .2s;
+}
+.what-feat:hover{box-shadow:var(--shadow)}
+.what-feat-icon{
+  width:40px;height:40px;border-radius:10px;background:var(--beige);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  flex-shrink:0;
+}
+.what-feat-text strong{display:block;font-size:.95rem;color:var(--text);margin-bottom:2px}
+.what-feat-text span{font-size:.85rem;color:var(--muted)}
+
+/* ─── S3 HOW IT WORKS ─────────────────────────────────────── */
+.hiw-header{text-align:center;max-width:640px;margin:0 auto 64px}
+.journey-track{
+  position:relative;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:0;
+}
+.journey-track::before{
+  content:'';
+  position:absolute;top:36px;left:8%;right:8%;
+  height:3px;
+  background:repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 12px,transparent 12px,transparent 24px);
+  z-index:0;
+}
+.journey-step{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;width:calc(100%/6 - 8px);
+  position:relative;z-index:1;
+}
+.step-icon{
+  width:72px;height:72px;border-radius:50%;
+  background:#fff;border:3px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:16px;
+  position:relative;transition:all .3s;
+  box-shadow:var(--shadow);
+}
+.journey-step:hover .step-icon{
+  border-color:var(--gold);transform:scale(1.1);
+  box-shadow:0 8px 24px rgba(245,166,35,.25);
+}
+.step-num{
+  position:absolute;top:-8px;right:-8px;
+  width:24px;height:24px;border-radius:50%;
+  background:var(--gold);color:var(--navy);
+  font-size:.7rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-label{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+.step-desc{font-size:.78rem;color:var(--muted);line-height:1.5;max-width:110px}
+
+/* ─── S4 FIND TUTOR ──────────────────────────────────────── */
+.find-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.search-ui{
+  background:#fff;border:1px solid var(--border);border-radius:24px;
+  padding:32px;box-shadow:var(--shadow-lg);margin-bottom:40px;
+}
+.search-bar-row{
+  display:flex;gap:12px;margin-bottom:24px;
+}
+.search-input-wrap{
+  flex:1;display:flex;align-items:center;gap:10px;
+  border:2px solid var(--border);border-radius:12px;padding:0 16px;
+  background:#FAFAFA;transition:border-color .2s;
+}
+.search-input-wrap:focus-within{border-color:var(--navy)}
+.search-input-wrap input{
+  flex:1;border:none;background:transparent;
+  font-size:.95rem;padding:13px 0;font-family:'Geist',sans-serif;outline:none;
+  color:var(--text);
+}
+.search-icon{color:var(--muted);font-size:18px}
+.search-btn{
+  background:var(--navy);color:#fff;border:none;
+  border-radius:12px;padding:0 28px;font-size:.95rem;font-weight:600;
+  cursor:pointer;font-family:'Geist',sans-serif;
+  transition:background .2s;
+}
+.search-btn:hover{background:#15245a}
+
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.filter-chip{
+  display:flex;align-items:center;gap:6px;
+  border:1.5px solid var(--border);border-radius:100px;
+  padding:6px 14px;font-size:.82rem;font-weight:500;
+  color:var(--text);background:#fff;cursor:pointer;transition:all .2s;
+}
+.filter-chip:hover,.filter-chip.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.filter-chip .emoji{font-size:14px}
+
+.subjects-row{display:flex;flex-wrap:wrap;gap:8px}
+.subj-chip{
+  border-radius:100px;padding:6px 16px;font-size:.82rem;font-weight:600;
+  cursor:pointer;transition:all .2s;border:1.5px solid transparent;
+}
+.subj-chip.s-math{background:#EEF2FF;color:#4F46E5}
+.subj-chip.s-sci{background:#F0FDF4;color:#16A34A}
+.subj-chip.s-code{background:#FFF7ED;color:#EA580C}
+.subj-chip.s-eng{background:#FFF0F3;color:#DB2777}
+.subj-chip.s-ielts{background:#F0F9FF;color:#0284C7}
+.subj-chip.s-sat{background:#FDF4FF;color:#9333EA}
+.subj-chip.s-olymp{background:#FFFBEB;color:#D97706}
+.subj-chip.s-speak{background:#F0FDFA;color:#0D9488}
+.subj-chip.s-ai{background:#EFF4FF;color:var(--navy)}
+.subj-chip.s-career{background:#FFF9F0;color:#C2410C}
+.subj-chip:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+
+.tutors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tutor-card{
+  background:#fff;border:1px solid var(--border);border-radius:20px;
+  padding:24px;transition:all .25s;cursor:pointer;
+}
+.tutor-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:transparent}
+.tutor-card-top{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start}
+.tutor-avatar{
+  width:56px;height:56px;border-radius:14px;
+  object-fit:cover;flex-shrink:0;
+  background:var(--beige);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;border:2px solid var(--border);
+}
+.tutor-info{flex:1}
+.tutor-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.tutor-subj{font-size:.8rem;color:var(--navy);font-weight:600;background:#EFF4FF;border-radius:6px;padding:2px 8px;display:inline-block}
+.tutor-meta{display:flex;align-items:center;gap:4px;margin-top:6px;font-size:.8rem;color:var(--muted)}
+.star{color:var(--gold)}
+.tutor-country{display:flex;align-items:center;gap:5px;font-size:.8rem;color:var(--muted);margin-bottom:10px}
+.flag-emoji{font-size:16px}
+.tutor-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.ttag{font-size:.75rem;background:var(--beige);border-radius:6px;padding:3px 9px;color:var(--text);font-weight:500}
+.tutor-footer{display:flex;align-items:center;justify-content:space-between}
+.tutor-price{font-size:.95rem;font-weight:800;color:var(--navy)}
+.tutor-price span{font-size:.75rem;font-weight:400;color:var(--muted)}
+.btn-book-sm{
+  background:var(--gold);color:var(--navy);font-weight:700;
+  border:none;border-radius:10px;padding:8px 18px;font-size:.82rem;
+  cursor:pointer;font-family:'Geist',sans-serif;transition:all .2s;
+}
+.btn-book-sm:hover{background:var(--gold-lt);transform:translateY(-1px)}
+
+/* ─── S5 BOOKING ─────────────────────────────────────────── */
+.booking-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.booking-mockup{
+  display:grid;grid-template-columns:320px 1fr;gap:0;
+  border:1px solid var(--border);border-radius:24px;overflow:hidden;
+  box-shadow:var(--shadow-lg);background:#fff;max-width:860px;margin:0 auto;
+}
+.booking-tutor-panel{
+  background:var(--navy);color:#fff;padding:36px 28px;
+}
+.btp-avatar{
+  width:80px;height:80px;border-radius:20px;
+  background:rgba(255,255,255,.15);margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;font-size:36px;
+  overflow:hidden;
+}
+.btp-avatar img{width:100%;height:100%;object-fit:cover}
+.btp-name{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.btp-subj{font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:16px}
+.btp-stars{display:flex;gap:2px;margin-bottom:20px;font-size:16px}
+.btp-facts{display:flex;flex-direction:column;gap:12px}
+.btp-fact{display:flex;align-items:center;gap:10px;font-size:.85rem;color:rgba(255,255,255,.85)}
+.btp-fact-icon{font-size:16px}
+
+.booking-cal-panel{padding:36px 32px}
+.cal-title{font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:8px}
+.cal-sub{font-size:.85rem;color:var(--muted);margin-bottom:24px}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.cal-month{font-weight:700;font-size:.95rem;color:var(--text)}
+.cal-arrow{
+  width:32px;height:32px;border:1px solid var(--border);border-radius:8px;
+  background:#fff;cursor:pointer;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+}
+.cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px;text-align:center}
+.cal-day-hdr{font-size:.72rem;font-weight:600;color:var(--muted)}
+.cal-days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:24px}
+.cal-day{
+  aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s;
+}
+.cal-day:hover{background:var(--beige)}
+.cal-day.empty{opacity:0}
+.cal-day.today{font-weight:800;color:var(--navy)}
+.cal-day.selected{background:var(--navy);color:#fff;border-radius:10px}
+.cal-day.has-slot{position:relative}
+.cal-day.has-slot::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--gold);border-radius:50%}
+
+.time-slots{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.time-slot{
+  padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;
+  font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--text);
+}
+.time-slot:hover,.time-slot.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.pkg-row{display:flex;gap:10px;margin-bottom:24px}
+.pkg-card{
+  flex:1;border:2px solid var(--border);border-radius:12px;padding:12px 14px;
+  cursor:pointer;transition:all .2s;text-align:center;
+}
+.pkg-card:hover,.pkg-card.active{border-color:var(--gold);background:#FFFBF0}
+.pkg-name{font-size:.82rem;font-weight:700;color:var(--text)}
+.pkg-price{font-size:1rem;font-weight:800;color:var(--navy);margin-top:4px}
+.pkg-detail{font-size:.72rem;color:var(--muted);margin-top:2px}
+
+/* ─── S6 CLASSROOM ───────────────────────────────────────── */
+.class-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.class-layout{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:center}
+.class-img-wrap{position:relative}
+.class-img-wrap img{width:100%;border-radius:28px;box-shadow:var(--shadow-lg)}
+.class-feature-list{display:flex;flex-direction:column;gap:14px}
+.class-feat{
+  display:flex;align-items:center;gap:16px;
+  background:#fff;border-radius:14px;padding:14px 18px;
+  box-shadow:var(--shadow);transition:all .2s;
+}
+.class-feat:hover{transform:translateX(4px);box-shadow:var(--shadow-lg)}
+.cf-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.cf-blue{background:#EFF4FF}
+.cf-gold{background:#FFF3D4}
+.cf-green{background:#F0FDF4}
+.cf-purple{background:#FDF4FF}
+.cf-pink{background:#FFF0F3}
+.cf-teal{background:#F0FDFA}
+.cf-text strong{display:block;font-size:.9rem;color:var(--text);font-weight:700}
+.cf-text span{font-size:.78rem;color:var(--muted)}
+
+/* ─── S7 MATCHING ─────────────────────────────────────────── */
+.match-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.match-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.match-card{
+  background:#fff;border:1px solid var(--border);border-radius:20px;
+  padding:28px 24px;width:240px;box-shadow:var(--shadow);
+}
+.match-card-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:16px}
+.match-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text);font-weight:500;margin-bottom:10px}
+.match-item:last-child{margin-bottom:0}
+.match-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+.match-arrow{
+  width:56px;height:56px;background:var(--navy);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;box-shadow:var(--shadow-lg);
+}
+.match-result{
+  background:var(--navy);color:#fff;border-radius:20px;
+  padding:28px 24px;width:240px;box-shadow:var(--shadow-lg);
+}
+.match-result-label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);margin-bottom:16px}
+.match-result-name{font-size:1.1rem;font-weight:800;margin-bottom:6px}
+.match-result-sub{font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:16px}
+.match-result-stars{display:flex;gap:2px;font-size:14px;margin-bottom:8px}
+.match-badge{
+  display:inline-block;background:rgba(245,166,35,.2);
+  color:var(--gold);font-size:.75rem;font-weight:700;
+  border-radius:8px;padding:4px 10px;
+}
+
+/* ─── S8 VERIFIED ─────────────────────────────────────────── */
+.verified-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.verified-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.verified-img img{width:100%;border-radius:28px;box-shadow:var(--shadow-lg)}
+.verified-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.v-card{
+  background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;
+  transition:all .2s;
+}
+.v-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.v-icon{font-size:28px;margin-bottom:10px}
+.v-title{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.v-desc{font-size:.78rem;color:var(--muted)}
+
+/* ─── S9 GLOBAL ──────────────────────────────────────────── */
+/* background will match the image's beige ~#EDE5D5 */
+.global-sec{background:#EDE5D5}
+.global-header{text-align:center;max-width:640px;margin:0 auto 40px}
+.global-img-wrap{text-align:center;margin-bottom:48px}
+.global-img-wrap img{
+  max-width:900px;width:100%;
+  display:block;margin:0 auto;
+}
+.global-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:800px;margin:0 auto}
+.g-stat{text-align:center}
+.g-stat-num{font-size:2.2rem;font-weight:900;color:var(--navy);line-height:1}
+.g-stat-lbl{font-size:.85rem;color:var(--muted);margin-top:6px;font-weight:500}
+
+/* ─── S10 SUCCESS ─────────────────────────────────────────── */
+.success-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.stories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.story-card{
+  background:#fff;border:1px solid var(--border);border-radius:24px;
+  overflow:hidden;transition:all .25s;
+}
+.story-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.story-banner{
+  height:8px;
+}
+.story-body{padding:28px 24px}
+.story-avatar-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.story-avatar{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--beige);display:flex;align-items:center;justify-content:center;
+  font-size:22px;border:2px solid var(--border);flex-shrink:0;
+}
+.story-name{font-size:.95rem;font-weight:700;color:var(--text)}
+.story-meta{font-size:.78rem;color:var(--muted)}
+.story-achievement{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--beige);border-radius:8px;padding:6px 12px;
+  font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:16px;
+}
+.story-quote{font-size:.88rem;color:var(--muted);line-height:1.7;font-style:italic;margin-bottom:20px}
+.story-before-after{display:flex;gap:8px}
+.before-after-pill{
+  flex:1;border-radius:8px;padding:8px 10px;text-align:center;
+  font-size:.75rem;font-weight:600;
+}
+.pill-before{background:#FFF0F3;color:#DB2777}
+.pill-after{background:#F0FDF4;color:#16A34A}
+.pill-label{display:block;font-size:.65rem;font-weight:400;color:var(--muted);margin-top:2px}
+
+/* ─── S11 FOR TUTORS ─────────────────────────────────────── */
+.tutors-sec-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.tutors-sec-visual{position:relative}
+.tutors-sec-visual img{width:100%;border-radius:28px;box-shadow:var(--shadow-lg)}
+.income-chip{
+  position:absolute;bottom:-16px;left:24px;
+  background:#fff;border-radius:14px;padding:14px 20px;
+  box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;
+}
+.income-chip-icon{font-size:28px}
+.income-chip-text strong{display:block;font-size:1.1rem;font-weight:800;color:var(--navy)}
+.income-chip-text span{font-size:.78rem;color:var(--muted)}
+.tutor-benefits{display:flex;flex-direction:column;gap:14px;margin:28px 0 36px}
+.tb-item{display:flex;align-items:center;gap:14px;font-size:.9rem;font-weight:500;color:var(--text)}
+.tb-icon{font-size:18px;width:36px;height:36px;background:var(--beige);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ─── S12 PLATFORM PREVIEW ───────────────────────────────── */
+.platform-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.dashboard-mockup{
+  max-width:960px;margin:0 auto;
+  border:1px solid var(--border);border-radius:24px;overflow:hidden;
+  box-shadow:0 24px 64px rgba(27,46,107,.18);
+}
+.dash-topbar{
+  background:var(--navy);padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.dash-tb-left{display:flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:.95rem}
+.dash-tb-right{display:flex;align-items:center;gap:12px}
+.dash-tb-avatar{width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--navy)}
+.dash-tb-notif{font-size:16px;color:rgba(255,255,255,.7)}
+.dash-body{display:grid;grid-template-columns:220px 1fr;background:#F9FAFB}
+.dash-sidebar{background:#fff;border-right:1px solid var(--border);padding:24px 16px}
+.dash-nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;
+  font-size:.85rem;font-weight:500;color:var(--muted);margin-bottom:4px;cursor:pointer;transition:all .2s;
+}
+.dash-nav-item:hover,.dash-nav-item.active{background:var(--beige);color:var(--navy);font-weight:600}
+.dash-main{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dash-widget{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px}
+.dash-widget-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:14px}
+.dash-session-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.83rem}
+.dash-session-item:last-child{border-bottom:none;padding-bottom:0}
+.dsi-avatar{width:32px;height:32px;border-radius:8px;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.dsi-info{flex:1}
+.dsi-name{font-weight:600;color:var(--text)}
+.dsi-time{color:var(--muted);font-size:.75rem}
+.dsi-badge{font-size:.7rem;font-weight:700;border-radius:6px;padding:2px 8px}
+.badge-live{background:#FEF2F2;color:#DC2626}
+.badge-soon{background:#FFF9F0;color:#D97706}
+.badge-done{background:#F0FDF4;color:#16A34A}
+.stat-big{font-size:2rem;font-weight:900;color:var(--navy)}
+.stat-sub{font-size:.8rem;color:var(--muted);margin-top:4px}
+.dash-mini-chart{height:48px;margin-top:12px;display:flex;align-items:flex-end;gap:4px}
+.bar{background:var(--navy);border-radius:4px 4px 0 0;flex:1;opacity:.15;transition:opacity .2s}
+.bar:hover{opacity:1}
+.bar.active{opacity:1;background:var(--gold)}
+.progress-list{display:flex;flex-direction:column;gap:10px}
+.prog-item{font-size:.83rem}
+.prog-label{display:flex;justify-content:space-between;margin-bottom:4px;color:var(--text);font-weight:500}
+.prog-bar{height:6px;background:var(--beige);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:var(--navy);border-radius:4px}
+
+/* ─── FINAL CTA ───────────────────────────────────────────── */
+.final-cta{
+  background:var(--navy);
+  text-align:center;padding:100px 48px;
+  position:relative;overflow:hidden;
+}
+.final-cta::before{
+  content:'';
+  position:absolute;top:-40%;right:-10%;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(245,166,35,.15) 0%,transparent 70%);
+}
+.final-cta::after{
+  content:'';
+  position:absolute;bottom:-30%;left:-5%;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%);
+}
+.final-cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.final-cta h2{color:#fff;margin-bottom:16px}
+.final-cta p{color:rgba(255,255,255,.7);font-size:1.05rem;margin-bottom:40px}
+.final-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--navy);font-weight:700}
+.btn-white:hover{background:#F0F4FF}
+.btn-outline-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4);font-weight:600}
+.btn-outline-white:hover{background:rgba(255,255,255,.1)}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer{background:#0D1B4B;padding:56px 48px 32px;color:rgba(255,255,255,.6)}
+.footer-grid{display:grid;grid-template-columns:280px 1fr 1fr 1fr;gap:48px;margin-bottom:48px;max-width:1200px;margin-left:auto;margin-right:auto}
+.footer-brand p{font-size:.85rem;margin-top:12px;line-height:1.7}
+.footer-col h4{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:.05em;text-transform:uppercase}
+.footer-col a{display:block;font-size:.85rem;color:rgba(255,255,255,.55);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;max-width:1200px;margin:0 auto}
+
+/* ─── UTILS ───────────────────────────────────────────────── */
+.text-center{text-align:center}
+.mt-4{margin-top:16px}
+.mt-6{margin-top:24px}
+.mt-8{margin-top:32px}
+.mb-2{margin-bottom:8px}
+.divider{width:56px;height:4px;background:var(--gold);border-radius:4px;margin:16px 0 24px}
+.divider-center{margin:16px auto 24px}
+
+/* scroll fade-in */
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ────────────────────────────────────────────── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7" cy="7" r="3" fill="#F5A623"/>
+        <circle cx="13" cy="7" r="3" fill="rgba(255,255,255,0.6)"/>
+        <path d="M4 15c0-2.2 1.8-4 4-4h4c2.2 0 4 1.8 4 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">OneCent<span>Tutors</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#find">Find Tutors</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#classroom">Classroom</a></li>
+    <li><a href="#tutors-sec">For Tutors</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" class="btn btn-outline">Log In</a>
+    <a href="#" class="btn btn-primary">Get Started</a>
+  </div>
+</nav>
+
+<!-- ────────────────────────────────────────── S1 HERO ── -->
+<section class="hero bg-beige" id="hero">
+  <div class="hero-inner">
+    <!-- LEFT -->
+    <div class="fade-in">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        50,000+ Verified Tutors Worldwide
+      </div>
+      <h1 class="hero-title">
+        Find the Right Tutor.<br>
+        <span class="line2">Learn <span class="curvy">Without Limits.</span></span>
+      </h1>
+      <p class="hero-sub">OneCent Tutors connects students with verified educators across subjects, skills and countries through personalised live learning experiences.</p>
+      <div class="hero-actions">
+        <a href="#find" class="btn btn-primary btn-lg">🔍 Explore Tutors</a>
+        <a href="#booking" class="btn btn-gold btn-lg">📅 Book Trial Session</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">50K+</div>
+          <div class="hero-stat-lbl">Verified Tutors</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">120+</div>
+          <div class="hero-stat-lbl">Subjects</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">1M+</div>
+          <div class="hero-stat-lbl">Sessions Completed</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100+</div>
+          <div class="hero-stat-lbl">Countries</div>
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT -->
+    <div class="hero-visual-wrap fade-in" style="animation-delay:.15s">
+      <div class="hero-img-blob">
+        <img src="/images/oct.png" alt="Student learning on OneCent Tutors" />
+        <!-- floating badges -->
+        <div class="hero-float hero-float-tl">
+          <div class="float-icon fi-gold">⭐</div>
+          <div><strong>4.9 Rating</strong><br><small style="color:var(--muted);font-weight:400">230+ Reviews</small></div>
+        </div>
+        <div class="hero-float hero-float-br">
+          <div class="float-icon fi-green">✅</div>
+          <div><strong>Session Booked!</strong><br><small style="color:var(--muted);font-weight:400">Today at 4:00 PM</small></div>
+        </div>
+        <div class="hero-float hero-float-tm">
+          <div class="float-icon fi-blue">🌍</div>
+          <div><strong>Global Tutors</strong><br><small style="color:var(--muted);font-weight:400">100+ Countries</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────── S2 WHAT IS ONECENT ── -->
+<section class="bg-white" id="what">
+  <div class="container">
+    <div class="what-grid fade-in">
+      <!-- LEFT visual -->
+      <div class="what-img-wrap">
+        <img src="/images/m2whatisoct" alt="Global tutor network map" />
+        <div class="what-img-badge">
+          <strong>100+</strong>
+          Countries Connected
+        </div>
+      </div>
+      <!-- RIGHT content -->
+      <div>
+        <div class="tag-section">
+          <span class="section-tag">What is OCT</span>
+        </div>
+        <h2>More Than Tutoring.<br><span class="curvy" style="font-size:2rem">A Global Learning</span><br>Marketplace.</h2>
+        <div class="divider"></div>
+        <p>OneCent Tutors is a human-centred learning marketplace where students discover, book, and learn from world-class verified educators — live, one-on-one, on their schedule.</p>
+        <div class="what-features">
+          <div class="what-feat">
+            <div class="what-feat-icon">🔒</div>
+            <div class="what-feat-text">
+              <strong>Verified Tutors Only</strong>
+              <span>Every tutor is identity-verified, skill-assessed, and demo-tested before going live.</span>
+            </div>
+          </div>
+          <div class="what-feat">
+            <div class="what-feat-icon">📹</div>
+            <div class="what-feat-text">
+              <strong>Live 1-on-1 Learning</strong>
+              <span>Real-time sessions with whiteboards, screen sharing, recordings and chat.</span>
+            </div>
+          </div>
+          <div class="what-feat">
+            <div class="what-feat-icon">💳</div>
+            <div class="what-feat-text">
+              <strong>Secure Payments</strong>
+              <span>Stripe-powered escrow. Pay only after your session is confirmed.</span>
+            </div>
+          </div>
+          <div class="what-feat">
+            <div class="what-feat-icon">🗓️</div>
+            <div class="what-feat-text">
+              <strong>Flexible Schedules</strong>
+              <span>Book sessions that fit your timezone, routine, and learning pace.</span>
+            </div>
+          </div>
+          <div class="what-feat">
+            <div class="what-feat-icon">🌐</div>
+            <div class="what-feat-text">
+              <strong>Worldwide Access</strong>
+              <span>Tutors from 100+ countries. Learn in any language, any subject, any time.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S3 HOW IT WORKS ── -->
+<section class="bg-beige" id="how">
+  <div class="container">
+    <div class="hiw-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">How It Works</span>
+      </div>
+      <h2>Your Journey to<br><span class="curvy" style="font-size:2rem">Better Learning</span></h2>
+      <div class="divider divider-center"></div>
+      <p>Six simple steps from lost to learning — like a board game where every stop makes you smarter.</p>
+    </div>
+    <div class="journey-track fade-in">
+      <div class="journey-step">
+        <div class="step-icon">
+          🔍
+          <span class="step-num">1</span>
+        </div>
+        <div class="step-label">Search</div>
+        <div class="step-desc">Type your subject, goal, or exam name</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-icon">
+          👥
+          <span class="step-num">2</span>
+        </div>
+        <div class="step-label">Compare Tutors</div>
+        <div class="step-desc">Filter by rating, price, language & availability</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-icon">
+          📅
+          <span class="step-num">3</span>
+        </div>
+        <div class="step-label">Book Session</div>
+        <div class="step-desc">Pick date, time & package — confirm in one tap</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-icon">
+          🖥️
+          <span class="step-num">4</span>
+        </div>
+        <div class="step-label">Attend Live Class</div>
+        <div class="step-desc">Join your private live classroom — anywhere, anytime</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-icon">
+          📈
+          <span class="step-num">5</span>
+        </div>
+        <div class="step-label">Track Progress</div>
+        <div class="step-desc">Assignments, notes, recordings & feedback in one place</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-icon">
+          🚀
+          <span class="step-num">6</span>
+        </div>
+        <div class="step-label">Keep Growing</div>
+        <div class="step-desc">Build streaks, earn milestones & level up your skills</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S4 FIND TUTOR ── -->
+<section class="bg-white" id="find">
+  <div class="container">
+    <div class="find-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Tutor Discovery</span>
+      </div>
+      <h2>Find Your <span class="curvy" style="font-size:2.2rem">Perfect Tutor</span></h2>
+      <div class="divider divider-center"></div>
+      <p>Search 50,000+ verified tutors by subject, language, country, rating, and schedule. Your ideal teacher is closer than you think.</p>
+    </div>
+
+    <!-- Search UI Mockup -->
+    <div class="search-ui fade-in">
+      <div class="search-bar-row">
+        <div class="search-input-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search by subject, tutor name, or skill…" value="Math · Grade 10" readonly>
+        </div>
+        <button class="search-btn">Search Tutors</button>
+      </div>
+      <div class="filter-row">
+        <div class="filter-chip active"><span class="emoji">🌍</span> All Countries</div>
+        <div class="filter-chip"><span class="emoji">🇮🇳</span> India</div>
+        <div class="filter-chip"><span class="emoji">🇺🇸</span> USA</div>
+        <div class="filter-chip"><span class="emoji">🇬🇧</span> UK</div>
+        <div class="filter-chip"><span class="emoji">🇦🇺</span> Australia</div>
+        <div class="filter-chip"><span class="emoji">🗣️</span> English</div>
+        <div class="filter-chip"><span class="emoji">⭐</span> 4.5+</div>
+        <div class="filter-chip"><span class="emoji">⏰</span> Available Today</div>
+        <div class="filter-chip"><span class="emoji">💰</span> Under ₹500/hr</div>
+      </div>
+      <div class="subjects-row">
+        <div class="subj-chip s-math">➕ Math</div>
+        <div class="subj-chip s-sci">🔬 Science</div>
+        <div class="subj-chip s-code">💻 Coding</div>
+        <div class="subj-chip s-eng">📖 English</div>
+        <div class="subj-chip s-ielts">🎓 IELTS</div>
+        <div class="subj-chip s-sat">📝 SAT</div>
+        <div class="subj-chip s-olymp">🏆 Olympiad</div>
+        <div class="subj-chip s-speak">🎤 Public Speaking</div>
+        <div class="subj-chip s-ai">🤖 AI Skills</div>
+        <div class="subj-chip s-career">💼 Career Skills</div>
+      </div>
+    </div>
+
+    <!-- Tutor Cards -->
+    <div class="tutors-grid fade-in">
+
+      <!-- Card 1 -->
+      <div class="tutor-card">
+        <div class="tutor-card-top">
+          <div class="tutor-avatar">👩‍🏫</div>
+          <div class="tutor-info">
+            <div class="tutor-name">Priya Sharma</div>
+            <div class="tutor-subj">Mathematics</div>
+            <div class="tutor-meta"><span class="star">⭐</span>4.9 <span style="margin:0 4px">·</span> 230 reviews</div>
+          </div>
+        </div>
+        <div class="tutor-country"><span class="flag-emoji">🇮🇳</span>India &nbsp;·&nbsp; 5+ yrs experience</div>
+        <div class="tutor-tags">
+          <span class="ttag">Algebra</span>
+          <span class="ttag">Calculus</span>
+          <span class="ttag">CBSE</span>
+          <span class="ttag">IIT JEE</span>
+        </div>
+        <div class="tutor-footer">
+          <div class="tutor-price">₹500<span>/hr</span></div>
+          <button class="btn-book-sm">Book Session</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="tutor-card">
+        <div class="tutor-card-top">
+          <div class="tutor-avatar">👨‍💻</div>
+          <div class="tutor-info">
+            <div class="tutor-name">James Carter</div>
+            <div class="tutor-subj">Coding & CS</div>
+            <div class="tutor-meta"><span class="star">⭐</span>4.8 <span style="margin:0 4px">·</span> 189 reviews</div>
+          </div>
+        </div>
+        <div class="tutor-country"><span class="flag-emoji">🇺🇸</span>USA &nbsp;·&nbsp; 7+ yrs experience</div>
+        <div class="tutor-tags">
+          <span class="ttag">Python</span>
+          <span class="ttag">Web Dev</span>
+          <span class="ttag">Data Science</span>
+        </div>
+        <div class="tutor-footer">
+          <div class="tutor-price">$35<span>/hr</span></div>
+          <button class="btn-book-sm">Book Session</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="tutor-card">
+        <div class="tutor-card-top">
+          <div class="tutor-avatar">👩‍🎓</div>
+          <div class="tutor-info">
+            <div class="tutor-name">Aisha Noor</div>
+            <div class="tutor-subj">IELTS / English</div>
+            <div class="tutor-meta"><span class="star">⭐</span>5.0 <span style="margin:0 4px">·</span> 412 reviews</div>
+          </div>
+        </div>
+        <div class="tutor-country"><span class="flag-emoji">🇬🇧</span>UK &nbsp;·&nbsp; 9+ yrs experience</div>
+        <div class="tutor-tags">
+          <span class="ttag">IELTS</span>
+          <span class="ttag">SAT</span>
+          <span class="ttag">Business English</span>
+        </div>
+        <div class="tutor-footer">
+          <div class="tutor-price">£28<span>/hr</span></div>
+          <button class="btn-book-sm">Book Session</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="tutor-card">
+        <div class="tutor-card-top">
+          <div class="tutor-avatar">🧑‍🔬</div>
+          <div class="tutor-info">
+            <div class="tutor-name">Rahul Mehta</div>
+            <div class="tutor-subj">Physics & Science</div>
+            <div class="tutor-meta"><span class="star">⭐</span>4.7 <span style="margin:0 4px">·</span> 156 reviews</div>
+          </div>
+        </div>
+        <div class="tutor-country"><span class="flag-emoji">🇮🇳</span>India &nbsp;·&nbsp; 6+ yrs experience</div>
+        <div class="tutor-tags">
+          <span class="ttag">Mechanics</span>
+          <span class="ttag">Olympiad</span>
+          <span class="ttag">NEET</span>
+        </div>
+        <div class="tutor-footer">
+          <div class="tutor-price">₹450<span>/hr</span></div>
+          <button class="btn-book-sm">Book Session</button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="tutor-card">
+        <div class="tutor-card-top">
+          <div class="tutor-avatar">👩‍💼</div>
+          <div class="tutor-info">
+            <div class="tutor-name">Sophie Laurent</div>
+            <div class="tutor-subj">Public Speaking</div>
+            <div class="tutor-meta"><span class="star">⭐</span>4.9 <span style="margin:0 4px">·</span> 98 reviews</div>
+          </div>
+        </div>
+        <div class="tutor-country"><span class="flag-emoji">🇦🇺</span>Australia &nbsp;·&nbsp; 4+ yrs experience</div>
+        <div class="tutor-tags">
+          <span class="ttag">Debate</span>
+          <span class="ttag">Presentations</span>
+          <span class="ttag">Leadership</span>
+        </div>
+        <div class="tutor-footer">
+          <div class="tutor-price">$42<span>/hr</span></div>
+          <button class="btn-book-sm">Book Session</button>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="tutor-card">
+        <div class="tutor-card-top">
+          <div class="tutor-avatar">🧑‍💻</div>
+          <div class="tutor-info">
+            <div class="tutor-name">Wei Lin</div>
+            <div class="tutor-subj">AI & Career Skills</div>
+            <div class="tutor-meta"><span class="star">⭐</span>4.8 <span style="margin:0 4px">·</span> 74 reviews</div>
+          </div>
+        </div>
+        <div class="tutor-country"><span class="flag-emoji">🇸🇬</span>Singapore &nbsp;·&nbsp; 5+ yrs experience</div>
+        <div class="tutor-tags">
+          <span class="ttag">Machine Learning</span>
+          <span class="ttag">ChatGPT</span>
+          <span class="ttag">Resume</span>
+        </div>
+        <div class="tutor-footer">
+          <div class="tutor-price">$38<span>/hr</span></div>
+          <button class="btn-book-sm">Book Session</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#" class="btn btn-outline btn-lg">View All 50,000+ Tutors →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S5 BOOKING ── -->
+<section class="bg-beige" id="booking">
+  <div class="container">
+    <div class="booking-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Booking Experience</span>
+      </div>
+      <h2>Book a Session <span class="curvy" style="font-size:2rem">in Minutes</span></h2>
+      <div class="divider divider-center"></div>
+      <p>Choose your tutor, pick your time, and confirm your session. Clean and simple — like booking a restaurant, but for your brain.</p>
+    </div>
+    <div class="booking-mockup fade-in">
+      <!-- Left: Tutor Panel -->
+      <div class="booking-tutor-panel">
+        <div class="btp-avatar">👩‍🏫</div>
+        <div class="btp-name">Priya Sharma</div>
+        <div class="btp-subj">Mathematics Tutor</div>
+        <div class="btp-stars">⭐⭐⭐⭐⭐</div>
+        <div class="btp-facts">
+          <div class="btp-fact"><span class="btp-fact-icon">🎓</span>MSc Mathematics, IIT Delhi</div>
+          <div class="btp-fact"><span class="btp-fact-icon">⏳</span>5+ Years Experience</div>
+          <div class="btp-fact"><span class="btp-fact-icon">🌐</span>Hindi, English</div>
+          <div class="btp-fact"><span class="btp-fact-icon">📍</span>India (IST)</div>
+          <div class="btp-fact"><span class="btp-fact-icon">💰</span>₹500 / hour</div>
+          <div class="btp-fact"><span class="btp-fact-icon">✅</span>230 sessions completed</div>
+        </div>
+      </div>
+      <!-- Right: Calendar -->
+      <div class="booking-cal-panel">
+        <div class="cal-title">Select a Date & Time</div>
+        <div class="cal-sub">All times shown in your local timezone</div>
+        <div class="cal-nav">
+          <button class="cal-arrow">‹</button>
+          <span class="cal-month">June 2026</span>
+          <button class="cal-arrow">›</button>
+        </div>
+        <div class="cal-days-header">
+          <div class="cal-day-hdr">Su</div><div class="cal-day-hdr">Mo</div>
+          <div class="cal-day-hdr">Tu</div><div class="cal-day-hdr">We</div>
+          <div class="cal-day-hdr">Th</div><div class="cal-day-hdr">Fr</div>
+          <div class="cal-day-hdr">Sa</div>
+        </div>
+        <div class="cal-days-grid">
+          <div class="cal-day empty"></div><div class="cal-day">1</div>
+          <div class="cal-day has-slot">2</div><div class="cal-day today">3</div>
+          <div class="cal-day has-slot">4</div><div class="cal-day has-slot">5</div>
+          <div class="cal-day">6</div><div class="cal-day">7</div>
+          <div class="cal-day has-slot">8</div><div class="cal-day has-slot">9</div>
+          <div class="cal-day selected">10</div><div class="cal-day has-slot">11</div>
+          <div class="cal-day has-slot">12</div><div class="cal-day">13</div>
+          <div class="cal-day">14</div><div class="cal-day has-slot">15</div>
+          <div class="cal-day has-slot">16</div><div class="cal-day has-slot">17</div>
+          <div class="cal-day has-slot">18</div><div class="cal-day has-slot">19</div>
+          <div class="cal-day">20</div><div class="cal-day">21</div>
+          <div class="cal-day has-slot">22</div><div class="cal-day has-slot">23</div>
+          <div class="cal-day has-slot">24</div><div class="cal-day has-slot">25</div>
+          <div class="cal-day has-slot">26</div><div class="cal-day">27</div>
+          <div class="cal-day">28</div><div class="cal-day has-slot">29</div>
+          <div class="cal-day has-slot">30</div>
+        </div>
+        <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:10px">Available Times — June 10</div>
+        <div class="time-slots">
+          <div class="time-slot">9:00 AM</div>
+          <div class="time-slot">10:00 AM</div>
+          <div class="time-slot selected">12:00 PM</div>
+          <div class="time-slot">2:00 PM</div>
+          <div class="time-slot">4:00 PM</div>
+          <div class="time-slot">6:00 PM</div>
+        </div>
+        <div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:10px">Choose Package</div>
+        <div class="pkg-row">
+          <div class="pkg-card active">
+            <div class="pkg-name">Trial</div>
+            <div class="pkg-price">₹250</div>
+            <div class="pkg-detail">30 min · One time</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-name">Monthly</div>
+            <div class="pkg-price">₹3,500</div>
+            <div class="pkg-detail">8 sessions · Save 12%</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-name">Yearly</div>
+            <div class="pkg-price">₹32,000</div>
+            <div class="pkg-detail">96 sessions · Save 30%</div>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">Confirm Booking →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S6 CLASSROOM ── -->
+<section class="bg-blue" id="classroom" style="background:#F4F8FF">
+  <div class="container">
+    <div class="class-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Live Classroom</span>
+      </div>
+      <h2>Your Private <span class="curvy" style="font-size:2rem">Live Classroom</span></h2>
+      <div class="divider divider-center"></div>
+      <p>Everything you need for a powerful learning session — all in one beautifully simple classroom that feels like learning with a friend.</p>
+    </div>
+    <div class="class-layout fade-in">
+      <div class="class-img-wrap">
+        <img src="/images/m2s6" alt="Live classroom experience" />
+      </div>
+      <div class="class-feature-list">
+        <div class="class-feat">
+          <div class="cf-icon cf-blue">📹</div>
+          <div class="cf-text">
+            <strong>Live HD Video</strong>
+            <span>Crystal clear 1-on-1 video calls with ultra-low latency</span>
+          </div>
+        </div>
+        <div class="class-feat">
+          <div class="cf-icon cf-gold">🖥️</div>
+          <div class="cf-text">
+            <strong>Screen Sharing</strong>
+            <span>Share your screen or let your tutor guide you step by step</span>
+          </div>
+        </div>
+        <div class="class-feat">
+          <div class="cf-icon cf-green">✏️</div>
+          <div class="cf-text">
+            <strong>Interactive Whiteboard</strong>
+            <span>Draw, write, solve problems together in real time</span>
+          </div>
+        </div>
+        <div class="class-feat">
+          <div class="cf-icon cf-purple">📋</div>
+          <div class="cf-text">
+            <strong>Assignments & Notes</strong>
+            <span>Tutors share assignments and notes directly in session</span>
+          </div>
+        </div>
+        <div class="class-feat">
+          <div class="cf-icon cf-pink">⏺️</div>
+          <div class="cf-text">
+            <strong>Session Recordings</strong>
+            <span>Every class is recorded so you can revisit anytime</span>
+          </div>
+        </div>
+        <div class="class-feat">
+          <div class="cf-icon cf-teal">💬</div>
+          <div class="cf-text">
+            <strong>Chat & Polls</strong>
+            <span>Ask questions, take polls, share resources instantly</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S7 MATCHING ── -->
+<section class="bg-white">
+  <div class="container">
+    <div class="match-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Smart Matching</span>
+      </div>
+      <h2>Get Matched With <span class="curvy" style="font-size:2rem">the Right Tutor</span></h2>
+      <div class="divider divider-center"></div>
+      <p>Tell us your goals, schedule, and learning style — we'll find the tutor who fits you perfectly.</p>
+    </div>
+    <div class="match-flow fade-in" style="gap:20px">
+      <!-- Student card -->
+      <div class="match-card">
+        <div class="match-card-title">📋 Your Profile</div>
+        <div class="match-item"><span class="match-dot"></span>Learning Goal: IELTS 7.5+</div>
+        <div class="match-item"><span class="match-dot"></span>Schedule: Weekdays 6–8 PM</div>
+        <div class="match-item"><span class="match-dot"></span>Budget: Under ₹600/hr</div>
+        <div class="match-item"><span class="match-dot"></span>Language: English</div>
+        <div class="match-item"><span class="match-dot"></span>Level: Intermediate</div>
+        <div class="match-item"><span class="match-dot"></span>Style: Visual Learner</div>
+      </div>
+      <!-- Arrow -->
+      <div class="match-arrow">✨</div>
+      <!-- Result card -->
+      <div class="match-result">
+        <div class="match-result-label">🎯 Perfect Match</div>
+        <div class="match-result-name">Aisha Noor</div>
+        <div class="match-result-sub">IELTS Expert · UK</div>
+        <div class="match-result-stars">⭐⭐⭐⭐⭐</div>
+        <div style="font-size:.82rem;color:rgba(255,255,255,.7);margin-bottom:12px">98% match score · Available evenings</div>
+        <div class="match-badge">✅ 412 students helped</div>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <a href="#" class="btn btn-primary btn-lg">Get My Matches →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S8 VERIFIED ── -->
+<section class="bg-beige" id="verified">
+  <div class="container">
+    <div class="verified-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Trust & Safety</span>
+      </div>
+      <h2>Every Tutor is <span class="curvy" style="font-size:2rem">Verified</span></h2>
+      <div class="divider divider-center"></div>
+      <p>We don't just let anyone teach. Every educator goes through a rigorous verification process so you can learn with complete confidence.</p>
+    </div>
+    <div class="verified-layout fade-in">
+      <div class="verified-img">
+        <img src="/images/m2s8.png" alt="Verified tutor ecosystem" />
+      </div>
+      <div>
+        <div class="verified-grid">
+          <div class="v-card">
+            <div class="v-icon">🪪</div>
+            <div class="v-title">Identity Verified</div>
+            <div class="v-desc">Government ID check on every tutor before they join the platform.</div>
+          </div>
+          <div class="v-card">
+            <div class="v-icon">🎓</div>
+            <div class="v-title">Education Verified</div>
+            <div class="v-desc">Degrees, certifications and academic credentials confirmed directly.</div>
+          </div>
+          <div class="v-card">
+            <div class="v-icon">🔍</div>
+            <div class="v-title">Background Check</div>
+            <div class="v-desc">Professional background screening for safe, trusted learning.</div>
+          </div>
+          <div class="v-card">
+            <div class="v-icon">📊</div>
+            <div class="v-title">Skills Assessment</div>
+            <div class="v-desc">Subject-specific tests to ensure every tutor truly knows their craft.</div>
+          </div>
+          <div class="v-card">
+            <div class="v-icon">🎬</div>
+            <div class="v-title">Demo Session</div>
+            <div class="v-desc">A live trial class reviewed by our quality team before approval.</div>
+          </div>
+          <div class="v-card">
+            <div class="v-icon">⭐</div>
+            <div class="v-title">Ratings & Reviews</div>
+            <div class="v-desc">Continuous student feedback ensures tutors maintain high standards.</div>
+          </div>
+        </div>
+        <div style="background:var(--navy);border-radius:16px;padding:20px 24px;margin-top:20px;display:flex;align-items:center;gap:16px">
+          <span style="font-size:32px">🛡️</span>
+          <div>
+            <div style="color:#fff;font-weight:700;font-size:.95rem;margin-bottom:4px">Quality Guarantee</div>
+            <div style="color:rgba(255,255,255,.7);font-size:.82rem">Not satisfied with a session? We offer a full refund — no questions asked.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S9 GLOBAL NETWORK ── -->
+<!-- background matched to image's warm beige ~#EDE5D5 -->
+<section style="background:#EDE5D5;padding:96px 0" id="global">
+  <div class="container">
+    <div class="global-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Global Network</span>
+      </div>
+      <h2>Learning Has <span class="curvy" style="font-size:2rem">No Borders</span></h2>
+      <div class="divider divider-center"></div>
+      <p>Students and tutors from every corner of the world, connected through the power of live learning.</p>
+    </div>
+    <div class="global-img-wrap fade-in">
+      <img src="/images/m2s9.png" alt="Global tutoring network" style="border-radius:0;box-shadow:none;max-width:960px;width:100%;display:block;margin:0 auto"/>
+    </div>
+    <div class="global-stats fade-in">
+      <div class="g-stat">
+        <div class="g-stat-num">50,000+</div>
+        <div class="g-stat-lbl">Verified Tutors</div>
+      </div>
+      <div class="g-stat">
+        <div class="g-stat-num">120+</div>
+        <div class="g-stat-lbl">Subjects Covered</div>
+      </div>
+      <div class="g-stat">
+        <div class="g-stat-num">24/7</div>
+        <div class="g-stat-lbl">Availability</div>
+      </div>
+      <div class="g-stat">
+        <div class="g-stat-num">100+</div>
+        <div class="g-stat-lbl">Countries</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S10 SUCCESS STORIES ── -->
+<section class="bg-white" id="stories">
+  <div class="container">
+    <div class="success-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Success Stories</span>
+      </div>
+      <h2>Real <span class="curvy" style="font-size:2.2rem">Journeys,</span><br>Real Results</h2>
+      <div class="divider divider-center"></div>
+      <p>These aren't testimonials. These are lives changed through the right teacher at the right time.</p>
+    </div>
+    <div class="stories-grid fade-in">
+      <!-- Story 1 -->
+      <div class="story-card">
+        <div class="story-banner" style="background:linear-gradient(90deg,#4F46E5,#818CF8)"></div>
+        <div class="story-body">
+          <div class="story-avatar-row">
+            <div class="story-avatar">👦</div>
+            <div>
+              <div class="story-name">Arjun Patel</div>
+              <div class="story-meta">Grade 12 · India</div>
+            </div>
+          </div>
+          <div class="story-achievement">🏆 IIT JEE Qualified</div>
+          <p class="story-quote">"I was failing Math in class 11. Three months with Priya on OneCent Tutors and I cracked JEE Advanced. She explained things no textbook ever could."</p>
+          <div class="story-before-after">
+            <div class="before-after-pill pill-before">
+              Before: 34% in Math
+              <span class="pill-label">Grade 11 Mid-term</span>
+            </div>
+            <div class="before-after-pill pill-after">
+              After: JEE Advanced ✅
+              <span class="pill-label">Top 2% nationally</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Story 2 -->
+      <div class="story-card">
+        <div class="story-banner" style="background:linear-gradient(90deg,#16A34A,#4ADE80)"></div>
+        <div class="story-body">
+          <div class="story-avatar-row">
+            <div class="story-avatar">👩</div>
+            <div>
+              <div class="story-name">Fatima Al-Hassan</div>
+              <div class="story-meta">University Student · UAE</div>
+            </div>
+          </div>
+          <div class="story-achievement">🎓 IELTS 8.0 Achieved</div>
+          <p class="story-quote">"My visa depended on an IELTS 7.5. Aisha worked with me every weekday for 6 weeks, drilling my weak areas. I scored 8.0 and got into my dream university in Canada."</p>
+          <div class="story-before-after">
+            <div class="before-after-pill pill-before">
+              Before: IELTS 5.5
+              <span class="pill-label">First attempt</span>
+            </div>
+            <div class="before-after-pill pill-after">
+              After: IELTS 8.0 ✅
+              <span class="pill-label">University accepted</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Story 3 -->
+      <div class="story-card">
+        <div class="story-banner" style="background:linear-gradient(90deg,#EA580C,#FB923C)"></div>
+        <div class="story-body">
+          <div class="story-avatar-row">
+            <div class="story-avatar">🧑</div>
+            <div>
+              <div class="story-name">Marcus Johnson</div>
+              <div class="story-meta">Career Changer · USA</div>
+            </div>
+          </div>
+          <div class="story-achievement">💻 Got Hired as Dev</div>
+          <p class="story-quote">"I was a marketing manager with zero coding experience. James taught me Python and web dev over 4 months. I landed my first developer job at a tech startup."</p>
+          <div class="story-before-after">
+            <div class="before-after-pill pill-before">
+              Before: No coding skills
+              <span class="pill-label">Marketing background</span>
+            </div>
+            <div class="before-after-pill pill-after">
+              After: Hired as Dev ✅
+              <span class="pill-label">$85K starting salary</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S11 FOR TUTORS ── -->
+<section class="bg-beige" id="tutors-sec">
+  <div class="container">
+    <div class="tutors-sec-layout fade-in">
+      <div>
+        <div class="tag-section">
+          <span class="section-tag">For Tutors</span>
+        </div>
+        <h2>Teach. Earn. <span class="curvy" style="font-size:2.2rem">Grow.</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:1.05rem;max-width:460px">Join a global community of passionate educators. Build your student base, set your own hours, and earn on your own terms.</p>
+        <div class="tutor-benefits">
+          <div class="tb-item"><div class="tb-icon">⏰</div>Flexible hours — teach on your schedule, full-time or part-time</div>
+          <div class="tb-item"><div class="tb-icon">🌍</div>Access thousands of students across 100+ countries</div>
+          <div class="tb-item"><div class="tb-icon">💳</div>Reliable weekly payouts directly to your bank account</div>
+          <div class="tb-item"><div class="tb-icon">📚</div>Free training resources, teaching tools, and curriculum templates</div>
+          <div class="tb-item"><div class="tb-icon">🤝</div>A supportive tutor community, events, and ongoing development</div>
+          <div class="tb-item"><div class="tb-icon">🏅</div>Earn badges, climb rankings, and grow your reputation globally</div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="#" class="btn btn-primary btn-lg">Become a Tutor</a>
+          <a href="#" class="btn btn-outline btn-lg">Learn More</a>
+        </div>
+      </div>
+      <div class="tutors-sec-visual">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=640&auto=format&fit=crop&q=80" alt="Tutor teaching from home" style="border-radius:28px;box-shadow:var(--shadow-lg)"/>
+        <div class="income-chip">
+          <span class="income-chip-icon">💰</span>
+          <div class="income-chip-text">
+            <strong>₹1.2L / month</strong>
+            <span>avg. top tutor earnings</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── S12 PLATFORM PREVIEW ── -->
+<section class="bg-blue" style="background:#F4F8FF">
+  <div class="container">
+    <div class="platform-header fade-in">
+      <div class="tag-section" style="justify-content:center">
+        <span class="section-tag">Platform Preview</span>
+      </div>
+      <h2>One Dashboard.<br><span class="curvy" style="font-size:2rem">Everything You Need.</span></h2>
+      <div class="divider divider-center"></div>
+      <p>Track your sessions, manage students, review assignments, and monitor growth — all from a single beautiful interface.</p>
+    </div>
+    <div class="dashboard-mockup fade-in">
+      <!-- Top bar -->
+      <div class="dash-topbar">
+        <div class="dash-tb-left">
+          <span>📚</span> OneCent Tutors — Dashboard
+        </div>
+        <div class="dash-tb-right">
+          <span class="dash-tb-notif">🔔</span>
+          <div class="dash-tb-avatar">P</div>
+        </div>
+      </div>
+      <!-- Body -->
+      <div class="dash-body">
+        <!-- Sidebar -->
+        <div class="dash-sidebar">
+          <div class="dash-nav-item active">🏠 Overview</div>
+          <div class="dash-nav-item">📅 Sessions</div>
+          <div class="dash-nav-item">👥 My Students</div>
+          <div class="dash-nav-item">📋 Assignments</div>
+          <div class="dash-nav-item">💳 Payments</div>
+          <div class="dash-nav-item">📈 Progress</div>
+          <div class="dash-nav-item">💬 Messages</div>
+          <div class="dash-nav-item">⚙️ Settings</div>
+        </div>
+        <!-- Main -->
+        <div class="dash-main">
+          <!-- Upcoming sessions -->
+          <div class="dash-widget" style="grid-column:1/-1">
+            <div class="dash-widget-title">Upcoming Sessions</div>
+            <div class="dash-session-item">
+              <div class="dsi-avatar">👩</div>
+              <div class="dsi-info">
+                <div class="dsi-name">Priya Sharma · Mathematics</div>
+                <div class="dsi-time">Today · 12:00 PM IST</div>
+              </div>
+              <span class="dsi-badge badge-live">● LIVE</span>
+            </div>
+            <div class="dash-session-item">
+              <div class="dsi-avatar">👨</div>
+              <div class="dsi-info">
+                <div class="dsi-name">James Carter · Python Basics</div>
+                <div class="dsi-time">Today · 4:00 PM</div>
+              </div>
+              <span class="dsi-badge badge-soon">In 2 hrs</span>
+            </div>
+            <div class="dash-session-item">
+              <div class="dsi-avatar">👩‍🎓</div>
+              <div class="dsi-info">
+                <div class="dsi-name">Aisha Noor · IELTS Prep</div>
+                <div class="dsi-time">Tomorrow · 6:00 PM</div>
+              </div>
+              <span class="dsi-badge badge-done">Confirmed</span>
+            </div>
+          </div>
+          <!-- Stats -->
+          <div class="dash-widget">
+            <div class="dash-widget-title">Sessions This Month</div>
+            <div class="stat-big">24</div>
+            <div class="stat-sub">+6 from last month ↑</div>
+            <div class="dash-mini-chart">
+              <div class="bar" style="height:30%"></div>
+              <div class="bar" style="height:50%"></div>
+              <div class="bar" style="height:40%"></div>
+              <div class="bar" style="height:70%"></div>
+              <div class="bar active" style="height:90%"></div>
+              <div class="bar" style="height:60%"></div>
+              <div class="bar" style="height:80%"></div>
+            </div>
+          </div>
+          <!-- Progress -->
+          <div class="dash-widget">
+            <div class="dash-widget-title">Subject Progress</div>
+            <div class="progress-list">
+              <div class="prog-item">
+                <div class="prog-label"><span>Mathematics</span><span style="color:var(--navy);font-weight:700">82%</span></div>
+                <div class="prog-bar"><div class="prog-fill" style="width:82%"></div></div>
+              </div>
+              <div class="prog-item">
+                <div class="prog-label"><span>IELTS Prep</span><span style="color:var(--navy);font-weight:700">67%</span></div>
+                <div class="prog-bar"><div class="prog-fill" style="width:67%"></div></div>
+              </div>
+              <div class="prog-item">
+                <div class="prog-label"><span>Python</span><span style="color:var(--navy);font-weight:700">45%</span></div>
+                <div class="prog-bar"><div class="prog-fill" style="width:45%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── FINAL CTA ── -->
+<section class="final-cta">
+  <div class="final-cta-inner fade-in">
+    <h2>Every Great Learner Starts With <span class="curvy" style="color:var(--gold);font-size:2.6rem">the Right Teacher.</span></h2>
+    <p>Join thousands of students and educators building meaningful learning journeys through OneCent Tutors.</p>
+    <div class="final-cta-btns">
+      <a href="#find" class="btn btn-white btn-lg">🔍 Explore Tutors</a>
+      <a href="#booking" class="btn btn-gold btn-lg">📅 Book Trial Session</a>
+      <a href="#" class="btn btn-outline-white btn-lg">🖥️ Open Tutor Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div style="width:36px;height:36px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px">📚</div>
+        <span style="font-size:1.1rem;font-weight:800;color:#fff">OneCent<span style="color:var(--gold)">Tutors</span></span>
+      </div>
+      <p>A global learning marketplace connecting students with verified educators for live, personalised education.</p>
+    </div>
+    <div class="footer-col">
+      <h4>For Students</h4>
+      <a href="#">Find a Tutor</a>
+      <a href="#">Browse Subjects</a>
+      <a href="#">Book a Trial</a>
+      <a href="#">How It Works</a>
+      <a href="#">Pricing</a>
+    </div>
+    <div class="footer-col">
+      <h4>For Tutors</h4>
+      <a href="#">Become a Tutor</a>
+      <a href="#">Tutor Guidelines</a>
+      <a href="#">Earnings</a>
+      <a href="#">Resources</a>
+      <a href="#">Community</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 OneCent Tutors · A WingsUP Product</span>
+    <span>Built with ❤️ for learners everywhere</span>
+  </div>
+</footer>
+
+<script>
+// Scroll fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Calendar day clicks
+document.querySelectorAll('.cal-day:not(.empty)').forEach(d => {
+  d.addEventListener('click', () => {
+    document.querySelectorAll('.cal-day').forEach(x => x.classList.remove('selected'));
+    d.classList.add('selected');
+  });
+});
+
+// Time slot clicks
+document.querySelectorAll('.time-slot').forEach(s => {
+  s.addEventListener('click', () => {
+    document.querySelectorAll('.time-slot').forEach(x => x.classList.remove('selected'));
+    s.classList.add('selected');
+  });
+});
+
+// Package card clicks
+document.querySelectorAll('.pkg-card').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.pkg-card').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+  });
+});
+
+// Filter chip clicks
+document.querySelectorAll('.filter-chip').forEach(c => {
+  c.addEventListener('click', () => {
+    c.classList.toggle('active');
+  });
+});
+</script>
+</body>
+</html>
