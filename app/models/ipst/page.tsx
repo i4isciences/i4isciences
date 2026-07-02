@@ -230,19 +230,41 @@ const challenges = [
 ];
 
 const parentSteps = [
-  { title: "Understanding School Systems", desc: "Learn how local education is structured — grade levels, institutions, and how decisions get made." },
-  { title: "Communication Skills", desc: "Build real confidence speaking with teachers, administrators, school boards, and other parents." },
-  { title: "Parent Engagement", desc: "Discover how to participate actively in your child's school life and the events that shape it." },
-  { title: "Supporting Learning at Home", desc: "Create the right environment and daily routines to reinforce what your child learns." },
-  { title: "Future Planning", desc: "Explore academic pathways, scholarships, and long-term opportunities for your child's future." },
+  {
+    title: "Grades & GPA",
+    desc: "How grades and GPA actually work.",
+  },
+  {
+    title: "Understanding IEPs",
+    desc: "What an IEP is and when it matters.",
+  },
+  {
+    title: "Talking to Teachers",
+    desc: "How to talk to your child&#39;s teacher.",
+  },
+  {
+    title: "Your Education Rights",
+    desc: "What your family&#39;s education rights are.",
+  },
 ];
 
 const studentSteps = [
-  { title: "School Readiness", desc: "Prepare for day one — supplies, schedules, expectations, and how to ask for help." },
-  { title: "Language Support", desc: "Build vocabulary, reading, and speaking confidence tailored to school and daily life." },
-  { title: "Study Skills", desc: "Learn how to take notes, organize time, and approach tests with real strategy." },
-  { title: "Confidence Building", desc: "Develop the self-belief to participate, raise your hand, and make your voice heard." },
-  { title: "Academic Success", desc: "Reach your potential with personalized tools, mentorship, and a community behind you." },
+  {
+    title: "One-on-One Tutoring",
+    desc: "Our tutors work one-on-one with your child to rebuild confidence and close any gaps left by the move.",
+  },
+  {
+    title: "English Language Support",
+    desc: "We support English language learners at every level, help students adjust to a new curriculum, and make sure no one is left struggling in silence.",
+  },
+  {
+    title: "Academic + Emotional Support",
+    desc: "This is academic and emotional support together, because a child who feels understood learns faster and settles in sooner.",
+  },
+  {
+    title: "Catching Up & Belonging",
+    desc: "Catching up in school is the goal, but belonging is just as important, and we never lose sight of either one.",
+  },
 ];
 
 const langs = [
@@ -286,11 +308,12 @@ export default function IPSTPage() {
   const [activeStoryIdx, setActiveStoryIdx] = useState(0);
 
   return (
-    <main style={{ fontFamily: "'Geist','Geist Sans',sans-serif", overflowX: "hidden", background: "#FDFAF5" }}>
+    <main className="ipst-page" style={{ fontFamily: "'Geist','Geist Sans',sans-serif", overflowX: "hidden", background: "#FDFAF5" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Geist:wght@300;400;500;600;700;800;900&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0}
-        .btn-blue{background:#0A2E8A;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;display:inline-block}
+        .ipst-page, .ipst-page *, .ipst-page *::before, .ipst-page *::after{
+  box-sizing:border-box;margin:0;padding:0;
+}        .btn-blue{background:#0A2E8A;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;display:inline-block}
         .btn-blue:hover{background:#081f63;transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,46,138,0.28)}
         .btn-gold{background:#F5A623;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;display:inline-block}
         .btn-gold:hover{background:#d9901a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,0.35)}
@@ -319,7 +342,46 @@ export default function IPSTPage() {
           .three-col{grid-template-columns:1fr!important}
           .stat-grid{grid-template-columns:1fr 1fr!important}
         }
+        .site-logo-sticky{
+          position:fixed;
+          top:96px;
+          right:24px;
+          z-index:999;
+          background:transparent;
+          border:none;
+          padding:0;
+          transition:transform .25s ease;
+        }
+        
+        .site-logo-image{
+          width:70px;
+          height:auto;
+          display:block;
+        }
+        
+        .site-logo-sticky:hover{
+          transform:scale(1.05);
+        }
+        
+        @media(max-width:768px){
+          .site-logo-sticky{
+            top:84px;
+            right:12px;
+          }
+        
+          .site-logo-image{
+            width:60px;
+          }
+        }
       `}</style>
+      <div className="site-logo-sticky">
+  <img
+    src="/images/ipstlogo-removebg-preview.png"
+    alt="OneCent Tutors"
+    className="site-logo-image"
+  />
+</div>
+      
 
 {/* ══════════════════════════════════════════════════════
   §1 — HERO  (Header & Footer Compatible)
@@ -438,7 +500,8 @@ fontFamily: "Geist, system-ui, sans-serif"
         maxWidth: "460px", 
         marginBottom: "2.2rem" 
       }}>
-        IPST supports immigrant parents and students through guidance, training, mentorship, resources, and community support designed for successful educational integration.
+        Immigrant Parent Student Training (IPST)
+ supports immigrant parents and students through guidance, training, mentorship, resources, and community support designed for successful educational integration in foreign land.
       </p>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
@@ -495,7 +558,7 @@ fontFamily: "Geist, system-ui, sans-serif"
           background: "#fff"
         }}>
           <Image 
-            src="/images/ipst.png" 
+            src="/images/ipst.jpg" 
             alt="Illustration of immigrant family arriving at school" 
             width={520} 
             height={520} 
@@ -521,10 +584,7 @@ fontFamily: "Geist, system-ui, sans-serif"
           §2 — CHALLENGES  (numbered magazine tiles, giant numerals)
       ══════════════════════════════════════════════════════ */}
       <section style={{ background: "#FDFAF5", padding: "clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem)", position: "relative", overflow: "hidden" }}>
-        {/* giant bg watermark */}
-        <div style={{ position: "absolute", top: 0, right: -20, fontSize: "clamp(8rem,20vw,18rem)", fontWeight: 900, color: "rgba(10,46,138,0.04)", lineHeight: 1, userSelect: "none", pointerEvents: "none", fontFamily: "inherit" }}>
-          BARRIERS
-        </div>
+
 
         {/* decorative doodles */}
         <svg style={{ position: "absolute", top: 40, left: 20, opacity: 0.15 }} width="90" height="90" viewBox="0 0 90 90" fill="none" aria-hidden="true">
@@ -582,7 +642,7 @@ fontFamily: "Geist, system-ui, sans-serif"
 
       <ZigZagDivider topColor="#FDFAF5" bottomColor="#0A2E8A" />
 
-      {/* ══════════════════════════════════════════════════════
+ {/* ══════════════════════════════════════════════════════
           §3 — WHAT IS IPST  (dark section, split magazine layout)
       ══════════════════════════════════════════════════════ */}
       <section style={{ background: "#0A2E8A", padding: "clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem)", position: "relative", overflow: "hidden" }}>
@@ -599,29 +659,61 @@ fontFamily: "Geist, system-ui, sans-serif"
           <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(2rem,5vw,5rem)", alignItems: "center" }}>
             <FadeIn x={-30} y={0}>
               <div style={{ display: "inline-block", border: "2px solid rgba(245,166,35,0.5)", borderRadius: 4, padding: "5px 14px", marginBottom: 22, transform: "rotate(-1deg)" }}>
-                <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.2em", color: "#F5A623", textTransform: "uppercase" }}>What Is IPST</span>
+                <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.2em", color: "#F5A623", textTransform: "uppercase" }}>Immigrant Parent Student Training &amp; Support</span>
               </div>
               <h2 style={{ fontSize: "clamp(2rem,4vw,3.4rem)", fontWeight: 900, color: "#fff", lineHeight: 1.12, marginBottom: 22 }}>
-                Not a Platform.<br />A <G>Confidence-Building</G> Ecosystem.
+                Help Your Child Thrive<br />in a <G>New School, New Country.</G>
               </h2>
-              <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.8, marginBottom: 32 }}>
-                IPST brings together parents, students, schools, mentors, and community in one interconnected support system. Every tool exists to reduce fear and build the confidence immigrant families need to thrive.
+              <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.8, marginBottom: 20 }}>
+                Moving to a new country is hard on a child. New school, new language, new way of grading, and new classmates, all at once. IPST, our Immigrant Parent Student Training (IPST) and Support program, is built to help your student catch up, keep up, and feel at home. The student always comes first here. Everything we do is designed to help your child succeed, with support for parents close behind so the whole family can move forward together.
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {["Guided learning paths for parents and students","Multilingual resources across 6 languages","Live mentor matching based on culture and language","Community events, workshops, and peer groups"].map(f => (
-                  <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-                    <IcoCheck />
-                    <span style={{ color: "rgba(255,255,255,0.75)", fontSize: 14, lineHeight: 1.6 }}>{f}</span>
-                  </div>
-                ))}
-              </div>
+              <h3 style={{ color: "#F5A623", fontSize: 15, fontWeight: 800, letterSpacing: "0.04em", marginTop: 28, marginBottom: 12 }}>
+                Why IPST Exists
+              </h3>
+              <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.8 }}>
+                When a family relocates, it is the student who feels it most. A child who was confident back home can suddenly fall behind, not because they are not capable, but because everything around them has changed. IPST closes that gap. We give newly arrived and immigrant students the academic help, the language support, and the encouragement they need to find their footing fast and start succeeding in their new school.
+              </p>
             </FadeIn>
 
             <FadeIn x={30} y={0} delay={120}>
               <div style={{ position: "relative" }}>
-                
-                  <Image src="/images/m3s4.png" alt="IPST ecosystem" width={800} height={500} style={{ width: "100%", height: "auto", display: "block" }} />
-                
+                <Image src="/images/m3s4.png" alt="IPST ecosystem" width={800} height={500} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Support cards — language access + early planning */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(1.5rem,3vw,2.5rem)", marginTop: "clamp(3rem,6vw,5rem)" }}>
+            <FadeIn y={20} delay={0}>
+              <div style={{
+                background: "rgba(255,255,255,0.04)", border: "1.5px solid rgba(245,166,35,0.25)",
+                borderRadius: 22, padding: "clamp(1.75rem,3vw,2.5rem)", height: "100%",
+              }}>
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true" style={{ marginBottom: 16 }}>
+                  <circle cx="18" cy="18" r="15" stroke="#F5A623" strokeWidth="1.6" />
+                  <path d="M3 18h30M18 3c4 4 6 9 6 15s-2 11-6 15c-4-4-6-9-6-15s2-11 6-15z" stroke="#F5A623" strokeWidth="1.6" fill="none" />
+                </svg>
+                <h3 style={{ color: "#fff", fontSize: 19, fontWeight: 800, marginBottom: 12 }}>Support in Your Language</h3>
+                <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14.5, lineHeight: 1.75 }}>
+                  Language should never be the reason a family feels lost. IPST offers multilingual support in as many as 15 languages, so parents and students can get help in a language they are comfortable with. Tutoring, guidance, and answers all come in a way your family can clearly understand, removing the language barrier that holds so many newcomer families back during a difficult first year.
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn y={20} delay={100}>
+              <div style={{
+                background: "rgba(255,255,255,0.04)", border: "1.5px solid rgba(245,166,35,0.25)",
+                borderRadius: 22, padding: "clamp(1.75rem,3vw,2.5rem)", height: "100%",
+              }}>
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true" style={{ marginBottom: 16 }}>
+                  <rect x="4" y="6" width="28" height="24" rx="3" stroke="#F5A623" strokeWidth="1.6" />
+                  <path d="M4 13h28M11 3v6M25 3v6" stroke="#F5A623" strokeWidth="1.6" strokeLinecap="round" />
+                  <path d="M12 21l4 4 8-9" stroke="#F5A623" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                </svg>
+                <h3 style={{ color: "#fff", fontSize: 19, fontWeight: 800, marginBottom: 12 }}>Plan Before You Land</h3>
+                <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14.5, lineHeight: 1.75 }}>
+                  The best time to prepare is before you arrive. Families planning a move can start with IPST early, mapping out the school system, the requirements, and the steps ahead before the first day of class. For older students aiming at higher education, we help map the path toward universities and entrance requirements in their new country, so relocation becomes a head start instead of a setback for the students who are ready to aim higher.
+                </p>
               </div>
             </FadeIn>
           </div>
@@ -630,8 +722,8 @@ fontFamily: "Geist, system-ui, sans-serif"
 
       <TornDivider topColor="#0A2E8A" bottomColor="#FDF0E4" flip />
 
-{/* ══════════════════════════════════════════════════════
-          §4 — FAMILY JOURNEY  (Creative Compact Horizontal Timeline)
+      {/* ══════════════════════════════════════════════════════
+          §4 — HOW IT WORKS  (Creative Compact Horizontal Timeline)
       ══════════════════════════════════════════════════════ */}
       <section style={{ 
         background: "#FDF0E4", 
@@ -641,7 +733,6 @@ fontFamily: "Geist, system-ui, sans-serif"
         fontFamily: "Geist, system-ui, sans-serif"
       }}>
 
-        {/* Subtle background doodles */}
         <svg style={{ position: "absolute", top: "20%", left: "5%", opacity: 0.06 }} width="180" height="140" viewBox="0 0 180 140" fill="none" aria-hidden="true">
           <path d="M20 110 Q60 40 130 95" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" fill="none"/>
         </svg>
@@ -651,7 +742,6 @@ fontFamily: "Geist, system-ui, sans-serif"
 
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(1.5rem, 5vw, 3.5rem)" }}>
           
-          {/* Header - Generous but compact spacing */}
           <div style={{ marginBottom: "clamp(3rem, 5vw, 4.5rem)", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "2rem" }}>
             <div>
               <div style={{
@@ -667,7 +757,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                 marginBottom: "1rem",
                 boxShadow: "0 6px 16px rgba(245,166,35,0.25)"
               }}>
-                YOUR FAMILY&apos;S JOURNEY
+                HOW IT WORKS
               </div>
               <h2 style={{ 
                 fontSize: "clamp(2.4rem, 4.8vw, 3.9rem)", 
@@ -675,7 +765,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                 color: "#0A2E8A", 
                 lineHeight: 1.1 
               }}>
-                Every Step Feels Like <span style={{ color: "#F5A623" }}>Home</span>
+                Four Steps to Feeling <span style={{ color: "#F5A623" }}>at Home</span>
               </h2>
             </div>
             
@@ -685,11 +775,10 @@ fontFamily: "Geist, system-ui, sans-serif"
               maxWidth: "380px", 
               lineHeight: 1.75 
             }}>
-              From arrival to full belonging — IPST guides your family with care through every chapter of educational integration.
+              Your student does not have to navigate a new school system alone, and neither do you.
             </p>
           </div>
 
-          {/* Creative Horizontal Scroll Timeline - Compact & Playful */}
           <div style={{ 
             overflowX: "auto", 
             paddingBottom: "1.5rem", 
@@ -704,7 +793,6 @@ fontFamily: "Geist, system-ui, sans-serif"
               padding: "20px 0"
             }}>
               
-              {/* Winding decorative path line */}
               <svg style={{ 
                 position: "absolute", 
                 top: "68px", 
@@ -713,9 +801,9 @@ fontFamily: "Geist, system-ui, sans-serif"
                 height: "6px", 
                 zIndex: 0,
                 opacity: 0.75
-              }} viewBox="0 0 1200 30" fill="none" aria-hidden="true">
+              }} viewBox="0 0 800 30" fill="none" aria-hidden="true">
                 <path 
-                  d="M0 15 Q180 2 340 22 Q520 8 680 19 Q850 5 1020 23 Q1150 12 1200 15" 
+                  d="M0 15 Q240 2 400 22 Q560 8 800 15" 
                   stroke="url(#journeyGradient)" 
                   strokeWidth="5" 
                   strokeLinecap="round"
@@ -733,43 +821,29 @@ fontFamily: "Geist, system-ui, sans-serif"
               {[
                 { 
                   num: "01", 
-                  title: "Arrival", 
-                  desc: "Landing with hope and questions. We greet you with open arms.", 
+                  title: "Tell Us Your Situation", 
+                  desc: "Share your student&#39;s grade, your home language, and the country you are arriving from.", 
                   accent: "#0A2E8A", 
                   light: "#DCEAF8" 
                 },
                 { 
                   num: "02", 
-                  title: "Understanding", 
-                  desc: "Decoding the new system — rules, expectations, and opportunities.", 
+                  title: "Get Matched", 
+                  desc: "We connect your child with multilingual tutors and guidance built for newcomer families.", 
                   accent: "#2A6B3A", 
                   light: "#BFD9B8" 
                 },
                 { 
                   num: "03", 
-                  title: "Enrollment", 
-                  desc: "Smooth guidance through forms, schools, and placement.", 
+                  title: "Build a Plan", 
+                  desc: "Your student follows a clear, personalized plan to catch up and keep moving forward.", 
                   accent: "#C4712A", 
                   light: "#FDE6D2" 
                 },
                 { 
                   num: "04", 
-                  title: "Adaptation", 
-                  desc: "Language, friendships, and routines begin to feel natural.", 
-                  accent: "#0A2E8A", 
-                  light: "#DCEAF8" 
-                },
-                { 
-                  num: "05", 
-                  title: "Community", 
-                  desc: "Building connections, mentors, and a strong support circle.", 
-                  accent: "#2A6B3A", 
-                  light: "#BFD9B8" 
-                },
-                { 
-                  num: "06", 
-                  title: "Confidence", 
-                  desc: "Thriving together — your new home now feels truly yours.", 
+                  title: "Settle In With Support", 
+                  desc: "Your family always has someone to turn to as your child grows more confident in school.", 
                   accent: "#7A4800", 
                   light: "#F5A623" 
                 }
@@ -784,7 +858,6 @@ fontFamily: "Geist, system-ui, sans-serif"
                     paddingTop: i % 2 === 0 ? "0" : "42px"
                   }}
                 >
-                  {/* Creative Number Bubble with doodle */}
                   <div style={{ 
                     position: "relative", 
                     width: "88px", 
@@ -809,13 +882,11 @@ fontFamily: "Geist, system-ui, sans-serif"
                       {step.num}
                     </div>
                     
-                    {/* Tiny hand-drawn accent */}
                     <svg style={{ position: "absolute", top: "-12px", right: "-10px", width: "38px", height: "38px", opacity: 0.7 }} viewBox="0 0 38 38" fill="none" aria-hidden="true">
                       <circle cx="19" cy="19" r="12" stroke="#F5A623" strokeWidth="2.5" fill="none"/>
                     </svg>
                   </div>
 
-                  {/* Content Card - Professional yet playful */}
                   <div style={{ 
                     background: "#fff", 
                     borderRadius: "22px", 
@@ -845,8 +916,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                     </p>
                   </div>
 
-                  {/* Connecting arrow doodle */}
-                  {i < 5 && (
+                  {i < 3 && (
                     <svg style={{ 
                       position: "absolute", 
                       top: "68px", 
@@ -875,25 +945,23 @@ fontFamily: "Geist, system-ui, sans-serif"
 
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="two-col" style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: "clamp(2rem,5vw,5rem)", alignItems: "start" }}>
-            {/* Sticky label column */}
             <FadeIn x={-30} y={0}>
               <div style={{ position: "sticky", top: 100 }}>
                 <div style={{ display: "inline-block", background: "#2A6B3A", color: "#fff", fontSize: 11, fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", padding: "6px 16px", borderRadius: 4, marginBottom: 20, transform: "rotate(-1deg)" }}>
                   For Parents
                 </div>
                 <h2 style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 900, color: "#2A6B3A", lineHeight: 1.12, marginBottom: 20 }}>
-                  Your <G>Learning Path</G> as a Parent
+                  The <G>School System</G>, Made Clear
                 </h2>
                 <p style={{ color: "#3B5A3B", fontSize: 14, lineHeight: 1.75, marginBottom: 32 }}>
-                  A structured, empathetic journey so you can support your child with real confidence.
+                  A new school system can be confusing for parents too, and that confusion makes it harder to support your child. We explain it in plain terms. When parents understand the system, they can stand behind their student with confidence, which is exactly what we want.
                 </p>
                 <button className="btn-blue" style={{ fontSize: 14, padding: "13px 28px", background: "#2A6B3A" }}>
-                  Start Parent Path
+                  Understand the School System
                 </button>
               </div>
             </FadeIn>
 
-            {/* Staggered cards */}
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {parentSteps.map((p, i) => (
                 <FadeIn key={p.title} delay={i * 80} x={30} y={0}>
@@ -904,7 +972,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                     boxShadow: "0 2px 12px rgba(42,107,58,0.06)",
                     transform: i % 2 === 1 ? "translateX(20px)" : "translateX(0)",
                   }}>
-                    <div style={{ width: 52, height: 52, borderRadius: 14, background: ["#DCEAF8","#BFD9B8","#FDE6D2","#DCEAF8","#BFD9B8"][i], display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 20, color: "#2A6B3A", flexShrink: 0, border: "2px solid rgba(42,107,58,0.15)" }}>
+                    <div style={{ width: 52, height: 52, borderRadius: 14, background: ["#DCEAF8","#BFD9B8","#FDE6D2","#DCEAF8"][i], display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 20, color: "#2A6B3A", flexShrink: 0, border: "2px solid rgba(42,107,58,0.15)" }}>
                       {i + 1}
                     </div>
                     <div>
@@ -939,7 +1007,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                     boxShadow: "0 2px 12px rgba(245,166,35,0.06)",
                     transform: i % 2 === 1 ? "translateX(-20px)" : "translateX(0)",
                   }}>
-                    <div style={{ width: 52, height: 52, borderRadius: 14, background: ["#BFD9B8","#DCEAF8","#BFD9B8","#FDE6D2","#BFD9B8"][i], display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 20, color: "#0A2E8A", flexShrink: 0, border: "2px solid rgba(10,46,138,0.12)" }}>
+                    <div style={{ width: 52, height: 52, borderRadius: 14, background: ["#BFD9B8","#DCEAF8","#BFD9B8","#FDE6D2"][i], display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 20, color: "#0A2E8A", flexShrink: 0, border: "2px solid rgba(10,46,138,0.12)" }}>
                       {i + 1}
                     </div>
                     <div>
@@ -957,17 +1025,56 @@ fontFamily: "Geist, system-ui, sans-serif"
                   For Students
                 </div>
                 <h2 style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 900, color: "#0A2E8A", lineHeight: 1.12, marginBottom: 20 }}>
-                  Your <G>Success Path</G> as a Student
+                  Help Your Student <G>Catch Up</G> and Belong
                 </h2>
                 <p style={{ color: "#3B4A6B", fontSize: 14, lineHeight: 1.75, marginBottom: 32 }}>
-                  A journey built for students navigating new schools, new languages, and new friendships.
+                  Our tutors work one-on-one with your child to rebuild confidence and close any gaps left by the move.
                 </p>
                 <button className="btn-gold" style={{ fontSize: 14, padding: "13px 28px" }}>
-                  Start Student Path
+                  See How We Help Students
                 </button>
               </div>
             </FadeIn>
           </div>
+
+          {/* Closing CTA banner */}
+          <FadeIn y={30} delay={0}>
+            <div style={{
+              marginTop: "clamp(3.5rem,6vw,5.5rem)",
+              background: "#0A2E8A",
+              borderRadius: 28,
+              padding: "clamp(2.5rem,5vw,4rem)",
+              textAlign: "center",
+              position: "relative",
+              overflow: "hidden",
+            }}>
+              <svg style={{ position: "absolute", top: -20, left: -20, opacity: 0.15 }} width="140" height="140" viewBox="0 0 140 140" fill="none" aria-hidden="true">
+                <circle cx="70" cy="70" r="60" stroke="#F5A623" strokeWidth="1.5" strokeDasharray="6 8" fill="none" />
+              </svg>
+              <svg style={{ position: "absolute", bottom: -30, right: -30, opacity: 0.15 }} width="160" height="160" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+                <circle cx="80" cy="80" r="65" stroke="#F5A623" strokeWidth="1.5" strokeDasharray="6 8" fill="none" />
+              </svg>
+
+              <div style={{ position: "relative", zIndex: 1, maxWidth: 640, margin: "0 auto" }}>
+                <h2 style={{ fontSize: "clamp(1.9rem,3.4vw,2.8rem)", fontWeight: 900, color: "#fff", lineHeight: 1.15, marginBottom: 20 }}>
+                  Give Your Child the <G>Support</G> They Deserve
+                </h2>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 15.5, lineHeight: 1.85, marginBottom: 16 }}>
+                  Your student does not have to navigate a new school system alone, and neither do you. With IPST, your child gets real academic support, your family gets clarity, and the move becomes the start of something good. Real help is ready in your own language, whenever your family needs it most.
+                </p>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 15.5, lineHeight: 1.85, marginBottom: 32 }}>
+                  Email us today to get started, and a member of our team will reach out within one business day to build a support plan around your student.
+                </p>
+                <a
+                  href="mailto:hello@ipst.org"
+                  className="btn-gold"
+                  style={{ fontSize: 15, padding: "15px 34px", display: "inline-block", textDecoration: "none" }}
+                >
+                  Email Us to Get Family Support
+                </a>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -1662,7 +1769,7 @@ fontFamily: "Geist, system-ui, sans-serif"
                   onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${s.rot})`; e.currentTarget.style.boxShadow = "0 8px 32px rgba(10,46,138,0.07)"; }}>
 
                   {/* Quote mark doodle */}
-                  <div style={{ position: "absolute", top: 16, right: 20, fontSize: 80, color: "rgba(10,46,138,0.06)", fontFamily: "Georgia,serif", lineHeight: 1, userSelect: "none" }}>"</div>
+                  <div style={{ position: "absolute", top: 16, right: 20, fontSize: 80, color: "rgba(10,46,138,0.06)", fontFamily: "Georgia,serif", lineHeight: 1, userSelect: "none" }}>&quot;</div>
 
                   <div style={{ display: "inline-block", background: "rgba(255,255,255,0.65)", borderRadius: 100, padding: "4px 12px", fontSize: 10, fontWeight: 800, color: "rgba(10,46,138,0.55)", textTransform: "uppercase", letterSpacing: "0.16em", marginBottom: 16, alignSelf: "flex-start" }}>
                     {s.tag || "Story"}

@@ -165,7 +165,7 @@ type ProblemItem = {
         {/* Headline */}
         <h3
           className="font-black tracking-tight mb-1.5 leading-tight"
-          style={{ fontSize: "clamp(0.9rem, 1.3vw, 1.05rem)", color: "#0F2D7A" }}
+          style={{ fontSize: "clamp(1rem, 1.3vw, 1.05rem)", color: "#0F2D7A" }}
         >
           {item.headline}
         </h3>
@@ -173,7 +173,7 @@ type ProblemItem = {
         {/* Stat label */}
         <p
           className="font-semibold mb-2.5"
-          style={{ fontSize: "clamp(0.62rem, 0.85vw, 0.72rem)", color: item.iconColor, opacity: 0.85 }}
+          style={{ fontSize: "clamp(0.82rem, 0.85vw, 0.72rem)", color: item.iconColor, opacity: 0.85 }}
         >
           {item.statLabel}
         </p>
@@ -181,7 +181,7 @@ type ProblemItem = {
         {/* Body */}
         <p
           className="font-medium leading-relaxed"
-          style={{ fontSize: "clamp(0.68rem, 0.95vw, 0.78rem)", color: "rgba(15,45,122,0.68)" }}
+          style={{ fontSize: "clamp(0.90rem, 0.95vw, 0.78rem)", color: "rgba(15,45,122,0.68)" }}
         >
           {item.body}
         </p>
@@ -338,28 +338,94 @@ const fadeUp = (delay = 0) => ({
 const TEAM = [
   {
     name: "Nishi Patel",
-    role: "Head of Curriculum & Learning Design",
-    line: "Spent a decade inside classrooms before she started redesigning them.",
+    role: "Chief Operating Officer · Canada",
+    line: "Builds the operational backbone that turns ambitious educational ideas into consistent global execution.",
     initials: "NP",
     hue: "#DCEBFF",
     textColor: "#0F2D7A",
   },
+
   {
-    name: "Nicole",
-    role: "Director of Community & Immigrant Programs",
-    line: "Her family navigated three school systems across two continents. She makes sure others don't have to figure it out alone.",
-    initials: "N",
-    hue: "#FFF5E0",
-    textColor: "#92400E",
-  },
-  {
-    name: "Victoria",
-    role: "Lead AI & Product Engineer",
-    line: "Believes the best technology is the kind students never notice — because it just works.",
-    initials: "V",
+    name: "Victoria Gens",
+    role: "Office Administrator",
+    line: "Keeps people, processes, and daily operations running with care, precision, and calm.",
+    initials: "VG",
     hue: "#E6F7F1",
     textColor: "#065F46",
   },
+  
+  {
+    name: "Pankaj Jain",
+    role: "Advisor · AI Olympiad",
+    line: "AI researcher and educator with expertise in machine learning and intelligent systems, guiding the AI Olympiad initiative.",
+    initials: "PJ",
+    hue: "#F3E8FF",
+    textColor: "#6B21A8",
+  },
+
+  {
+    name: "Jerany Jackson",
+    role: "Senior Advisor · USA",
+    line: "Brings strategic guidance and global perspective to help shape long-term educational impact.",
+    initials: "JJ",
+    hue: "#FFF4D8",
+    textColor: "#8A5A00",
+  },
+
+  {
+    name: "Sanjay Mishra",
+    role: "Chief Operating Officer · India",
+    line: "Leads execution across India, ensuring every initiative reaches learners efficiently.",
+    initials: "SM",
+    hue: "#FDECEC",
+    textColor: "#991B1B",
+  },
+
+  {
+    name: "Savvy Vaishnav",
+    role: "Senior Manager & Mathematics Teacher",
+    line: "Passionate about making mathematics engaging, practical, and accessible for every learner.",
+    initials: "SV",
+    hue: "#EEF5FF",
+    textColor: "#1E3A8A",
+  },
+
+  {
+    name: "Rockey Goyal",
+    role: "Manager",
+    line: "Coordinates teams and operations with a focus on collaboration, efficiency, and growth.",
+    initials: "RG",
+    hue: "#F3F4F6",
+    textColor: "#374151",
+  },
+
+  {
+    name: "Jaiprakash",
+    role: "Mathematics Teacher",
+    line: "Believes every mathematical concept becomes easier when students experience it with confidence.",
+    initials: "JP",
+    hue: "#F0FDF4",
+    textColor: "#166534",
+  },
+
+  {
+    name: "Krisha Patel",
+    role: "Biology Teacher",
+    line: "Encourages scientific curiosity by connecting biology with everyday life and discovery.",
+    initials: "KP",
+    hue: "#ECFDF5",
+    textColor: "#047857",
+  },
+
+  {
+    name: "Sudha Chauhan",
+    role: "Social Outreach",
+    line: "Builds meaningful connections with communities to make education more inclusive and accessible.",
+    initials: "SC",
+    hue: "#FFF7ED",
+    textColor: "#C2410C",
+  },
+
 ];
 const partners = [
   "/logos/google.svg",
@@ -437,13 +503,11 @@ const globalInView = useInView(globalRef, {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mx-auto max-w-4xl text-4xl font-[700] tracking-tight text-white sm:text-5xl md:text-6xl md:leading-[1.15] font-sans"
         >
-          Nurturing curiosity, one{" "}
-          <span className="font-serif italic font-normal text-slate-200">
-            thoughtful pathway
-          </span>{" "}
-          at a time. <br />We build global spaces for{" "}
+          One Ecosystem. 
+{" "}
+       
           <span className="relative inline-block text-white font-serif italic font-normal px-2">
-            human potential
+          Five Ways to Grow
             {/* Sketchy uneven yellow underline SVG */}
             <svg
               viewBox="0 0 300 24"
@@ -466,11 +530,9 @@ const globalInView = useInView(globalRef, {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mx-auto mt-12 max-w-2xl text-lg md:text-xl leading-relaxed text-slate-300 font-medium"
+          className="mx-auto mt-12 max-w-2xl text-lg md:text-lg leading-relaxed text-slate-300 font-medium"
         >
-          WingsUP wasn&apos;t created to automate away the beauty of learning. We design 
-          asymmetrical, culturally supportive frameworks that anchor new immigrant communities, 
-          empower local tutors, and return authentic wonder back to education.
+          One platform. Five ways to grow. i4i Sciences is a complete online education ecosystem connecting teachers, students, and families across the globe. Become a certified online educator and earn from home with Teach the Teacher. Get affordable, 24/7 tutoring from real human tutors in every subject with OneCent Tutors. Help immigrant and newcomer students thrive with IPST. Win AI scholarships, certificates, and internships at the AI Olympiad. And bring real science experiments to life with LabTricks. Learning, earning, and belonging, all in one trusted place.
         </motion.p>
 
 
@@ -548,8 +610,7 @@ const globalInView = useInView(globalRef, {
 
           {/* PLATFORM PARAGRAPH BLOCKS */}
           <p className="max-w-lg text-base font-medium leading-relaxed text-[#4B5E92]">
-            We envision a global community where quality education knows no boundaries, 
-            opportunities are equal, and every individual is empowered to shape a better future.
+          Whether you want to teach, learn, or lead, i4i Sciences has a path built for you. Earn globally as a certified educator, book budget-friendly tutoring in all subjects and grades, or guide your child through a new school system in your own language. Spark your kid's future with AI competitions, coding scholarships, and real internships, or get them hands-on with practical science labs and exam prep near you. Five powerful education models, one platform, endless opportunities to succeed. Email or call us today and find your path.
           </p>
 
           {/* THREE COLUMN ASYMMETRIC METRICS MATRIX */}
@@ -705,7 +766,7 @@ const globalInView = useInView(globalRef, {
             </span>
             <br />
             <span style={{ fontStyle: "italic", fontFamily: "Georgia, serif", fontWeight: 400, color: "#0F2D7A" }}>
-              We built WingsUP to solve it.
+              We built i4iSciences to solve it.
             </span>
           </motion.h2>
 
@@ -717,7 +778,7 @@ const globalInView = useInView(globalRef, {
             className="mx-auto font-medium leading-relaxed"
             style={{
               maxWidth: 580,
-              fontSize: "clamp(0.85rem, 1.2vw, 1rem)",
+              fontSize: "clamp(1.1rem, 1.2vw, 1.2rem)",
               color: "rgba(15,45,122,0.72)",
               lineHeight: 1.75,
             }}
@@ -803,8 +864,7 @@ const globalInView = useInView(globalRef, {
                 className="font-medium leading-relaxed"
                 style={{ fontSize: "clamp(0.78rem, 1.05vw, 0.9rem)", color: "rgba(255,255,255,0.68)", maxWidth: 420 }}
               >
-                Not a single app. A fully integrated platform — certifying teachers,
-                matching tutors, supporting immigrant families, and powering it all with AI.
+               Not a single app. A complete education ecosystem — empowering educators, connecting tutors, supporting immigrant families, advancing AI education, and bringing practical science learning to life through LabTricks.
               </p>
             </div>
 
@@ -952,7 +1012,7 @@ const globalInView = useInView(globalRef, {
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay: 0.16 }}
       className="font-medium leading-[1.65] text-[#0F2D7A]/75 mb-6"
-      style={{ fontSize: "clamp(0.7rem, 1.1vw, 0.9rem)" }}
+      style={{ fontSize: "clamp(1rem, 1.1vw, 1.2rem)" }}
     >
       We believe education should feel personal, hopeful, accessible,
       and deeply empowering—for students, teachers, parents, and
@@ -977,7 +1037,7 @@ const globalInView = useInView(globalRef, {
         <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
           Access
         </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.6rem, 0.85vw, 0.75rem)" }}>
+        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
           Premium education pathways available to every learner, everywhere.
         </p>
       </motion.div>
@@ -997,7 +1057,7 @@ const globalInView = useInView(globalRef, {
         <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
           Empowerment
         </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.6rem, 0.85vw, 0.75rem)" }}>
+        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
           Students and educators growing together with confidence and mentorship.
         </p>
       </motion.div>
@@ -1017,7 +1077,7 @@ const globalInView = useInView(globalRef, {
         <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
           Community
         </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.6rem, 0.85vw, 0.75rem)" }}>
+        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
           Uniting families, schools, and tutoring networks in shared support.
         </p>
       </motion.div>
@@ -1037,7 +1097,7 @@ const globalInView = useInView(globalRef, {
         <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
           Innovation
         </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.6rem, 0.85vw, 0.75rem)" }}>
+        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
           Responsible AI personalising learning without replacing its human core.
         </p>
       </motion.div>
@@ -1078,26 +1138,13 @@ const globalInView = useInView(globalRef, {
           Two-column: left = all text, right = photo.
           On mobile they stack, photo second.
         */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 lg:gap-20 items-center">
 
           {/* ── LEFT: story text ── */}
           <div>
 
             {/* Name + title line */}
-            <motion.div {...fadeUp(0)} className="mb-8">
-              <p
-                className="font-bold tracking-[0.06em] mb-1"
-                style={{ fontSize: "clamp(0.68rem, 0.9vw, 0.78rem)", color: "#F4A623" }}
-              >
-                RANJIT CHAUHAN
-              </p>
-              <p
-                className="font-medium"
-                style={{ fontSize: "clamp(0.78rem, 1vw, 0.88rem)", color: "rgba(15,45,122,0.55)" }}
-              >
-                Founder & CEO, WingsUP
-              </p>
-            </motion.div>
+            
 
             {/* Main headline */}
             <motion.h2
@@ -1110,7 +1157,7 @@ const globalInView = useInView(globalRef, {
                 color: "#0F2D7A",
               }}
             >
-              He didn&apos;t set out to build{" "}
+              He didn&apos;t set out to build   {" "}
               <span className="relative inline-block">
                 a platform.
                 <SketchLine color="#F4A623" />
@@ -1150,17 +1197,17 @@ const globalInView = useInView(globalRef, {
                   fontStyle: "italic",
                 }}
               >
-                &quot;I watched brilliant students lose confidence not because they weren&lsquo;t
-                capable — but because nobody ever showed up for them at the right moment.
-                I couldn&apos;t un-see that.&quot;
+                &quot;I watched brilliant students lose confidence, not because they weren&apos;t capable, but because nobody ever showed up for them at the right moment. I couldn&apos;t un-see that.&quot;
               </p>
             </motion.blockquote>
 
             {/* Story paragraphs */}
             {[
-              "Ranjit grew up watching education work beautifully for some — and fail quietly for many others. Families who had recently immigrated. Students in under-resourced classrooms. Teachers doing their best without support. He saw the same gap everywhere he looked: the gap between what education could be and what it actually was.",
-              "After years working inside schools, edtech companies, and community programs across North America, he understood something most founders miss — the problem isn't content. The internet is full of content. The problem is connection: the right teacher, the right support, at the right moment, in a language and context that actually makes sense to the learner.",
-              "WingsUP started as a question: what if we built the whole ecosystem instead of just one piece of it? Not an app. A platform that certified teachers, connected tutors to students, supported immigrant families, and used AI thoughtfully — not to replace humans, but to help them reach further.",
+              "Ranjit has spent his life in the world of science. A biomedical scientist with a foundation in computer science, an expert in molecular genetic virology, and the author of more than 25 international publications, he built his career on a single belief: that the right knowledge, placed in the right hands, can change everything.              ",
+              "That belief carried him across continents. He studied, researched, and worked in many countries, moving between laboratories, universities, and the real communities around them. And everywhere he went, he saw the same thing. Education worked beautifully for some and failed quietly for many others. Families who had recently immigrated. Students in under-resourced classrooms. Teachers doing their best with no support behind them. The gap was always the same: the distance between what education could be and what it actually was.",
+              "Years spent inside labs, classrooms, edtech companies, and community programs taught him something most founders miss. The problem was never content. The internet overflows with content. The real problem is connection. The right teacher, the right support, at the right moment, in a language and context that actually makes sense to the learner.",
+              "He had spent his career turning complex problems into working systems, so he approached this one the same way a scientist approaches anything. He asked a better question. What if we built the entire ecosystem, instead of just one piece of it? Not another app. A platform that certifies teachers, connects tutors with students, stands beside immigrant families, and gives young minds real science and real AI to explore. Technology used thoughtfully, not to replace people, but to help them reach further than they ever could alone.",
+              "That question became i4i Sciences.",
             ].map((para, i) => (
               <motion.p
                 key={i}
@@ -1211,7 +1258,7 @@ const globalInView = useInView(globalRef, {
               </div>
               <div className="ml-auto">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="inline-flex items-center gap-1.5 font-bold transition-all hover:-translate-y-0.5"
                   style={{
                     fontSize: "0.78rem",
@@ -1230,9 +1277,9 @@ const globalInView = useInView(globalRef, {
 
           {/* ── RIGHT: founder photo ── */}
           <motion.div
-            {...fadeUp(0.12)}
-            className="relative lg:sticky lg:top-24"
-          >
+  {...fadeUp(0.12)}
+  className="relative self-center"
+>
             <div className="relative">
               {/* Offset amber border — purely CSS, no shadow */}
               
@@ -1244,7 +1291,7 @@ const globalInView = useInView(globalRef, {
               >
                 <img
                   src="/images/ranjit-chauhan.jpg"
-                  alt="Ranjit Chauhan, Founder & CEO of WingsUP"
+                  alt="Ranjit Chauhan, Founder & CEO of i4iSciences"
                   className="w-full h-full object-cover object-top"
                   onError={(e) => {
                     // Graceful placeholder if image missing
@@ -1281,7 +1328,7 @@ const globalInView = useInView(globalRef, {
                 <p
                   style={{ fontSize: "0.7rem", color: "rgba(15,45,122,0.5)", fontWeight: 500 }}
                 >
-                  Founder & CEO · WingsUP
+                  Founder & CEO · i4iSciences
                 </p>
               </div>
             </div>
@@ -1326,7 +1373,7 @@ const globalInView = useInView(globalRef, {
             <p
               className="font-medium leading-relaxed"
               style={{
-                fontSize: "clamp(0.82rem, 1vw, 0.9rem)",
+                fontSize: "clamp(0.72rem, 0.9vw, 0.82rem)",
                 color: "rgba(15,45,122,0.6)",
                 maxWidth: 360,
                 lineHeight: 1.75,
@@ -1341,7 +1388,7 @@ const globalInView = useInView(globalRef, {
         {/* ════════════════════════════════════════
             TEAM MEMBERS
         ════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 lg:gap-14">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
           {TEAM.map((member, i) => (
             <motion.div
               key={member.name}
@@ -1350,16 +1397,20 @@ const globalInView = useInView(globalRef, {
             >
               {/* Photo */}
               <div
-                className="relative overflow-hidden rounded-2xl mb-5 w-full"
-                style={{ aspectRatio: "3/4", background: member.hue }}
-              >
+  className="relative overflow-hidden rounded-xl mb-4 mx-auto"
+  style={{
+    width: "170px",
+    aspectRatio: "3/4",
+    background: member.hue,
+  }}
+>
                 <img
   src={`/images/team-${member.name.toLowerCase().replace(/\s+/g, "-")}.jpg`}
   alt={member.name}
   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
 />
                   <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center font-black text-lg mb-2"
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-black text-sm mb-2"
                     style={{ background: "rgba(255,255,255,0.7)", color: member.textColor }}
                   >
                     {member.initials}
@@ -1380,7 +1431,7 @@ const globalInView = useInView(globalRef, {
                 <p
                   className="font-bold mb-1"
                   style={{
-                    fontSize: "0.65rem",
+                    fontSize: "0.58rem",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     color: "rgba(15,45,122,0.42)",
@@ -1393,7 +1444,7 @@ const globalInView = useInView(globalRef, {
                 <h4
                   className="font-[900] tracking-tight mb-3"
                   style={{
-                    fontSize: "clamp(1.1rem, 1.6vw, 1.3rem)",
+                    fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)",
                     color: "#0F2D7A",
                     letterSpacing: "-0.4px",
                     lineHeight: 1.1,
@@ -1407,7 +1458,7 @@ const globalInView = useInView(globalRef, {
                   className="font-medium leading-relaxed"
                   style={{
                     fontFamily: "Georgia, 'Times New Roman', serif",
-                    fontSize: "clamp(0.82rem, 1vw, 0.9rem)",
+                    fontSize: "clamp(0.80rem, 0.9vw, 0.82rem)",
                     color: "rgba(15,45,122,0.65)",
                     lineHeight: 1.7,
                     fontStyle: "italic",
@@ -1565,7 +1616,7 @@ const globalInView = useInView(globalRef, {
               margin:      "0 auto",
             }}
           >
-            WingsUP is live across four countries — uniting learners, teachers,
+            i4iSciences is live across four countries — uniting learners, teachers,
             and families through one intelligent platform designed for the world.
           </motion.p>
         </div>
@@ -1594,7 +1645,7 @@ const globalInView = useInView(globalRef, {
 >
   <img
     src="/images/globe.png"
-    alt="WingsUP global presence map"
+    alt="i4iSciences global presence map"
     draggable={false}
     style={{
       width: "100%",
@@ -1667,7 +1718,7 @@ const globalInView = useInView(globalRef, {
           
               <p
                 style={{
-                  fontSize: "0.82rem",
+                  fontSize: "0.92rem",
                   lineHeight: 1.7,
                   color: "rgba(15,45,122,0.68)",
                 }}
@@ -2025,7 +2076,7 @@ const globalInView = useInView(globalRef, {
             Whether you&apos;re a student seeking
             opportunity, a tutor creating impact,
             or an institution shaping the future,
-            WingsUP is building the platform that
+            i4iSciences is building the platform that
             connects people, knowledge and growth.
           </p>
 

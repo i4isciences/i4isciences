@@ -2,11 +2,63 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const [modelsOpen, setModelsOpen] = useState(false);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
+
+  // Reset the scroll-tracked state when the route changes.
+  // This runs during render (React's documented pattern for resetting
+  // state in response to a changed prop/value) instead of inside an
+  // effect, so it doesn't trigger a synchronous setState-in-effect
+  // cascading render.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setScrolledPastHero(false);
+  }
+
+  useEffect(() => {
+    // Only the homepage has a hero section the navbar should float over.
+    // Everywhere else it's glass from the very top — no listener needed.
+    if (!isHomepage) return;
+
+    const getHeroHeight = () => {
+      const hero = document.getElementById("hero");
+      return hero ? hero.offsetHeight : window.innerHeight;
+    };
+
+    const handleScroll = () => {
+      // switch a little before the hero fully ends so it feels natural
+      const threshold = getHeroHeight() - 80;
+      setScrolledPastHero(window.scrollY > threshold);
+    };
+
+    // Defer the initial check to the next frame instead of calling it
+    // synchronously in the effect body — this is a real scroll-position
+    // check reacting to the current DOM/viewport, just scheduled async.
+    const raf = requestAnimationFrame(handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isHomepage]);
+
+  // Glass mode = solid/blurred navbar with navy text.
+  // True everywhere except the homepage hero.
+  const isGlass = !isHomepage || scrolledPastHero;
+
+  const textColor = isGlass ? "#0A2E8A" : "#ffffff";
+  const textColorMuted = isGlass ? "rgba(10,46,138,0.75)" : "rgba(255,255,255,0.88)";
+  const chevronColor = isGlass ? "rgba(10,46,138,0.6)" : "rgba(255,255,255,0.7)";
+  const logoSrc = isGlass ? "/images/logo-white.svg" : "/images/favicon.png";
 
   return (
     <header
@@ -16,9 +68,12 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 50,
-        /* Completely transparent — blends into the dark hero bg */
-        background: "transparent",
-        borderBottom: "none",
+        background: isGlass ? "rgba(255,255,255,0.85)" : "transparent",
+        backdropFilter: isGlass ? "blur(14px)" : "none",
+        WebkitBackdropFilter: isGlass ? "blur(14px)" : "none",
+        borderBottom: isGlass ? "1px solid rgba(10,46,138,0.08)" : "none",
+        boxShadow: isGlass ? "0 2px 20px rgba(10,46,138,0.06)" : "none",
+        transition: "background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease",
       }}
     >
       <div
@@ -44,7 +99,7 @@ export default function Navbar() {
           }}
         >
           <Image
-            src="/images/favicon.png"
+            src={logoSrc}
             alt="i4i Sciences"
             width={44}
             height={44}
@@ -56,7 +111,7 @@ export default function Navbar() {
               fontFamily: "'Geist','Geist Variable',sans-serif",
               fontWeight: 700,
               fontSize: "1.15rem",
-              color: "#ffffff",
+              color: textColor,
               letterSpacing: "-0.02em",
             }}
           >
@@ -79,16 +134,15 @@ export default function Navbar() {
               fontFamily: "'Geist','Geist Variable',sans-serif",
               fontSize: "0.88rem",
               fontWeight: 600,
-              color: "rgba(255,255,255,0.88)",
+              color: textColorMuted,
               textDecoration: "none",
               transition: "color 0.2s",
             }}
             onMouseEnter={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color = "#ffffff")
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColor)
             }
             onMouseLeave={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color =
-                "rgba(255,255,255,0.88)")
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColorMuted)
             }
           >
             About
@@ -108,7 +162,7 @@ export default function Navbar() {
                 fontFamily: "'Geist','Geist Variable',sans-serif",
                 fontSize: "0.88rem",
                 fontWeight: 600,
-                color: "rgba(255,255,255,0.88)",
+                color: textColorMuted,
                 background: "none",
                 border: "none",
                 cursor: "pointer",
@@ -116,11 +170,10 @@ export default function Navbar() {
                 transition: "color 0.2s",
               }}
               onMouseEnter={e =>
-                ((e.currentTarget as HTMLButtonElement).style.color = "#ffffff")
+                ((e.currentTarget as HTMLButtonElement).style.color = textColor)
               }
               onMouseLeave={e =>
-                ((e.currentTarget as HTMLButtonElement).style.color =
-                  "rgba(255,255,255,0.88)")
+                ((e.currentTarget as HTMLButtonElement).style.color = textColorMuted)
               }
             >
               Models
@@ -129,7 +182,7 @@ export default function Navbar() {
                 style={{
                   transition: "transform 0.25s",
                   transform: modelsOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  color: "rgba(255,255,255,0.7)",
+                  color: chevronColor,
                 }}
               />
             </button>
@@ -145,7 +198,8 @@ export default function Navbar() {
               }}
             />
 
-            {/* Dropdown panel */}
+            {/* Dropdown panel — always dark glass regardless of navbar mode,
+                since it floats over page content either way */}
             <div
               style={{
                 position: "absolute",
@@ -167,10 +221,10 @@ export default function Navbar() {
               }}
             >
               {[
-                { href: "/models/ipst",              label: "IPST",             sub: "Immigrant Parent Student Training" },
-                { href: "/models/labtrick",           label: "Labtrick",         sub: "Hands-on experimentation" },
-                { href: "/models/onecent-tutors",     label: "OneCent Tutors",   sub: "Global tutoring network" },
-                { href: "/models/teach-the-teacher",  label: "Teach The Teacher",sub: "Educator empowerment platform" },
+                { href: "/models/teach-the-teacher", label: "Teach The Teacher", sub: "Educator Empowerment Platform" },
+                { href: "/models/onecent-tutors", label: "OneCent Tutors", sub: "Global Tutoring Network" },
+                { href: "/models/ipst", label: "Immigrant Parent Support Training", sub: "Support for Immigrant Parents" },
+                { href: "/models/labtrick", label: "Lab Tricks", sub: "Science Experiments for Students" },
               ].map(item => (
                 <Link
                   key={item.href}
@@ -224,16 +278,15 @@ export default function Navbar() {
               fontFamily: "'Geist','Geist Variable',sans-serif",
               fontSize: "0.88rem",
               fontWeight: 600,
-              color: "rgba(255,255,255,0.88)",
+              color: textColorMuted,
               textDecoration: "none",
               transition: "color 0.2s",
             }}
             onMouseEnter={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color = "#ffffff")
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColor)
             }
             onMouseLeave={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color =
-                "rgba(255,255,255,0.88)")
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColorMuted)
             }
           >
             AI Ecosystem
@@ -246,16 +299,15 @@ export default function Navbar() {
               fontFamily: "'Geist','Geist Variable',sans-serif",
               fontSize: "0.88rem",
               fontWeight: 600,
-              color: "rgba(255,255,255,0.88)",
+              color: textColorMuted,
               textDecoration: "none",
               transition: "color 0.2s",
             }}
             onMouseEnter={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color = "#ffffff")
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColor)
             }
             onMouseLeave={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color =
-                "rgba(255,255,255,0.88)")
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColorMuted)
             }
           >
             Contact Us
@@ -264,12 +316,29 @@ export default function Navbar() {
 
         {/* ── RIGHT SIDE ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          {/* Country pills */}
           {[
-            { label: "🇮🇳  India",  href: "https://india.yourdomain.com" },
-            { label: "🇺🇸  USA",    href: "https://usa.yourdomain.com" },
-            { label: "🇨🇦  Canada", href: "https://canada.yourdomain.com" },
-          ].map(c => (
+            {
+              label: "🇮🇳 India",
+              href: "https://india.yourdomain.com",
+              bg: "rgba(19, 136, 8, 0.15)",
+              border: "rgba(19, 136, 8, 0.35)",
+              hover: "rgba(19, 136, 8, 0.22)",
+            },
+            {
+              label: "🇺🇸 USA",
+              href: "https://usa.yourdomain.com",
+              bg: "rgba(178, 34, 52, 0.15)",
+              border: "rgba(178, 34, 52, 0.35)",
+              hover: "rgba(178, 34, 52, 0.22)",
+            },
+            {
+              label: "🇨🇦 Canada",
+              href: "https://canada.yourdomain.com",
+              bg: "rgba(91, 75, 219, 0.15)",
+              border: "rgba(91, 75, 219, 0.35)",
+              hover: "rgba(91, 75, 219, 0.22)",
+            },
+          ].map((c) => (
             <Link
               key={c.label}
               href={c.href}
@@ -278,24 +347,26 @@ export default function Navbar() {
                 alignItems: "center",
                 padding: "6px 14px",
                 borderRadius: 999,
-                background: "rgba(255,255,255,0.10)",
-                border: "1px solid rgba(255,255,255,0.18)",
+                background: c.bg,
+                border: `1px solid ${c.border}`,
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
                 fontFamily: "'Geist','Geist Variable',sans-serif",
                 fontSize: "0.75rem",
                 fontWeight: 600,
-                color: "#ffffff",
+                color: isGlass ? "#0A2E8A" : "#fff",
                 textDecoration: "none",
-                transition: "background 0.2s",
+                transition: "all 0.25s ease",
                 whiteSpace: "nowrap",
               }}
-              onMouseEnter={e =>
-                ((e.currentTarget as HTMLAnchorElement).style.background =
-                  "rgba(255,255,255,0.18)")
-              }
-              onMouseLeave={e =>
-                ((e.currentTarget as HTMLAnchorElement).style.background =
-                  "rgba(255,255,255,0.10)")
-              }
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = c.hover;
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = c.bg;
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
             >
               {c.label}
             </Link>
@@ -306,28 +377,32 @@ export default function Navbar() {
             style={{
               padding: "7px 20px",
               borderRadius: 999,
-              background: "rgba(255,255,255,0.10)",
-              border: "1px solid rgba(255,255,255,0.22)",
+              background: isGlass ? "rgba(10,46,138,0.06)" : "rgba(255,255,255,0.10)",
+              border: isGlass
+                ? "1px solid rgba(10,46,138,0.18)"
+                : "1px solid rgba(255,255,255,0.22)",
               fontFamily: "'Geist','Geist Variable',sans-serif",
               fontSize: "0.82rem",
               fontWeight: 600,
-              color: "#ffffff",
+              color: textColor,
               cursor: "pointer",
               transition: "background 0.2s",
             }}
             onMouseEnter={e =>
-              ((e.currentTarget as HTMLButtonElement).style.background =
-                "rgba(255,255,255,0.18)")
+              ((e.currentTarget as HTMLButtonElement).style.background = isGlass
+                ? "rgba(10,46,138,0.12)"
+                : "rgba(255,255,255,0.18)")
             }
             onMouseLeave={e =>
-              ((e.currentTarget as HTMLButtonElement).style.background =
-                "rgba(255,255,255,0.10)")
+              ((e.currentTarget as HTMLButtonElement).style.background = isGlass
+                ? "rgba(10,46,138,0.06)"
+                : "rgba(255,255,255,0.10)")
             }
           >
             Login
           </button>
 
-          {/* Book Demo — gold */}
+          {/* Book Demo — gold, stays the same in both modes */}
           <button
             style={{
               padding: "8px 22px",
@@ -343,14 +418,12 @@ export default function Navbar() {
               transition: "transform 0.2s, box-shadow 0.2s",
             }}
             onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.transform =
-                "translateY(-1px)";
+              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)";
               (e.currentTarget as HTMLButtonElement).style.boxShadow =
                 "0 6px 28px rgba(245,166,35,0.50)";
             }}
             onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.transform =
-                "translateY(0)";
+              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
               (e.currentTarget as HTMLButtonElement).style.boxShadow =
                 "0 4px 20px rgba(245,166,35,0.35)";
             }}

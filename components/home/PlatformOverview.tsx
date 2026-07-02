@@ -193,14 +193,7 @@ export default function PlatformOverview() {
                 {feature.description}
               </p>
 
-              {/* Arrow */}
-              <motion.div
-                className="inline-flex items-center gap-2 text-white/40 text-sm font-medium group-hover:text-white/80 transition-colors"
-                whileHover={{ x: 4 }}
-              >
-                Learn more
-                <ArrowRight className="w-4 h-4" />
-              </motion.div>
+              
 
               {/* Hover glow */}
               <div

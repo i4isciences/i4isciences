@@ -3,11 +3,11 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
-  BookOpen, Award, Globe, Users, CheckCircle,
-  ChevronDown, Play, Download, BarChart2,
-  ClipboardList, Star, MapPin, ArrowRight,
+  BookOpen, Globe, Users, CheckCircle,
+  ChevronDown, Play  ,
+  ClipboardList, Star, ArrowRight,
   GraduationCap, Lightbulb, Target, Compass,
-  Clock, FileText, TrendingUp, Heart,
+   FileText, TrendingUp, Heart, ShieldCheck, DollarSign, Cpu, Mail
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════
@@ -151,14 +151,16 @@ function HeroSection() {
 
           <FadeIn delay={0.15}>
             <p style={{ fontFamily:font, fontSize:"clamp(0.9rem,1.1vw,1.05rem)", lineHeight:1.75, color:C.muted, maxWidth:460, marginBottom:"2rem" }}>
-              Train, certify, and prepare to teach learners across the world through structured learning,
-              assessments, and internationally aligned standards.
+            Earn from your expertise, on your own schedule, from home.
+Set your hours, keep your freedom, and grow your income with
+our expert training, guidance, assessment and internationally
+aligned standards.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.22}>
             <div style={{ display:"flex", gap:"1rem", flexWrap:"wrap" }}>
-              <a href="#pathway" style={{
+              <a href="#journey" style={{
                 display:"inline-flex", alignItems:"center", gap:"0.5rem",
                 padding:"0.82rem 1.8rem", borderRadius:999,
                 background: C.navy, color:"#fff",
@@ -170,7 +172,7 @@ function HeroSection() {
                 onMouseEnter={e=>{ (e.currentTarget as HTMLAnchorElement).style.transform="translateY(-2px)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow="0 8px 32px rgba(10,46,138,0.38)"; }}
                 onMouseLeave={e=>{ (e.currentTarget as HTMLAnchorElement).style.transform="translateY(0)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow="0 4px 22px rgba(10,46,138,0.28)"; }}
               >
-                Explore Certification Path <ArrowRight size={15} strokeWidth={2.5} />
+                Explore Path <ArrowRight size={15} strokeWidth={2.5} />
               </a>
               <a href="/dashboard/ttt" style={{
                 display:"inline-flex", alignItems:"center",
@@ -289,8 +291,8 @@ function ProblemSection() {
             <SectionTitle center>
               Great Teachers Deserve <Gold>Greater Opportunities</Gold>
             </SectionTitle>
-            <p style={{ fontFamily:font, fontSize:"clamp(0.88rem,1.05vw,1rem)", lineHeight:1.72, color:C.muted, maxWidth:520, margin:"0 auto" }}>
-              The world has brilliant educators who are being held back by systems that weren't designed for their ambitions.
+            <p style={{ fontFamily:font,  fontWeight:500, fontSize:"clamp(1.1rem,1.05vw,1rem)", lineHeight:1.72, color:C.muted, maxWidth:520, margin:"0 auto" }}>
+              The world has brilliant educators who are being held back by systems that weren&apos;t designed for their ambitions.
             </p>
           </div>
         </FadeIn>
@@ -324,7 +326,7 @@ function ProblemSection() {
                   <h3 style={{ fontFamily:font, fontWeight:700, fontSize:"0.98rem", color:C.text, marginBottom:"0.5rem", lineHeight:1.3 }}>
                     {p.title}
                   </h3>
-                  <p style={{ fontFamily:font, fontSize:"0.8rem", lineHeight:1.65, color:C.muted, margin:0 }}>
+                  <p style={{ fontFamily:font, fontWeight:500, fontSize:"1rem", lineHeight:1.65, color:C.muted, margin:0 }}>
                     {p.body}
                   </p>
                 </div>
@@ -350,13 +352,14 @@ const journey = [
 
 function JourneySection() {
   return (
-    <section style={{ background:C.bg, padding:"clamp(72px,10vw,110px) clamp(20px,6vw,96px)", overflow:"hidden" }}>
+    
+    <section id="journey" style={{ background:C.bg, padding:"clamp(72px,10vw,110px) clamp(20px,6vw,96px)", overflow:"hidden" }}>
       <div style={{ maxWidth:1200, margin:"0 auto" }}>
         <FadeIn>
           <div style={{ textAlign:"center", marginBottom:"clamp(44px,6vw,64px)" }}>
             <Eyebrow>The Journey</Eyebrow>
             <SectionTitle center>
-              A Teacher's Path to <Gold>Global Impact</Gold>
+              A Teacher&apos;s Path to <Gold>Global Impact</Gold>
             </SectionTitle>
           </div>
         </FadeIn>
@@ -411,10 +414,12 @@ function JourneySection() {
 /* ═══════════════════════════════════════════════════
    S4 — WHAT IS TTT
 ═══════════════════════════════════════════════════ */
+
+
 function WhatIsTTT() {
   return (
-    <section style={{ background:C.bg, padding:"clamp(72px,10vw,110px) clamp(20px,6vw,96px)" }}>
-      <div style={{ maxWidth:1200, margin:"0 auto", display:"grid", gridTemplateColumns:"1.1fr 1fr", gap:"clamp(48px,6vw,88px)", alignItems:"center" }}>
+    <section style={{ background: C.bg, padding: "clamp(72px,10vw,110px) clamp(20px,6vw,96px)" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "clamp(48px,6vw,88px)", alignItems: "center" }}>
 
         {/* LEFT — editorial text */}
         <FadeIn>
@@ -424,49 +429,68 @@ function WhatIsTTT() {
               What Is <Gold>Teach The Teacher?</Gold>
             </SectionTitle>
             <Divider />
-            <p style={{ fontFamily:font, fontSize:"clamp(0.88rem,1.05vw,1.02rem)", lineHeight:1.78, color:C.muted, marginBottom:"1.4rem" }}>
-              TTT is WingsUP's flagship teacher development ecosystem — a structured, globally-minded programme
-              that prepares passionate educators to teach confidently anywhere in the world.
-            </p>
-            <p style={{ fontFamily:font, fontSize:"clamp(0.88rem,1.05vw,1.02rem)", lineHeight:1.78, color:C.muted, marginBottom:"2rem" }}>
-              Through recorded courses, live assessments, internationally-recognised certifications and
-              direct deployment opportunities, TTT transforms teaching careers from local to global.
+            
+            {/* Sub-heading & Primary Context */}
+            <h4 style={{ fontFamily: font, fontSize: "clamp(1.05rem, 1.25vw, 1.22rem)", fontWeight: 700, color: C.text, margin: "0 0 0.6rem 0", lineHeight: 1.4 }}>
+              Get Certified. Teach Globally. Earn From Your Expertise.
+            </h4>
+            
+            <p style={{ fontFamily: font, fontSize: "clamp(0.88rem,1.05vw,1.02rem)", lineHeight: 1.72, color: C.muted, marginBottom: "1.8rem" }}>
+              You already have the knowledge. We help you turn it into income. Teach the Teacher is the i4i Sciences 
+              certification and earning program for educators who want to teach online, reach students in more than 120 countries, 
+              and build a real income from home, all on a schedule they set themselves.
             </p>
 
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.7rem" }}>
-              {["Structured Courses","Recognised Certificates","Practical Assignments","Global Deployments","Community Support","Progress Tracking"].map(item => (
-                <div key={item} style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-                  <CheckCircle size={14} style={{ color:C.gold, flexShrink:0 }} strokeWidth={2.5} />
-                  <span style={{ fontFamily:font, fontSize:"0.8rem", fontWeight:500, color:C.text }}>{item}</span>
+            {/* Highly Optimized Feature Grid — "Why Teachers Choose i4i" */}
+            <div style={{ background: "rgba(0,0,0,0.02)", borderRadius: "16px", padding: "1.25rem", border: "1px solid rgba(0,0,0,0.04)" }}>
+              <div style={{ fontFamily: font, fontSize: "0.82rem", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em", color: C.gold, marginBottom: "0.85rem" }}>
+                Why Teachers Choose i4i
+              </div>
+              
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.2rem" }}>
+                {/* Pillar 1 */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
+                    <ShieldCheck size={16} style={{ color: C.gold, flexShrink: 0 }} strokeWidth={2.5} />
+                    <span style={{ fontFamily: font, fontSize: "0.88rem", fontWeight: 700, color: C.text }}>Global Classroom</span>
+                  </div>
+                  <p style={{ fontFamily: font, fontSize: "0.78rem", lineHeight: 1.5, color: C.muted, margin: 0 }}>
+                    Most teaching jobs tie you to one school, city, and pay scale. We do the opposite. Once certified, your classroom goes global.
+                  </p>
                 </div>
-              ))}
+
+                {/* Pillar 2 */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
+                    <DollarSign size={16} style={{ color: C.gold, flexShrink: 0 }} strokeWidth={2.5} />
+                    <span style={{ fontFamily: font, fontSize: "0.88rem", fontWeight: 700, color: C.text }}>No Income Ceiling</span>
+                  </div>
+                  <p style={{ fontFamily: font, fontSize: "0.78rem", lineHeight: 1.5, color: C.muted, margin: 0 }}>
+                    Teach the subjects you know best, choose your own hours, and earn from every live session and course. No commute, no waiting.
+                  </p>
+                </div>
+              </div>
             </div>
+            
           </div>
         </FadeIn>
 
         {/* RIGHT — TTT visual */}
-<FadeIn delay={0.12}>
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "100%",
-    }}
-  >
-    <img
-      src="/images/m1whatisttt.png"
-      alt="Teach The Teacher ecosystem"
-      style={{
-        width: "100%",
-        maxWidth: "620px",
-        height: "auto",
-        display: "block",
-        objectFit: "contain",
-      }}
-    />
-  </div>
-</FadeIn>
+        <FadeIn delay={0.12}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+            <img
+              src="/images/m1whatisttt.png"
+              alt="Teach The Teacher ecosystem"
+              style={{
+                width: "100%",
+                maxWidth: "620px",
+                height: "auto",
+                display: "block",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -476,88 +500,99 @@ function WhatIsTTT() {
    S5 — CERTIFICATION PATHWAY
 ═══════════════════════════════════════════════════ */
 const levels = [
-  { num:"01", title:"Foundations of Teaching",         desc:"Core pedagogy, classroom management, and learning psychology fundamentals.",                  tag:"4 weeks" },
+  { num:"01", title:"Foundations of Teaching",         desc:"Master core pedagogy, classroom management, and learning psychology fundamentals confidently.",                  tag:"2 weeks" },
   { num:"02", title:"Communication & Engagement",      desc:"Effective communication strategies, student engagement techniques, and digital tools.",        tag:"3 weeks" },
   { num:"03", title:"Assessment Design",               desc:"Creating fair, meaningful assessments aligned to international curricula and standards.",       tag:"3 weeks" },
   { num:"04", title:"Teaching Excellence",             desc:"Advanced delivery, differentiation strategies, and lesson planning for diverse classrooms.",    tag:"4 weeks" },
   { num:"05", title:"Global Certification",            desc:"Final review, comprehensive evaluation, and internationally-recognised certification award.",   tag:"2 weeks" },
 ];
 
+
 function CertPathSection() {
   const [open, setOpen] = useState<number|null>(null);
   return (
-    <section id="pathway" style={{ background:C.bg, padding:"clamp(72px,10vw,110px) clamp(20px,6vw,96px)" }}>
-      <div style={{ maxWidth:860, margin:"0 auto" }}>
+    <section id="pathway" style={{ background: C.bg, padding: "clamp(72px,10vw,110px) clamp(20px,6vw,96px)" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}> {/* Expanded outer width for the top row balance */}
+        
         <FadeIn>
-          <div style={{ textAlign:"center", marginBottom:"clamp(44px,6vw,64px)" }}>
+          <div style={{ textAlign: "center", marginBottom: "clamp(44px,6vw,56px)" }}>
             <Eyebrow>Certification Pathway</Eyebrow>
             <SectionTitle center>
               Your <Gold>Step-by-Step</Gold> Academic Journey
             </SectionTitle>
-            <p style={{ fontFamily:font, fontSize:"clamp(0.88rem,1.05vw,1rem)", lineHeight:1.72, color:C.muted, maxWidth:480, margin:"0 auto" }}>
+            <p style={{ fontFamily: font, fontSize: "clamp(0.88rem,1.05vw,1rem)", lineHeight: 1.72, color: C.muted, maxWidth: 480, margin: "0 auto" }}>
               Five carefully sequenced levels — each building on the last, each bringing you closer to global deployment.
             </p>
           </div>
         </FadeIn>
 
-        <div style={{ position:"relative" }}>
+
+
+        {/* ═══════════════════════════════════
+            TIMELINE MATRIX (Centered & Squeezed)
+           ═══════════════════════════════════ */}
+        <div style={{ position: "relative" }}>
           {/* vertical connector */}
-          <div style={{ position:"absolute", left:30, top:28, bottom:28, width:2, background:`linear-gradient(180deg,${C.gold},${C.navy})`, borderRadius:999, opacity:0.25 }} />
+          <div style={{ position: "absolute", left: "calc(25% + 30px)", top: 28, bottom: 28, width: 2, background: `linear-gradient(180deg,${C.gold},${C.navy})`, borderRadius: 999, opacity: 0.25 }} />
 
           {levels.map((l, i) => (
             <FadeIn key={l.num} delay={i * 0.08}>
               <div
                 style={{
-                  display:"flex", gap:"1.4rem", marginBottom:"1rem",
-                  paddingLeft:"0", position:"relative",
+                  display: "flex", gap: "1.4rem", 
+                  paddingLeft: "0", position: "relative",
+                  width: "50%", 
+                  minWidth: "300px",
+                  margin: "0 auto 1rem auto", 
                 }}
               >
                 {/* level number bubble */}
                 <div style={{
-                  width:60, height:60, borderRadius:"50%", flexShrink:0,
-                  background: i===4 ? C.gold : i<2 ? C.navy : "#fff",
-                  border:`2px solid ${i<2?C.navy:i===4?C.gold:C.border}`,
-                  display:"flex", alignItems:"center", justifyContent:"center",
-                  boxShadow:"0 3px 14px rgba(10,46,138,0.10)",
-                  zIndex:1,
+                  width: 60, height: 60, borderRadius: "50%", flexShrink: 0,
+                  background: i === 4 ? C.gold : i < 2 ? C.navy : "#fff",
+                  border: `2px solid ${i < 2 ? C.navy : i === 4 ? C.gold : C.border}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 3px 14px rgba(10,46,138,0.10)",
+                  zIndex: 1,
                 }}>
-                  <span style={{ fontFamily:fontCurvy, fontSize:"1.2rem", fontWeight:700, color: i===4?"#fff":i<2?"#fff":C.navy }}>
+                  <span style={{ fontFamily: fontCurvy, fontSize: "1.2rem", fontWeight: 700, color: i === 4 ? "#fff" : i < 2 ? "#fff" : C.navy }}>
                     {l.num}
                   </span>
                 </div>
 
+                {/* Squeezed Rectangle Box */}
                 <div
                   style={{
-                    flex:1, background:"#fff",
-                    borderRadius:16, padding:"1.1rem 1.4rem",
-                    border:`1.5px solid ${open===i?C.gold:C.border}`,
-                    boxShadow:`0 2px 16px rgba(10,46,138,0.05)`,
-                    cursor:"pointer", transition:"border-color 0.25s, box-shadow 0.25s",
+                    flex: 1, background: "#fff",
+                    borderRadius: 16, padding: "1.1rem 1.4rem",
+                    border: `1.5px solid ${open === i ? C.gold : C.border}`,
+                    boxShadow: `0 2px 16px rgba(10,46,138,0.05)`,
+                    cursor: "pointer", transition: "border-color 0.25s, box-shadow 0.25s",
                   }}
-                  onClick={() => setOpen(open===i ? null : i)}
-                  onMouseEnter={e=>{ if(open!==i)(e.currentTarget as HTMLDivElement).style.borderColor="rgba(10,46,138,0.25)"; }}
-                  onMouseLeave={e=>{ if(open!==i)(e.currentTarget as HTMLDivElement).style.borderColor=C.border; }}
+                  onClick={() => setOpen(open === i ? null : i)}
+                  onMouseEnter={e => { if (open !== i) (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(10,46,138,0.25)"; }}
+                  onMouseLeave={e => { if (open !== i) (e.currentTarget as HTMLDivElement).style.borderColor = C.border; }}
                 >
-                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
-                      <div style={{ fontFamily:font, fontWeight:800, fontSize:"0.98rem", color:C.text }}>{l.title}</div>
-                      <div style={{ fontFamily:font, fontSize:"0.72rem", color:C.gold, fontWeight:600, marginTop:"0.2rem" }}>{l.tag}</div>
+                      <div style={{ fontFamily: font, fontWeight: 800, fontSize: "0.98rem", color: C.text }}>{l.title}</div>
+                      <div style={{ fontFamily: font, fontSize: "0.72rem", color: C.gold, fontWeight: 600, marginTop: "0.2rem" }}>{l.tag}</div>
                     </div>
-                    <motion.div animate={{ rotate: open===i ? 180 : 0 }} transition={{ duration:0.3 }}>
-                      <ChevronDown size={18} style={{ color:C.muted }} />
+                    <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                      <ChevronDown size={18} style={{ color: C.muted }} />
                     </motion.div>
                   </div>
                   <AnimatePresence initial={false}>
-                    {open===i && (
+                    {open === i && (
                       <motion.div
                         key="body"
-                        initial={{ height:0, opacity:0 }}
-                        animate={{ height:"auto", opacity:1 }}
-                        exit={{ height:0, opacity:0 }}
-                        transition={{ duration:0.32, ease:[0.22,1,0.36,1] }}
-                        style={{ overflow:"hidden" }}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ overflow: "hidden" }}
                       >
-                        <p style={{ fontFamily:font, fontSize:"0.82rem", lineHeight:1.68, color:C.muted, marginTop:"0.75rem", marginBottom:0 }}>
+                        <p style={{ fontFamily: font, fontSize: "0.82rem", lineHeight: 1.68, color: C.muted, marginTop: "0.75rem", marginBottom: 0 }}>
                           {l.desc}
                         </p>
                       </motion.div>
@@ -566,30 +601,106 @@ function CertPathSection() {
                 </div>
               </div>
             </FadeIn>
+            
           ))}
         </div>
+        
+        {/* ═══════════════════════════════════
+            NEW: OPTIMIZED THREE-COLUMN ROW PANEL
+           ═══════════════════════════════════ */}
+        <FadeIn>
+          <div 
+            style={{ 
+              display: "grid", 
+              gridTemplateColumns: "1fr 1.1fr 1fr", 
+              gap: "1.75rem", 
+              marginTop: "clamp(56px, 8vw, 88px)",
+              background: "rgba(255, 255, 255, 0.6)",
+              backdropFilter: "blur(8px)",
+              borderRadius: "20px",
+              padding: "1.75rem",
+              border: `1px solid ${C.border}`,
+              boxShadow: "0 10px 30px rgba(10,46,138,0.02)"
+            }}
+          >
+            {/* Column 1: Who This Is For */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+              <div style={{ fontFamily: font, fontSize: "0.85rem", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em", color: C.gold }}>
+                Who This Is For
+              </div>
+              <p style={{ fontFamily: font, fontSize: "0.8rem", lineHeight: 1.6, color: C.muted, margin: 0 }}>
+                You do not need to be tied to a classroom to teach with us. Current teachers looking for extra income, 
+                subject matter experts, retired educators, and skilled professionals are all welcome. If you know your 
+                subject and can explain it clearly, you can earn here.
+              </p>
+            </div>
+
+            {/* Column 2: How It Works (Squeezed List Style) */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", borderLeft: `1px solid ${C.border}`, borderRight: `1px solid ${C.border}`, padding: "0 1.25rem" }}>
+              <div style={{ fontFamily: font, fontSize: "0.85rem", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em", color: C.navy }}>
+                How It Works
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                {[
+                  { step: "1", text: "Get Certified (Ready in hours)" },
+                  { step: "2", text: "Build Courses & Packaged lessons" },
+                  { step: "3", text: "Set Schedule & Control choices" },
+                  { step: "4", text: "Teach & Earn across 120 countries" }
+                ].map((s) => (
+                  <div key={s.step} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <span style={{ fontFamily: font, fontSize: "0.72rem", fontWeight: 700, background: C.navy, color: "#fff", width: "16px", height: "16px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      {s.step}
+                    </span>
+                    <span style={{ fontFamily: font, fontSize: "0.78rem", fontWeight: 500, color: C.text }}>{s.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Column 3: Build Once, Earn Again */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+              <div style={{ fontFamily: font, fontSize: "0.85rem", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em", color: C.gold }}>
+                Passive Leverage
+              </div>
+              <p style={{ fontFamily: font, fontSize: "0.8rem", lineHeight: 1.6, color: C.muted, margin: 0 }}>
+                The courses you create do not disappear after one session. Build a strong course once, and students can 
+                keep booking it for months. Your best work becomes a steady source of lasting income instead of a one-time paycheck.
+              </p>
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
 }
 
-/* ═══════════════════════════════════════════════════
-   S6 — RECORDED LEARNING EXPERIENCE
-═══════════════════════════════════════════════════ */
-const learningFeatures = [
-  { icon:Clock,       title:"Self-Paced",               body:"Learn anywhere, anytime at your own pace — no fixed schedule required." },
-  { icon:ClipboardList, title:"Built-in Assessments",   body:"Check understanding with quizzes, assignments and practical teaching tasks." },
-  { icon:Award,       title:"Earn Certificates",         body:"Earn recognised certificates to boost your teaching career globally." },
-  { icon:BarChart2,   title:"Progress Tracking",         body:"Track every module, stay motivated, and know exactly where you stand." },
-  { icon:Download,    title:"Downloadable Resources",    body:"Access study materials, lesson templates, and guides — whenever you need." },
+
+// S6 — LEARNING EXPERIENCE}
+// Optimized dataset replacing the old learningFeatures array
+const teachingPillars = [
+  { 
+    icon: Cpu, 
+    title: "Tools That Make Teaching Easier", 
+    body: "Teaching with i4i is supported by smart, AI-powered tools that handle the busywork so you can focus on students. Real-time feedback helps you see where a learner is struggling, scheduling tools keep your calendar full, and our matching system connects you with the students whoneed exactly what you teach. The technology supports you in the background. The teaching, the connection, and the credit stay entirely yours." 
+  },
+  { 
+    icon: Globe, 
+    title: "Global From Day One", 
+    body: "Other platforms keep teachers boxed into a single country or a single subject. We do not. With i4i Sciences, you can teach any subject to motivated students anywhere in the world. Train once, and you can earn globally, reaching learners far beyond your own city or country. Your audience is as large as your ambition." 
+  },
+  { 
+    icon: TrendingUp, 
+    title: "What You Can Earn", 
+    body: "Your income grows with your effort. The more courses you build and the more sessions you run, the more you earn. There is no fixed salary holding you back and no manager deciding your worth. You set your rates, you set your hours, and you keep building from there. For many educators, what starts as extra income becomes a full and flexible career." 
+  }
 ];
 
 function LearningSection() {
   return (
-    <section style={{ background:C.bgSoft, padding:"clamp(72px,10vw,110px) clamp(20px,6vw,96px)" }}>
-      <div style={{ maxWidth:1200, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1.05fr", gap:"clamp(48px,6vw,80px)", alignItems:"center" }}>
+    <section style={{ background: C.bgSoft, padding: "clamp(72px,10vw,110px) clamp(20px,6vw,96px)" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "clamp(48px,6vw,80px)", alignItems: "center" }}>
 
-        {/* LEFT — features */}
+        {/* LEFT — Reconfigured Layout Workspace */}
         <FadeIn>
           <div>
             <Eyebrow>Learning Experience</Eyebrow>
@@ -597,44 +708,68 @@ function LearningSection() {
               Learn the Way <Gold>Life Actually Works</Gold>
             </SectionTitle>
             <Divider />
-            <p style={{ fontFamily:font, fontSize:"clamp(0.88rem,1.05vw,1rem)", lineHeight:1.75, color:C.muted, marginBottom:"2rem" }}>
-              Our recorded learning platform is calm, structured, and centred on you — not on tech for the sake of it.
-            </p>
 
-            <div style={{ display:"flex", flexDirection:"column", gap:"1.1rem" }}>
-              {learningFeatures.map(({ icon: Icon, title, body }) => (
-                <div key={title} style={{ display:"flex", gap:"1rem", alignItems:"flex-start" }}>
+            {/* Top Pillars Matrix Grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.25rem", marginBottom: "1.75rem" }}>
+              {teachingPillars.map(({ icon: Icon, title, body }) => (
+                <div key={title} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
                   <div style={{
-                    width:40, height:40, borderRadius:12, flexShrink:0,
-                    background:"rgba(10,46,138,0.07)",
-                    display:"flex", alignItems:"center", justifyContent:"center",
-                    border:`1px solid ${C.border}`,
+                    width: 38, height: 38, borderRadius: 10, flexShrink: 0,
+                    background: "rgba(10,46,138,0.06)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    border: `1px solid ${C.border}`,
                   }}>
-                    <Icon size={18} style={{ color:C.navy }} strokeWidth={1.8} />
+                    <Icon size={16} style={{ color: C.navy }} strokeWidth={2} />
                   </div>
                   <div>
-                    <div style={{ fontFamily:font, fontWeight:700, fontSize:"0.9rem", color:C.text, marginBottom:"0.2rem" }}>{title}</div>
-                    <div style={{ fontFamily:font, fontSize:"0.78rem", lineHeight:1.62, color:C.muted }}>{body}</div>
+                    <div style={{ fontFamily: font, fontWeight: 700, fontSize: "0.88rem", color: C.text, marginBottom: "0.15rem" }}>{title}</div>
+                    <p style={{ fontFamily: font, fontSize: "0.78rem", lineHeight: 1.55, color: C.muted, margin: 0 }}>{body}</p>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Space-Optimized Action Callout Box */}
+            <div style={{ 
+              background: "rgba(255, 255, 255, 0.6)", 
+              backdropFilter: "blur(6px)",
+              borderRadius: "16px", 
+              padding: "1.1rem 1.3rem", 
+              border: `1px solid ${C.border}`,
+              boxShadow: "0 4px 20px rgba(10,46,138,0.02)"
+            }}>
+              <div style={{ fontFamily: font, fontWeight: 800, fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.04em", color: C.gold, marginBottom: "0.3rem" }}>
+                Start Teaching Today
+              </div>
+              <p style={{ fontFamily: font, fontSize: "0.76rem", lineHeight: 1.5, color: C.text, margin: "0 0 0.6rem 0" }}>
+                Your knowledge is worth more than you think. Turn it into a global teaching career that pays you on your own terms. Getting started takes only a few minutes from wherever you are. Getting started takes only a few minutes, and
+our team will guide you through every step of certification.
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", borderTop: "1px dashed rgba(0,0,0,0.08)", paddingTop: "0.6rem" }}>
+                <Mail size={13} style={{ color: C.navy, flexShrink: 0 }} />
+                <span style={{ fontFamily: font, fontSize: "0.74rem", fontWeight: 600, color: C.muted }}>
+                  Email us today today to begin your certification, and a member of our team will reach out within one
+business day to help you start teaching and earning.
+                </span>
+              </div>
+            </div>
+
           </div>
         </FadeIn>
 
-        {/* RIGHT — image */}
+        {/* RIGHT — Unchanged image block wrapper */}
         <FadeIn delay={0.14}>
           <div style={{
-            borderRadius:"24px 48px 24px 48px",
-            overflow:"hidden",
-            boxShadow:"0 20px 60px rgba(10,46,138,0.12)",
-            border:`2px solid rgba(245,166,35,0.20)`,
-            aspectRatio:"4/3",
+            borderRadius: "24px 48px 24px 48px",
+            overflow: "hidden",
+            boxShadow: "0 20px 60px rgba(10,46,138,0.12)",
+            border: `2px solid rgba(245,166,35,0.20)`,
+            aspectRatio: "4/3",
           }}>
             <img
               src="/images/m1s6.png"
               alt="Teacher studying online with features around her"
-              style={{ width:"100%", height:"100%", objectFit:"cover" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
               draggable={false}
             />
           </div>
@@ -778,7 +913,7 @@ function GlobalSection() {
               Teaching <Gold>Beyond Borders</Gold>
             </SectionTitle>
             <p style={{ fontFamily:font, fontSize:"clamp(0.88rem,1.05vw,1rem)", lineHeight:1.72, color:C.muted, maxWidth:460, margin:"0 auto" }}>
-              Multiple pathways. One purpose. Your TTT certification opens doors you didn't know were there.
+              Multiple pathways. One purpose. Your TTT certification opens doors you didn&apos;t know were there.
             </p>
           </div>
         </FadeIn>
@@ -859,7 +994,7 @@ function DashboardSection() {
                 <div key={c} style={{ width:11, height:11, borderRadius:"50%", background:c }} />
               ))}
               <div style={{ flex:1, textAlign:"center", fontFamily:font, fontSize:"0.72rem", color:"rgba(255,255,255,0.45)" }}>
-                dashboard.wingsup.com/ttt
+                dashboard.i4iSciences.com/ttt
               </div>
             </div>
 
@@ -1009,7 +1144,7 @@ function StoriesSection() {
                 {[...Array(5)].map((_,i) => <Star key={i} size={14} style={{ color:C.gold }} strokeWidth={0} fill={C.gold} />)}
               </div>
               <p style={{ fontFamily:fontCurvy, fontSize:"clamp(1.1rem,1.8vw,1.45rem)", lineHeight:1.5, color:C.text, marginBottom:"1rem", fontWeight:600 }}>
-                "{stories[0].quote}"
+                &quot;{stories[0].quote}&quot;
               </p>
               <div>
                 <div style={{ fontFamily:font, fontWeight:700, fontSize:"0.88rem", color:C.navy }}>{stories[0].name}</div>
@@ -1033,7 +1168,7 @@ function StoriesSection() {
                   {[...Array(5)].map((_,j) => <Star key={j} size={12} fill={C.gold} strokeWidth={0} style={{ color:C.gold }} />)}
                 </div>
                 <p style={{ fontFamily:fontCurvy, fontSize:"1.05rem", lineHeight:1.55, color:C.text, marginBottom:"0.9rem", fontWeight:500 }}>
-                  "{s.quote}"
+                  &quot;{s.quote}&quot;
                 </p>
                 <div style={{ fontFamily:font, fontWeight:700, fontSize:"0.82rem", color:C.navy }}>{s.name}</div>
                 <div style={{ fontFamily:font, fontSize:"0.7rem", color:C.muted }}>{s.from} · {s.role}</div>
@@ -1155,7 +1290,7 @@ function FinalCTA() {
             Great Teachers.
           </h2>
           <p style={{ fontFamily:font, fontSize:"clamp(0.9rem,1.1vw,1.05rem)", lineHeight:1.72, color:C.muted, marginBottom:"2.2rem" }}>
-            Let's prepare you for it.
+            Let&apos;s prepare you for it.
           </p>
         </FadeIn>
 
@@ -1204,10 +1339,46 @@ export default function TTTPage() {
       {/* Caveat for curvy gold text */}
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');`}</style>
       <main style={{ fontFamily:font }}>
+        <style>{`
+          .site-logo-sticky{
+            position:fixed;
+            top:96px;
+            right:24px;
+            z-index:999;
+            background:transparent;
+            border:none;
+            padding:0;
+            transition:transform .25s ease;
+          }
+          .site-logo-image{
+            width:80px;
+            height:auto;
+            display:block;
+          }
+          .site-logo-sticky:hover{
+            transform:scale(1.05);
+          }
+          @media(max-width:768px){
+            .site-logo-sticky{
+              top:84px;
+              right:12px;
+            }
+            .site-logo-image{
+              width:70px;
+            }
+          }
+        `}</style>
+        <div className="site-logo-sticky">
+          <img
+            src="/images/tttlogo-removebg-preview.png"
+            alt="Teach The Teacher"
+            className="site-logo-image"
+          />
+        </div>
         <HeroSection />
-        <ProblemSection />
         <JourneySection />
         <WhatIsTTT />
+        <ProblemSection />
         <CertPathSection />
         <LearningSection />
         <AssessmentSection />

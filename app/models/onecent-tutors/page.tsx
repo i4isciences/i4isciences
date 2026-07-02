@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 
 /* ─────────────────────────────────────────────
@@ -65,8 +66,8 @@ const ChatIcon = ({ size = 20 }: { size?: number }) => (
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
-const ClockIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+const ClockIcon = ({ size = 20, color = "currentColor" }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5">
     <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />
   </svg>
 );
@@ -279,6 +280,86 @@ const WaveDivider = ({ color, flip = false }: { color: string; flip?: boolean })
 );
 
 /* ─────────────────────────────────────────────
+   CERTIFIED SEAL — hand-stamped burst badge
+   ───────────────────────────────────────────── */
+const CertifiedSeal = () => {
+  const points = Array.from({ length: 24 }, (_, i) => {
+    const angle = (i / 24) * Math.PI * 2;
+    const r = i % 2 === 0 ? 58 : 50;
+    const x = 70 + r * Math.cos(angle);
+    const y = 70 + r * Math.sin(angle);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+
+  return (
+    <div style={{ transform: "rotate(-6deg)" }}>
+      <svg width={140} height={140} viewBox="0 0 140 140">
+        <polygon points={points} fill={C.navy} />
+        <circle cx={70} cy={70} r={44} fill="none" stroke={C.gold} strokeWidth={1.5} strokeDasharray="2 4" />
+
+        <defs>
+          <path id="sealCurveTop" d="M 22,70 A 48,48 0 0 1 118,70" />
+        </defs>
+
+        <path
+          d="M 52,72 L 64,84 L 90,56"
+          fill="none"
+          stroke={C.white}
+          strokeWidth={5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   BOT VS HUMAN — section 3's visual thesis
+   ───────────────────────────────────────────── */
+const BotVsHuman = () => (
+  <svg width={150} height={110} viewBox="0 0 150 110" fill="none">
+    <g opacity={0.55}>
+      <rect x={12} y={28} width={44} height={38} rx={10} stroke={C.blueTint} strokeWidth={2.5} />
+      <line x1={34} y1={28} x2={34} y2={16} stroke={C.blueTint} strokeWidth={2.5} strokeLinecap="round" />
+      <circle cx={34} cy={12} r={4} stroke={C.blueTint} strokeWidth={2.5} />
+      <circle cx={25} cy={46} r={3.5} fill={C.blueTint} />
+      <circle cx={43} cy={46} r={3.5} fill={C.blueTint} />
+      <line x1={22} y1={58} x2={46} y2={58} stroke={C.blueTint} strokeWidth={2.5} strokeLinecap="round" />
+      <line x1={4} y1={18} x2={64} y2={76} stroke={C.gold} strokeWidth={4} strokeLinecap="round" />
+    </g>
+
+    <path
+      d="M 66,50 Q 90,30 110,50"
+      stroke={C.gold}
+      strokeWidth={2}
+      strokeDasharray="4 5"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path d="M 104,44 L 112,50 L 103,54" stroke={C.gold} strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+
+    <circle cx={112} cy={38} r={13} stroke={C.white} strokeWidth={2.5} />
+    <path
+      d="M 92,80 Q 92,58 112,58 Q 132,58 132,80"
+      stroke={C.white}
+      strokeWidth={2.5}
+      fill="none"
+      strokeLinecap="round"
+    />
+    <circle cx={128} cy={68} r={11} fill={C.gold} />
+    <path
+      d="M 123,68 L 127,72 L 134,63"
+      stroke={C.navy}
+      strokeWidth={2.5}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+/* ─────────────────────────────────────────────
    STAR RATING
    ───────────────────────────────────────────── */
 const StarRating = ({ rating }: { rating: number }) => (
@@ -348,31 +429,6 @@ const TutorCard = ({ t }: { t: typeof tutors[0] }) => (
   </div>
 );
 
-/* ─────────────────────────────────────────────
-   JOURNEY STEP
-   ───────────────────────────────────────────── */
-const JourneyStep = ({ step, label, icon, isLast }: { step: number; label: string; icon: React.ReactNode; isLast?: boolean }) => (
-  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1, position: "relative" }}>
-    {!isLast && (
-      <div style={{
-        position: "absolute", top: 28, left: "60%", right: "-40%",
-        height: 3, background: `repeating-linear-gradient(90deg, ${C.gold} 0, ${C.gold} 8px, transparent 8px, transparent 16px)`,
-        zIndex: 0,
-      }} />
-    )}
-    <div style={{
-      width: 56, height: 56, borderRadius: "50%",
-      background: C.navy, color: C.gold,
-      display: "flex", alignItems: "center", justifyContent: "center",
-      zIndex: 1, boxShadow: `0 0 0 6px ${C.goldPale}`,
-      marginBottom: 12,
-    }}>{icon}</div>
-    <div style={{ textAlign: "center" }}>
-      <div style={{ fontSize: 11, color: C.gold, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase" }}>Step {step}</div>
-      <div style={{ fontWeight: 700, color: C.navy, fontSize: 14, marginTop: 4 }}>{label}</div>
-    </div>
-  </div>
-);
 
 /* ─────────────────────────────────────────────
    BOOKING MOCKUP
@@ -579,6 +635,43 @@ export default function OneCentTutorsPage() {
 
   return (
     <main style={{ fontFamily: "var(--font-geist-sans)", overflowX: "hidden" }}>
+      <style>{`
+        .site-logo-sticky{
+          position:fixed;
+          top:96px;
+          right:24px;
+          z-index:999;
+          background:transparent;
+          border:none;
+          padding:0;
+          transition:transform .25s ease;
+        }
+        .site-logo-image{
+          width:90px;
+          height:auto;
+          display:block;
+        }
+        .site-logo-sticky:hover{
+          transform:scale(1.05);
+        }
+        @media(max-width:768px){
+          .site-logo-sticky{
+            top:84px;
+            right:12px;
+          }
+          .site-logo-image{
+            width:70px;
+          }
+        }
+      `}</style>
+      <div className="site-logo-sticky">
+        <img
+          src="/images/octlogo-removebg-preview.png"
+          alt="OneCent Tutors"
+          className="site-logo-image"
+        />
+      </div>
+
 
       {/* ────────────────────────────────────────
           SECTION 1 — HERO
@@ -606,16 +699,15 @@ export default function OneCentTutorsPage() {
                 fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 900,
                 color: C.navy, lineHeight: 1.1, margin: 0,
               }}>
-                Find the Right Tutor.{" "}
+                Real Tutors. Every Subject.  {" "}
                 <span style={{
                   fontFamily: "'Caveat', cursive", fontWeight: 700,
                   color: C.gold, fontSize: "1.05em",
-                }}>Learn Without Limits.</span>
+                }}>Help That Costs Less.</span>
               </h1>
 
-              <p style={{ fontSize: 18, color: C.textMuted, lineHeight: 1.7, margin: 0, maxWidth: 460 }}>
-                OneCent Tutors connects students with verified educators across subjects, skills and countries through personalized live learning experiences.
-              </p>
+              <p style={{ fontSize: 17, color: C.textMuted, lineHeight: 1.7, margin: 0, maxWidth: 460 }}>
+              When your child is stuck, you do not want a chatbot. You want a real person who can explain it, patiently and clearly, until it finally clicks. That is what OneCent Tutors is built for. Affordable, on-demand tutoring from real human tutors, ready to help with any subject, any grade, at any hour. And your first session is free.              </p>
 
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
                 <button style={{
@@ -652,270 +744,435 @@ export default function OneCentTutorsPage() {
             </div>
 
             {/* Right: Hero image in organic shape */}
-            <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              {/* Organic blob background */}
-              <svg viewBox="0 0 500 480" style={{ position: "absolute", width: "100%", top: -20 }}>
-                <defs>
-                  <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor={C.goldPale} />
-                    <stop offset="100%" stopColor={C.blueTint} />
-                  </linearGradient>
-                  <clipPath id="heroClip">
-                    <path d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z" />
-                  </clipPath>
-                </defs>
-                <path d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z" fill="url(#blobGrad)" />
-              </svg>
-
-              <div
+<div
   style={{
     position: "relative",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
     width: "100%",
-    maxWidth: 650,
-    aspectRatio: "500 / 480",
-    zIndex: 1
+    paddingLeft: 40,
   }}
 >
-<svg
-viewBox="0 0 500 480"
-style={{
-  width: "100%",
-  maxWidth: 650,
-  display: "block"
-}}
->
-<defs>
-  <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stopColor={C.goldPale} />
-    <stop offset="100%" stopColor={C.blueTint} />
-  </linearGradient>
+  {/* Background Blob */}
+  <svg
+    viewBox="0 0 500 480"
+    style={{
+      position: "absolute",
+      width: 450,
+      right: -30,
+      top: -20,
+      zIndex: 0,
+    }}
+  >
+    <defs>
+      <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor={C.goldPale} />
+        <stop offset="100%" stopColor={C.blueTint} />
+      </linearGradient>
 
-  <clipPath id="heroClip">
-    <path d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z" />
-  </clipPath>
-</defs>
+      <clipPath id="heroClip">
+        <path d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z" />
+      </clipPath>
+    </defs>
 
-{/* Blob background */}
-<path
-  d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z"
-  fill="url(#blobGrad)"
-/>
+    <path
+      d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z"
+      fill="url(#blobGrad)"
+    />
+  </svg>
 
-{/* Full image */}
-<image
-  href="/images/oct.png"
-  x="0"
-  y="0"
-  width="500"
-  height="480"
-  preserveAspectRatio="xMidYMid slice"
-  clipPath="url(#heroClip)"
-/>
-</svg>
-                
-              </div>
-            </div>
+  {/* Foreground Image */}
+  <div
+    style={{
+      position: "relative",
+      width: "100%",
+      maxWidth: 450,
+      aspectRatio: "500 / 480",
+      marginLeft: "auto",
+      marginRight: "-30px",
+      zIndex: 2,
+    }}
+  >
+    <svg
+      viewBox="0 0 500 480"
+      style={{
+        width: "100%",
+        display: "block",
+      }}
+    >
+      <defs>
+        <linearGradient id="blobGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={C.goldPale} />
+          <stop offset="100%" stopColor={C.blueTint} />
+        </linearGradient>
+
+        <clipPath id="heroClip2">
+          <path d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z" />
+        </clipPath>
+      </defs>
+
+      <path
+        d="M250,30 C360,20 460,80 470,180 C480,280 420,380 310,430 C200,480 80,450 40,350 C0,250 30,130 120,70 C170,40 200,35 250,30Z"
+        fill="url(#blobGrad2)"
+      />
+
+      <image
+        href="/images/oct.png"
+        x="0"
+        y="0"
+        width="500"
+        height="480"
+        preserveAspectRatio="xMidYMid slice"
+        clipPath="url(#heroClip2)"
+      />
+    </svg>
+  </div>
+</div>
           </div>
         </div>
         <WaveDivider color={C.beige} />
       </section>
 
-      {/* ────────────────────────────────────────
-          SECTION 2 — WHAT IS ONECENT TUTORS
-          ──────────────────────────────────────── */}
-      <section style={{ background: C.beige, paddingTop: 80, paddingBottom: 0 }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px 80px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
-            {/* Left: organic image */}
-            <div style={{ position: "relative" }}>
-              <svg viewBox="0 0 500 500" style={{ width: "100%", display: "block" }}>
-                <defs>
-                  <clipPath id="s2clip">
-                    <path d="M260,20 C380,10 490,100 480,220 C470,340 370,460 240,470 C110,480 10,380 20,250 C30,120 140,30 260,20Z" />
-                  </clipPath>
-                  <linearGradient id="s2bg" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor={C.goldPale} />
-                    <stop offset="100%" stopColor={C.blueTint} />
-                  </linearGradient>
-                </defs>
-                <path d="M260,20 C380,10 490,100 480,220 C470,340 370,460 240,470 C110,480 10,380 20,250 C30,120 140,30 260,20Z" fill="url(#s2bg)" />
-                <image href="/images/m2whatisoct.png" x="20" y="20" width="460" height="460" clipPath="url(#s2clip)" preserveAspectRatio="xMidYMid slice" />
-              </svg>
-              {/* Floating stat badge */}
-              <div style={{
-                position: "absolute", bottom: "10%", right: "0",
-                background: C.navy, color: C.white, borderRadius: 18, padding: "16px 22px",
-                boxShadow: "0 12px 40px rgba(27,45,91,0.2)",
-              }}>
-                <div style={{ fontSize: 24, fontWeight: 900, color: C.gold }}>120+</div>
-                <div style={{ fontSize: 12, color: "#ffffff99", marginTop: 2 }}>Subjects Available</div>
-              </div>
-              <div style={{
-                position: "absolute", top: "8%", right: "-4%",
-                background: C.white, borderRadius: 18, padding: "14px 18px",
-                boxShadow: "0 8px 32px rgba(27,45,91,0.1)", border: `1px solid ${C.border}`,
-              }}>
-                <div style={{ fontSize: 20, fontWeight: 900, color: C.navy }}>24/7</div>
-                <div style={{ fontSize: 11, color: C.textMuted }}>Always Available</div>
-              </div>
-            </div>
-            {/* Right: content */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: C.gold, letterSpacing: 1.5, textTransform: "uppercase" }}>
-                What is OneCent Tutors
-              </div>
-              <h2 style={{ fontSize: "clamp(28px, 3vw, 42px)", fontWeight: 900, color: C.navy, lineHeight: 1.2, margin: 0 }}>
-                More Than Tutoring.{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", color: C.gold }}>A Global Learning Marketplace.</span>
-              </h2>
-              <p style={{ fontSize: 16, color: C.textMuted, lineHeight: 1.8, margin: 0 }}>
-                Like Airbnb connects travellers with unique homes worldwide, OneCent Tutors connects learners with the perfect educator — wherever they are, whatever they need.
-              </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              {[
-  {
-    key: "verified",
-    icon: <ShieldIcon size={18} />,
-    title: "Verified Tutors",
-    desc: "Every educator is background-checked, degree-verified, and skills-assessed before they can teach.",
-  },
-  {
-    key: "live",
-    icon: <VideoIcon size={18} />,
-    title: "Live Learning",
-    desc: "Real-time classes with interactive whiteboards, screen sharing and session recordings.",
-  },
-  {
-    key: "payments",
-    icon: <DollarIcon size={18} />,
-    title: "Secure Payments",
-    desc: "Stripe-powered payments with escrow protection. Pay only when you're happy.",
-  },
-  {
-    key: "schedule",
-    icon: <CalendarIcon size={18} />,
-    title: "Flexible Schedules",
-    desc: "Book 1-hour or recurring sessions. Change, reschedule or cancel anytime.",
-  },
-  {
-    key: "global",
-    icon: <GlobeIcon size={18} />,
-    title: "Worldwide Access",
-    desc: "Connect with tutors across 100+ countries in multiple languages.",
-  },
-].map(({ key, icon, title, desc }) => (
-  <div
-    key={key}
-    style={{
-      display: "flex",
-      gap: 16,
-      alignItems: "flex-start",
-    }}
-  >
-    <div
-      style={{
-        width: 42,
-        height: 42,
-        borderRadius: 12,
-        background: C.white,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: C.navy,
-        flexShrink: 0,
-        boxShadow: "0 2px 12px rgba(27,45,91,0.08)",
-        border: `1px solid ${C.border}`,
-      }}
-    >
-      {icon}
-    </div>
-
-    <div>
-      <div
-        style={{
-          fontWeight: 700,
-          fontSize: 14,
-          color: C.navy,
-        }}
-      >
-        {title}
+{/* ────────────────────────────────────────
+  SECTION 2 — WHAT IS ONECENT TUTORS
+  ──────────────────────────────────────── */}
+<section style={{ background: C.beige, paddingTop: 80, paddingBottom: 0 }}>
+<div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px 80px" }}>
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+    {/* Left: organic image */}
+    <div style={{ position: "relative" }}>
+      <svg viewBox="0 0 500 500" style={{ width: "100%", display: "block" }}>
+        <defs>
+          <clipPath id="s2clip">
+            <path d="M260,20 C380,10 490,100 480,220 C470,340 370,460 240,470 C110,480 10,380 20,250 C30,120 140,30 260,20Z" />
+          </clipPath>
+          <linearGradient id="s2bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={C.goldPale} />
+            <stop offset="100%" stopColor={C.blueTint} />
+          </linearGradient>
+        </defs>
+        <path d="M260,20 C380,10 490,100 480,220 C470,340 370,460 240,470 C110,480 10,380 20,250 C30,120 140,30 260,20Z" fill="url(#s2bg)" />
+        <image href="/images/m2whatisoct.png" x="20" y="20" width="460" height="460" clipPath="url(#s2clip)" preserveAspectRatio="xMidYMid slice" />
+      </svg>
+      {/* Floating stat badge */}
+      <div style={{
+        position: "absolute", bottom: "10%", right: "0",
+        background: C.navy, color: C.white, borderRadius: 18, padding: "16px 22px",
+        boxShadow: "0 12px 40px rgba(27,45,91,0.2)",
+      }}>
+        <div style={{ fontSize: 24, fontWeight: 900, color: C.gold }}>120+</div>
+        <div style={{ fontSize: 12, color: "#ffffff99", marginTop: 2 }}>Subjects Available</div>
       </div>
+      <div style={{
+        position: "absolute", top: "8%", right: "-4%",
+        background: C.white, borderRadius: 18, padding: "14px 18px",
+        boxShadow: "0 8px 32px rgba(27,45,91,0.1)", border: `1px solid ${C.border}`,
+      }}>
+        <div style={{ fontSize: 20, fontWeight: 900, color: C.navy }}>24/7</div>
+        <div style={{ fontSize: 11, color: C.textMuted }}>Always Available</div>
+      </div>
+    </div>
+    {/* Right: content */}
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: C.gold, letterSpacing: 1.5, textTransform: "uppercase" }}>
+        What is OneCent Tutors
+      </div>
+      <h2 style={{ fontSize: "clamp(28px, 3vw, 42px)", fontWeight: 900, color: C.navy, lineHeight: 1.2, margin: 0 }}>
+        More Than Tutoring.{" "}
+        <span style={{ fontFamily: "'Caveat', cursive", color: C.gold }}>A Global Learning Marketplace.</span>
+      </h2>
+      <p style={{ fontSize: 16, color: C.textMuted, lineHeight: 1.8, margin: 0 }}>
+        Like Airbnb connects travellers with unique homes worldwide, OneCent Tutors connects learners with the perfect educator — wherever they are, whatever they need.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      {[
+{
+key: "verified",
+icon: <ShieldIcon size={18} />,
+title: "Verified Tutors",
+desc: "Every educator is background-checked, degree-verified, and skills-assessed before they can teach.",
+},
+{
+key: "live",
+icon: <VideoIcon size={18} />,
+title: "Live Learning",
+desc: "Real-time classes with interactive whiteboards, screen sharing and session recordings.",
+},
+{
+key: "payments",
+icon: <DollarIcon size={18} />,
+title: "Secure Payments",
+desc: "Stripe-powered payments with escrow protection. Pay only when you're happy.",
+},
+{
+key: "schedule",
+icon: <CalendarIcon size={18} />,
+title: "Flexible Schedules",
+desc: "Book 1-hour or recurring sessions. Change, reschedule or cancel anytime.",
+},
+{
+key: "global",
+icon: <GlobeIcon size={18} />,
+title: "Worldwide Access",
+desc: "Connect with tutors across 100+ countries in multiple languages.",
+},
+].map(({ key, icon, title, desc }) => (
+<div
+key={key}
+style={{
+display: "flex",
+gap: 16,
+alignItems: "flex-start",
+}}
+>
+<div
+style={{
+width: 42,
+height: 42,
+borderRadius: 12,
+background: C.white,
+display: "flex",
+alignItems: "center",
+justifyContent: "center",
+color: C.navy,
+flexShrink: 0,
+boxShadow: "0 2px 12px rgba(27,45,91,0.08)",
+border: `1px solid ${C.border}`,
+}}
+>
+{icon}
+</div>
 
-      <div
-        style={{
-          fontSize: 13,
-          color: C.textMuted,
-          marginTop: 3,
-          lineHeight: 1.6,
-        }}
-      >
-        {desc}
+<div>
+<div
+style={{
+  fontWeight: 700,
+  fontSize: 14,
+  color: C.navy,
+}}
+>
+{title}
+</div>
+
+<div
+style={{
+  fontSize: 14,
+  color: C.textMuted,
+  marginTop: 3,
+  lineHeight: 1.6,
+}}
+>
+{desc}
+</div>
+</div>
+</div>
+))}
       </div>
     </div>
   </div>
-))}
-              </div>
-            </div>
-          </div>
+
+  {/* ── Urgent-help banner ── */}
+  <div style={{
+    marginTop: 64,
+    background: C.white,
+    borderRadius: 24,
+    border: `1px solid ${C.border}`,
+    boxShadow: "0 12px 48px rgba(27,45,91,0.07)",
+    padding: "40px 44px",
+    display: "flex",
+    gap: 32,
+    alignItems: "flex-start",
+    flexWrap: "wrap",
+  }}>
+    {/* Icon tile, echoing the feature-list icon pattern */}
+    <div style={{
+      width: 56, height: 56, borderRadius: 16, flexShrink: 0,
+      background: C.navy,
+      display: "flex", alignItems: "center", justifyContent: "center",
+      boxShadow: "0 8px 24px rgba(27,45,91,0.18)",
+    }}>
+      <ClockIcon size={24} color={C.gold} />
+    </div>
+
+    <div style={{ flex: "1 1 420px" }}>
+      <div style={{
+        fontSize: 13, fontWeight: 700, color: C.gold,
+        letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 8,
+      }}>
+        Round-the-Clock Support
+      </div>
+      <h3 style={{
+        fontSize: "clamp(20px, 2.1vw, 26px)", fontWeight: 900,
+        color: C.navy, lineHeight: 1.25, margin: "0 0 12px",
+      }}>
+        Help the Moment You Need It
+      </h3>
+      <p style={{ fontSize: 15.5, color: C.textMuted, lineHeight: 1.85, margin: 0, maxWidth: 640 }}>
+        Homework problems do not wait for office hours, so neither do we. OneCent Tutors is available 24 hours a day, every day, with same-day booking when something urgent comes up. A test tomorrow morning. An assignment due tonight. A concept that has to make sense before class. Whenever the need is immediate, a real tutor is ready to step in and help right away.
+      </p>
+    </div>
+
+    {/* Live-status chip, reinforces the 24/7 stat badge already in the section */}
+    <div style={{
+      flexShrink: 0, alignSelf: "center",
+      display: "flex", alignItems: "center", gap: 8,
+      background: C.beige, borderRadius: 999,
+      border: `1px solid ${C.border}`,
+      padding: "10px 18px",
+    }}>
+      <span style={{
+        width: 8, height: 8, borderRadius: "50%",
+        background: "#3fbf6f", flexShrink: 0,
+        boxShadow: "0 0 0 3px rgba(63,191,111,0.18)",
+      }} />
+      <span style={{ fontSize: 13, fontWeight: 700, color: C.navy, whiteSpace: "nowrap" }}>
+        Tutors online now
+      </span>
+    </div>
+  </div>
+</div>
+<WaveDivider color={C.white} />
+</section>
+
+{/* ────────────────────────────────────────
+    SECTION 3 — WHY FAMILIES CHOOSE ONECENT
+    ──────────────────────────────────────── */}
+<section style={{ background: C.white, paddingTop: 96, paddingBottom: 0, position: "relative", overflow: "hidden" }}>
+  <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px 96px" }}>
+
+    {/* Heading */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6 }}
+      style={{ textAlign: "center", marginBottom: 56 }}
+    >
+      <div style={{ fontSize: 13, fontWeight: 700, color: C.gold, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 12 }}>
+        The OneCent Difference
+      </div>
+      <h2 style={{ fontSize: "clamp(28px, 3vw, 42px)", fontWeight: 900, color: C.navy, margin: 0 }}>
+        Why Families{" "}
+        <span style={{ fontFamily: "'Caveat', cursive", color: C.gold, fontWeight: 700 }}>Choose</span>{" "}
+        OneCent Tutors
+      </h2>
+    </motion.div>
+
+    {/* Panel 1 — value proposition + certified seal */}
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay: 0.1 }}
+      style={{
+        background: C.beige,
+        borderRadius: 32,
+        padding: "56px 48px",
+        position: "relative",
+        overflow: "hidden",
+        display: "grid",
+        gridTemplateColumns: "1.5fr 1fr",
+        gap: 48,
+        alignItems: "center",
+      }}
+    >
+      {/* doodle texture */}
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            background: C.gold + "33",
+            left: `${8 + i * 16}%`,
+            top: i % 2 === 0 ? "10%" : "88%",
+          }}
+        />
+      ))}
+
+      {/* Left: copy */}
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <p style={{ fontSize: 18, lineHeight: 1.7, color: C.navy, margin: 0, fontWeight: 500 }}>
+          Good tutoring should not cost a fortune, and it should not make you wait. We built OneCent Tutors to be
+          the opposite of the usual options: budget-friendly, available around the clock, and powered by certified
+          human tutors who actually care whether your child understands. No long contracts. No surprise fees. Just
+          real help, the moment it is needed, at a price that makes sense for everyday families.
+        </p>
+
+        {/* hand-drawn tags pulled straight from the copy */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}>
+          {["Budget-Friendly", "Available Around the Clock", "No Long Contracts", "No Surprise Fees"].map(
+            (label, i) => (
+              <span
+                key={label}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  padding: "8px 16px",
+                  borderRadius: 999,
+                  border: `1.5px solid ${C.navy}`,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: C.navy,
+                  background: C.white,
+                  transform: `rotate(${i % 2 === 0 ? -1.5 : 1.5}deg)`,
+                }}
+              >
+                {label}
+              </span>
+            )
+          )}
         </div>
-        <WaveDivider color={C.white} />
-      </section>
+      </div>
 
-      {/* ────────────────────────────────────────
-          SECTION 3 — HOW THE MARKETPLACE WORKS
-          ──────────────────────────────────────── */}
-      <section style={{ background: C.white, paddingTop: 80, paddingBottom: 0 }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px 80px" }}>
-          {/* Heading */}
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: C.gold, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 12 }}>
-              Your Learning Journey
-            </div>
-            <h2 style={{ fontSize: "clamp(28px, 3vw, 42px)", fontWeight: 900, color: C.navy, margin: 0 }}>
-              How the{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: C.gold }}>Marketplace</span>{" "}
-              Works
-            </h2>
-            <p style={{ fontSize: 16, color: C.textMuted, marginTop: 14, maxWidth: 520, margin: "14px auto 0" }}>
-              From discovery to growth — here&apos;s how thousands of students find their perfect tutor and start learning.
-            </p>
-          </div>
+      {/* Right: certified seal */}
+      <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "center" }}>
+        <CertifiedSeal />
+      </div>
+    </motion.div>
 
-          {/* Journey path */}
-          <div style={{
-            background: C.beige, borderRadius: 32,
-            padding: "48px 40px",
-            position: "relative", overflow: "hidden",
-          }}>
-            {/* Doodle dots */}
-            {[...Array(8)].map((_, i) => (
-              <div key={i} style={{
-                position: "absolute",
-                width: 6, height: 6, borderRadius: "50%",
-                background: C.gold + "44",
-                left: `${10 + i * 12}%`,
-                top: i % 2 === 0 ? "15%" : "80%",
-              }} />
-            ))}
+    {/* Panel 2 — Real Human Tutors, Not a Chatbot */}
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      style={{
+        background: C.navy,
+        borderRadius: 32,
+        padding: "56px 48px",
+        marginTop: 24,
+        position: "relative",
+        overflow: "hidden",
+        display: "grid",
+        gridTemplateColumns: "auto 1fr",
+        gap: 40,
+        alignItems: "center",
+      }}
+    >
+      <BotVsHuman />
 
-            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
-              {[
-                { step: 1, label: "Search", icon: <SearchIcon size={22} /> },
-                { step: 2, label: "Compare Tutors", icon: <UsersIcon size={22} /> },
-                { step: 3, label: "Book Session", icon: <CalendarIcon size={22} /> },
-                { step: 4, label: "Attend Live Class", icon: <VideoIcon size={22} /> },
-                { step: 5, label: "Track Progress", icon: <TrendingIcon size={22} /> },
-                { step: 6, label: "Keep Growing", icon: <AwardIcon size={22} /> },
-              ].map(({ step, label, icon }, i, arr) => (
-                <JourneyStep key={step} step={step} label={label} icon={icon} isLast={i === arr.length - 1} />
-              ))}
-            </div>
+      <div>
+        <h3 style={{ fontSize: "clamp(22px, 2.4vw, 30px)", fontWeight: 900, color: C.white, margin: "0 0 16px" }}>
+          Real Human Tutors,{" "}
+          <span style={{ fontFamily: "'Caveat', cursive", color: C.gold, fontWeight: 700 }}>Not a Chatbot</span>
+        </h3>
+        <p style={{ fontSize: 16, lineHeight: 1.75, color: C.blueTint, margin: 0 }}>
+          This is the part that matters most. Every OneCent session is taught by a real, certified,
+          background-checked tutor, not an AI bot pretending to teach. Smart tools work quietly in the background
+          to match your child with the right tutor and track their progress, but a human being always does the
+          teaching. When a concept is hard, a real person notices the confusion, slows down, and explains it a
+          different way. A chatbot cannot do that. A great tutor can.
+        </p>
+      </div>
+    </motion.div>
 
-          </div>
-        </div>
-        <WaveDivider color={C.blueTint} />
-      </section>
-
+  </div>
+  <WaveDivider color={C.blueTint} />
+</section>
       {/* ────────────────────────────────────────
           SECTION 4 — FIND YOUR PERFECT TUTOR
           ──────────────────────────────────────── */}
@@ -1033,11 +1290,12 @@ style={{
               Booking
             </div>
             <h2 style={{ fontSize: "clamp(28px, 3vw, 42px)", fontWeight: 900, color: C.navy, margin: 0 }}>
-              Schedule a Session in{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: C.gold }}>Seconds</span>
+            Book Your Free Session {" "}
+              <span style={{ fontFamily: "'Caveat', cursive", color: C.gold }}>Today </span>
             </h2>
             <p style={{ fontSize: 16, color: C.textMuted, marginTop: 14, maxWidth: 500, margin: "14px auto 0" }}>
-              Choose your tutor, pick a time, select a package and you&apos;re set. Booking as simple as ordering food online.
+Your child does not have to keep struggling, and you do not have to spend a fortune to help them. Start with a free first session and see the difference a real, caring tutor makes.
+Email us today to book your free session, and a member of our team will match your child with the right tutor within one business day.
             </p>
           </div>
           <BookingMockup />

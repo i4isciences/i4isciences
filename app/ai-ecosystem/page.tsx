@@ -24,25 +24,62 @@ const T = {
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+
 /* ═══════════════════════════════════════
-   GLOBAL CSS
+   GLOBAL CSS — now scoped to .aie-root only
 ═══════════════════════════════════════ */
 const G = `
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Geist',sans-serif;background:#fff;color:#10204e;-webkit-font-smoothing:antialiased}
-::selection{background:rgba(245,166,35,0.22)}
-img{display:block;max-width:100%;border:none;outline:none}
-a{text-decoration:none}
-button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none;padding:0}
+
+.aie-root, .aie-root *, .aie-root *::before, .aie-root *::after {
+  box-sizing: border-box;
+}
+.aie-root {
+  font-family: 'Geist', sans-serif;
+  background: #fff;
+  color: #10204e;
+  -webkit-font-smoothing: antialiased;
+}
+.aie-root h1, .aie-root h2, .aie-root h3, .aie-root h4,
+.aie-root p, .aie-root ul, .aie-root li, .aie-root figure {
+  margin: 0;
+  padding: 0;
+}
+.aie-root ::selection { background: rgba(245,166,35,0.22); }
+.aie-root img { display: block; max-width: 100%; border: none; outline: none; }
+.aie-root a { text-decoration: none; }
+.aie-root button { font-family: 'Geist', sans-serif; cursor: pointer; border: none; background: none; padding: 0; }
+
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes shimmer{0%{opacity:0.5}50%{opacity:1}100%{opacity:0.5}}
 @keyframes drift{0%,100%{transform:translate(0,0) rotate(0deg)}33%{transform:translate(6px,-8px) rotate(2deg)}66%{transform:translate(-4px,4px) rotate(-1deg)}}
 @keyframes drawLine{from{stroke-dashoffset:800}to{stroke-dashoffset:0}}
 @keyframes blobPulse{0%,100%{border-radius:42% 58% 62% 38% / 48% 42% 58% 52%}33%{border-radius:58% 42% 38% 62% / 52% 58% 42% 48%}66%{border-radius:46% 54% 54% 46% / 56% 44% 56% 44%}}
+
+.site-logo-sticky{
+  position: fixed;
+  top: 96px;
+  right: 24px;
+  z-index: 40;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  transition: transform .25s ease, opacity .25s ease;
+}
+.site-logo-sticky.is-hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+.site-logo-image{ width: 90px; height: auto; display: block; }
+.site-logo-sticky:hover{ transform: scale(1.05); }
+
+@media(max-width:768px){
+  .site-logo-sticky{ top: 84px; right: 12px; }
+  .site-logo-image{ width: 70px; }
+}
 `;
 
 /* ═══════════════════════════════════════
@@ -401,97 +438,94 @@ function Hero() {
 
       <Inn>
         <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr",
-          gap: "clamp(44px,5vw,80px)", alignItems: "center",
+          display: "flex", flexDirection: "column", alignItems: "center",
+          textAlign: "center", width: "100%",
         }}>
-          {/* LEFT */}
-          <div>
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
-              <Pill text="AI Ecosystem · i4i Sciences" onNavy />
-            </motion.div>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
+            <Pill text="AI Ecosystem · i4i Sciences" onNavy />
+          </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.78, ease }}>
-              <span style={{
-                fontFamily: "'Geist',sans-serif", fontWeight: 900,
-                fontSize: "clamp(2.6rem,4.8vw,4.4rem)", lineHeight: 1.06,
-                letterSpacing: "-0.042em", color: "#fff", display: "block",
-              }}>
-                AI That Makes<br />
-                Learning{" "}
-                <span style={{ color: T.amber, position: "relative", display: "inline-block" }}>
-                  More Human.
-                  <svg viewBox="0 0 270 14" style={{ position: "absolute", bottom: -6, left: 0, width: "100%" }} fill="none">
-                    <motion.path d="M2 11 Q55 4 120 11 Q185 18 230 11 Q252 6 268 11"
-                      stroke={T.amber} strokeWidth="3" strokeLinecap="round"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ pathLength: 1, opacity: 1 }}
-                      transition={{ delay: 1.1, duration: 1.1 }} />
-                  </svg>
-                </span>
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.34 }}
-              style={{
-                fontFamily: "'Geist',sans-serif",
-                fontSize: "clamp(0.9rem,1.1vw,1rem)", lineHeight: 1.9,
-                color: T.navyText, maxWidth: 460, marginTop: "1.7rem", marginBottom: "2.4rem",
-              }}>
-              Behind every recommendation, every tutor match,<br />
-              every learning journey, and every certification,<br />
-              our AI ecosystem works quietly to create<br />
-              better educational outcomes.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.46 }}
-              style={{ display: "flex", gap: "0.9rem", flexWrap: "wrap", marginBottom: "2.6rem" }}>
-              <BtnPrimary label="Explore AI Systems" href="#engines" />
-              <BtnGhost label="See Platform Demo" href="#demo" onNavy icon={<Ico.Play c="rgba(255,255,255,0.8)" />} />
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.64 }}
-              style={{ display: "flex", gap: "1.8rem", flexWrap: "wrap" }}>
-              {["10M+ Learners", "120+ Countries", "99.9% Uptime"].map(t => (
-                <div key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <Ico.Check c={T.amber} />
-                  <span style={{
-                    fontFamily: "'Geist',sans-serif", fontSize: "0.74rem",
-                    fontWeight: 600, color: T.navyText,
-                  }}>{t}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* RIGHT — image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease, delay: 0.14 }}
-            style={{ position: "relative" }}>
-            {/* Decorative ring behind image */}
-            <div style={{
-              position: "absolute", inset: -18, borderRadius: 38,
-              border: "1.5px dashed rgba(245,166,35,0.28)",
-              pointerEvents: "none",
-            }} />
-            <div style={{
-              borderRadius: 28, overflow: "hidden",
-              boxShadow: "0 32px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08)",
-              position: "relative",
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18, duration: 0.78, ease }}>
+            <span style={{
+              fontFamily: "'Geist',sans-serif", fontWeight: 900,
+              fontSize: "clamp(2.6rem,4.8vw,4.4rem)", lineHeight: 1.06,
+              letterSpacing: "-0.042em", color: "#fff", display: "block",
+              textAlign: "center",
             }}>
-              <img src="/images/aiecosystem.png" alt="AI Ecosystem"
-                style={{ width: "100%", height: "auto", display: "block" }} />
-              {/* Shimmer overlay */}
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(135deg,rgba(255,255,255,0.05) 0%,transparent 50%,rgba(11,56,176,0.1) 100%)",
-              }} />
-            </div>
-           
+              Time to show your talent <br/> and outshine.
+              Build an AI Model. <br />Win a Scholarship.
+              <br />
+              <span style={{ color: T.amber, position: "relative", display: "inline-block" }}>
+                Start Something Big.
+                <svg viewBox="0 0 270 14" style={{ position: "absolute", bottom: -6, left: 0, width: "100%" }} fill="none">
+                  <motion.path d="M2 11 Q55 4 120 11 Q185 18 230 11 Q252 6 268 11"
+                    stroke={T.amber} strokeWidth="3" strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ delay: 1.1, duration: 1.1 }} />
+                </svg>
+              </span>
+            </span>
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.34 }}
+            style={{
+              fontFamily: "'Geist',sans-serif",
+              fontSize: "clamp(0.8rem,0.85vw,0.86rem)", lineHeight: 1.55,
+              color: T.navyText, marginTop: "3rem", marginBottom: "2.4rem",
+              maxWidth: 980, marginLeft: "auto", marginRight: "auto",
+              textAlign: "left",
+              columns: "2 300px", columnGap: "clamp(1.5rem,3vw,3rem)",
+              columnRuleWidth: "1px", columnRuleStyle: "solid",
+              columnRuleColor: "rgba(255,255,255,0.12)",
+            }}>
+            <p style={{ margin: "0 0 0.85rem" }}>
+              Your child is already curious about AI. They ask big questions, love figuring out how things work, and light up around a screen. The i4i AI Olympiad turns that curiosity into something real. Kids in elementary and middle school build their very own AI project, earn an official certificate, and the brightest young creators win scholarships.
+            </p>
+            <p style={{ margin: "0 0 0.85rem" }}>
+              It is hands-on, it is fun, and no, your child does not need to be a coding genius to join. Curiosity is enough to start.
+            </p>
+            <p style={{ margin: "0 0 0.85rem" }}>
+              Summer is the perfect time to dive in. While school is out, your child can learn AI, build something they are genuinely proud of, and join a community of young creators across South Asia.
+            </p>
+            <p style={{ margin: "0 0 0.85rem" }}>
+              And it gets even better. Top students earn a short internship with our team, real experience that shines on any future school or college application.
+            </p>
+            <p style={{ margin: "0 0 0.85rem" }}>
+              No experience needed. Just a curious kid and a little courage to try.
+            </p>
+            <p style={{ margin: "0 0 0.85rem", fontWeight: 600, color: "#fff" }}>
+              Ready to see what your child can build this summer?
+            </p>
+            <p style={{ margin: 0 }}>
+              Email or call us today to register, and our team will help your young creator get started
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.46 }}
+            style={{
+              display: "flex", gap: "0.9rem", flexWrap: "wrap",
+              marginBottom: "2.6rem", justifyContent: "center",
+            }}>
+            <BtnPrimary label="Email Us To Register" href="/contact" />
+            <BtnGhost label="Contact Us" href="/contact" onNavy  />
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.64 }}
+            style={{ display: "flex", gap: "1.8rem", flexWrap: "wrap", justifyContent: "center" }}>
+            {["10M+ Learners", "120+ Countries", "99.9% Uptime"].map(t => (
+              <div key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <Ico.Check c={T.amber} />
+                <span style={{
+                  fontFamily: "'Geist',sans-serif", fontSize: "0.74rem",
+                  fontWeight: 600, color: T.navyText,
+                }}>{t}</span>
+              </div>
+            ))}
           </motion.div>
         </div>
       </Inn>
@@ -502,326 +536,159 @@ function Hero() {
 /* ═══════════════════════════════════════
    SECTION 2 — AI POWERS EVERY MODEL (WHITE)
 ═══════════════════════════════════════ */
-const ECOS = [
-  {
-    id: "TTT", label: "Teach the Teacher", col: T.navy, IcoC: Ico.GradCap,
-    img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=540&q=85&fit=crop",
-    lines: ["AI certification scoring", "AI teaching feedback", "AI career guidance"],
-  },
-  {
-    id: "OCT", label: "OneCent Tutors", col: "#0891b2", IcoC: Ico.Users,
-    img: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=540&q=85&fit=crop",
-    lines: ["AI tutor matching", "AI smart scheduling", "AI quality scoring"],
-  },
-  {
-    id: "IPST", label: "Immigrant Parent Support", col: "#16a34a", IcoC: Ico.Globe,
-    img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=540&q=85&fit=crop",
-    lines: ["AI language assistance", "AI adaptation guidance", "AI support planning"],
-  },
-  {
-    id: "AI", label: "AI Competitions", col: "#7c3aed", IcoC: Ico.Cpu,
-    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=540&q=85&fit=crop",
-    lines: ["AI project evaluation", "AI feedback engine", "AI scholarship matching"],
-  },
-];
 
-function EcoCard({ e, i }: { e: typeof ECOS[0]; i: number }) {
-  const [hov, setHov] = useState(false);
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  return (
-    <motion.article ref={ref}
-      initial={{ opacity: 0, y: 48 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: i * 0.1, ease }}
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{
-        borderRadius: 24, overflow: "hidden", background: T.white,
-        border: `1.5px solid ${hov ? e.col + "44" : T.hair}`,
-        boxShadow: hov
-          ? `0 32px 80px ${e.col}1a, 0 4px 18px rgba(0,0,0,0.07)`
-          : "0 2px 18px rgba(11,56,176,0.06)",
-        transform: hov ? "translateY(-6px)" : "none",
-        transition: "all 0.32s cubic-bezier(0.22,1,0.36,1)",
-      }}>
-      {/* Image with colour overlay */}
-      <div style={{ position: "relative", height: 180, overflow: "hidden" }}>
-        <img src={e.img} alt={e.label} style={{
-          width: "100%", height: "100%", objectFit: "cover",
-          transform: hov ? "scale(1.07)" : "scale(1)",
-          transition: "transform 0.55s cubic-bezier(0.22,1,0.36,1)",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: `linear-gradient(160deg,${e.col}cc 0%,${e.col}66 50%,transparent 100%)`,
-        }} />
-        {/* ID badge */}
-        <div style={{
-          position: "absolute", top: 14, left: 14,
-          display: "flex", alignItems: "center", gap: 8,
-        }}>
-          <div style={{
-            width: 36, height: 36, borderRadius: 11,
-            background: "rgba(255,255,255,0.2)",
-            border: "1px solid rgba(255,255,255,0.42)",
-            backdropFilter: "blur(8px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <e.IcoC c="white" />
-          </div>
-          <span style={{
-            fontFamily: "'Geist',sans-serif", fontSize: "0.58rem", fontWeight: 800,
-            letterSpacing: "0.16em", color: "rgba(255,255,255,0.95)", textTransform: "uppercase",
-          }}>{e.id}</span>
-        </div>
-      </div>
-      {/* Body */}
-      <div style={{ padding: "1.25rem 1.5rem 1.6rem" }}>
-        <h3 style={{
-          fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "1rem",
-          color: T.ink, marginBottom: "1rem", lineHeight: 1.25,
-        }}>{e.label}</h3>
-        <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
-          {e.lines.map(l => (
-            <li key={l} style={{ display: "flex", alignItems: "center", gap: 9 }}>
-              <span style={{
-                width: 22, height: 22, borderRadius: 7,
-                background: `${e.col}10`, border: `1px solid ${e.col}26`,
-                display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-              }}>
-                <Ico.Chev c={e.col} size={10} />
-              </span>
-              <span style={{ fontFamily: "'Geist',sans-serif", fontSize: "0.78rem", color: T.body, lineHeight: 1.4 }}>{l}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* Bottom colour bar */}
-      <div style={{
-        height: 3,
-        background: `linear-gradient(90deg,transparent,${e.col},transparent)`,
-        transform: hov ? "scaleX(1)" : "scaleX(0)",
-        transformOrigin: "center",
-        transition: "transform 0.38s cubic-bezier(0.22,1,0.36,1)",
-      }} />
-    </motion.article>
-  );
-}
+function AIOlympiadIntro() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
-function AIPowersSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section style={{
+    <section id="about-olympiad" ref={ref} style={{
+      padding: "clamp(64px,8vw,110px) clamp(24px,5.5vw,90px)",
       background: T.white,
-      padding: "clamp(96px,11vw,144px) clamp(24px,5.5vw,90px)",
-      position: "relative", overflow: "hidden",
     }}>
-      {/* Corner doodle arcs */}
-      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }} fill="none">
-        <path d="M -20 180 Q 150 80 350 180 Q 500 260 700 180" stroke={T.amber} strokeWidth="1.6" strokeOpacity="0.1" strokeLinecap="round" />
-        <path d="M 85% 30% Q 88% 22% 92% 30%" stroke={T.navy} strokeWidth="2" strokeOpacity="0.08" strokeLinecap="round" />
-      </svg>
-      <FloatingCircle style={{ top: "8%", right: "6%" }} size={64} col={T.amber} />
-      <FloatingStar style={{ bottom: "12%", left: "4%", animationDelay: "1.5s" }} />
-
       <Inn>
-        <div ref={ref} style={{ textAlign: "center", marginBottom: "clamp(52px,6vw,80px)" }}>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}>
-            <Pill text="AI Powers Everything" />
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}>
-            <SectionHeading>
-              One Ecosystem.<br /><Gold>Many Intelligent Experiences.</Gold>
-            </SectionHeading>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.22 }}>
-            <Body center style={{ maxWidth: 540, margin: "1.2rem auto 0" }}>
-              AI isn&apos;t a separate product. It&apos;s the invisible layer that makes every interaction smarter, faster, and more personal.
-            </Body>
-          </motion.div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }}>
-          {ECOS.map((e, i) => <EcoCard key={e.id} e={e} i={i} />)}
-        </div>
+        {/* Heading + intro paragraph */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease }}
+        >
+          <h2 style={{
+            fontFamily: "'Geist',sans-serif", fontWeight: 800,
+            fontSize: "clamp(1.8rem,3.2vw,2.6rem)", lineHeight: 1.15,
+            letterSpacing: "-0.02em", color: T.ink, marginBottom: "1.4rem",
+          }}>
+            The AI Olympiad: Where Young Creators Shine
+          </h2>
+          <p style={{
+            fontFamily: "'Geist',sans-serif", fontSize: "1rem", lineHeight: 1.85,
+            color: T.body, maxWidth: 820, marginBottom: "2.6rem",
+          }}>
+            Every kid has a spark. Some love drawing, some love building, and some cannot stop asking how computers think. The i4i AI Olympiad is for that last group, the curious ones who want to create with technology instead of just using it. It is a fun, friendly competition where elementary and middle school students learn AI, build a project of their own, and get celebrated for it. Best of all, the top young creators walk away with scholarships and a real head start on their future.
+          </p>
+        </motion.div>
+
+        {/* "What Is the AI Olympiad?" card */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15, ease }}
+          style={{
+            borderRadius: 24, overflow: "hidden",
+            background: T.white, border: `1.5px solid ${T.hair}`,
+            boxShadow: "0 2px 18px rgba(11,56,176,0.06)",
+            padding: "clamp(1.75rem,3.2vw,2.75rem)",
+          }}
+        >
+          <h3 style={{
+            fontFamily: "'Geist',sans-serif", fontWeight: 800,
+            fontSize: "1.35rem", color: T.ink, marginBottom: "1rem",
+          }}>
+            What Is the AI Olympiad?
+          </h3>
+          <p style={{
+            fontFamily: "'Geist',sans-serif", fontSize: "0.95rem",
+            lineHeight: 1.85, color: T.body, maxWidth: 900,
+          }}>
+            The AI Olympiad is a competition built just for kids. Students learn the basics of AI and coding, then put their new skills to work by building something unique. It could be a smart little program, a simple model, or a clever idea brought to life with code. There are no boring lectures and no impossible expectations. Just kids learning, creating, and having a great time while they do it. Along the way, kids learn how AI actually works, how to think like a problem solver, and how to turn an idea into something they can show off. When they finish, every participant earns an official certificate, and the standout projects earn so much more. It is learning that feels like play, which is exactly how the best learning happens.
+          </p>
+        </motion.div>
       </Inn>
     </section>
   );
 }
 
-/* ═══════════════════════════════════════
-   SECTION 3 — CORE AI ENGINES (NAVY)
-═══════════════════════════════════════ */
-type EngDef = { IcoC: ({ c }: { c?: string }) => JSX.Element; col: string; title: string; desc: string; Chart: () => JSX.Element }
 
-const ENGINES: EngDef[] = [
+/* ═══════════════════════════════════════
+   SECTION 3 — COMPETITION FORMAT (NAVY)
+═══════════════════════════════════════ */
+
+type TierDef = { IcoC: ({ c }: { c?: string }) => JSX.Element; col: string; badge: string; title: string; desc: string };
+
+const TIERS: TierDef[] = [
   {
-    IcoC: Ico.Brain, col: "#60a5fa", title: "Recommendation Engine",
-    desc: "Recommends courses, skills, certifications, and personalised learning pathways.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        <polyline points="4,46 18,30 36,16 54,24 74,8 98,18"
-          stroke="#60a5fa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-        <polyline points="4,46 18,30 36,16 54,24 74,8 98,18"
-          stroke="#60a5fa" strokeWidth="14" strokeOpacity="0.08" strokeLinecap="round" strokeLinejoin="round" />
-        {([4, 18, 36, 54, 74, 98] as number[]).map((x, i) => {
-          const ys = [46, 30, 16, 24, 8, 18];
-          return <circle key={i} cx={x} cy={ys[i]} r={i === 5 ? 5 : 3.5} fill={i === 5 ? T.amber : "#60a5fa"} fillOpacity={i === 5 ? 1 : 0.4 + i * 0.1} />;
-        })}
-      </svg>
-    ),
+    IcoC: Ico.Brain, col: "#60a5fa", badge: "Tier 01",
+    title: "Elementary Tier (Grades 4 and 5)",
+    desc: "A gentle, exciting first step into the world of AI, built for young minds taking their first leap.",
   },
   {
-    IcoC: Ico.Link, col: "#34d399", title: "Tutor Matching Engine",
-    desc: "Matches learners with the right educator by subject, pace, and learning style.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        <circle cx="26" cy="26" r="18" stroke="#34d399" strokeWidth="1.2" strokeDasharray="4 3" strokeOpacity="0.4" />
-        <circle cx="84" cy="26" r="18" stroke={T.amber} strokeWidth="1.2" strokeDasharray="4 3" strokeOpacity="0.4" />
-        <circle cx="26" cy="20" r="6" stroke="#34d399" strokeWidth="1.2" />
-        <path d="M17 37 Q17 29 26 29 Q35 29 35 37" stroke="#34d399" strokeWidth="1.2" strokeLinecap="round" />
-        <circle cx="84" cy="20" r="6" stroke={T.amber} strokeWidth="1.2" />
-        <path d="M75 37 Q75 29 84 29 Q93 29 93 37" stroke={T.amber} strokeWidth="1.2" strokeLinecap="round" />
-        <line x1="46" y1="26" x2="64" y2="26" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 2" />
-        <circle cx="55" cy="26" r="4.5" fill="rgba(255,255,255,0.1)" />
-        <circle cx="55" cy="26" r="2.2" fill="rgba(255,255,255,0.7)" />
-      </svg>
-    ),
-  },
-  {
-    IcoC: Ico.BarChart, col: "#c084fc", title: "Learning Analytics",
-    desc: "Identifies strengths and growth opportunities with real-time progress intelligence.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        {([{ x: 7, h: 36 }, { x: 25, h: 22 }, { x: 43, h: 46 }, { x: 61, h: 28 }, { x: 79, h: 50 }, { x: 97, h: 16 }]).map(({ x, h }, i) => (
-          <g key={i}>
-            <rect x={x - 7} y={52 - h} width="14" height={h} rx="4" fill="#c084fc" fillOpacity={0.12 + i * 0.06} />
-            <rect x={x - 7} y={52 - h} width="14" height="4" rx="2" fill="#c084fc" fillOpacity={0.7 + i * 0.04} />
-          </g>
-        ))}
-        <line x1="0" y1="50" x2="110" y2="50" stroke="#c084fc" strokeWidth="1" strokeOpacity="0.3" />
-      </svg>
-    ),
-  },
-  {
-    IcoC: Ico.Clipboard, col: T.amber, title: "Teacher Evaluation",
-    desc: "Supports fair, evidence-based certification decisions for educators globally.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        <rect x="10" y="4" width="90" height="46" rx="7" fill="rgba(245,166,35,0.06)" stroke={T.amber} strokeWidth="1.2" strokeDasharray="4 3" />
-        {(["A+", "96%", "✓ Pass"] as string[]).map((t, i) => (
-          <g key={i}>
-            <rect x="20" y={14 + i * 12} width={40 + i * 14} height="8" rx="4" fill={T.amber} fillOpacity={0.2 + i * 0.1} />
-            <text x="96" y={21 + i * 12} textAnchor="end" fontFamily="'Geist',sans-serif" fontSize="8" fontWeight="700" fill={T.amber}>{t}</text>
-          </g>
-        ))}
-      </svg>
-    ),
-  },
-  {
-    IcoC: Ico.Wave, col: "#38bdf8", title: "Accent Analysis",
-    desc: "Supports communication readiness and clarity for diverse global classrooms.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        {([9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 99] as number[]).map((x, i) => {
-          const hs = [10, 26, 18, 36, 28, 44, 20, 32, 12, 40, 8];
-          return <line key={i} x1={x} y1={26 - hs[i] / 2} x2={x} y2={26 + hs[i] / 2}
-            stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeOpacity={0.3 + Math.abs(Math.sin(i)) * 0.5} />;
-        })}
-        <path d="M 9 26 Q 55 8 102 26" stroke={T.amber} strokeWidth="1.3" fill="none" strokeDasharray="4 3" strokeOpacity="0.65" />
-      </svg>
-    ),
-  },
-  {
-    IcoC: Ico.Trophy, col: "#4ade80", title: "AI Olympiad Evaluation",
-    desc: "Rapidly and fairly evaluates competition submissions and student projects.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        <rect x="16" y="4" width="78" height="46" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" strokeWidth="1.2" />
-        {([{ y: 16, w: 50, s: "94" }, { y: 28, w: 42, s: "88" }, { y: 40, w: 58, s: "91" }]).map(({ y, w, s }, i) => (
-          <g key={i}>
-            <circle cx="27" cy={y - 2} r="4" fill="#4ade80" fillOpacity={0.85 - i * 0.25} />
-            <rect x="36" y={y - 7} width={w} height="9" rx="4.5" fill="#4ade80" fillOpacity={0.15 + i * 0.06} />
-            <text x="90" y={y + 2} textAnchor="end" fontFamily="'Geist',sans-serif" fontSize="8" fontWeight="700" fill="#4ade80">{s}</text>
-          </g>
-        ))}
-      </svg>
-    ),
-  },
-  {
-    IcoC: Ico.TrendUp, col: "#fb923c", title: "Predictive Success Engine",
-    desc: "Forecasts learning outcomes and surfaces at-risk learners early.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        <path d="M 6 48 C 22 42 36 34 54 22 S 84 5 104 3"
-          stroke="#fb923c" strokeWidth="2.4" strokeLinecap="round" fill="none" />
-        <path d="M 6 48 C 22 42 36 34 54 22 S 84 5 104 3 L104 52 L6 52 Z" fill="#fb923c" fillOpacity="0.09" />
-        <circle cx="104" cy="3" r="6" fill="#fb923c" fillOpacity="0.2" />
-        <circle cx="104" cy="3" r="3.5" fill="#fb923c" />
-      </svg>
-    ),
-  },
-  {
-    IcoC: Ico.Shield, col: "#60a5fa", title: "Integrity & Fraud Detection",
-    desc: "Protects assessments and certifications with AI-powered anomaly detection.",
-    Chart: () => (
-      <svg viewBox="0 0 110 52" fill="none" style={{ width: "100%", height: 52 }}>
-        <path d="M 55 4 L 96 16 L 96 32 C 96 44 76 51 55 54 C 34 51 14 44 14 32 L 14 16 Z"
-          fill="rgba(96,165,250,0.08)" stroke="#60a5fa" strokeWidth="1.2" />
-        <path d="M 38 27 L 49 38 L 72 18" stroke="#60a5fa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="88" cy="12" r="7" fill="#4ade80" />
-        <path d="M85 12l2 2 4.5-4" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    IcoC: Ico.Trophy, col: T.amber, badge: "Tier 02",
+    title: "Middle School Tier (Grades 6 to 8)",
+    desc: "A bigger challenge for older kids who are ready to build smarter projects and push their ideas further.",
   },
 ];
 
-function EngCard({ e, i }: { e: EngDef; i: number }) {
+type StepDef = { IcoC: ({ c }: { c?: string }) => JSX.Element; col: string; num: string; title: string; desc: string };
+
+const STEPS: StepDef[] = [
+  {
+    IcoC: Ico.Clipboard, col: "#60a5fa", num: "01",
+    title: "Step 1: Register.",
+    desc: "Sign your child up and choose their tier. It takes only a few minutes.",
+  },
+  {
+    IcoC: Ico.Brain, col: "#34d399", num: "02",
+    title: "Step 2: Learn.",
+    desc: "Your child explores AI and coding through friendly, beginner-ready lessons.",
+  },
+  {
+    IcoC: Ico.BarChart, col: "#c084fc", num: "03",
+    title: "Step 3: Build.",
+    desc: "They create their own unique AI project, with friendly guidance every step of the way. No child is ever left stuck or staring at a blank screen.",
+  },
+  {
+    IcoC: Ico.Trophy, col: T.amber, num: "04",
+    title: "Step 4: Submit and shine.",
+    desc: "Projects are reviewed, every participant earns a certificate, and the top creators move into the winners circle.",
+  },
+];
+
+function TierCard({ t, i }: { t: TierDef; i: number }) {
   const [hov, setHov] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-24px" });
   return (
     <motion.article ref={ref}
       initial={{ opacity: 0, y: 32 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.58, delay: i * 0.07, ease }}
+      transition={{ duration: 0.58, delay: i * 0.1, ease }}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       style={{
         background: hov ? "rgba(255,255,255,0.09)" : "rgba(255,255,255,0.05)",
-        borderRadius: 20,
-        border: `1px solid ${hov ? e.col + "55" : "rgba(255,255,255,0.1)"}`,
-        padding: "1.4rem 1.4rem 1.55rem",
+        borderRadius: 22,
+        border: `1px solid ${hov ? t.col + "55" : "rgba(255,255,255,0.1)"}`,
+        padding: "1.75rem 1.75rem 2rem",
         boxShadow: hov ? `0 24px 60px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)` : "none",
         transform: hov ? "translateY(-4px)" : "none",
         transition: "all 0.3s cubic-bezier(0.22,1,0.36,1)",
         backdropFilter: "blur(4px)",
+        flex: "1 1 320px",
       }}>
-      <div style={{
-        width: 44, height: 44, borderRadius: 14,
-        background: `${e.col}18`, border: `1px solid ${e.col}32`,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        marginBottom: "0.9rem",
-        transform: hov ? "scale(1.1) rotate(-3deg)" : "scale(1)",
-        transition: "transform 0.28s",
-      }}>
-        <e.IcoC c={e.col} />
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "1.1rem" }}>
+        <div style={{
+          width: 48, height: 48, borderRadius: 15,
+          background: `${t.col}18`, border: `1px solid ${t.col}32`,
+          display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+          transform: hov ? "scale(1.1) rotate(-3deg)" : "scale(1)",
+          transition: "transform 0.28s",
+        }}>
+          <t.IcoC c={t.col} />
+        </div>
+        <span style={{
+          fontFamily: "'Geist',sans-serif", fontSize: "0.62rem", fontWeight: 800,
+          letterSpacing: "0.16em", color: t.col, textTransform: "uppercase",
+        }}>{t.badge}</span>
       </div>
-      <div style={{
-        marginBottom: "0.85rem", borderRadius: 10,
-        background: "rgba(255,255,255,0.04)",
-        padding: "7px 3px", overflow: "hidden",
-      }}>
-        <e.Chart />
-      </div>
-      <h3 style={{
-        fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "0.9rem",
-        color: "#fff", marginBottom: "0.44rem", lineHeight: 1.25,
-      }}>{e.title}</h3>
+      <h4 style={{
+        fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "1.08rem",
+        color: "#fff", marginBottom: "0.65rem", lineHeight: 1.3,
+      }}>{t.title}</h4>
       <p style={{
-        fontFamily: "'Geist',sans-serif", fontSize: "0.76rem",
-        lineHeight: 1.66, color: T.navyText,
-      }}>{e.desc}</p>
+        fontFamily: "'Geist',sans-serif", fontSize: "1rem",
+        lineHeight: 1.75, color: T.navyText,
+      }}>{t.desc}</p>
       <div style={{
-        height: 2, marginTop: "1.1rem", borderRadius: 999,
-        background: `linear-gradient(90deg,transparent,${e.col},transparent)`,
+        height: 2, marginTop: "1.3rem", borderRadius: 999,
+        background: `linear-gradient(90deg,transparent,${t.col},transparent)`,
         transform: hov ? "scaleX(1)" : "scaleX(0)", transformOrigin: "center",
         transition: "transform 0.34s cubic-bezier(0.22,1,0.36,1)",
       }} />
@@ -829,11 +696,72 @@ function EngCard({ e, i }: { e: EngDef; i: number }) {
   );
 }
 
-function AIEnginesSection() {
+function StepCard({ s, i, isLast }: { s: StepDef; i: number; isLast: boolean }) {
+  const [hov, setHov] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-24px" });
+  return (
+    <motion.article ref={ref}
+      initial={{ opacity: 0, y: 32 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.58, delay: i * 0.08, ease }}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+      style={{ position: "relative", flex: "1 1 230px" }}>
+      {/* Connector line to next step (desktop only) */}
+      {!isLast && (
+        <div style={{
+          position: "absolute", top: 24, left: "calc(50% + 34px)", right: "calc(-50% + 34px)",
+          height: 1, background: `linear-gradient(90deg,${s.col}55,rgba(255,255,255,0.08))`,
+          display: window.innerWidth > 900 ? "block" : "none",
+        }} />
+      )}
+      <div style={{
+        background: hov ? "rgba(255,255,255,0.09)" : "rgba(255,255,255,0.05)",
+        borderRadius: 20,
+        border: `1px solid ${hov ? s.col + "55" : "rgba(255,255,255,0.1)"}`,
+        padding: "1.4rem 1.3rem 1.55rem", height: "100%",
+        boxShadow: hov ? `0 24px 60px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)` : "none",
+        transform: hov ? "translateY(-4px)" : "none",
+        transition: "all 0.3s cubic-bezier(0.22,1,0.36,1)",
+        backdropFilter: "blur(4px)",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "0.9rem" }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: 14,
+            background: `${s.col}18`, border: `1px solid ${s.col}32`,
+            display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+            transform: hov ? "scale(1.1) rotate(-3deg)" : "scale(1)",
+            transition: "transform 0.28s",
+          }}>
+            <s.IcoC c={s.col} />
+          </div>
+          <span style={{
+            fontFamily: "'Geist',sans-serif", fontSize: "1.4rem", fontWeight: 900,
+            color: `${s.col}40`, letterSpacing: "-0.02em",
+          }}>{s.num}</span>
+        </div>
+        <h4 style={{
+          fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "0.92rem",
+          color: "#fff", marginBottom: "0.5rem", lineHeight: 1.3,
+        }}>{s.title}</h4>
+        <p style={{
+          fontFamily: "'Geist',sans-serif", fontSize: "0.9rem",
+          lineHeight: 1.7, color: T.navyText,
+        }}>{s.desc}</p>
+      </div>
+    </motion.article>
+  );
+}
+
+function CompetitionFormatSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const tiersRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const tiersInView = useInView(tiersRef, { once: true, margin: "-40px" });
+  const stepsInView = useInView(stepsRef, { once: true, margin: "-40px" });
+
   return (
-    <section id="engines" style={{
+    <section id="format" style={{
       background: `linear-gradient(160deg,${T.navyD} 0%,${T.navy} 100%)`,
       padding: "clamp(96px,11vw,144px) clamp(24px,5.5vw,90px)",
       position: "relative", overflow: "hidden",
@@ -841,7 +769,7 @@ function AIEnginesSection() {
       <DotGrid col="rgba(255,255,255,0.045)" size={26} />
       {/* Glow orb */}
       <div style={{
-        position: "absolute", top: "30%", left: "50%", transform: "translateX(-50%)",
+        position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)",
         width: "70%", height: "40%", borderRadius: "50%",
         background: "radial-gradient(ellipse,rgba(96,165,250,0.07) 0%,transparent 70%)",
         pointerEvents: "none",
@@ -851,23 +779,67 @@ function AIEnginesSection() {
       <Squiggle x={40} y={60} w={100} col={T.amber} opacity={0.15} rotate={-8} />
 
       <Inn>
-        <div ref={ref} style={{ textAlign: "center", marginBottom: "clamp(52px,6vw,78px)" }}>
+        {/* Page-level title for the whole section */}
+        <div ref={ref} style={{ textAlign: "center", marginBottom: "clamp(56px,6.5vw,84px)" }}>
           <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}>
-            <Pill text="Core AI Engines" onNavy />
+            <Pill text="Competition Roadmap" onNavy />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}>
             <SectionHeading onNavy>
-              The Intelligence <Gold>Behind the Platform</Gold>
+              Your Child&apos;s Path to the <Gold>Winner&apos;s Circle</Gold>
             </SectionHeading>
           </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.22 }}>
-            <Body onNavy center style={{ maxWidth: 540, margin: "1.2rem auto 0" }}>
-              Eight purpose-built systems working in concert — so educators, learners, and families can focus on what matters.
+        </div>
+
+        {/* ── Subsection: Two Tiers ── */}
+        <div ref={tiersRef} style={{ marginBottom: "clamp(64px,7vw,96px)" }}>
+          <motion.h3
+            initial={{ opacity: 0, y: 16 }} animate={tiersInView ? { opacity: 1, y: 0 } : {}}
+            style={{
+              fontFamily: "'Geist',sans-serif", fontWeight: 800,
+              fontSize: "clamp(1.4rem,2.2vw,1.9rem)", color: "#fff",
+              textAlign: "center", marginBottom: "0.9rem", letterSpacing: "-0.015em",
+            }}>
+            Two Tiers, One Big Opportunity
+          </motion.h3>
+          <motion.div initial={{ opacity: 0 }} animate={tiersInView ? { opacity: 1 } : {}} transition={{ delay: 0.1 }}>
+            <Body onNavy center style={{ fontSize: "1rem", maxWidth: 620, margin: "0 auto clamp(36px,4vw,52px)" }}>
+              We keep things fair and fun by splitting the competition into two tiers, so kids compete with others their own age.
             </Body>
           </motion.div>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 20, marginBottom: "clamp(28px,3vw,40px)" }}>
+            {TIERS.map((t, i) => <TierCard key={t.title} t={t} i={i} />)}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }} animate={tiersInView ? { opacity: 1 } : {}} transition={{ delay: 0.3 }}
+            style={{
+              fontFamily: "'Geist',sans-serif", fontSize: "1rem", fontStyle: "italic",
+              lineHeight: 1.75, color: T.navyText, textAlign: "center",
+              maxWidth: 640, margin: "0 auto",
+            }}>
+            Each tier is designed to feel just right, never too easy and never overwhelming, so every child finishes proud of what they made.
+          </motion.p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 18 }}>
-          {ENGINES.map((e, i) => <EngCard key={e.title} e={e} i={i} />)}
+
+        {/* ── Subsection: How It Works ── */}
+        <div ref={stepsRef}>
+          <motion.h3
+            initial={{ opacity: 0, y: 16 }} animate={stepsInView ? { opacity: 1, y: 0 } : {}}
+            style={{
+              fontFamily: "'Geist',sans-serif", fontWeight: 800,
+              fontSize: "clamp(1.4rem,2.2vw,1.9rem)", color: "#fff",
+              textAlign: "center", marginBottom: "clamp(36px,4vw,52px)", letterSpacing: "-0.015em",
+            }}>
+            How It Works
+          </motion.h3>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 18 }}>
+            {STEPS.map((s, i) => (
+              <StepCard key={s.title} s={s} i={i} isLast={i === STEPS.length - 1} />
+            ))}
+          </div>
         </div>
       </Inn>
     </section>
@@ -877,7 +849,7 @@ function AIEnginesSection() {
 /* ═══════════════════════════════════════
    SECTION 4 — PERSONALISED JOURNEY (WHITE)
 ═══════════════════════════════════════ */
-const STEPS = [
+const FLOW = [
   { label: "Enroll", desc: "AI assesses your background and goals", col: T.navy, IcoC: Ico.Target },
   { label: "Learn", desc: "A curated curriculum built around your pace", col: "#0891b2", IcoC: Ico.BookOpen },
   { label: "Practice", desc: "Adaptive exercises with real-time feedback", col: "#7c3aed", IcoC: Ico.Pencil },
@@ -889,6 +861,7 @@ const STEPS = [
 function LearningJourney() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
   return (
     <section id="journey" style={{
       background: T.white,
@@ -900,125 +873,363 @@ function LearningJourney() {
       <Squiggle x={200} y={40} w={80} col={T.amber} opacity={0.18} rotate={15} />
 
       <Inn>
-        <div style={{ textAlign: "center", marginBottom: "clamp(52px,6vw,78px)" }}>
+        {/* ---------- Header ---------- */}
+        <div style={{ textAlign: "center", marginBottom: "clamp(48px,5.5vw,68px)" }}>
           <Pill text="Personalised Journey" />
           <SectionHeading>
             Every Learner Receives <Gold>A Different Path</Gold>
           </SectionHeading>
-          <Body center style={{ maxWidth: 540, margin: "1.2rem auto 0" }}>
+          <Body center style={{ fontSize: "1rem", maxWidth: 540, margin: "1.2rem auto 0" }}>
             No two learners are alike. The platform builds a unique journey for every person — from first login to career-ready.
           </Body>
         </div>
 
-        <div ref={ref} style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          {/* Spine */}
-          <div style={{
-            position: "absolute", top: 0, bottom: 0, left: "50%",
-            transform: "translateX(-50%)", width: 2,
-            background: `linear-gradient(to bottom,${T.navy}20,${T.amber}60,${T.navy}14)`,
-            borderRadius: 999, zIndex: 0,
-          }} />
+        {/* ---------- Two-column split ---------- */}
+        <div style={{
+          display: "flex", gap: "clamp(28px,4vw,56px)",
+          alignItems: "flex-start",
+          flexWrap: "wrap",
+        }}>
 
-          {STEPS.map(({ label, desc, col, IcoC }, i) => {
-            const isLeft = i % 2 === 0;
-            return (
+          {/* ===== LEFT: Journey flow ===== */}
+          <div ref={ref} style={{
+            flex: "1 1 340px", minWidth: 300, maxWidth: 420,
+            position: "relative",
+          }}>
+            <div style={{
+              fontFamily: "'Geist',sans-serif", fontWeight: 800,
+              fontSize: "0.72rem", letterSpacing: "0.06em", textTransform: "uppercase",
+              color: T.navy, marginBottom: 18, paddingLeft: 2,
+            }}>The Journey</div>
+
+            <div style={{
+              position: "absolute", top: 46, bottom: 6, left: 19,
+              width: 2,
+              background: `linear-gradient(to bottom,${T.navy}20,${T.amber}60,${T.navy}14)`,
+              borderRadius: 999, zIndex: 0,
+            }} />
+
+            {FLOW.map(({ label, desc, col, IcoC }, i) => (
               <motion.div key={label}
-                initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
+                initial={{ opacity: 0, x: -30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.62, delay: i * 0.13, ease }}
+                transition={{ duration: 0.5, delay: i * 0.11, ease }}
                 style={{
-                  display: "flex", flexDirection: isLeft ? "row" : "row-reverse",
-                  alignItems: "center", width: "100%",
-                  marginBottom: i < STEPS.length - 1 ? 12 : 0,
+                  display: "flex", alignItems: "flex-start", gap: 14,
                   position: "relative", zIndex: 1,
+                  marginBottom: i < FLOW.length - 1 ? 16 : 0,
                 }}>
-                {/* Card */}
-                <div style={{
-                  flex: 1, display: "flex",
-                  justifyContent: isLeft ? "flex-end" : "flex-start",
-                  paddingRight: isLeft ? 44 : 0, paddingLeft: isLeft ? 0 : 44,
-                }}>
-                  <div style={{
-                    background: T.white, borderRadius: 18,
-                    border: `1.5px solid ${col}1e`,
-                    boxShadow: `0 4px 28px ${col}0e, 0 1px 6px rgba(0,0,0,0.04)`,
-                    padding: "1.1rem 1.4rem",
-                    minWidth: 226, maxWidth: 288,
-                    display: "flex", alignItems: "center", gap: 14,
-                  }}>
-                    <div style={{
-                      width: 38, height: 38, borderRadius: 12,
-                      background: `${col}10`, border: `1.5px solid ${col}22`,
-                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-                    }}>
-                      <IcoC c={col} />
-                    </div>
-                    <div>
-                      <div style={{
-                        fontFamily: "'Geist',sans-serif", fontWeight: 800,
-                        fontSize: "0.97rem", color: col, marginBottom: 3, lineHeight: 1.2,
-                      }}>{label}</div>
-                      <div style={{
-                        fontFamily: "'Geist',sans-serif", fontSize: "0.72rem",
-                        color: T.soft, lineHeight: 1.44,
-                      }}>{desc}</div>
-                    </div>
-                  </div>
-                </div>
-                {/* Node */}
                 <motion.div
                   animate={inView ? { scale: [0, 1.24, 1] } : {}}
-                  transition={{ delay: i * 0.13 + 0.09, duration: 0.42 }}
+                  transition={{ delay: i * 0.11 + 0.08, duration: 0.4 }}
                   style={{
-                    width: 42, height: 42, borderRadius: "50%",
+                    width: 38, height: 38, borderRadius: "50%", flexShrink: 0,
                     background: `linear-gradient(135deg,${col},${col}bb)`,
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    flexShrink: 0, zIndex: 2,
-                    boxShadow: `0 6px 20px ${col}40, 0 0 0 4px ${col}14`,
+                    boxShadow: `0 5px 16px ${col}40, 0 0 0 4px ${col}14`,
                   }}>
                   <IcoC c="white" />
                 </motion.div>
-                <div style={{ flex: 1 }} />
+
+                <div style={{
+                  flex: 1, background: T.white, borderRadius: 14,
+                  border: `1.5px solid ${col}1e`,
+                  boxShadow: `0 3px 20px ${col}0e, 0 1px 5px rgba(0,0,0,0.04)`,
+                  padding: "0.7rem 0.95rem",
+                }}>
+                  <div style={{
+                    fontFamily: "'Geist',sans-serif", fontWeight: 800,
+                    fontSize: "0.88rem", color: col, marginBottom: 2, lineHeight: 1.2,
+                  }}>{label}</div>
+                  <div style={{
+                    fontFamily: "'Geist',sans-serif", fontSize: "0.88rem",
+                    color: T.soft, lineHeight: 1.4,
+                  }}>{desc}</div>
+                </div>
               </motion.div>
-            );
-          })}
+            ))}
+          </div>
+
+          {/* ===== RIGHT: Rewards ===== */}
+          <RewardsColumn />
         </div>
       </Inn>
     </section>
   );
 }
 
+function RewardsColumn() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <div ref={ref} style={{ flex: "1 1 380px", minWidth: 300, position: "relative" }}>
+      <div style={{
+        fontFamily: "'Geist',sans-serif", fontWeight: 800,
+        fontSize: "0.72rem", letterSpacing: "0.06em", textTransform: "uppercase",
+        color: T.amber, marginBottom: 18, paddingLeft: 2,
+      }}>What It Leads To</div>
+
+      <div style={{
+        position: "absolute", top: 46, bottom: 6, left: 23,
+        width: 2,
+        background: `linear-gradient(to bottom,${T.amber}55,${T.navy}30,${T.amber}55)`,
+        borderRadius: 999, zIndex: 0,
+      }} />
+
+      {REWARDS.map((r, i) => (
+        <motion.div key={r.title}
+          initial={{ opacity: 0, x: 30 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.55, delay: i * 0.14, ease }}
+          style={{
+            display: "flex", gap: 14, alignItems: "flex-start",
+            position: "relative", zIndex: 1,
+            marginBottom: i < REWARDS.length - 1 ? 14 : 0,
+          }}>
+          <motion.div
+            animate={inView ? { scale: [0, 1.2, 1] } : {}}
+            transition={{ delay: i * 0.14 + 0.09, duration: 0.4 }}
+            style={{
+              width: 46, height: 46, borderRadius: "50%", flexShrink: 0,
+              background: `linear-gradient(135deg,${r.col},${r.col}bb)`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              boxShadow: `0 6px 18px ${r.col}45, 0 0 0 4px ${r.col}12`,
+              position: "relative",
+            }}>
+            <r.Icon c="white" />
+            <div style={{
+              position: "absolute", top: -5, right: -5,
+              width: 17, height: 17, borderRadius: "50%",
+              background: T.white, border: `1.5px solid ${r.col}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontFamily: "'Geist',sans-serif", fontWeight: 800,
+              fontSize: "0.6rem", color: r.col,
+            }}>{i + 1}</div>
+          </motion.div>
+
+          <div style={{
+            flex: 1, background: T.white, borderRadius: 14,
+            border: `1.5px solid ${r.col}20`,
+            boxShadow: `0 3px 20px ${r.col}0e, 0 1px 5px rgba(0,0,0,0.04)`,
+            padding: "0.85rem 1rem", position: "relative", overflow: "hidden",
+          }}>
+            <div style={{ position: "absolute", top: 8, right: 10, opacity: 0.9 }}>
+              <r.Seal col={r.col} size={22} />
+            </div>
+            <div style={{
+              fontFamily: "'Geist',sans-serif", fontWeight: 500,
+              fontSize: "0.6rem", letterSpacing: "0.05em", textTransform: "uppercase",
+              color: r.col, marginBottom: 3,
+            }}>{r.eyebrow}</div>
+            <div style={{
+              fontFamily: "'Geist',sans-serif", fontWeight: 800,
+              fontSize: "0.94rem", color: T.navy, marginBottom: 5, lineHeight: 1.22,
+              maxWidth: "82%",
+            }}>{r.title}</div>
+            <div style={{
+              fontFamily: "'Geist',sans-serif", fontSize: "0.82rem",
+              color: T.soft, lineHeight: 1.52,
+            }}>{r.text}</div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+/* ---------- Reward icons ---------- */
+function IconCertificate({ c }: { c: string }) {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="9" r="6" stroke={c} strokeWidth="1.8" />
+      <path d="M8.5 14L7 21l5-2.5L17 21l-1.5-7" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9 9l2 2 4-4" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function IconScholarship({ c }: { c: string }) {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+      <path d="M12 3l9 4.5-9 4.5-9-4.5L12 3z" stroke={c} strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5" stroke={c} strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M21 8v6" stroke={c} strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconIntern({ c }: { c: string }) {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+      <rect x="3.5" y="8" width="17" height="12" rx="2" stroke={c} strokeWidth="1.8" />
+      <path d="M8.5 8V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2" stroke={c} strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M3.5 13h17" stroke={c} strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+/* ---------- Signature seals ---------- */
+function SealRibbon({ col, size = 28 }: { col: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 34 34" fill="none" style={{ transform: "rotate(8deg)" }}>
+      <circle cx="17" cy="13" r="9" stroke={col} strokeWidth="1.4" strokeDasharray="2.5 2.5" />
+      <path d="M12 20l-3 9 5-2.5L17 29l3-2.5 5 2.5-3-9" stroke={col} strokeWidth="1.4" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
+}
+function SealBurst({ col, size = 28 }: { col: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 34 34" fill="none">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <line key={i}
+          x1={17} y1={17}
+          x2={17 + 14 * Math.cos((i * Math.PI) / 4)}
+          y2={17 + 14 * Math.sin((i * Math.PI) / 4)}
+          stroke={col} strokeWidth="1.4" strokeLinecap="round" opacity={0.7} />
+      ))}
+      <circle cx="17" cy="17" r="5.5" stroke={col} strokeWidth="1.4" fill="none" />
+    </svg>
+  );
+}
+function SealArrow({ col, size = 28 }: { col: string; size?: number }) {
+  return (
+    <svg width={size * 1.15} height={size * 0.7} viewBox="0 0 40 24" fill="none">
+      <text x="0" y="16" fontFamily="'Geist',sans-serif" fontSize="9" fontWeight={800} fill={col}>WIN</text>
+      <path d="M20 12h9" stroke={col} strokeWidth="1.6" markerEnd="url(#arrow)" />
+      <defs>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill={col} />
+        </marker>
+      </defs>
+      <text x="31" y="16" fontFamily="'Geist',sans-serif" fontSize="9" fontWeight={800} fill={col}>INT</text>
+    </svg>
+  );
+}
+
+/* ---------- Reward content — full copy, unedited ---------- */
+const REWARDS = [
+  {
+    eyebrow: "Recognition",
+    title: "Earn an Official Certificate",
+    text: "Every child who takes part and builds a project earns an official i4i AI Olympiad certificate. It is more than a piece of paper. It is proof that your child learned something real, finished what they started, and built something with their own hands and ideas. For a young student, that kind of recognition is a huge confidence boost. It tells them their ideas matter and that they are capable of more than they thought. It also looks wonderful on future school and program applications, giving your child an early edge that grows with them.",
+    col: T.navy,
+    Icon: IconCertificate,
+    Seal: SealRibbon,
+  },
+  {
+    eyebrow: "Reward",
+    title: "Win a Scholarship",
+    text: "The very best projects earn something special. Our top young creators are awarded scholarships, given only to the students whose work truly stands out. These scholarships reward effort, creativity, and skill, and they show your child that hard work and big ideas really do pay off. It is our way of investing in the brilliant young minds who are shaping what comes next. A scholarship is not just a prize. It is a vote of confidence in your child and the future they are building, one project at a time.",
+    col: T.amber,
+    Icon: IconScholarship,
+    Seal: SealBurst,
+  },
+  {
+    eyebrow: "Opportunity",
+    title: "From Winner to Intern",
+    text: "Here is where it gets exciting. Scholarship winners also earn the chance to join our team as a short-term intern. This is a brief, supervised, and age-appropriate experience, not a permanent job, designed to give standout students a real taste of how technology works in the real world. They learn, they explore, they meet people who build technology for a living, and they walk away with a story and an experience most kids their age never get.",
+    col: T.navy,
+    Icon: IconIntern,
+    Seal: SealArrow,
+  },
+];
 /* ═══════════════════════════════════════
-   SECTION 5 — LIVE AI IN ACTION (NAVY)
+   SECTION 5 — WHY FAMILIES LOVE IT + FAQ + REGISTER (NAVY)
 ═══════════════════════════════════════ */
-const SCENARIOS = [
+const FAQS = [
   {
-    role: "Student", need: "Finding the right math tutor",
-    steps: ["Analyses 18 months of learning history", "Scans 2,400+ active tutor profiles", "Ranks by style compatibility & availability"],
-    result: "Matched in 30 seconds", resultCol: "#4ade80",
-    img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=560&q=85&fit=crop",
+    q: "What age can my child enter?",
+    a: "The AI Olympiad welcomes elementary students in grades 4 and 5 and middle school students in grades 6 to 8.",
   },
   {
-    role: "Teacher", need: "Seeking global certification",
-    steps: ["Reviews teaching portfolio & feedback", "Analyses 47 pedagogical skill indicators", "Generates a personalised certification pathway"],
-    result: "Certification pathway generated", resultCol: "#60a5fa",
-    img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=560&q=85&fit=crop",
+    q: "Does my child need coding experience?",
+    a: "Not at all. We teach everything from the ground up, and beginners are not only welcome, they thrive here.",
   },
   {
-    role: "Immigrant Parent", need: "Understanding the US school system",
-    steps: ["Detects primary language and home country", "Scans district and school-level databases", "Builds a step-by-step local resource plan"],
-    result: "Personalised support plan ready", resultCol: T.amber,
-    img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=560&q=85&fit=crop",
+    q: "What will my child actually build?",
+    a: "Each student creates their own simple AI project or model, guided by friendly lessons that match their age and skill level.",
+  },
+  {
+    q: "How does the scholarship work?",
+    a: "Scholarships go only to the top projects, chosen for creativity, effort, and skill. Winners also unlock the short internship experience.",
+  },
+  {
+    q: "Still have questions?",
+    a: "Just email or call us and we will happily walk you through it.",
   },
 ];
 
-function LiveAISection() {
-  const [active, setActive] = useState(0);
-  const s = SCENARIOS[active];
+function IconChevron({ c, open }: { c: string; open: boolean }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+      style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.28s ease" }}>
+      <path d="M6 9l6 6 6-6" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function IconMail({ c }: { c: string }) {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="5" width="18" height="14" rx="2.5" stroke={c} strokeWidth="1.8" />
+      <path d="M4 7l8 6 8-6" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function IconPhone({ c }: { c: string }) {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+      <path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2C10.5 19 5 13.5 5 7a2 2 0 0 1 1-4z"
+        stroke={c} strokeWidth="1.7" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function AccordionItem({ item, open, onToggle }: { item: typeof FAQS[0]; open: boolean; onToggle: () => void }) {
+  return (
+    <div style={{
+      background: open ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.03)",
+      border: `1px solid ${open ? "rgba(245,166,35,0.35)" : "rgba(255,255,255,0.1)"}`,
+      borderRadius: 14, overflow: "hidden", transition: "background 0.25s, border-color 0.25s",
+    }}>
+      <button onClick={onToggle} style={{
+        width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+        gap: 16, padding: "1.05rem 1.3rem", background: "transparent", border: "none",
+        cursor: "pointer", textAlign: "left",
+      }}>
+        <span style={{
+          fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "0.94rem",
+          color: open ? T.amber : "#fff",
+        }}>{item.q}</span>
+        <span style={{
+          flexShrink: 0, width: 26, height: 26, borderRadius: "50%",
+          background: open ? T.amber : "rgba(255,255,255,0.1)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          <IconChevron c={open ? "#0a1a4a" : T.navyText} open={open} />
+        </span>
+      </button>
+      <motion.div
+        animate={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+        initial={false}
+        transition={{ duration: 0.32, ease }}
+        style={{ display: "grid" }}>
+        <div style={{ overflow: "hidden" }}>
+          <div style={{
+            padding: "0 1.3rem 1.15rem", fontFamily: "'Geist',sans-serif",
+            fontSize: "0.85rem", lineHeight: 1.62, color: T.navyText,
+          }}>{item.a}</div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+function WhyFamiliesFAQRegisterSection() {
+  const [openFAQ, setOpenFAQ] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+
   return (
-    <section id="demo" style={{
+    <section id="why-families" style={{
       background: `linear-gradient(160deg,${T.navy} 0%,${T.navyD} 100%)`,
       padding: "clamp(96px,11vw,144px) clamp(24px,5.5vw,90px)",
       position: "relative", overflow: "hidden",
@@ -1029,122 +1240,114 @@ function LiveAISection() {
       <FloatingCircle style={{ bottom: "10%", left: "5%" }} size={60} col="rgba(255,255,255,0.18)" />
 
       <Inn>
-        <div ref={ref} style={{ textAlign: "center", marginBottom: "clamp(48px,5.5vw,72px)" }}>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}>
-            <Pill text="Live AI in Action" onNavy />
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}>
-            <SectionHeading onNavy>
-              See What the AI <Gold>Actually Does</Gold>
-            </SectionHeading>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.22 }}>
-            <Body onNavy center style={{ maxWidth: 520, margin: "1.2rem auto 0" }}>
-              Real scenarios, real outcomes. Not theory — this is how the platform operates every single day.
-            </Body>
-          </motion.div>
-        </div>
+        <div ref={ref}>
 
-        {/* Tabs */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 10, marginBottom: 44, flexWrap: "wrap" }}>
-          {SCENARIOS.map((sc, i) => (
-            <button key={i} onClick={() => setActive(i)} style={{
-              padding: "0.62rem 1.5rem", borderRadius: 999,
-              background: i === active ? T.amber : "rgba(255,255,255,0.08)",
-              color: i === active ? "#0a1a4a" : T.navyText,
-              border: `1.5px solid ${i === active ? T.amber : "rgba(255,255,255,0.14)"}`,
-              fontFamily: "'Geist',sans-serif", fontSize: "0.82rem", fontWeight: 700,
-              transition: "all 0.22s",
-              boxShadow: i === active ? "0 6px 22px rgba(245,166,35,0.38)" : "none",
-            }}>{sc.role}</button>
-          ))}
-        </div>
+          {/* ===== ACT 1 — Why families love it ===== */}
+          <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto clamp(64px,7vw,96px)" }}>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}>
+              <Pill text="Why Families Love the AI Olympiad" onNavy />
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}>
+              <SectionHeading onNavy>
+                A Creator, <Gold>Not Just a Watcher</Gold>
+              </SectionHeading>
+            </motion.div>
+            <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.22 }}>
+              <Body onNavy center style={{ maxWidth: 620, margin: "1.3rem auto 0", fontSize: "1rem", lineHeight: 1.75 }}>
+                In a world racing toward AI, this is a chance for your child to be a creator, not just a watcher. They build real skills, gain real confidence, and join a friendly community of young creators across South Asia. Summer break is the perfect time to start, while school is out, schedules are light, and curiosity is wide open. It is the kind of summer project that pays off for years.
+              </Body>
+            </motion.div>
+          </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div key={active}
-            initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.36 }}
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 44, alignItems: "center" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              {/* Need */}
+          {/* ===== ACT 2 — FAQ accordion ===== */}
+          <div style={{
+            display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 48,
+            alignItems: "start", marginBottom: "clamp(64px,7vw,96px)",
+          }}>
+            <motion.div
+              initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.15 }}
+              style={{ position: "sticky", top: 100 }}>
               <div style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                borderRadius: 16, padding: "1.3rem 1.5rem",
-              }}>
-                <div style={{
-                  fontFamily: "'Geist',sans-serif", fontSize: "0.58rem", fontWeight: 700,
-                  letterSpacing: "0.14em", textTransform: "uppercase", color: T.navyTextD, marginBottom: 5,
-                }}>{s.role}</div>
-                <div style={{ fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "1.05rem", color: "#fff" }}>{s.need}</div>
+                fontFamily: "'Geist',sans-serif", fontSize: "0.62rem", fontWeight: 700,
+                letterSpacing: "0.14em", textTransform: "uppercase", color: T.amber, marginBottom: 10,
+              }}>FAQ</div>
+              <div style={{ fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "1.6rem", color: "#fff", lineHeight: 1.25 }}>
+                Questions Parents<br />Often Ask
               </div>
-              {/* AI steps */}
-              <div style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderRadius: 16, padding: "1.3rem 1.5rem",
-              }}>
-                <div style={{
-                  display: "flex", alignItems: "center", gap: 7,
-                  marginBottom: 14,
-                  fontFamily: "'Geist',sans-serif", fontSize: "0.58rem",
-                  fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: T.amber,
-                }}>
-                  <Ico.Brain c={T.amber} /> AI Processing
-                </div>
-                {s.steps.map((step, i) => (
-                  <motion.div key={step}
-                    initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 + 0.05 }}
-                    style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: i < 2 ? 10 : 0 }}>
-                    <div style={{
-                      width: 24, height: 24, borderRadius: "50%",
-                      background: T.amber, color: "#0a1a4a",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: "0.62rem", fontWeight: 800, flexShrink: 0,
-                    }}>{i + 1}</div>
-                    <span style={{ fontFamily: "'Geist',sans-serif", fontSize: "0.81rem", color: T.navyText }}>{step}</span>
-                  </motion.div>
-                ))}
-              </div>
-              {/* Result */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.44 }}
-                style={{
-                  background: s.resultCol, borderRadius: 14,
-                  padding: "1rem 1.4rem",
-                  display: "flex", alignItems: "center", gap: 10,
-                  boxShadow: `0 8px 28px ${s.resultCol}44`,
-                }}>
-                <Ico.Check c={s.resultCol === T.amber ? "#0a1a4a" : "white"} />
-                <span style={{
-                  fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "0.96rem",
-                  color: s.resultCol === T.amber ? "#0a1a4a" : "white",
-                }}>{s.result}</span>
-              </motion.div>
+              <Body onNavy style={{ marginTop: 14, fontSize: "0.86rem", maxWidth: 320 }}>
+                Everything we're asked before a family signs up — answered straight, no fine print.
+              </Body>
+            </motion.div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {FAQS.map((item, i) => (
+                <motion.div key={item.q}
+                  initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.2 + i * 0.07 }}>
+                  <AccordionItem item={item} open={openFAQ === i} onToggle={() => setOpenFAQ(openFAQ === i ? -1 : i)} />
+                </motion.div>
+              ))}
             </div>
-            {/* Photo */}
-            <div style={{
-              borderRadius: 24, overflow: "hidden",
-              boxShadow: "0 24px 80px rgba(0,0,0,0.38)",
-              position: "relative",
-              border: "1px solid rgba(255,255,255,0.08)",
+          </div>
+
+          {/* ===== ACT 3 — Register CTA ===== */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            style={{
+              background: `linear-gradient(120deg,${T.amber} 0%,#f5b94a 100%)`,
+              borderRadius: 28, padding: "clamp(40px,5vw,60px) clamp(32px,5vw,64px)",
+              display: "flex", flexWrap: "wrap", gap: 32,
+              alignItems: "center", justifyContent: "space-between",
+              boxShadow: "0 24px 70px rgba(245,166,35,0.28)",
+              position: "relative", overflow: "hidden",
             }}>
-              <img src={s.img} alt={s.role}
-                style={{ width: "100%", height: 420, objectFit: "cover", display: "block" }} />
+            <Squiggle x={40} y={20} w={70} col="#0a1a4a" opacity={0.1} rotate={-10} />
+
+            <div style={{ flex: "1 1 340px", position: "relative", zIndex: 1 }}>
               <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top,rgba(11,56,176,0.6) 0%,transparent 60%)",
-              }} />
+                fontFamily: "'Geist',sans-serif", fontWeight: 800, fontSize: "1.7rem",
+                color: "#0a1a4a", marginBottom: 10, lineHeight: 1.15,
+              }}>Register Today</div>
               <div style={{
-                position: "absolute", bottom: 18, left: 18,
-                fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "0.82rem",
-                color: "rgba(255,255,255,0.8)",
-              }}>{s.role}</div>
+                fontFamily: "'Geist',sans-serif", fontSize: "0.92rem", color: "#0a1a4a",
+                lineHeight: 1.65, maxWidth: 480, opacity: 0.88, marginBottom: 8,
+              }}>
+                Give your child a summer they will remember and skills they will keep for life. Spots fill up fast, so do not wait.
+              </div>
+              <div style={{
+                fontFamily: "'Geist',sans-serif", fontSize: "0.92rem", color: "#0a1a4a",
+                lineHeight: 1.65, maxWidth: 480, opacity: 0.88,
+              }}>
+                Email or call us today to register your young creator, and our team will guide you through every step.
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, position: "relative", zIndex: 1, flexShrink: 0 }}>
+              <a href="mailto:hello@i4isciences.com" style={{
+                display: "flex", alignItems: "center", gap: 9, textDecoration: "none",
+                background: "#0a1a4a", color: "#fff",
+                padding: "0.85rem 1.6rem", borderRadius: 999,
+                fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "0.88rem",
+                boxShadow: "0 8px 24px rgba(10,26,74,0.3)", whiteSpace: "nowrap",
+              }}>
+                <IconMail c="#fff" /> Email Us to Register
+              </a>
+              <a href="/contact" style={{
+                display: "flex", alignItems: "center", gap: 9, textDecoration: "none",
+                background: "transparent", color: "#0a1a4a",
+                padding: "0.85rem 1.6rem", borderRadius: 999,
+                border: "1.5px solid #0a1a4a",
+                fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "0.88rem",
+                whiteSpace: "nowrap",
+              }}>
+                <IconPhone c="#0a1a4a" /> Call Us to Learn More
+              </a>
             </div>
           </motion.div>
-        </AnimatePresence>
+
+        </div>
       </Inn>
     </section>
   );
@@ -1615,12 +1818,19 @@ export default function AIEcosystemPage() {
   return (
     <>
       <style>{G}</style>
+      <div className="site-logo-sticky">
+  <img
+    src="/images/ailogo-removebg-preview.png"   
+    alt="AI Ecosystem"
+    className="site-logo-image"
+  />
+</div>
       <main>
         {/* 1. NAVY   */ }<Hero />
-        {/* 2. WHITE  */ }<AIPowersSection />
-        {/* 3. NAVY   */ }<AIEnginesSection />
+        {/* 2. WHITE  */ }<AIOlympiadIntro />
+        {/* 3. NAVY   */ }<CompetitionFormatSection />
         {/* 4. WHITE  */ }<LearningJourney />
-        {/* 5. NAVY   */ }<LiveAISection />
+        {/* 5. NAVY   */ }<WhyFamiliesFAQRegisterSection />
         {/* 6. WHITE  */ }<GlobalSection />
         {/* 7. NAVY   */ }<ResponsibleAI />
         {/* 8. WHITE  */ }<ImpactSection />

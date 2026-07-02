@@ -691,11 +691,14 @@ export default function ContactPage() {
           STYLES
       ═══════════════════════════════════════════ */}
       <style jsx global>{`
-        *, *::before, *::after {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
+        .contact-root,
+            .contact-root *,
+               .contact-root *::before,
+               .contact-root *::after {
+                 box-sizing: border-box;
+                 margin: 0;
+                 padding: 0;
+               }
 
         :root {
           --blue: #1A3575;

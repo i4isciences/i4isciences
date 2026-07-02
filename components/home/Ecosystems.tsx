@@ -2,13 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Atom, FlaskConical } from "lucide-react";
 
 // Shared easing curve for framer-motion transitions
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 /* ═══════════════════════════════════
-   TYPEWRITER — heading only
+    TYPEWRITER — heading only
 ═══════════════════════════════════ */
 function Typewriter({ segments, delay = 0.8 }: { segments: { text: string; color: string }[]; delay?: number }) {
   const full = segments.map(s => s.text).join("");
@@ -59,7 +59,7 @@ function Typewriter({ segments, delay = 0.8 }: { segments: { text: string; color
 }
 
 /* ═══════════════════════════════════
-   SCATTERED BG DOODLES
+    SCATTERED BG DOODLES
 ═══════════════════════════════════ */
 function BgDoodles({ inView }: { inView: boolean }) {
   return (
@@ -96,7 +96,7 @@ function BgDoodles({ inView }: { inView: boolean }) {
 }
 
 /* ═══════════════════════════════════
-   HEADING DOODLE
+    HEADING DOODLE
 ═══════════════════════════════════ */
 function HeadingDoodle({ inView }: { inView: boolean }) {
   return (
@@ -132,7 +132,7 @@ function HeadingDoodle({ inView }: { inView: boolean }) {
 }
 
 /* ═══════════════════════════════════
-   CARD DATA
+    CARD DATA
 ═══════════════════════════════════ */
 const CARDS = [
   {
@@ -144,16 +144,19 @@ const CARDS = [
     imageUrl: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80&fit=crop",
     imageAlt: "Experienced teacher leading a classroom",
     eyebrow: "Teach the Teacher",
+    headerLabel: "For Teachers",
     headline: "Turn Your\nPassion Into\nA Paycheck",
     subline: "Your expertise is worth more than one classroom.",
     bullets: [
       "Get certified by global education experts",
       "Train once. Earn across 120+ countries",
       "What you earn in a month — earn in hours",
-      "AI-powered courses you build and own",
     ],
     cta: "Start Earning",
+    href: "/models/teach-the-teacher",
     stat: { value: "240+", label: "Educators Certified" },
+    tooltipText: "Earn from your expertise, on your own schedule, from home. Set your hours, keep your freedom, and grow your income with every hour you teach.\n\nGet certified. Build your courses. Teach students across 120 countries.",
+    bubbleAlign: "right" as const, // Handled dynamically in desktop grid, fallback for responsive
   },
   {
     id: "OCT",
@@ -164,16 +167,20 @@ const CARDS = [
     imageUrl: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80&fit=crop",
     imageAlt: "Student learning online seamlessly",
     eyebrow: "OneCent Tutors",
+    headerLabel: "For Students",
     headline: "Never Miss\nA Concept\nAgain",
-    subline: "24/7 live teaching for every subject, every doubt.",
+    subline: "24/7 live teaching for every subject, any grade.",
     bullets: [
-      "On-the-spot help when your class moves on",
+      "Immediate help, when you learn online yourself and get confused",
       "All subjects, any grade, real human tutors",
-      "First 2 sessions completely FREE",
-      "Subscription that costs less than a textbook",
+      "First session completely FREE",
+      "Affordable, inexpensive subscription based tutoring model",
     ],
     cta: "Book Free Class",
+    href: "/models/onecent-tutors",
     stat: { value: "50K+", label: "Sessions Booked" },
+    tooltipText: "Affordable, on-demand help from real human tutors, not chatbots. Every subject, every grade.\n\nBook a tutor. Meet live. Improve with a plan built around your child. First session free.",
+    bubbleAlign: "right" as const, 
   },
   {
     id: "IPST",
@@ -184,6 +191,7 @@ const CARDS = [
     imageUrl: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80&fit=crop",
     imageAlt: "Immigrant family planning their journey together",
     eyebrow: "Immigrant Parent Support",
+    headerLabel: "For Parents",
     headline: "A New Country.\nNot A New\nStruggle.",
     subline: "Your family moves together — educationally and emotionally.",
     bullets: [
@@ -193,7 +201,10 @@ const CARDS = [
       "US school systems decoded — for parents",
     ],
     cta: "Plan Your Move",
+    href: "/models/ipst",
     stat: { value: "120+", label: "Countries Reached" },
+    tooltipText: "Real support for newly arrived students and their parents, offered in your language.\n\nTell us your situation. Get matched with multilingual help. Walk into school with a clear plan.",
+    bubbleAlign: "left" as const, 
   },
   {
     id: "AI",
@@ -204,6 +215,7 @@ const CARDS = [
     imageUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80&fit=crop",
     imageAlt: "Students competing in AI challenge",
     eyebrow: "AI Competition & Scholarships",
+    headerLabel: "For Rewards",
     headline: "Your Child\nCodes. Now\nLet Them Compete.",
     subline: "From Grade 4 curiosity to global-stage achievement.",
     bullets: [
@@ -213,15 +225,126 @@ const CARDS = [
       "Win certificates, trophies & scholarships",
     ],
     cta: "Enter Competition",
+    href: "/ai-ecosystem",
     stat: { value: "2M+", label: "AI Lessons Created" },
+    tooltipText: "Compete globally and earn scholarships through our specialized AI training ecosystems.",
+    bubbleAlign: "right" as const,
+  },
+  {
+    id: "LABTRICKS",
+    badge: "LT",
+    logo: "/images/labtrickslogo.png",
+    accentColor: "#F5A623",
+    accentLight: "rgba(245,166,35,0.14)",
+    imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80&fit=crop",
+    imageAlt: "Student performing a real chemistry experiment in a lab",
+    eyebrow: "LabTricks",
+    headerLabel: "For Explorers",
+    headline: "Take Science\nOut Of The\nTextbook",
+    subline: "Real laboratories, real equipment, real experiments — not simulations.",
+    bullets: [
+      "500+ verified partner labs in 50+ cities",
+      "100+ real experiments for Class 6–12",
+      "Certified mentors, safety-checked equipment",
+      "Earn a verified practical certificate",
+    ],
+    cta: "Find Nearby Labs",
+    href: "/models/labtrick",
+    stat: { value: "500+", label: "Partner Labs" },
+    tooltipText: "Explore real-world laboratories and conduct real experiments near you.",
+    bubbleAlign: "left" as const,
   },
 ];
 
 /* ═══════════════════════════════════
-   INDIVIDUAL CARD
+    MESSAGE-BUBBLE TOOLTIP (Modified for horizontal placement)
 ═══════════════════════════════════ */
-function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; index: number }) {
+function MessageBubble({
+  text,
+  color,
+  side,
+  visible,
+}: {
+  text: string;
+  color: string;
+  side: "left" | "right";
+  visible: boolean;
+}) {
+  // Desktop positioning logic based on side orientation
+  const horizontalPosition =
+    side === "left"
+      ? { right: "calc(100% + 24px)", left: "auto" }
+      : { left: "calc(100% + 24px)", right: "auto" };
+
+  const tailPosition =
+    side === "left"
+      ? { right: "-7px", left: "auto", borderLeft: `1.5px solid ${color}35`, borderTop: `1.5px solid ${color}35` }
+      : { left: "-7px", right: "auto", borderRight: `1.5px solid ${color}35`, borderBottom: `1.5px solid ${color}35` };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: side === "left" ? 15 : -15 }}
+      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : (side === "left" ? 15 : -15) }}
+      transition={{ duration: 0.25, ease: EASE }}
+      className={`tooltip-bubble side-${side}`}
+      style={{
+        position: "absolute",
+        top: "10%",
+        ...horizontalPosition,
+        width: "min(300px, 88vw)",
+        zIndex: 60,
+        pointerEvents: "none",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          background: "#ffffff",
+          borderRadius: "16px",
+          border: `1.5px solid ${color}35`,
+          boxShadow: "0 24px 56px rgba(16,32,78,0.2), 0 4px 14px rgba(16,32,78,0.08)",
+          padding: "1.15rem 1.3rem",
+        }}
+      >
+        <div style={{
+          position: "absolute",
+          top: 0, left: 0, right: 0,
+          height: "5px",
+          borderRadius: "16px 16px 0 0",
+          background: color,
+        }} />
+        <p style={{
+          fontFamily: "'Geist', sans-serif",
+          fontSize: "0.85rem",
+          lineHeight: 1.7,
+          color: "#10204e",
+          fontWeight: 500,
+          whiteSpace: "pre-line",
+          margin: 0,
+        }}>
+          {text}
+        </p>
+        {/* Tail turned towards the card container */}
+        <div style={{
+          position: "absolute",
+          top: "35px",
+          width: "14px",
+          height: "14px",
+          background: "#ffffff",
+          transform: "rotate(45deg)",
+          ...tailPosition,
+        }} />
+      </div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════
+    INDIVIDUAL CARD
+═══════════════════════════════════ */
+function EcoCard({ card, index, forceSide }: { card: typeof CARDS[0] & { logo: string; bubbleAlign?: "left" | "center" | "right" }; index: number; forceSide?: "left" | "right" }) {
   const [hovered, setHovered] = useState(false);
+  const side = forceSide ?? (card.bubbleAlign === "left" ? "left" : "right");
 
   return (
     <motion.div
@@ -235,8 +358,9 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
         position: "relative",
         display: "flex",
         flexDirection: "column",
+        flex: 1,
+        height: "100%",
         borderRadius: "24px",
-        overflow: "hidden",
         background: "#ffffff",
         border: `2px solid ${hovered ? card.accentColor : "rgba(10,46,138,0.08)"}`,
         boxShadow: hovered
@@ -246,12 +370,23 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
         cursor: "pointer",
       }}
     >
+      {/* ── HOVER MESSAGE BUBBLE (positioned to side horizontally) ── */}
+      {card.tooltipText && (
+        <MessageBubble
+          text={card.tooltipText}
+          color={card.accentColor}
+          side={side}
+          visible={hovered}
+        />
+      )}
+
       {/* ── IMAGE AREA ── */}
       <div style={{
         position: "relative",
         height: "260px",
         overflow: "hidden",
         flexShrink: 0,
+        borderRadius: "22px 22px 0 0",
       }}>
         {/* Photo */}
         <motion.img
@@ -267,7 +402,7 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
           }}
         />
 
-        {/* Gradient overlay — always present, intensifies on hover */}
+        {/* Gradient overlay */}
         <motion.div
           animate={{ opacity: hovered ? 0.78 : 0.58 }}
           transition={{ duration: 0.35 }}
@@ -277,36 +412,6 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
             background: `linear-gradient(175deg, ${card.accentColor}cc 0%, ${card.accentColor}88 50%, transparent 100%)`,
           }}
         />
-
-        {/* Logo badge top-left — replaces text tag */}
-        <div style={{
-          position: "absolute",
-          top: 14,
-          left: 14,
-          width: "52px",
-          height: "52px",
-          borderRadius: "14px",
-          background: "rgba(255,255,255,0.92)",
-          border: "1.5px solid rgba(255,255,255,0.7)",
-          backdropFilter: "blur(10px)",
-          boxShadow: "0 2px 12px rgba(0,0,0,0.14)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "6px",
-          overflow: "hidden",
-        }}>
-          <img
-            src={card.logo}
-            alt={`${card.id} logo`}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              display: "block",
-            }}
-          />
-        </div>
 
         {/* Stat pill top-right */}
         <motion.div
@@ -348,17 +453,18 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
           </span>
         </motion.div>
 
-        {/* Eyebrow on the photo */}
+        {/* Eyebrow / service name */}
         <div style={{
           position: "absolute",
           bottom: 16,
           left: 18,
           fontFamily: "'Geist', sans-serif",
-          fontSize: "0.68rem",
-          fontWeight: 700,
-          color: "rgba(255,255,255,0.85)",
+          fontSize: "0.72rem",
+          fontWeight: 800,
+          color: "#7a1224",
           letterSpacing: "0.06em",
           textTransform: "uppercase",
+          textShadow: "0 1px 3px rgba(255,255,255,0.35)",
         }}>
           {card.eyebrow}
         </div>
@@ -372,19 +478,54 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
         flexDirection: "column",
       }}>
 
-        {/* Headline */}
-        <h3 style={{
-          fontFamily: "'Geist Variable', 'Geist', sans-serif",
-          fontWeight: 800,
-          fontSize: "clamp(1.35rem, 1.6vw, 1.72rem)",
-          lineHeight: 1.12,
-          letterSpacing: "-0.03em",
-          color: "#10204e",
-          margin: "0 0 0.6rem 0",
-          whiteSpace: "pre-line",
+        {/* Headline row */}
+        <div style={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          gap: "0.75rem",
+          marginBottom: "0.6rem",
         }}>
-          {card.headline}
-        </h3>
+          <h3 style={{
+            fontFamily: "'Geist Variable', 'Geist', sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(1.35rem, 1.6vw, 1.72rem)",
+            lineHeight: 1.12,
+            letterSpacing: "-0.03em",
+            color: "#10204e",
+            margin: 0,
+            whiteSpace: "pre-line",
+            flex: 1,
+          }}>
+            {card.headline}
+          </h3>
+
+          <div style={{
+            width: "60px",
+            height: "60px",
+            borderRadius: "18px",
+            background: "#ffffff",
+            border: `1.5px solid ${card.accentColor}30`,
+            boxShadow: `0 6px 20px ${card.accentColor}22`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "10px",
+            overflow: "hidden",
+            flexShrink: 0,
+          }}>
+            <img
+              src={card.logo}
+              alt={`${card.id} logo`}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
+          </div>
+        </div>
 
         {/* Wavy accent divider */}
         <svg viewBox="0 0 160 10" style={{ width: 160, display: "block", marginBottom: "0.8rem" }}>
@@ -450,7 +591,7 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
 
         {/* CTA Button */}
         <motion.a
-          href="#"
+          href={card.href}
           animate={{
             background: hovered ? card.accentColor : "transparent",
             color: hovered ? "#ffffff" : card.accentColor,
@@ -495,7 +636,7 @@ function EcoCard({ card, index }: { card: typeof CARDS[0] & { logo: string }; in
 }
 
 /* ═══════════════════════════════════
-   CTA BUTTON
+    CTA BUTTON
 ═══════════════════════════════════ */
 function CTABtn({ href, primary, color, children }: { href: string; primary?: boolean; color: string; children: React.ReactNode }) {
   const [hov, setHov] = useState(false);
@@ -534,7 +675,39 @@ function CTABtn({ href, primary, color, children }: { href: string; primary?: bo
 }
 
 /* ═══════════════════════════════════
-   MAIN EXPORT
+    SIDE-GAP DOODLE
+═══════════════════════════════════ */
+function SideDoodle({ icon, color, delay }: { icon: "atom" | "flask"; color: string; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.6 }}
+      whileInView={{ opacity: 0.22, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay, ease: EASE }}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+        minHeight: "160px",
+      }}
+    >
+      <motion.div
+        animate={{ y: [0, -10, 0], rotate: [0, 6, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
+      >
+        {icon === "atom" ? (
+          <Atom size={44} color={color} strokeWidth={1.4} />
+        ) : (
+          <FlaskConical size={44} color={color} strokeWidth={1.4} />
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════
+    MAIN EXPORT
 ═══════════════════════════════════ */
 export default function Ecosystems() {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -542,8 +715,12 @@ export default function Ecosystems() {
   const sectionRef = useRef<HTMLElement>(null);
   const sectionInView = useInView(sectionRef, { once: true, margin: "-40px" });
 
+  const row1 = CARDS.slice(0, 3);
+  const row2 = CARDS.slice(3, 5);
+
   return (
     <section
+      id="ecosystem"
       ref={sectionRef}
       style={{
         background: "#f0f5ff",
@@ -553,10 +730,59 @@ export default function Ecosystems() {
         fontFamily: "'Geist', 'Geist Variable', sans-serif",
       }}
     >
-      {/* Geist font import */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap');
         * { box-sizing: border-box; }
+
+        .eco-grid{
+          display:grid;
+          grid-template-columns:repeat(6, 1fr);
+          gap:clamp(16px, 2vw, 28px);
+        }
+        .eco-cell-1{ grid-column: 1 / 3; grid-row: 1; }
+        .eco-cell-2{ grid-column: 3 / 5; grid-row: 1; }
+        .eco-cell-3{ grid-column: 5 / 7; grid-row: 1; }
+        .eco-doodle-left{ grid-column: 1 / 2; grid-row: 2; }
+        .eco-cell-4{ grid-column: 2 / 4; grid-row: 2; }
+        .eco-cell-5{ grid-column: 4 / 6; grid-row: 2; }
+        .eco-doodle-right{ grid-column: 6 / 7; grid-row: 2; }
+
+        /* Media adjustments to fall back cleanly when stacked vertically */
+        @media (max-width: 1200px) {
+          .tooltip-bubble {
+            right: 0 !important;
+            left: 0 !important;
+            margin: 0 auto;
+            top: auto !important;
+            bottom: calc(100% + 16px) !important;
+            width: 94% !important;
+          }
+          .tooltip-bubble [style*="top: 35px"] {
+             top: auto !important;
+             bottom: -7px !important;
+             left: 50% !important;
+             right: auto !important;
+             transform: translateX(-50%) rotate(45deg) !important;
+             border-left: none !important;
+             border-top: none !important;
+             border-right: 1.5px solid rgba(0,0,0,0.1) !important;
+             border-bottom: 1.5px solid rgba(0,0,0,0.1) !important;
+          }
+        }
+
+        @media (max-width: 900px){
+          .eco-grid{ grid-template-columns: repeat(2, 1fr); }
+          .eco-cell-1,.eco-cell-2,.eco-cell-3,.eco-cell-4,.eco-cell-5{
+            grid-column: span 2 !important; grid-row: auto !important;
+          }
+          .eco-doodle-left,.eco-doodle-right{ display:none; }
+        }
+        @media (max-width: 600px){
+          .eco-grid{ grid-template-columns: 1fr; }
+          .eco-cell-1,.eco-cell-2,.eco-cell-3,.eco-cell-4,.eco-cell-5{
+            grid-column: span 1 !important;
+          }
+        }
       `}</style>
 
       {/* Ambient bg orbs */}
@@ -574,8 +800,6 @@ export default function Ecosystems() {
 
         {/* ══ HEADER ══ */}
         <div ref={headerRef} style={{ textAlign: "center", marginBottom: "clamp(52px, 7vw, 80px)" }}>
-
-          {/* Heading with doodle behind */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -597,16 +821,15 @@ export default function Ecosystems() {
             }}>
               <Typewriter
                 segments={[
-                  { text: "Four Ecosystems. ", color: "#0a2e8a" },
+                  { text: "Five Ecosystems ", color: "#0a2e8a" },
                   { text: "One", color: "#f5a623" },
-                  { text: " Unified Platform.", color: "#0a2e8a" },
+                  { text: " One Platform For All", color: "#0a2e8a" },
                 ]}
                 delay={0.7}
               />
             </h2>
           </motion.div>
 
-          {/* Subheading */}
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -621,20 +844,68 @@ export default function Ecosystems() {
               fontWeight: 400,
             }}
           >
-            From certifying teachers to matching AI tutors — WingsUP powers the full
-            global education lifecycle through four deeply integrated systems.
+            From certifying teachers to matching AI tutors — i4iSciences powers the full
+            global education lifecycle through five deeply integrated systems.
           </motion.p>
         </div>
 
-        {/* ══ 4-COLUMN CARD GRID ══ */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "clamp(16px, 2vw, 28px)",
-        }}>
-          {CARDS.map((card, i) => (
-            <EcoCard key={card.id} card={card} index={i} />
+        {/* ══ CARD GRID ══ */}
+        <div className="eco-grid">
+          {row1.map((card, i) => (
+            <div key={card.id} className={`eco-cell-${i + 1}`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: i * 0.11, ease: EASE }}
+                style={{
+                  textAlign: "center",
+                  fontFamily: "'Geist Variable', 'Geist', sans-serif",
+                  fontWeight: 800,
+                  fontSize: "1.05rem",
+                  letterSpacing: "-0.01em",
+                  color: card.accentColor,
+                  marginBottom: "0.85rem",
+                }}
+              >
+                {card.headerLabel}
+              </motion.div>
+              {/* Force right-alignment for cards 1 & 2, left-alignment for card 3 */}
+              <EcoCard card={card} index={i} forceSide={i === 2 ? "left" : "right"} />
+            </div>
           ))}
+
+          <div className="eco-doodle-left">
+            <SideDoodle icon="atom" color="#0a2e8a" delay={0.2} />
+          </div>
+
+          {row2.map((card, i) => (
+            <div key={card.id} className={`eco-cell-${i + 4}`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: (i + 3) * 0.11, ease: EASE }}
+                style={{
+                  textAlign: "center",
+                  fontFamily: "'Geist Variable', 'Geist', sans-serif",
+                  fontWeight: 800,
+                  fontSize: "1.05rem",
+                  letterSpacing: "-0.01em",
+                  color: card.accentColor,
+                  marginBottom: "0.85rem",
+                }}
+              >
+                {card.headerLabel}
+              </motion.div>
+              {/* Row 2 handles positions cleanly based on space */}
+              <EcoCard card={card} index={i + 3} />
+            </div>
+          ))}
+
+          <div className="eco-doodle-right">
+            <SideDoodle icon="flask" color="#F5A623" delay={0.4} />
+          </div>
         </div>
 
         {/* ══ CTA STRIP ══ */}
@@ -653,7 +924,6 @@ export default function Ecosystems() {
             position: "relative",
           }}
         >
-          {/* Doodle arc above CTA */}
           <svg style={{ position: "absolute", top: -36, left: "50%", transform: "translateX(-50%)", width: 220, overflow: "visible", pointerEvents: "none" }} viewBox="0 0 220 36">
             <motion.path d="M 10 30 Q 110 4, 210 30"
               stroke="#f5a623" strokeWidth="2.5" fill="none" strokeLinecap="round"

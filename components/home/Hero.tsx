@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
   Users, GraduationCap, Globe, Clock, Star,
   ArrowRight, Play,
@@ -216,6 +216,7 @@ function TickerStrip() {
    HERO SECTION — EXACT MATCH TO REFERENCE
 ───────────────────────────────────────── */
 export default function Hero() {
+  const [showVideo, setShowVideo] = useState(false);
   return (
     <section
       style={{
@@ -274,7 +275,7 @@ export default function Hero() {
           padding: "0 clamp(16px,4vw,48px)",
           /* Push up slightly to account for ticker height at bottom */
           marginBottom: "clamp(64px,10vw,88px)",
-          transform: "translateY(-4vh)",
+          transform: "translateY(-5vh)",
         }}
       >
         {/* Headline — EXACTLY 2 LINES, sized to match reference perfectly */}
@@ -314,9 +315,9 @@ export default function Hero() {
             margin: "0 auto 2rem",
           }}
         >
-          i4i Sciences connects educators and learners through an AI-powered
-          ecosystem that inspires growth, accelerates learning, and builds a
-          smarter future for all.
+          i4i Sciences connects certified teachers, students who need help now, and families starting over in a new country. One
+ecosystem, 120+ countries, real people backed by smart AI tools. Whoever you are, there is a place for you here, and a clear
+way to begin.
         </motion.p>
 
         {/* CTA buttons — exact styling from reference */}
@@ -364,13 +365,14 @@ export default function Hero() {
                 "0 6px 28px rgba(245,166,35,0.40)";
             }}
           >
-            Explore Ecosystem
+            Explore Platforms
             <ArrowRight size={15} strokeWidth={2.5} />
           </a>
 
           {/* Secondary — outline with play icon */}
-          <a
-            href="#demo"
+          <button
+  type="button"
+  onClick={() => setShowVideo(true)}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -388,16 +390,17 @@ export default function Hero() {
               backdropFilter: "blur(6px)",
               transition: "background 0.22s ease, transform 0.22s ease",
             }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLAnchorElement).style.background =
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background =
                 "rgba(255,255,255,0.14)";
-              (e.currentTarget as HTMLAnchorElement).style.transform =
+              (e.currentTarget as HTMLButtonElement).style.transform =
                 "translateY(-2px)";
             }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLAnchorElement).style.background =
+            
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background =
                 "rgba(255,255,255,0.06)";
-              (e.currentTarget as HTMLAnchorElement).style.transform =
+              (e.currentTarget as HTMLButtonElement).style.transform =
                 "translateY(0)";
             }}
           >
@@ -416,12 +419,68 @@ export default function Hero() {
               <Play size={9} fill="white" stroke="none" />
             </span>
             Watch A Video
-          </a>
+          </button>
         </motion.div>
       </div>
 
       {/* ── TICKER STRIP ── */}
       <TickerStrip />
+      {showVideo && (
+  <div
+    onClick={() => setShowVideo(false)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.85)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 9999,
+      padding: "2rem",
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        position: "relative",
+        width: "min(1000px, 90vw)",
+        borderRadius: "18px",
+        overflow: "hidden",
+        background: "#000",
+      }}
+    >
+      <button
+        onClick={() => setShowVideo(false)}
+        style={{
+          position: "absolute",
+          top: 12,
+          right: 12,
+          width: 38,
+          height: 38,
+          borderRadius: "50%",
+          border: "none",
+          background: "rgba(0,0,0,0.6)",
+          color: "#fff",
+          fontSize: "22px",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+      >
+        ×
+      </button>
+
+      <video
+        src="/images/introvideo.mp4"
+        controls
+        autoPlay
+        style={{
+          width: "100%",
+          display: "block",
+        }}
+      />
+    </div>
+  </div>
+)}
     </section>
   );
 }
