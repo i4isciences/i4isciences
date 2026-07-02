@@ -238,17 +238,20 @@ export default function Hero() {
           zIndex: 0,
         }}
       >
-        <img
-          src="/images/hero.png"
-          alt=""
-          draggable={false}
+         <video
+       src="/images/hero.mp4"
+          poster="/images/hero.png"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
           style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
             objectPosition: "center center",
             display: "block",
-            userSelect: "none",
           }}
         />
 

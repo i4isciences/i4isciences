@@ -76,6 +76,16 @@ const G = `
 .site-logo-image{ width: 90px; height: auto; display: block; }
 .site-logo-sticky:hover{ transform: scale(1.05); }
 
+
+.aie-step-connector {
+ display: block;
+}
+@media (max-width: 900px) {
+  .aie-step-connector {
+    display: none;
+  }
+}
+
 @media(max-width:768px){
   .site-logo-sticky{ top: 84px; right: 12px; }
   .site-logo-image{ width: 70px; }
@@ -708,10 +718,9 @@ function StepCard({ s, i, isLast }: { s: StepDef; i: number; isLast: boolean }) 
       style={{ position: "relative", flex: "1 1 230px" }}>
       {/* Connector line to next step (desktop only) */}
       {!isLast && (
-        <div style={{
+        <div className="aie-step-connector" style={{
           position: "absolute", top: 24, left: "calc(50% + 34px)", right: "calc(-50% + 34px)",
           height: 1, background: `linear-gradient(90deg,${s.col}55,rgba(255,255,255,0.08))`,
-          display: window.innerWidth > 900 ? "block" : "none",
         }} />
       )}
       <div style={{
