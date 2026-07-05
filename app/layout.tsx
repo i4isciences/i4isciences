@@ -5,6 +5,7 @@ import "./globals.css";
 
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import GoToTopButton from "@/components/GoToTopButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +37,12 @@ export default function RootLayout({
       >
         <Navbar />
 
-        <main className="overflow-x-hidden">
+        <main id="page-top" className="overflow-x-hidden">
           {children}
         </main>
 
+        <div id="page-end-sentinel" aria-hidden="true" className="h-px" />
+        <GoToTopButton />
         <Footer />
       </body>
     </html>

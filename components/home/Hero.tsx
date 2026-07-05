@@ -278,7 +278,7 @@ export default function Hero() {
           padding: "0 clamp(16px,4vw,48px)",
           /* Push up slightly to account for ticker height at bottom */
           marginBottom: "clamp(64px,10vw,88px)",
-          transform: "translateY(-5vh)",
+          transform: "translateY(-1vh)",
         }}
       >
         {/* Headline — EXACTLY 2 LINES, sized to match reference perfectly */}

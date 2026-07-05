@@ -233,7 +233,7 @@ const CARDS = [
   {
     id: "LABTRICKS",
     badge: "LT",
-    logo: "/images/labtrickslogo.png",
+    logo: "/images/labtrickslogo.jpg",
     accentColor: "#F5A623",
     accentLight: "rgba(245,166,35,0.14)",
     imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80&fit=crop",
@@ -453,21 +453,38 @@ function EcoCard({ card, index, forceSide }: { card: typeof CARDS[0] & { logo: s
           </span>
         </motion.div>
 
-        {/* Eyebrow / service name */}
-        <div style={{
-          position: "absolute",
-          bottom: 16,
-          left: 18,
-          fontFamily: "'Geist', sans-serif",
-          fontSize: "0.72rem",
-          fontWeight: 800,
-          color: "#7a1224",
-          letterSpacing: "0.06em",
-          textTransform: "uppercase",
-          textShadow: "0 1px 3px rgba(255,255,255,0.35)",
-        }}>
-          {card.eyebrow}
-        </div>
+{/* Service Name */}
+<div
+  style={{
+    position: "absolute",
+    bottom: 16,
+    left: 12,
+
+    display: "inline-flex",
+    alignItems: "center",
+
+    padding: "8px 14px",
+    borderRadius: "999px",
+
+    background: "rgba(255,255,255,0.18)",
+    backdropFilter: "blur(14px)",
+    WebkitBackdropFilter: "blur(14px)",
+
+    border: "1px solid rgba(255,255,255,0.35)",
+    boxShadow:
+      "0 8px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.35)",
+
+    fontFamily: "'Geist', sans-serif",
+    fontSize: "0.64rem",
+    fontWeight: 800,
+    color: "#7A1224",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    whiteSpace: "nowrap",
+  }}
+>
+  {card.eyebrow}
+</div>
       </div>
 
       {/* ── BODY ── */}
@@ -510,7 +527,7 @@ function EcoCard({ card, index, forceSide }: { card: typeof CARDS[0] & { logo: s
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "10px",
+            padding: "4px",
             overflow: "hidden",
             flexShrink: 0,
           }}>

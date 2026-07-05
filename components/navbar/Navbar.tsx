@@ -60,6 +60,33 @@ export default function Navbar() {
   const chevronColor = isGlass ? "rgba(10,46,138,0.6)" : "rgba(255,255,255,0.7)";
   const logoSrc = isGlass ? "/images/logo-white.svg" : "/images/favicon.png";
 
+  const models = [
+    {
+      href: "/models/teach-the-teacher",
+      label: "Teach The Teacher",
+      sub: "Educator Empowerment Platform",
+      logo: "/images/TTTlogodark.jpg",
+    },
+    {
+      href: "/models/onecent-tutors",
+      label: "OneCent Tutors",
+      sub: "Global Tutoring Network",
+      logo: "/images/octlogo-removebg-preview.png",
+    },
+    {
+      href: "/models/ipst",
+      label: "Immigrant Parent Support Training",
+      sub: "Support for Immigrant Parents",
+      logo: "/images/Ipstdarklogo.jpg",
+    },
+    {
+      href: "/models/labtrick",
+      label: "Lab Tricks",
+      sub: "Science Experiments for Students",
+      logo: "/images/LabTrickslogodark.jpg",
+    },
+  ];
+
   return (
     <header
       style={{
@@ -220,53 +247,84 @@ export default function Navbar() {
                 zIndex: 100,
               }}
             >
-              {[
-                { href: "/models/teach-the-teacher", label: "Teach The Teacher", sub: "Educator Empowerment Platform" },
-                { href: "/models/onecent-tutors", label: "OneCent Tutors", sub: "Global Tutoring Network" },
-                { href: "/models/ipst", label: "Immigrant Parent Support Training", sub: "Support for Immigrant Parents" },
-                { href: "/models/labtrick", label: "Lab Tricks", sub: "Science Experiments for Students" },
-              ].map(item => (
+              {models.map((item) => (
                 <Link
-                  key={item.href}
-                  href={item.href}
+                key={item.href}
+                href={item.href}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  padding: "12px 14px",
+                  borderRadius: 12,
+                  textDecoration: "none",
+                  transition: "all .2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.07)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                }}
+              >
+                {/* Logo */}
+                <div
+                  style={{
+                    width: 52,
+                    height: 52,
+                    borderRadius: 14,
+                    background: "rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(255,255,255,0.10)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <Image
+                    src={item.logo}
+                    alt={item.label}
+                    width={42}
+                    height={42}
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              
+                {/* Text */}
+                <div
                   style={{
                     display: "flex",
                     flexDirection: "column",
                     gap: 2,
-                    padding: "12px 14px",
-                    borderRadius: 10,
-                    textDecoration: "none",
-                    transition: "background 0.18s",
+                    flex: 1,
                   }}
-                  onMouseEnter={e =>
-                    ((e.currentTarget as HTMLAnchorElement).style.background =
-                      "rgba(255,255,255,0.07)")
-                  }
-                  onMouseLeave={e =>
-                    ((e.currentTarget as HTMLAnchorElement).style.background =
-                      "transparent")
-                  }
                 >
                   <span
                     style={{
                       fontFamily: "'Geist','Geist Variable',sans-serif",
                       fontWeight: 700,
-                      fontSize: "0.85rem",
-                      color: "#ffffff",
+                      fontSize: "0.86rem",
+                      color: "#fff",
                     }}
                   >
                     {item.label}
                   </span>
+              
                   <span
                     style={{
                       fontFamily: "'Geist','Geist Variable',sans-serif",
                       fontSize: "0.72rem",
-                      color: "rgba(255,255,255,0.50)",
+                      color: "rgba(255,255,255,0.55)",
                     }}
                   >
                     {item.sub}
                   </span>
-                </Link>
+                </div>
+              </Link>
               ))}
             </div>
           </div>
@@ -317,31 +375,33 @@ export default function Navbar() {
         {/* ── RIGHT SIDE ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {[
-            {
-              label: "🇮🇳 India",
-              href: "https://india.yourdomain.com",
-              bg: "rgba(19, 136, 8, 0.15)",
-              border: "rgba(19, 136, 8, 0.35)",
-              hover: "rgba(19, 136, 8, 0.22)",
-            },
-            {
-              label: "🇺🇸 USA",
-              href: "https://usa.yourdomain.com",
-              bg: "rgba(178, 34, 52, 0.15)",
-              border: "rgba(178, 34, 52, 0.35)",
-              hover: "rgba(178, 34, 52, 0.22)",
-            },
-            {
-              label: "🇨🇦 Canada",
-              href: "https://canada.yourdomain.com",
-              bg: "rgba(91, 75, 219, 0.15)",
-              border: "rgba(91, 75, 219, 0.35)",
-              hover: "rgba(91, 75, 219, 0.22)",
-            },
-          ].map((c) => (
+  {
+    label: "🇮🇳 India",
+    href: "https://i4isciences.in/",
+    bg: "rgba(19, 136, 8, 0.15)",
+    border: "rgba(19, 136, 8, 0.35)",
+    hover: "rgba(19, 136, 8, 0.22)",
+  },
+  {
+    label: "🇺🇸 USA",
+    href: "https://i4isciences.us/",
+    bg: "rgba(178, 34, 52, 0.15)",
+    border: "rgba(178, 34, 52, 0.35)",
+    hover: "rgba(178, 34, 52, 0.22)",
+  },
+  {
+    label: "🇨🇦 Canada",
+    href: "https://i4isciences.ca/",
+    bg: "rgba(91, 75, 219, 0.15)",
+    border: "rgba(91, 75, 219, 0.35)",
+    hover: "rgba(91, 75, 219, 0.22)",
+  },
+].map((c) => (
             <Link
               key={c.label}
               href={c.href}
+              target="_blank"
+  rel="noopener noreferrer"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -403,33 +463,35 @@ export default function Navbar() {
           </button>
 
           {/* Book Demo — gold, stays the same in both modes */}
-          <button
-            style={{
-              padding: "8px 22px",
-              borderRadius: 999,
-              background: "#F5A623",
-              border: "none",
-              fontFamily: "'Geist','Geist Variable',sans-serif",
-              fontSize: "0.82rem",
-              fontWeight: 700,
-              color: "#0B2A83",
-              cursor: "pointer",
-              boxShadow: "0 4px 20px rgba(245,166,35,0.35)",
-              transition: "transform 0.2s, box-shadow 0.2s",
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow =
-                "0 6px 28px rgba(245,166,35,0.50)";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow =
-                "0 4px 20px rgba(245,166,35,0.35)";
-            }}
-          >
-            Book Demo
-          </button>
+          <Link href="/contact">
+  <button
+    style={{
+      padding: "8px 22px",
+      borderRadius: 999,
+      background: "#F5A623",
+      border: "none",
+      fontFamily: "'Geist','Geist Variable',sans-serif",
+      fontSize: "0.82rem",
+      fontWeight: 700,
+      color: "#0B2A83",
+      cursor: "pointer",
+      boxShadow: "0 4px 20px rgba(245,166,35,0.35)",
+      transition: "transform 0.2s, box-shadow 0.2s",
+    }}
+    onMouseEnter={e => {
+      e.currentTarget.style.transform = "translateY(-1px)";
+      e.currentTarget.style.boxShadow =
+        "0 6px 28px rgba(245,166,35,0.50)";
+    }}
+    onMouseLeave={e => {
+      e.currentTarget.style.transform = "translateY(0)";
+      e.currentTarget.style.boxShadow =
+        "0 4px 20px rgba(245,166,35,0.35)";
+    }}
+  >
+    Book Demo
+  </button>
+</Link>
         </div>
       </div>
     </header>

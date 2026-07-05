@@ -33,6 +33,26 @@ const ChevronDownIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+const MailIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="5" width="18" height="14" rx="2.5" />
+    <path d="M3.5 6.5L12 13L20.5 6.5" />
+  </svg>
+);
+
+const PhoneIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M5.5 4h3.2l1.6 4.4-2.1 1.6a11.5 11.5 0 005.8 5.8l1.6-2.1L20 15.3v3.2a1.5 1.5 0 01-1.6 1.5A15.5 15.5 0 014 5.6 1.5 1.5 0 015.5 4z" />
+  </svg>
+);
+
+const WhatsAppIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3.5a8.5 8.5 0 00-7.3 12.8L3.5 20.5l4.4-1.2A8.5 8.5 0 1012 3.5z" />
+    <path d="M8.7 9.3c0-.5.4-1 .9-1h.6c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.7.7a5.8 5.8 0 002.8 2.8l.7-.7c.2-.2.4-.2.6-.1l1.6.7c.2.1.3.3.3.5v.6c0 .5-.4.9-1 .9-3.6 0-6.9-3.3-6.9-6.9z" />
+  </svg>
+);
+
 // ─────────────────────────────────────────────
 // FLOATING DOODLE BACKGROUND ELEMENTS
 // ─────────────────────────────────────────────
@@ -474,7 +494,80 @@ export default function ContactPage() {
           SECTION 2 — FORM
       ═══════════════════════════════════════════ */}
       <section className="form-section" id="contact-form">
-        <FadeUp>
+        <div className="form-grid">
+          {/* LEFT — CONTACT CARD */}
+          <FadeUp className="contact-card-wrap">
+            <div className="contact-card">
+              <div className="contact-card-decor" aria-hidden="true">
+                <FloatingGlobe style={{ position: "absolute", top: "-14px", right: "-14px", opacity: 0.08 }} />
+                <FloatingStar style={{ position: "absolute", bottom: "120px", left: "-8px", opacity: 0.08 }} />
+              </div>
+
+              <div className="contact-card-top">
+                <span className="contact-eyebrow">Reach Us Directly</span>
+                <h3 className="contact-title">We&apos;re Just A Message Away</h3>
+                <p className="contact-desc">
+                  Prefer to skip the form? Our team is reachable directly by
+                  email, phone, or WhatsApp, wherever you&apos;re writing to us from.
+                </p>
+              </div>
+
+              <div className="contact-list">
+                <div className="contact-group">
+                  <span className="contact-group-label">
+                    <MailIcon size={14} /> Email
+                  </span>
+                  <a href="mailto:manager@i4isciences.in" className="contact-row">
+                    <span className="contact-row-value">manager@i4isciences.in</span>
+                    <span className="contact-row-tag">General</span>
+                  </a>
+                  <a href="mailto:ranjit@i4isciences.com" className="contact-row">
+                    <span className="contact-row-value">ranjit@i4isciences.com</span>
+                    <span className="contact-row-tag">Partnerships</span>
+                  </a>
+                </div>
+
+                <div className="contact-group">
+                  <span className="contact-group-label">
+                    <PhoneIcon size={14} /> Phone
+                  </span>
+                  <a href="tel:+919414452953" className="contact-row">
+                    <span className="contact-row-value">+91 94144 52953</span>
+                    <span className="contact-row-tag">India</span>
+                  </a>
+                  <a href="tel:+13145363631" className="contact-row">
+                    <span className="contact-row-value">+1 314-536-3631</span>
+                    <span className="contact-row-tag">USA</span>
+                  </a>
+                </div>
+
+                <div className="contact-group">
+                  <span className="contact-group-label">
+                    <WhatsAppIcon size={14} /> WhatsApp
+                  </span>
+                  <a
+                    href="https://wa.me/919414452953"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-row"
+                  >
+                    <span className="contact-row-value">+91 94144 52953</span>
+                    <span className="contact-row-tag">Chat Now</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="contact-card-footer">
+                <div className="contact-footer-divider" />
+                <p className="contact-footer-note">
+                  Our team typically responds within 48 hours.
+                </p>
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* RIGHT — FORM */}
+          <FadeUp delay={0.1} className="form-card-wrap">
           <motion.div
             className="form-card"
             whileHover={{ translateY: -8 }}
@@ -643,7 +736,8 @@ export default function ContactPage() {
               )}
             </AnimatePresence>
           </motion.div>
-        </FadeUp>
+          </FadeUp>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════
@@ -876,18 +970,169 @@ export default function ContactPage() {
           padding: 100px 24px;
         }
 
-        .form-card {
-          max-width: 900px;
+        .form-grid {
+          max-width: 1220px;
           margin: 0 auto;
+          display: grid;
+          grid-template-columns: 0.82fr 1.18fr;
+          gap: 32px;
+          align-items: stretch;
+        }
+
+        .contact-card-wrap,
+        .form-card-wrap {
+          display: flex;
+        }
+
+        .form-card {
+          flex: 1;
+          width: 100%;
           background: white;
           border-radius: var(--radius-2xl);
-          padding: 64px;
+          padding: 56px;
           box-shadow:
             0 2px 4px rgba(13, 27, 62, 0.03),
             0 8px 24px rgba(13, 27, 62, 0.06),
             0 24px 64px rgba(13, 27, 62, 0.06);
           cursor: default;
           will-change: transform;
+        }
+
+        /* ── CONTACT CARD ── */
+        .contact-card {
+          flex: 1;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background: var(--blue);
+          border-radius: var(--radius-2xl);
+          padding: 52px 44px;
+          color: white;
+          position: relative;
+          overflow: hidden;
+          box-shadow:
+            0 2px 4px rgba(13, 27, 62, 0.08),
+            0 8px 24px rgba(13, 27, 62, 0.14),
+            0 24px 64px rgba(13, 27, 62, 0.18);
+        }
+
+        .contact-card-decor {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .contact-card-top {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .contact-eyebrow {
+          font-family: var(--font);
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--gold);
+        }
+
+        .contact-title {
+          font-family: var(--font);
+          font-size: 27px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          line-height: 1.28;
+          color: white;
+        }
+
+        .contact-desc {
+          font-family: var(--font);
+          font-size: 15px;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.72);
+          max-width: 340px;
+        }
+
+        .contact-list {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+          position: relative;
+          z-index: 1;
+          margin-top: 32px;
+        }
+
+        .contact-group {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .contact-group-label {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: var(--font);
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 6px;
+        }
+
+        .contact-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 11px 14px;
+          margin: 0 -14px;
+          border-radius: 12px;
+          text-decoration: none;
+          transition: background 0.18s ease, transform 0.18s ease;
+        }
+
+        .contact-row:hover {
+          background: rgba(255, 255, 255, 0.08);
+          transform: translateX(2px);
+        }
+
+        .contact-row-value {
+          font-family: var(--font);
+          font-size: 15px;
+          font-weight: 600;
+          color: white;
+        }
+
+        .contact-row-tag {
+          font-family: var(--font);
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--gold);
+          white-space: nowrap;
+        }
+
+        .contact-card-footer {
+          position: relative;
+          z-index: 1;
+          margin-top: 36px;
+        }
+
+        .contact-footer-divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.14);
+          margin-bottom: 16px;
+        }
+
+        .contact-footer-note {
+          font-family: var(--font);
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.55);
         }
 
         .form-title {
@@ -1228,7 +1473,13 @@ export default function ContactPage() {
             font-size: 36px;
           }
 
-          .form-card {
+          .form-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+
+          .form-card,
+          .contact-card {
             padding: 40px 28px;
           }
 

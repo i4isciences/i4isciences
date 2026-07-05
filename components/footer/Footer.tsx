@@ -6,7 +6,7 @@ import { ArrowUpRight, Smile, Sparkles, Languages, Compass } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0F1922] text-[#E2E8F0] font-sans antialiased selection:bg-amber-400 selection:text-slate-900 border-t border-slate-800">
+    <footer id="site-footer" className="relative bg-[#0F1922] text-[#E2E8F0] font-sans antialiased selection:bg-amber-400 selection:text-slate-900 border-t border-slate-800">
       
       {/* HUMAN DESIGN ELEMENTS (Hand-drawn feel, crisp vectors instead of glowing tech meshes) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-20">

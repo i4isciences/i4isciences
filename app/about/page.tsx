@@ -344,25 +344,6 @@ const TEAM = [
     hue: "#DCEBFF",
     textColor: "#0F2D7A",
   },
-
-  {
-    name: "Victoria Gens",
-    role: "Office Administrator",
-    line: "Keeps people, processes, and daily operations running with care, precision, and calm.",
-    initials: "VG",
-    hue: "#E6F7F1",
-    textColor: "#065F46",
-  },
-  
-  {
-    name: "Pankaj Jain",
-    role: "Advisor · AI Olympiad",
-    line: "AI researcher and educator with expertise in machine learning and intelligent systems, guiding the AI Olympiad initiative.",
-    initials: "PJ",
-    hue: "#F3E8FF",
-    textColor: "#6B21A8",
-  },
-
   {
     name: "Jerany Jackson",
     role: "Senior Advisor · USA",
@@ -371,7 +352,15 @@ const TEAM = [
     hue: "#FFF4D8",
     textColor: "#8A5A00",
   },
-
+ 
+  {
+    name: "Pankaj Jain",
+    role: "Advisor · AI Olympiad",
+    line: "AI researcher and educator with expertise in machine learning and intelligent systems, guiding the AI Olympiad initiative.",
+    initials: "PJ",
+    hue: "#F3E8FF",
+    textColor: "#6B21A8",
+  },
   {
     name: "Sanjay Mishra",
     role: "Chief Operating Officer · India",
@@ -379,6 +368,15 @@ const TEAM = [
     initials: "SM",
     hue: "#FDECEC",
     textColor: "#991B1B",
+  },
+
+  {
+    name: "Victoria Gens",
+    role: "Office Administrator",
+    line: "Keeps people, processes, and daily operations running with care, precision, and calm.",
+    initials: "VG",
+    hue: "#E6F7F1",
+    textColor: "#065F46",
   },
 
   {
@@ -407,16 +405,14 @@ const TEAM = [
     hue: "#F0FDF4",
     textColor: "#166534",
   },
-
   {
     name: "Krisha Patel",
-    role: "Biology Teacher",
-    line: "Encourages scientific curiosity by connecting biology with everyday life and discovery.",
+    role: "STEM Teacher (Algebra & Biology) · USA",
+    line: "Empowers students in STEM subjects, including Algebra and Biology, with practical, inquiry-based teaching that builds confidence and curiosity.",
     initials: "KP",
     hue: "#ECFDF5",
     textColor: "#047857",
   },
-
   {
     name: "Sudha Chauhan",
     role: "Social Outreach",

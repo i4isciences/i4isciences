@@ -62,37 +62,36 @@ const GeistStyle = () => (
     .lt-scope .fade-up.visible{opacity:1;transform:none;}
     .lt-scope .d1{transition-delay:.08s;} .lt-scope .d2{transition-delay:.18s;} .lt-scope .d3{transition-delay:.28s;} .lt-scope .d4{transition-delay:.38s;} .lt-scope .d5{transition-delay:.48s;}
 
-    /* ═══════════ STICKY LOGO ═══════════ */
-    /* Moved down (top:96px) so it clears the site Navbar instead of colliding with it */
     .lt-scope .site-logo-sticky{
       position:fixed;
       top:96px;
       right:24px;
-      z-index:40;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-      border:1px solid #E2E8F0;
-      border-radius:999px;
-      padding:8px 18px 8px 8px;
-      box-shadow:0 10px 30px rgba(10,46,138,.14);
-      transition:box-shadow .25s,transform .25s;
+      z-index:999;
+      background:transparent;
+      border:none;
+      padding:0;
+      transition:transform .25s ease;
     }
-    .lt-scope .site-logo-sticky:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(10,46,138,.2);}
-    .lt-scope .site-logo-icon{
-      width:34px;height:34px;border-radius:10px;flex-shrink:0;
-      background:linear-gradient(135deg,var(--navy),#1544b8);
-      display:flex;align-items:center;justify-content:center;
+    
+    .lt-scope .site-logo-image{
+      width:90px;
+      height:auto;
+      display:block;
     }
-    .lt-scope .site-logo-text{font-size:15px;font-weight:900;color:var(--navy);letter-spacing:-.02em;white-space:nowrap;}
-    .lt-scope .site-logo-text span{color:var(--gold);}
-    @media(max-width:600px){
-      .lt-scope .site-logo-sticky{top:84px;right:12px;padding:6px 14px 6px 6px;}
-      .lt-scope .site-logo-icon{width:28px;height:28px;}
-      .lt-scope .site-logo-text{font-size:13px;}
+    
+    .lt-scope .site-logo-sticky:hover{
+      transform:scale(1.05);
+    }
+    
+    @media(max-width:768px){
+      .lt-scope .site-logo-sticky{
+        top:84px;
+        right:12px;
+      }
+    
+      .lt-scope .site-logo-image{
+        width:70px;
+      }
     }
 
     /* ═══════════ HERO ═══════════ */
@@ -1198,10 +1197,11 @@ const HeroDoodles = () => (
 ───────────────────────────────────────────── */
 const StickyLogo = () => (
   <div className="site-logo-sticky" aria-label="LabTricks">
-    <div className="site-logo-icon">
-      <Icon name="flask-conical" size={18} color="#fff" strokeWidth={1.8}/>
-    </div>
-    <div className="site-logo-text">Lab<span>Tricks</span></div>
+    <img
+      src="/images/labtrickslogo-removebg-preview.png"
+      alt="LabTricks"
+      className="site-logo-image"
+    />
   </div>
 );
 
