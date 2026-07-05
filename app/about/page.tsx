@@ -414,10 +414,26 @@ const TEAM = [
     textColor: "#047857",
   },
   {
+    name: "Isha",
+    role: "Biology Teacher",
+    line: "Inspires curiosity through hands-on biology education, helping students connect scientific concepts with the world around them.",
+    initials: "IS",
+    hue: "#ECFDF5",
+    textColor: "#047857",
+  },
+  {
     name: "Sudha Chauhan",
     role: "Social Outreach",
     line: "Builds meaningful connections with communities to make education more inclusive and accessible.",
     initials: "SC",
+    hue: "#FFF7ED",
+    textColor: "#C2410C",
+  },
+  {
+    name: "Rishabh Birla",
+    role: "CA & Financial Advisor",
+    line: "Leads financial planning and advisory to support responsible growth, compliance, and long-term success.",
+    initials: "RB",
     hue: "#FFF7ED",
     textColor: "#C2410C",
   },
@@ -899,8 +915,8 @@ const globalInView = useInView(globalRef, {
           transition={{ duration: 0.55, delay: 0.2 }}
           className="flex items-center justify-center gap-4 mt-12 flex-wrap"
         >
-          <a
-            href="#platform"
+          <Link
+            href="/#ecosystem"
             className="inline-flex items-center gap-2 rounded-full font-bold transition-all duration-200 hover:-translate-y-0.5"
             style={{
               background: "#0F2D7A",
@@ -912,9 +928,9 @@ const globalInView = useInView(globalRef, {
           >
             See how we solve it
             <ArrowRight size={14} />
-          </a>
+          </Link>
           <a
-            href="#about"
+            href="#founder"
             className="inline-flex items-center gap-2 rounded-full font-bold border transition-all duration-200 hover:-translate-y-0.5"
             style={{
               background: "rgba(255,255,255,0.75)",
@@ -1128,7 +1144,8 @@ const globalInView = useInView(globalRef, {
         {/* ════════════════════════════════════════
             FOUNDER STORY
         ════════════════════════════════════════ */}
-        <SectionRule label="Founder" />
+        <section id="founder">
+          <SectionRule label="Founder" />
 
         {/*
           Two-column: left = all text, right = photo.
@@ -1331,6 +1348,7 @@ const globalInView = useInView(globalRef, {
           </motion.div>
 
         </div>
+        </section>
 
         {/* ════════════════════════════════════════
             TEAM DIVIDER
@@ -1384,7 +1402,7 @@ const globalInView = useInView(globalRef, {
         {/* ════════════════════════════════════════
             TEAM MEMBERS
         ════════════════════════════════════════ */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
           {TEAM.map((member, i) => (
             <motion.div
               key={member.name}

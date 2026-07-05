@@ -105,7 +105,7 @@ export default function FinalCTASection() {
           
           {/* PRIMARY BUTTON: SCHEDULE DEMO */}
           <a
-            href="#schedule-demo"
+            href="/contact"
             className="
               group flex w-full items-center justify-center gap-3 rounded-full bg-[#0A2E8A] 
               px-10 py-5 text-lg font-bold text-white shadow-xl shadow-[#0A2E8A]/15
@@ -119,7 +119,7 @@ export default function FinalCTASection() {
 
           {/* SECONDARY BUTTON: BECOME PARTNER */}
           <a
-            href="#become-partner"
+            href="/contact"
             className="
               group flex w-full items-center justify-center gap-3 rounded-full border border-[#DDE8FF] bg-white 
               px-10 py-5 text-lg font-bold text-[#10204E] shadow-sm
@@ -132,7 +132,7 @@ export default function FinalCTASection() {
 
           {/* TERTIARY BUTTON: EXPLORE MODELS */}
           <a
-            href="#explore-models"
+            href="/teach-the-teacher"
             className="
               group flex w-full items-center justify-center gap-3 rounded-full border border-transparent bg-[#EEF4FF] 
               px-10 py-5 text-lg font-bold text-[#0A2E8A]

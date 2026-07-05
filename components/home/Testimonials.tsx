@@ -339,7 +339,7 @@ export default function TestimonialsSection() {
                 />
               </a>
               <a
-                href="#"
+                href="/contact"
                 className="rounded-full border border-white/20 bg-white/10 px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition-all hover:scale-[1.03] hover:bg-white/20 active:scale-95"
               >
                 Book Demo

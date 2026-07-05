@@ -346,22 +346,46 @@ const PathwayIllustration = () => (
 // ─────────────────────────────────────────────
 
 const whoOptions = [
+  "Student",
+  "Teacher",
+  "Parent",
   "School",
   "University",
-  "Parent",
-  "Teacher",
-  "NGO",
-  "Government",
+  "Institute",
   "Enterprise",
+  "Government",
+  "NGO",
 ];
 
 const interestOptions = [
-  "TTT",
-  "OCT",
-  "IPST",
-  "Partnership",
-  "Demo",
-  "AI Ecosystem",
+  {
+    name: "TTT",
+    logo: "/images/tttlogo-removebg-preview.png",
+  },
+  {
+    name: "OCT",
+    logo: "/images/octlogo-removebg-preview.png",
+  },
+  {
+    name: "IPST",
+    logo: "/images/ipstlogo-removebg-preview.png",
+  },
+  {
+    name: "LabTricks",
+    logo: "/images/labtrickslogo-removebg-preview.png",
+  },
+  {
+    name: "AI Ecosystem",
+    logo: "/images/ailogo-removebg-preview.png",
+  },
+  {
+    name: "Partnership",
+    logo: null,
+  },
+  {
+    name: "Demo",
+    logo: null,
+  },
 ];
 
 // ─────────────────────────────────────────────
@@ -423,9 +447,44 @@ export default function ContactPage() {
 
   const handleSubmit = async () => {
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1400));
+  
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+  
+        headers: {
+          "Content-Type": "application/json",
+        },
+  
+        body: JSON.stringify({
+          ...formData,
+          who: selectedWho,
+          interests: selectedInterests,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        setSubmitted(true);
+  
+        setFormData({
+          name: "",
+          email: "",
+          organization: "",
+          message: "",
+        });
+  
+        setSelectedWho([]);
+        setSelectedInterests([]);
+      } else {
+        alert("Unable to send your message.");
+      }
+    } catch (err) {
+      alert("Something went wrong.");
+    }
+  
     setSubmitting(false);
-    setSubmitted(true);
   };
 
   return (
@@ -521,18 +580,23 @@ export default function ContactPage() {
                     <span className="contact-row-value">manager@i4isciences.in</span>
                     <span className="contact-row-tag">General</span>
                   </a>
+                  <a href="mailto:ceo@i4isciences.ai" className="contact-row">
+                    <span className="contact-row-value">ceo@i4isciences.ai</span>
+                    <span className="contact-row-tag">AI Team</span>
+                  </a>
                   <a href="mailto:ranjit@i4isciences.com" className="contact-row">
                     <span className="contact-row-value">ranjit@i4isciences.com</span>
                     <span className="contact-row-tag">Partnerships</span>
                   </a>
+                  
                 </div>
 
                 <div className="contact-group">
                   <span className="contact-group-label">
                     <PhoneIcon size={14} /> Phone
                   </span>
-                  <a href="tel:+919414452953" className="contact-row">
-                    <span className="contact-row-value">+91 94144 52953</span>
+                  <a href="tel:+919414452952" className="contact-row">
+                    <span className="contact-row-value">+91 94144 52952</span>
                     <span className="contact-row-tag">India</span>
                   </a>
                   <a href="tel:+13145363631" className="contact-row">
@@ -546,12 +610,12 @@ export default function ContactPage() {
                     <WhatsAppIcon size={14} /> WhatsApp
                   </span>
                   <a
-                    href="https://wa.me/919414452953"
+                    href="https://wa.me/919414452952"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-row"
                   >
-                    <span className="contact-row-value">+91 94144 52953</span>
+                    <span className="contact-row-value">+91 94144 52952</span>
                     <span className="contact-row-tag">Chat Now</span>
                   </a>
                 </div>
@@ -631,23 +695,34 @@ export default function ContactPage() {
                       Interested in
                     </span>
                     <div className="chip-group">
-                      {interestOptions.map((opt) => (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() =>
-                            toggleChip(opt, selectedInterests, setSelectedInterests)
-                          }
-                          className={`chip chip-interest ${selectedInterests.includes(opt) ? "chip-active" : ""}`}
-                        >
-                          {selectedInterests.includes(opt) && (
-                            <span className="chip-check">
-                              <CheckIcon size={12} />
-                            </span>
-                          )}
-                          {opt}
-                        </button>
-                      ))}
+                    {interestOptions.map((item) => (
+  <button
+    key={item.name}
+    type="button"
+    onClick={() =>
+      toggleChip(item.name, selectedInterests, setSelectedInterests)
+    }
+    className={`chip chip-interest ${
+      selectedInterests.includes(item.name) ? "chip-active" : ""
+    }`}
+  >
+    {selectedInterests.includes(item.name) && (
+      <span className="chip-check">
+        <CheckIcon size={12} />
+      </span>
+    )}
+
+    {item.logo && (
+      <img
+        src={item.logo}
+        alt={item.name}
+        className="chip-logo"
+      />
+    )}
+
+    {item.name}
+  </button>
+))}
                     </div>
                   </div>
 
@@ -1202,6 +1277,22 @@ export default function ContactPage() {
           color: var(--text-secondary);
           cursor: pointer;
           transition: all 0.18s ease;
+        }
+        .chip-logo {
+          width: 26px;
+          height: 26px;
+          object-fit: contain;
+          flex-shrink: 0;
+          margin-right: 2px;
+          transition: transform .2s ease;
+        }
+        
+        .chip:hover .chip-logo {
+          transform: scale(1.08);
+        }
+        
+        .chip-active .chip-logo {
+          filter: brightness(0) invert(1);
         }
 
         .chip:hover {
