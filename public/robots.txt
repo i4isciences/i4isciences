@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Canonical site
-Host: https://i4isciences.com
+Host: https://www.i4isciences.com
 
 # Sitemap index (contains per-domain sitemaps)
 Sitemap: https://i4isciences.com/sitemap-index.xml

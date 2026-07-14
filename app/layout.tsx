@@ -18,30 +18,38 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "i4iSciences — AI for Education, Teacher Training & Learning",
-  description: "i4iSciences builds AI-powered education platforms, teacher training, and learning tools that expand access and improve outcomes for learners worldwide.",
+  metadataBase: new URL("https://www.i4isciences.com"),
+  title: {
+    default: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
+    template: "%s | i4iSciences",
+  },
+  description:
+    "i4iSciences builds AI-powered education platforms, teacher training, and learning tools that improve access, outcomes, and equity for learners worldwide.",
   icons: {
     icon: "/images/favicon.png",
   },
   keywords: [
     "i4iSciences",
-    "education technology",
-    "AI tutoring",
+    "AI education",
     "teacher training",
-    "online learning",
+    "AI tutoring",
+    "adaptive learning",
     "EdTech",
+    "STEM learning",
+    "immigrant education",
   ],
   openGraph: {
-    title: "i4iSciences — AI for Education, Teacher Training & Learning",
-    description: "AI-powered education platforms, teacher training, and learning tools that expand access and improve outcomes.",
-    url: "https://i4isciences.in",
+    title: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
+    description:
+      "AI-powered education platforms, teacher training, and learning tools that improve access, outcomes, and equity for learners worldwide.",
+    url: "https://www.i4isciences.com",
     siteName: "i4iSciences",
     images: [
       {
-        url: "https://i4isciences.in/images/og-default.png",
+        url: "https://www.i4isciences.com/images/og-default.svg",
         width: 1200,
         height: 630,
-        alt: "i4iSciences — AI for education",
+        alt: "i4iSciences AI education and teacher training platform",
       },
     ],
     locale: "en_US",
@@ -49,9 +57,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "i4iSciences — AI for Education",
-    description: "AI-powered education platforms, teacher training, and learning tools.",
-    images: ["https://i4isciences.in/images/og-default.png"],
+    title: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
+    description:
+      "AI-powered education platforms, teacher training, and learning tools that improve access, outcomes, and equity for learners worldwide.",
+    images: ["https://www.i4isciences.com/images/og-default.svg"],
   },
   robots: {
     index: true,
@@ -64,7 +73,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  authors: [{ name: "i4iSciences Team", url: "https://i4isciences.in" }],
+  authors: [{ name: "i4iSciences Team", url: "https://www.i4isciences.com" }],
+  alternates: {
+    canonical: "https://www.i4isciences.com",
+  },
 };
 
 export default function RootLayout({
