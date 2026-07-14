@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Canonical site
+Host: https://i4isciences.com
+
+# Sitemap index (contains per-domain sitemaps)
+Sitemap: https://i4isciences.com/sitemap-index.xml
+
+# Also reference per-domain sitemaps
+Sitemap: https://i4isciences.com/sitemap-com.xml
+Sitemap: https://i4isciences.com/sitemap-in.xml
+Sitemap: https://i4isciences.com/sitemap-ai.xml
+Sitemap: https://i4isciences.com/sitemap-us.xml
+Sitemap: https://i4isciences.com/sitemap-ca.xml
+
+# Crawl-delay can be added if needed for server load
+# Crawl-delay: 10
