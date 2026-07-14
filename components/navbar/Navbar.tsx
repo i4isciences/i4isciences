@@ -58,7 +58,7 @@ export default function Navbar() {
   const textColor = isGlass ? "#0A2E8A" : "#ffffff";
   const textColorMuted = isGlass ? "rgba(10,46,138,0.75)" : "rgba(255,255,255,0.88)";
   const chevronColor = isGlass ? "rgba(10,46,138,0.6)" : "rgba(255,255,255,0.7)";
-  const logoSrc = isGlass ? "/images/logo-white.svg" : "/images/favicon.png";
+  const logoSrc = isGlass ? "/images/logo.svg" : "/images/favicon.png";
 
   const models = [
     {
