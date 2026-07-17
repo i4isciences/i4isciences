@@ -40,11 +40,11 @@ export default function Footer() {
   />
 
   <span className="text-3xl font-bold tracking-tight text-[#ffffff]">
-    i4i Sciences
+    i4i Sciences LLC
   </span>
 
   <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
-    Est. 2026
+    Est. 2022
   </span>
 </div>
               <h3 className="text-2xl md:text-3xl font-normal leading-tight text-slate-100 font-serif max-w-md">
