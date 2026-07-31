@@ -165,20 +165,20 @@ const C = {
    TUTOR CARD DATA
    ───────────────────────────────────────────── */
 const tutors = [
-  { name: "Priya Sharma", subject: "Mathematics", country: "India", flag: "🇮🇳", rating: 4.9, reviews: 312, experience: "8 years", languages: ["English", "Hindi"], price: "₹500/hr", avatar: "PS", color: "#E8F4FD" },
-  { name: "James Mitchell", subject: "IELTS / English", country: "UK", flag: "🇬🇧", rating: 4.8, reviews: 198, experience: "6 years", languages: ["English"], price: "$40/hr", avatar: "JM", color: "#FFF0E8" },
-  { name: "Aisha Al-Farsi", subject: "Science & Physics", country: "UAE", flag: "🇦🇪", rating: 5.0, reviews: 89, experience: "5 years", languages: ["English", "Arabic"], price: "$35/hr", avatar: "AA", color: "#F0F8EC" },
-  { name: "Wei Chen", subject: "Coding & Python", country: "Singapore", flag: "🇸🇬", rating: 4.9, reviews: 241, experience: "7 years", languages: ["English", "Mandarin"], price: "$50/hr", avatar: "WC", color: "#F4F0FF" },
-  { name: "Sarah Thompson", subject: "SAT Prep", country: "USA", flag: "🇺🇸", rating: 4.7, reviews: 156, experience: "4 years", languages: ["English"], price: "$55/hr", avatar: "ST", color: "#FFF8EC" },
-  { name: "Rahul Verma", subject: "Public Speaking", country: "India", flag: "🇮🇳", rating: 4.8, reviews: 203, experience: "9 years", languages: ["English", "Hindi"], price: "₹600/hr", avatar: "RV", color: "#F0F4FF" },
+  { name: "Priya Sharma", subject: "Mathematics", country: "India", flag: "🇮🇳", rating: 4.9, reviews: 312, experience: "3 years", languages: ["English", "Hindi"], price: "₹500/student", avatar: "PS", color: "#E8F4FD" },
+  { name: "James Mitchell", subject: "IELTS / English", country: "UK", flag: "🇬🇧", rating: 4.8, reviews: 198, experience: "2 years", languages: ["English"], price: "$40/student", avatar: "JM", color: "#FFF0E8" },
+  { name: "Jai Prakash", subject: "Science & Physics", country: "UAE", flag: "🇦🇪", rating: 5.0, reviews: 89, experience: "2 years", languages: ["English", "Arabic"], price: "$35/student", avatar: "AA", color: "#F0F8EC" },
+  { name: "Nathan Chen", subject: "Coding & Python", country: "Singapore", flag: "🇸🇬", rating: 4.9, reviews: 241, experience: "2 years", languages: ["English", "Mandarin"], price: "$50/student", avatar: "WC", color: "#F4F0FF" },
+  { name: "Nicole", subject: "SAT Prep", country: "USA", flag: "🇺🇸", rating: 4.7, reviews: 156, experience: "3 years", languages: ["English"], price: "$55/student", avatar: "ST", color: "#FFF8EC" },
+  { name: "Shiv", subject: "Public Speaking", country: "India", flag: "🇮🇳", rating: 4.8, reviews: 203, experience: "3 years", languages: ["English", "Hindi"], price: "₹600/student", avatar: "RV", color: "#F0F4FF" },
 ];
 
 const subjects = ["All", "Math", "Science", "Coding", "English", "IELTS", "SAT", "Olympiad", "Public Speaking", "Career Skills"];
 
 const successStories = [
   {
-    name: "Ananya Krishnan",
-    age: "17, Chennai",
+    name: "Rachel Rose",
+    age: "17, USA",
     before: "Struggling with Calculus, scoring 54% in school tests",
     after: "Scored 96% in boards, cleared JEE Advanced",
     tutor: "Priya Sharma",
@@ -188,8 +188,8 @@ const successStories = [
     color: "#FFF0E8",
   },
   {
-    name: "Mohammed Al-Rashid",
-    age: "24, Dubai",
+    name: "Pankaj's Daughter",
+    age: "24, USA",
     before: "IELTS Band 5.5, needed 7.0 for university",
     after: "Achieved Band 7.5, admitted to University of Edinburgh",
     tutor: "James Mitchell",
@@ -199,8 +199,8 @@ const successStories = [
     color: "#E8F4FD",
   },
   {
-    name: "Zara Okafor",
-    age: "16, Toronto",
+    name: "McKenzie Manes",
+    age: "16, USA",
     before: "No coding experience, feeling left behind",
     after: "Built her first app, accepted into CS summer camp",
     tutor: "Wei Chen",
@@ -461,7 +461,7 @@ const BookingMockup = () => {
           fontWeight: 800, fontSize: 22, color: C.navy, border: `3px solid ${C.gold}`,
         }}>PS</div>
         <div>
-          <div style={{ color: C.white, fontWeight: 800, fontSize: 20 }}>Priya Sharma</div>
+          <div style={{ color: C.white, fontWeight: 800, fontSize: 20 }}>Savvy</div>
           <div style={{ color: C.gold, fontSize: 13, marginTop: 4 }}>Mathematics · India</div>
         </div>
         <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
@@ -732,14 +732,7 @@ export default function OneCentTutorsPage() {
                 </button>
               </div>
 
-              {/* Stats */}
-              <div style={{ display: "flex", gap: 32, flexWrap: "wrap", paddingTop: 8 }}>
-                {[["50,000+", "Verified Tutors"], ["120+", "Subjects"], ["1M+", "Sessions Done"]].map(([val, lbl]) => (
-                  <div key={lbl}>
-                    <div style={{ fontSize: 22, fontWeight: 900, color: C.navy }}>{val}</div>
-                    <div style={{ fontSize: 12, color: C.textMuted }}>{lbl}</div>
-                  </div>
-                ))}
+              
               </div>
             </div>
 
@@ -1722,7 +1715,7 @@ Email us today to book your free session, and a member of our team will match yo
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 {[
                   { label: "Active Students", value: "24", icon: <UsersIcon size={18} />, bg: C.white },
-                  { label: "Countries Reached", value: "8", icon: <GlobeIcon size={18} />, bg: C.goldPale },
+                  { label: "Countries Reached", value: "3", icon: <GlobeIcon size={18} />, bg: C.goldPale },
                   { label: "Avg Rating", value: "4.9", icon: <StarIcon size={18} filled />, bg: C.blueTint },
                   { label: "Hours Taught", value: "340", icon: <ClockIcon size={18} />, bg: C.white },
                 ].map(({ label, value, icon, bg }) => (

@@ -1260,10 +1260,7 @@ export default function LabTricksPage() {
                   </div>
 
                 </div>
-                <div className="hero-tag-right">
-                  <b>500+</b>
-                  <small>Partner Labs</small>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -1354,11 +1351,8 @@ export default function LabTricksPage() {
           <div className="why-badge">
             <div className="why-badge-row">
               <Icon name="trending-up" size={16} color={_chem} strokeWidth={2}/>
-              <span style={{fontSize:12,fontWeight:800,color:_navy}}>Retention Rate</span>
+              <span style={{fontSize:12,fontWeight:800,color:_navy}}>Better Retention than textbook-only learning</span>
             </div>
-            <div style={{fontSize:22,fontWeight:900,color:_navy}}>4.7×</div>
-            <div className="why-badge-bar" style={{width:"100%",background:"linear-gradient(90deg,"+_chem+",#16a34a)"}}/>
-            <div style={{fontSize:10,color:_muted,marginTop:6}}>vs. textbook-only learning</div>
           </div>
         </div>
       </div>
@@ -1666,7 +1660,7 @@ export default function LabTricksPage() {
               </div>
               <div className="lab-cta-box fade-up d3">
                 <h3>Ready to make a difference?</h3>
-                <p>Join 500+ partner laboratories already transforming science education across India.</p>
+                <p>Join partner laboratories already transforming science education across India.</p>
                 <a href="#cta-final" className="btn-white" style={{display:"inline-block"}}>Partner Your Laboratory</a>
               </div>
             </div>
@@ -1760,10 +1754,10 @@ export default function LabTricksPage() {
           </div>
           <div className="impact-grid">
             {[
-              { target:10000,  suffix:"+", label:"Experiments Conducted" },
-              { target:500,    suffix:"+", label:"Partner Labs" },
-              { target:50,     suffix:"+", label:"Cities" },
-              { target:100000, suffix:"+", label:"Students Impacted" },
+              { target:500,  suffix:"+", label:"Experiments Conducted" },
+              { target:25,    suffix:"+", label:"Partner Labs" },
+              { target:7,     suffix:"+", label:"Cities" },
+              { target:1000, suffix:"+", label:"Students Impacted" },
               { target:95,     suffix:"%", label:"Completion Rate" },
             ].map((stat, i) => (
               <div className={`impact-card fade-up d${(i%5)+1}`} key={i}>

@@ -14,9 +14,9 @@ const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
    Scrolling ticker data
 ───────────────────────────────────────── */
 const TICKER_ITEMS = [
-  { icon: Users,          value: "10M+",       label: "Learners Impacted" },
-  { icon: GraduationCap,  value: "500K+",      label: "Certified Educators" },
-  { icon: Globe,          value: "120+",       label: "Countries Connected" },
+  { icon: Users,          value: "Global",       label: "Learners Impacted" },
+  { icon: GraduationCap,  value: "5",      label: "EduTech Models" },
+  { icon: Globe,          value: "3",          label: "Countries Connected" },
   { icon: Clock,          value: "24/7",       label: "Learning Support" },
   { icon: Star,           value: "AI-Powered", label: "Personalized Learning" },
 ];
@@ -319,7 +319,7 @@ export default function Hero() {
           }}
         >
           i4i Sciences connects certified teachers, students who need help now, and families starting over in a new country. One
-ecosystem, 120+ countries, real people backed by smart AI tools. Whoever you are, there is a place for you here, and a clear
+ecosystem, USA, Canada and India, real people backed by smart AI tools. Whoever you are, there is a place for you here, and a clear
 way to begin.
         </motion.p>
 

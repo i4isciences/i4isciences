@@ -270,10 +270,10 @@ export default function AboutHero() {
   ];
   
   const STATS = [
-    { value: "4", suffix: " Countries", label: "Active Markets" },
-    { value: "10M", suffix: "+", label: "Scalable Users" },
-    { value: "120", suffix: "+", label: "Languages Supported" },
-    { value: "500K", suffix: "+", label: "Concurrent Learners" },
+    { value: "3", suffix: " Countries", label: "Active Markets" },
+    { value: "1K", suffix: "+", label: "Scalable Users" },
+    { value: "4", suffix: "+", label: "Languages Supported" },
+    { value: "1K", suffix: "+", label: "Concurrent Learners" },
   ];
   
  

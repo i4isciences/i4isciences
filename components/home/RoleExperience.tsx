@@ -94,7 +94,7 @@ const rolesData: Record<Role, RoleData> = {
       }
     ],
     stats: [
-      { value: '10K+', label: 'Courses' },
+      { value: '10+', label: 'Courses' },
       { value: '95%', label: 'Success Rate' },
       { value: '24/7', label: 'Support' }
     ],
@@ -105,8 +105,8 @@ const rolesData: Record<Role, RoleData> = {
     dashboardPreview: {
       cards: [
         { title: 'Active Courses', value: '8', change: '+2 this week', icon: BookOpen, color: '#0a2e8a' },
-        { title: 'Hours Learned', value: '124', change: '+12 this week', icon: Zap, color: '#f5a623' },
-        { title: 'Achievements', value: '23', change: '+3 new', icon: Trophy, color: '#bfe3ff' }
+        { title: 'Hours Learned', value: '74', change: '+12 this week', icon: Zap, color: '#f5a623' },
+        { title: 'Achievements', value: '7', change: '+3 new', icon: Trophy, color: '#bfe3ff' }
       ],
       charts: { type: 'bar', data: [65, 75, 82, 88, 92, 95] }
     }
@@ -142,9 +142,9 @@ const rolesData: Record<Role, RoleData> = {
       }
     ],
     stats: [
-      { value: '$5K+', label: 'Avg Monthly' },
+      { value: '$2K+', label: 'Avg Monthly' },
       { value: '4.9/5', label: 'Tutor Rating' },
-      { value: '50+', label: 'Students' }
+      { value: '25+', label: 'Students' }
     ],
     cta: {
       primary: 'Become a Tutor',
@@ -153,8 +153,8 @@ const rolesData: Record<Role, RoleData> = {
     dashboardPreview: {
       cards: [
         { title: 'Active Students', value: '47', change: '+5 this month', icon: Users, color: '#f5a623' },
-        { title: 'This Month', value: '$4,820', change: '+18% growth', icon: DollarSign, color: '#0a2e8a' },
-        { title: 'Sessions', value: '156', change: '+12 scheduled', icon: Video, color: '#bfe3ff' }
+        { title: 'This Month', value: '$1,800', change: '+18% growth', icon: DollarSign, color: '#0a2e8a' },
+        { title: 'Sessions', value: '60', change: '+12 scheduled', icon: Video, color: '#bfe3ff' }
       ],
       charts: { type: 'line', data: [3200, 3800, 4100, 4400, 4600, 4820] }
     }
@@ -248,8 +248,8 @@ const rolesData: Record<Role, RoleData> = {
     },
     dashboardPreview: {
       cards: [
-        { title: 'Total Students', value: '2,450', change: '+234 this year', icon: GraduationCap, color: '#10204e' },
-        { title: 'Active Tutors', value: '186', change: '+12 this month', icon: Users, color: '#f5a623' },
+        { title: 'Total Students', value: '1,286', change: '+62 this year', icon: GraduationCap, color: '#10204e' },
+        { title: 'Active Tutors', value: '47', change: '+12 this month', icon: Users, color: '#f5a623' },
         { title: 'Completion Rate', value: '94%', change: '+3% improved', icon: Target, color: '#bfe3ff' }
       ],
       charts: { type: 'bar', data: [1850, 2000, 2150, 2280, 2380, 2450] }

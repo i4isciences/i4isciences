@@ -234,28 +234,7 @@ export default function PlatformOverview() {
           </div>
         </motion.div>
 
-        {/* Stats - Clean presentation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 1.4 }}
-          className="grid grid-cols-3 gap-8 mt-24 pt-12 border-t border-white/5"
-        >
-          {[
-            { value: '50+', label: 'Countries' },
-            { value: '1M+', label: 'Students' },
-            { value: '99.9%', label: 'Uptime' }
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-4xl md:text-5xl font-semibold text-white mb-2">
-                {stat.value}
-              </div>
-              <div className="text-white/40 text-sm tracking-wide uppercase">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
+        
 
       </div>
     </section>

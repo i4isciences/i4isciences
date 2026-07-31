@@ -193,7 +193,7 @@ aligned standards.
           {/* small trust bar */}
           <FadeIn delay={0.3}>
             <div style={{ display:"flex", alignItems:"center", gap:"1.5rem", marginTop:"2.2rem", flexWrap:"wrap" }}>
-              {["4 Countries","10M+ Users","Internationally Aligned"].map((t,i) => (
+              {["3 Countries","10K+ followers","Internationally Aligned"].map((t,i) => (
                 <div key={t} style={{ display:"flex", alignItems:"center", gap:"0.45rem" }}>
                   <CheckCircle size={14} style={{ color:C.gold }} strokeWidth={2.5} />
                   <span style={{ fontFamily:font, fontSize:"0.78rem", fontWeight:500, color:C.muted }}>{t}</span>
@@ -1019,7 +1019,7 @@ function DashboardSection() {
               {/* main area */}
               <div style={{ padding:"1.4rem 1.6rem" }}>
                 <div style={{ fontFamily:font, fontWeight:700, fontSize:"0.95rem", color:C.text, marginBottom:"1rem" }}>
-                  Welcome back, <span style={{ color:C.navy }}>Priya</span> 👋
+                  Welcome back <span style={{ color:C.navy }}></span> 👋
                 </div>
 
                 {/* stat cards */}

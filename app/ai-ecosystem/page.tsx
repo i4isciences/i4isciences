@@ -527,7 +527,7 @@ function Hero() {
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.64 }}
             style={{ display: "flex", gap: "1.8rem", flexWrap: "wrap", justifyContent: "center" }}>
-            {["10M+ Learners", "120+ Countries", "99.9% Uptime"].map(t => (
+            {["Global Learners", "3 Countries", "99.9% Uptime"].map(t => (
               <div key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <Ico.Check c={T.amber} />
                 <span style={{
@@ -1448,7 +1448,7 @@ function GlobalSection() {
         whiteSpace: "nowrap",
       }}
     >
-      Active in 120+ countries · 10M+ potential learners · 15+ languages
+      Active in 3+ countries · 1K+ Early learners · 4+ languages
     </div>
   </div>
 </div>
@@ -1462,7 +1462,7 @@ function GlobalSection() {
               fontWeight: 700, color: T.ink,
               border: `1px solid ${T.hair}`, whiteSpace: "nowrap",
             }}>
-              Active in 120+ countries · 10M+ potential learners · 15+ languages
+              Active in 3+ countries · 1K+ Early learners · 4+ languages
             </div>
           </div>
       </Inn>
@@ -1569,10 +1569,10 @@ function useCount(target: number, dur = 1900, active = false) {
 }
 
 const STATS = [
-  { n: 10, suf: "M+", label: "Potential Learners", col: T.navy },
-  { n: 500, suf: "K+", label: "Concurrent Users", col: "#0891b2" },
-  { n: 120, suf: "+", label: "Countries Reached", col: "#7c3aed" },
-  { n: 247, suf: "+", label: "Certified Educators", col: "#16a34a" },
+  { n: 1, suf: "K+", label: "Early Learners", col: T.navy },
+  { n: 10, suf: "K+", label: "Concurrent Users", col: "#0891b2" },
+  { n: 12, suf: "+", label: "Countries Reached", col: "#7c3aed" },
+  { n: 50, suf: "+", label: "Certified Educators", col: "#16a34a" },
   { n: 99, suf: ".9%", label: "Platform Reliability", col: "#c05621" },
 ];
 

@@ -1606,10 +1606,10 @@ fontFamily: "Geist, system-ui, sans-serif"
               </p>
               <div className="stat-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 {[
-                  { n: "48K+", l: "Families Supported", bg: "#DCEAF8", c: "#0A2E8A" },
-                  { n: "120+", l: "Countries Represented", bg: "#BFD9B8", c: "#2A6B3A" },
+                  { n: "23K+", l: "Families Supported", bg: "#DCEAF8", c: "#0A2E8A" },
+                  { n: "3+", l: "Countries Represented", bg: "#BFD9B8", c: "#2A6B3A" },
                   { n: "92%", l: "Feel More Confident", bg: "#FDE6D2", c: "#C4712A" },
-                  { n: "6", l: "Languages Supported", bg: "#F5A623", c: "#7A4800" },
+                  { n: "4", l: "Languages Supported", bg: "#F5A623", c: "#7A4800" },
                 ].map(s => (
                   <div key={s.l} style={{ background: s.bg, borderRadius: 16, padding: "18px 16px" }}>
                     <div style={{ fontSize: "clamp(1.8rem,2.8vw,2.4rem)", fontWeight: 900, color: s.c }}>{s.n}</div>

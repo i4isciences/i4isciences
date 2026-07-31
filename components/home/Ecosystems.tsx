@@ -149,12 +149,11 @@ const CARDS = [
     subline: "Your expertise is worth more than one classroom.",
     bullets: [
       "Get certified by global education experts",
-      "Train once. Earn across 120+ countries",
+      "Train once. Earn across USA, Canada and India",
       "What you earn in a month — earn in hours",
     ],
     cta: "Start Earning",
     href: "/models/teach-the-teacher",
-    stat: { value: "240+", label: "Educators Certified" },
     tooltipText: "Earn from your expertise, on your own schedule, from home. Set your hours, keep your freedom, and grow your income with every hour you teach.\n\nGet certified. Build your courses. Teach students across 120 countries.",
     bubbleAlign: "right" as const, // Handled dynamically in desktop grid, fallback for responsive
   },
@@ -178,7 +177,6 @@ const CARDS = [
     ],
     cta: "Book Free Class",
     href: "/models/onecent-tutors",
-    stat: { value: "50K+", label: "Sessions Booked" },
     tooltipText: "Affordable, on-demand help from real human tutors, not chatbots. Every subject, every grade.\n\nBook a tutor. Meet live. Improve with a plan built around your child. First session free.",
     bubbleAlign: "right" as const, 
   },
@@ -197,12 +195,11 @@ const CARDS = [
     bullets: [
       "Plan your immigration before you land",
       "Don't leave your child's future to chance",
-      "15+ languages, full family support",
+      "Hindi language, full family support",
       "US school systems decoded — for parents",
     ],
     cta: "Plan Your Move",
     href: "/models/ipst",
-    stat: { value: "120+", label: "Countries Reached" },
     tooltipText: "Real support for newly arrived students and their parents, offered in your language.\n\nTell us your situation. Get matched with multilingual help. Walk into school with a clear plan.",
     bubbleAlign: "left" as const, 
   },
@@ -226,7 +223,6 @@ const CARDS = [
     ],
     cta: "Enter Competition",
     href: "/ai-ecosystem",
-    stat: { value: "2M+", label: "AI Lessons Created" },
     tooltipText: "Compete globally and earn scholarships through our specialized AI training ecosystems.",
     bubbleAlign: "right" as const,
   },
@@ -243,14 +239,11 @@ const CARDS = [
     headline: "Take Science\nOut Of The\nTextbook",
     subline: "Real laboratories, real equipment, real experiments — not simulations.",
     bullets: [
-      "500+ verified partner labs in 50+ cities",
-      "100+ real experiments for Class 6–12",
       "Certified mentors, safety-checked equipment",
       "Earn a verified practical certificate",
     ],
     cta: "Find Nearby Labs",
     href: "/models/labtrick",
-    stat: { value: "500+", label: "Partner Labs" },
     tooltipText: "Explore real-world laboratories and conduct real experiments near you.",
     bubbleAlign: "left" as const,
   },
@@ -413,45 +406,7 @@ function EcoCard({ card, index, forceSide }: { card: typeof CARDS[0] & { logo: s
           }}
         />
 
-        {/* Stat pill top-right */}
-        <motion.div
-          initial={{ opacity: 0, x: 16 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 + index * 0.12 }}
-          style={{
-            position: "absolute",
-            top: 16,
-            right: 16,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end",
-            background: "rgba(255,255,255,0.18)",
-            border: "1.5px solid rgba(255,255,255,0.38)",
-            backdropFilter: "blur(10px)",
-            borderRadius: "14px",
-            padding: "6px 12px",
-          }}
-        >
-          <span style={{
-            fontFamily: "'Geist Variable', 'Geist', sans-serif",
-            fontSize: "1.15rem",
-            fontWeight: 800,
-            color: "white",
-            lineHeight: 1.1,
-          }}>
-            {card.stat.value}
-          </span>
-          <span style={{
-            fontFamily: "'Geist', sans-serif",
-            fontSize: "0.58rem",
-            color: "rgba(255,255,255,0.82)",
-            letterSpacing: "0.04em",
-            marginTop: 1,
-          }}>
-            {card.stat.label}
-          </span>
-        </motion.div>
+        
 
 {/* Service Name */}
 <div
@@ -840,7 +795,7 @@ export default function Ecosystems() {
                 segments={[
                   { text: "Five Ecosystems ", color: "#0a2e8a" },
                   { text: "One", color: "#f5a623" },
-                  { text: " One Platform For All", color: "#0a2e8a" },
+                  { text: " Platform For All", color: "#0a2e8a" },
                 ]}
                 delay={0.7}
               />
