@@ -1,7 +1,7 @@
 export default function Head() {
   const siteUrl = "https://www.i4isciences.com/contact";
-  const title = "Contact — i4iSciences | Book a Demo & Get Support";
-  const description = "Get in touch with i4iSciences for demos, partnerships, and support. We'll respond within 48 hours.";
+  const title = "Contact Us | i4iSciences";
+  const description = "Connect with i4iSciences for partnerships, demos, and support.";
   const keywords = "contact i4iSciences, book demo, partnership, education support, contact us";
 
   const ld = { "@context": "https://schema.org", "@type": "ContactPage", name: title, description, url: siteUrl };
@@ -53,6 +53,8 @@ export default function Head() {
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image" content="https://www.i4isciences.com/images/og-default.svg" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <script type="application/ld+json">{JSON.stringify(ld)}</script>
       <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
     </>

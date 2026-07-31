@@ -13,9 +13,9 @@ import FinalCTA from "@/components/home/FinalCTA";
 import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
-  title: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
+  title: "i4iSciences | Global AI Education Platform",
   description:
-    "i4iSciences delivers AI-powered education, teacher training, tutoring, parent support, and science learning experiences for learners, teachers, and families worldwide.",
+    "Building the future of AI education through research, innovation and global learning.",
   alternates: {
     canonical: "https://www.i4isciences.com/",
   },
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     "education technology",
   ],
   openGraph: {
-    title: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
+    title: "i4iSciences | Global AI Education Platform",
     description:
-      "Discover AI-powered learning, certification, tutoring, and support programs that make quality education more accessible and practical.",
+      "Building the future of AI education through research, innovation and global learning.",
     url: "https://www.i4isciences.com/",
     siteName: "i4iSciences",
     type: "website",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
+    title: "i4iSciences | Global AI Education Platform",
     description:
-      "Discover AI-powered learning, certification, tutoring, and support programs that make quality education more accessible and practical.",
+      "Building the future of AI education through research, innovation and global learning.",
     images: ["https://www.i4isciences.com/images/og-default.svg"],
   },
 };

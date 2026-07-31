@@ -1,7 +1,7 @@
 export default function Head() {
   const siteUrl = "https://www.i4isciences.com/models/onecent-tutors";
-  const title = "OneCent Tutors — i4iSciences | Affordable Tutor Marketplace";
-  const description = "OneCent Tutors connects learners with vetted tutors for affordable, high-quality instruction across subjects and exam prep.";
+  const title = "OneCent Tutors | i4iSciences";
+  const description = "Connect learners with affordable, high-quality tutoring through a trusted marketplace.";
   const keywords = "OneCent Tutors, tutors, tutoring marketplace, affordable tutors, i4iSciences tutors";
 
   const ld = { "@context": "https://schema.org", "@type": "Service", name: title, description, url: siteUrl };
@@ -30,6 +30,8 @@ export default function Head() {
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image" content="https://www.i4isciences.com/images/og-onecent.png" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <script type="application/ld+json">{JSON.stringify(ld)}</script>
     </>
   );

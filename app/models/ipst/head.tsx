@@ -1,7 +1,7 @@
 export default function Head() {
   const siteUrl = "https://www.i4isciences.com/models/ipst";
-  const title = "IPST — i4iSciences | Immigrant & Parent Support Tools";
-  const description = "IPST by i4iSciences provides resources, mentorship, and language support for immigrant families and students navigating new education systems.";
+  const title = "IPST | i4iSciences";
+  const description = "Support immigrant families with practical tools, mentoring, and guidance for navigating education systems.";
   const keywords = "IPST, immigrant support, parent resources, education navigation, i4iSciences IPST";
 
   const ld = { "@context": "https://schema.org", "@type": "WebPage", name: title, description, url: siteUrl };
@@ -30,6 +30,8 @@ export default function Head() {
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image" content="https://www.i4isciences.com/images/og-ipst.png" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <script type="application/ld+json">{JSON.stringify(ld)}</script>
     </>
   );

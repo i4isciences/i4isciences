@@ -40,7 +40,7 @@ export default function Footer() {
   />
 
   <span className="text-3xl font-bold tracking-tight text-[#ffffff]">
-    i4i Sciences LLC
+    i4iSciences LLC
   </span>
 
   <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
@@ -186,10 +186,15 @@ export default function Footer() {
           {/* SOCIAL HANDLES (Clean typography instead of box shapes) */}
           <div className="flex items-center gap-6">
             {[
-              { name: "𝕏", url: "#" },
-              { name: "LinkedIn", url: "#" },
-              { name: "Instagram", url: "#" },
-              { name: "Substack", url: "#" },
+              { name: "𝕏", url: "https://x.com/I4iSciences" },
+              { name: "LinkedIn", url: "https://www.linkedin.com/company/i4isciences" },
+              { name: "Instagram", url: "https://www.instagram.com/i4isciences" },
+              { name: "Facebook", url: "https://www.facebook.com/i4isciences" },
+              { name: "Youtube", url: "https://www.youtube.com/@i4isciences" },
+              { name: "Tiktok", url: "https://www.tiktok.com/@i4isciences" },
+              { name: "Pinterest", url: "https://www.pinterest.com/i4isciences" },
+              { name: "Bluesky", url: "https://bsky.app/profile/i4isciences.bsky.social" },
+              { name: "Threads", url: "https://www.threads.net/@i4isciences" },
             ].map((social, idx) => (
               <a 
                 key={idx} 

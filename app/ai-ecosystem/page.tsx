@@ -452,7 +452,7 @@ function Hero() {
           textAlign: "center", width: "100%",
         }}>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
-            <Pill text="AI Ecosystem · i4i Sciences" onNavy />
+            <Pill text="AI Ecosystem · i4iSciences" onNavy />
           </motion.div>
 
           <motion.h1

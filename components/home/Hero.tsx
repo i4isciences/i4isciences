@@ -318,7 +318,7 @@ export default function Hero() {
             margin: "0 auto 2rem",
           }}
         >
-          i4i Sciences connects certified teachers, students who need help now, and families starting over in a new country. One
+          i4iSciences connects certified teachers, students who need help now, and families starting over in a new country. One
 ecosystem, USA, Canada and India, real people backed by smart AI tools. Whoever you are, there is a place for you here, and a clear
 way to begin.
         </motion.p>

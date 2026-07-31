@@ -731,33 +731,30 @@ export default function OneCentTutorsPage() {
                   Book Trial Session
                 </button>
               </div>
-
-              
-              </div>
             </div>
 
             {/* Right: Hero image in organic shape */}
-<div
-  style={{
-    position: "relative",
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    width: "100%",
-    paddingLeft: 40,
-  }}
->
-  {/* Background Blob */}
-  <svg
-    viewBox="0 0 500 480"
-    style={{
-      position: "absolute",
-      width: 450,
-      right: -30,
-      top: -20,
-      zIndex: 0,
-    }}
-  >
+            <div
+              style={{
+                position: "relative",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                width: "100%",
+                paddingLeft: 40,
+              }}
+            >
+              {/* Background Blob */}
+              <svg
+                viewBox="0 0 500 480"
+                style={{
+                  position: "absolute",
+                  width: 450,
+                  right: -30,
+                  top: -20,
+                  zIndex: 0,
+                }}
+              >
     <defs>
       <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor={C.goldPale} />
@@ -820,8 +817,8 @@ export default function OneCentTutorsPage() {
         clipPath="url(#heroClip2)"
       />
     </svg>
-  </div>
-</div>
+              </div>
+            </div>
           </div>
         </div>
         <WaveDivider color={C.beige} />

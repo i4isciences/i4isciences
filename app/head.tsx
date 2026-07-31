@@ -1,7 +1,7 @@
 export default function Head() {
   const siteUrl = "https://www.i4isciences.com";
-  const title = "i4iSciences | AI Education, Teacher Training & Learning Platforms";
-  const description = "i4iSciences builds AI-powered education platforms, teacher training, and learning tools that improve access, outcomes, and equity for learners worldwide.";
+  const title = "i4iSciences | Global AI Education Platform";
+  const description = "Building the future of AI education through research, innovation and global learning.";
   const keywords = "i4iSciences, AI education, teacher training, AI tutoring, adaptive learning, EdTech, STEM learning, immigrant education";
 
   const orgLd = {

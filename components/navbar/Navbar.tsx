@@ -127,7 +127,7 @@ export default function Navbar() {
         >
           <Image
             src={logoSrc}
-            alt="i4i Sciences"
+            alt="i4iSciences"
             width={44}
             height={44}
             priority
@@ -142,7 +142,7 @@ export default function Navbar() {
               letterSpacing: "-0.02em",
             }}
           >
-            i4i Sciences
+            i4iSciences
           </span>
         </Link>
 

@@ -1,7 +1,7 @@
 export default function Head() {
   const siteUrl = "https://www.i4isciences.com/ai-ecosystem";
-  const title = "AI Ecosystem — i4iSciences | Competitions, Programs & Resources";
-  const description = "Explore the i4iSciences AI Ecosystem: AI Olympiad, learning programs, competitions, and resources that help young creators build real AI projects.";
+  const title = "AI Ecosystem | i4iSciences";
+  const description = "Explore the AI Ecosystem powering education, healthcare and innovation.";
   const keywords = "AI Ecosystem, AI Olympiad, AI programs for kids, AI education, i4iSciences";
 
   const ld = { "@context": "https://schema.org", "@type": "WebPage", name: title, description, url: siteUrl };
@@ -30,6 +30,8 @@ export default function Head() {
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image" content="https://www.i4isciences.com/images/og-default.svg" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <script type="application/ld+json">{JSON.stringify(ld)}</script>
     </>
   );

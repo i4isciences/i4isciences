@@ -1,7 +1,7 @@
 export default function Head() {
   const siteUrl = "https://www.i4isciences.com/models/labtrick";
-  const title = "LabTricks — i4iSciences | Practical Lab Simulations for Learning";
-  const description = "LabTricks offers hands-on lab simulations and interactive experiments to make science learning accessible and engaging for students.";
+  const title = "LabTricks | i4iSciences";
+  const description = "Bring science learning to life with practical lab simulations and interactive experiments.";
   const keywords = "LabTricks, lab simulations, science education, virtual labs, i4iSciences";
 
   const ld = { "@context": "https://schema.org", "@type": "WebPage", name: title, description, url: siteUrl };
@@ -30,6 +30,8 @@ export default function Head() {
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image" content="https://www.i4isciences.com/images/og-labtrick.png" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <script type="application/ld+json">{JSON.stringify(ld)}</script>
     </>
   );

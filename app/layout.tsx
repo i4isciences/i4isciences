@@ -18,7 +18,6 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.i4isciences.com"),
   title: {
     default: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
     template: "%s | i4iSciences",
@@ -39,10 +38,6 @@ export const metadata: Metadata = {
     "immigrant education",
   ],
   openGraph: {
-    title: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
-    description:
-      "AI-powered education platforms, teacher training, and learning tools that improve access, outcomes, and equity for learners worldwide.",
-    url: "https://www.i4isciences.com",
     siteName: "i4iSciences",
     images: [
       {
@@ -74,9 +69,6 @@ export const metadata: Metadata = {
     },
   },
   authors: [{ name: "i4iSciences Team", url: "https://www.i4isciences.com" }],
-  alternates: {
-    canonical: "https://www.i4isciences.com",
-  },
 };
 
 export default function RootLayout({

@@ -436,7 +436,7 @@ function WhatIsTTT() {
             </h4>
             
             <p style={{ fontFamily: font, fontSize: "clamp(0.88rem,1.05vw,1.02rem)", lineHeight: 1.72, color: C.muted, marginBottom: "1.8rem" }}>
-              You already have the knowledge. We help you turn it into income. Teach the Teacher is the i4i Sciences 
+              You already have the knowledge. We help you turn it into income. Teach the Teacher is the i4iSciences 
               certification and earning program for educators who want to teach online, reach students in more than 120 countries, 
               and build a real income from home, all on a schedule they set themselves.
             </p>
@@ -686,7 +686,7 @@ const teachingPillars = [
   { 
     icon: Globe, 
     title: "Global From Day One", 
-    body: "Other platforms keep teachers boxed into a single country or a single subject. We do not. With i4i Sciences, you can teach any subject to motivated students anywhere in the world. Train once, and you can earn globally, reaching learners far beyond your own city or country. Your audience is as large as your ambition." 
+    body: "Other platforms keep teachers boxed into a single country or a single subject. We do not. With i4iSciences, you can teach any subject to motivated students anywhere in the world. Train once, and you can earn globally, reaching learners far beyond your own city or country. Your audience is as large as your ambition." 
   },
   { 
     icon: TrendingUp, 

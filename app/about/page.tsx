@@ -544,7 +544,7 @@ const globalInView = useInView(globalRef, {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mx-auto mt-12 max-w-2xl text-lg md:text-lg leading-relaxed text-slate-300 font-medium"
         >
-          One platform. Five ways to grow. i4i Sciences is a complete online education ecosystem connecting teachers, students, and families across the globe. Become a certified online educator and earn from home with Teach the Teacher. Get affordable, 24/7 tutoring from real human tutors in every subject with OneCent Tutors. Help immigrant and newcomer students thrive with IPST. Win AI scholarships, certificates, and internships at the AI Olympiad. And bring real science experiments to life with LabTricks. Learning, earning, and belonging, all in one trusted place.
+          One platform. Five ways to grow. i4iSciences is a complete online education ecosystem connecting teachers, students, and families across the globe. Become a certified online educator and earn from home with Teach the Teacher. Get affordable, 24/7 tutoring from real human tutors in every subject with OneCent Tutors. Help immigrant and newcomer students thrive with IPST. Win AI scholarships, certificates, and internships at the AI Olympiad. And bring real science experiments to life with LabTricks. Learning, earning, and belonging, all in one trusted place.
         </motion.p>
 
 
@@ -622,7 +622,7 @@ const globalInView = useInView(globalRef, {
 
           {/* PLATFORM PARAGRAPH BLOCKS */}
           <p className="max-w-lg text-base font-medium leading-relaxed text-[#4B5E92]">
-          Whether you want to teach, learn, or lead, i4i Sciences has a path built for you. Earn globally as a certified educator, book budget-friendly tutoring in all subjects and grades, or guide your child through a new school system in your own language. Spark your kid's future with AI competitions, coding scholarships, and real internships, or get them hands-on with practical science labs and exam prep near you. Five powerful education models, one platform, endless opportunities to succeed. Email or call us today and find your path.
+          Whether you want to teach, learn, or lead, i4iSciences has a path built for you. Earn globally as a certified educator, book budget-friendly tutoring in all subjects and grades, or guide your child through a new school system in your own language. Spark your kid's future with AI competitions, coding scholarships, and real internships, or get them hands-on with practical science labs and exam prep near you. Five powerful education models, one platform, endless opportunities to succeed. Email or call us today and find your path.
           </p>
 
           {/* THREE COLUMN ASYMMETRIC METRICS MATRIX */}
@@ -1220,7 +1220,7 @@ const globalInView = useInView(globalRef, {
               "That belief carried him across continents. He studied, researched, and worked in many countries, moving between laboratories, universities, and the real communities around them. And everywhere he went, he saw the same thing. Education worked beautifully for some and failed quietly for many others. Families who had recently immigrated. Students in under-resourced classrooms. Teachers doing their best with no support behind them. The gap was always the same: the distance between what education could be and what it actually was.",
               "Years spent inside labs, classrooms, edtech companies, and community programs taught him something most founders miss. The problem was never content. The internet overflows with content. The real problem is connection. The right teacher, the right support, at the right moment, in a language and context that actually makes sense to the learner.",
               "He had spent his career turning complex problems into working systems, so he approached this one the same way a scientist approaches anything. He asked a better question. What if we built the entire ecosystem, instead of just one piece of it? Not another app. A platform that certifies teachers, connects tutors with students, stands beside immigrant families, and gives young minds real science and real AI to explore. Technology used thoughtfully, not to replace people, but to help them reach further than they ever could alone.",
-              "That question became i4i Sciences.",
+              "That question became i4iSciences.",
             ].map((para, i) => (
               <motion.p
                 key={i}
@@ -2122,7 +2122,7 @@ const globalInView = useInView(globalRef, {
             </Link>
 
             <Link
-              href="/models"
+              href="#"
               className="
               inline-flex
               items-center

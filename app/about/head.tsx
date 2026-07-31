@@ -1,7 +1,7 @@
 export default function Head() {
   const siteUrl = "https://www.i4isciences.com/about";
-  const title = "About — i4iSciences | Mission, Team & Impact";
-  const description = "Learn about i4iSciences' mission to expand access to quality education with AI, teacher training programs, and global partnerships.";
+  const title = "About Us | i4iSciences";
+  const description = "Learn about our mission, leadership and global vision.";
   const keywords = "i4iSciences about, EdTech mission, teacher training, AI in education, educational impact";
 
   const ld = {
@@ -214,6 +214,8 @@ export default function Head() {
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image" content="https://www.i4isciences.com/images/og-about.png" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <script type="application/ld+json">{JSON.stringify(ld)}</script>
       <script type="application/ld+json">{JSON.stringify(personLd)}</script>
       <script type="application/ld+json">{JSON.stringify(faqLd)}</script>

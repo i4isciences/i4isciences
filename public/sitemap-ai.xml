@@ -25,12 +25,6 @@
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://i4isciences.ai/models</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
     <loc>https://i4isciences.ai/models/ipst</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
