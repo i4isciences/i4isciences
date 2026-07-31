@@ -8,7 +8,7 @@ import { ArrowDown, Users, BookOpen, Globe2, Sparkles,
   Award, 
   Heart, 
   Activity, AlertTriangle, TrendingUp, Globe,
-  ArrowRight, Lightbulb, ArrowUpRight, Quote } from "lucide-react"
+  ArrowRight, Atom, Cpu, Network,  Lightbulb, ArrowUpRight, Quote, HeartHandshake, Compass, Brain, ShieldCheck, Flame,Users2,  Scale, Target } from "lucide-react"
 
 import { useRef } from "react";
 
@@ -450,6 +450,31 @@ const partners = [
   "/logos/academia.svg",
   "/logos/microsoft.svg",
 ];
+
+const pillars = [
+  {
+    title: "Inspired Science",
+    subtitle: "The Substance",
+    desc: "We teach the subjects that let a student change something — real science, real mathematics, real methods — taught with the seriousness they deserve. We do not soften the material to widen the market.",
+    icon: Atom,
+    color: "bg-blue-50 text-blue-600 border-blue-100",
+  },
+  {
+    title: "Innovative Systems",
+    subtitle: "The Scale",
+    desc: "Universality is an engineering problem before it is an ideal. We build the platforms, assessments, and AI infrastructure that let one standard of teaching reach millions of students without thinning out along the way.",
+    icon: Cpu,
+    color: "bg-amber-50 text-amber-600 border-amber-100",
+  },
+  {
+    title: "Integrated Impact",
+    subtitle: "The Ecosystem",
+    desc: "Students, teachers, families, and institutions are one system, not four markets. We work across all of them at once, because a student rises no higher than the support around them.",
+    icon: Network,
+    color: "bg-emerald-50 text-emerald-600 border-emerald-100",
+  },
+];
+
 const row1 = [
   "/logos/google.svg",
   "/logos/khanacademy.svg",
@@ -469,6 +494,92 @@ const row3 = [
   
 ];
 
+const values = [
+  {
+    num: "01",
+    title: "Universal Access",
+    desc: "We believe every individual deserves access to exceptional education, regardless of geography, financial background, or circumstance.",
+    icon: Globe,
+    accent: "bg-blue-50 text-blue-600 border-blue-100",
+  },
+  {
+    num: "02",
+    title: "Scientific Excellence",
+    desc: "We uphold the highest standards of scientific rigor, intellectual curiosity, critical thinking, and evidence-based learning.",
+    icon: Brain,
+    accent: "bg-purple-50 text-purple-600 border-purple-100",
+  },
+  {
+    num: "03",
+    title: "Innovation with Purpose",
+    desc: "We embrace innovation and emerging technologies to solve meaningful problems that improve lives and advance society.",
+    icon: Lightbulb,
+    accent: "bg-amber-50 text-amber-600 border-amber-100",
+  },
+  {
+    num: "04",
+    title: "Artificial Intelligence for Good",
+    desc: "We responsibly leverage Artificial Intelligence to enhance learning, research, decision-making, and collaboration while ensuring human values remain at the center of every technological advancement.",
+    icon: Compass,
+    accent: "bg-cyan-50 text-cyan-600 border-cyan-100",
+  },
+  {
+    num: "05",
+    title: "Integrity",
+    desc: "We act with honesty, transparency, accountability, and ethical responsibility in every decision and interaction.",
+    icon: ShieldCheck,
+    accent: "bg-emerald-50 text-emerald-600 border-emerald-100",
+  },
+  {
+    num: "06",
+    title: "Ideas Over Titles",
+    desc: "We value creativity, original thinking, and problem-solving above status, hierarchy, or personal recognition. Great ideas can come from anyone.",
+    icon: Flame,
+    accent: "bg-rose-50 text-rose-600 border-rose-100",
+  },
+  {
+    num: "07",
+    title: "Perseverance",
+    desc: "We believe meaningful achievements are built through dedication, resilience, continuous learning, and disciplined execution.",
+    icon: Target,
+    accent: "bg-indigo-50 text-indigo-600 border-indigo-100",
+  },
+  {
+    num: "08",
+    title: "Compassion",
+    desc: "We encourage empathy, respect, collaboration, and service to humanity, recognizing that knowledge has its greatest value when it improves people's lives.",
+    icon: Heart,
+    accent: "bg-pink-50 text-pink-600 border-pink-100",
+  },
+  {
+    num: "09",
+    title: "Global Collaboration",
+    desc: "We believe the world's greatest challenges are solved when people from diverse cultures, disciplines, and perspectives work together.",
+    icon: Users2,
+    accent: "bg-teal-50 text-teal-600 border-teal-100",
+  },
+  {
+    num: "10",
+    title: "Lifelong Learning",
+    desc: "Learning does not end with graduation. We foster continuous growth, adaptability, curiosity, and professional development throughout life.",
+    icon: BookOpen,
+    accent: "bg-sky-50 text-sky-600 border-sky-100",
+  },
+  {
+    num: "11",
+    title: "Equality of Opportunity",
+    desc: "Every learner deserves a fair opportunity to demonstrate their abilities through objective, transparent, and merit-based evaluation.",
+    icon: Scale,
+    accent: "bg-violet-50 text-violet-600 border-violet-100",
+  },
+  {
+    num: "12",
+    title: "Impact Beyond Success",
+    desc: "Our ultimate measure of success is the positive impact our learners, educators, researchers, and innovations have on communities and the future of humanity.",
+    icon: HeartHandshake,
+    accent: "bg-orange-50 text-orange-600 border-orange-100",
+  },
+];
 
   const globalRef = useRef(null);
 
@@ -622,8 +733,7 @@ const globalInView = useInView(globalRef, {
 
           {/* PLATFORM PARAGRAPH BLOCKS */}
           <p className="max-w-lg text-base font-medium leading-relaxed text-[#4B5E92]">
-          Whether you want to teach, learn, or lead, i4iSciences has a path built for you. Earn globally as a certified educator, book budget-friendly tutoring in all subjects and grades, or guide your child through a new school system in your own language. Spark your kid's future with AI competitions, coding scholarships, and real internships, or get them hands-on with practical science labs and exam prep near you. Five powerful education models, one platform, endless opportunities to succeed. Email or call us today and find your path.
-          </p>
+          At i4iSciences, we believe that exceptional education should be accessible to every learner, everywhere. Our vision is to create a world where students across the globe receive the same high-quality education, rigorous training, objective evaluation, and equal opportunities to succeed. We harness the power of Artificial Intelligence to make learning more personalized, efficient, and accessible while empowering educators and researchers with intelligent tools. We believe that the greatest measure of success is not wealth, but the ability to generate transformative ideas, solve meaningful problems, and serve humanity with integrity and compassion. By connecting world-class knowledge with innovative technology, i4isciences is building a global learning ecosystem that prepares future scientists, innovators, healthcare professionals, entrepreneurs, and leaders to shape a better world.          </p>
 
           {/* THREE COLUMN ASYMMETRIC METRICS MATRIX */}
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-3 sm:gap-4">
@@ -947,176 +1057,390 @@ const globalInView = useInView(globalRef, {
 
       </div>
     </section>
+
     <section
-  className="relative w-full overflow-hidden select-none antialiased font-sans text-[#0F2D7A]"
-  style={{ aspectRatio: "3 / 2", minHeight: "100svh" }}
->
-  {/* ── BACKGROUND IMAGE — object-fit:fill preserves exact 3:2, zero crop, zero zoom ── */}
-  <img
-    src="/images/about-2.png"
-    alt=""
-    aria-hidden="true"
-    className="absolute inset-0 w-full h-full pointer-events-none"
-    style={{ objectFit: "fill" }}
-  />
-
-  {/* Subtle right-side veil — only over the cream area, left artwork fully untouched */}
-  <div
-    className="absolute inset-0 pointer-events-none"
-    style={{
-      background:
-        "linear-gradient(to left, rgba(250,248,244,0.55) 0%, rgba(250,248,244,0.22) 32%, transparent 52%)",
-    }}
-  />
-
-  {/* ── CONTENT — right side only, over the clean cream area ── */}
-  <div
-    className="relative z-10 h-full flex flex-col justify-center pr-10 pl-4 sm:pr-14 xl:pr-20 ml-auto"
-    style={{ maxWidth: "46%" }}
-  >
-    {/* EYEBROW LABEL */}
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="inline-flex items-center gap-1.5 self-start rounded-full bg-[#DCEBFF] border border-[#B9D7FF] px-3 py-1 mb-4"
+      className="relative w-full overflow-hidden select-none antialiased font-sans text-[#0F2D7A]"
+      style={{ aspectRatio: "3 / 2", minHeight: "100svh" }}
     >
-      <Sparkles size={10} className="text-[#0F2D7A]" />
-      <span className="text-[9px] font-bold tracking-[0.22em] text-[#0F2D7A] uppercase">
-        Our Mission
-      </span>
-    </motion.div>
+      {/* ── BACKGROUND IMAGE — object-fit:fill preserves exact 3:2, zero crop, zero zoom ── */}
+      <img
+        src="/images/about-2.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ objectFit: "fill" }}
+      />
 
-    {/* MAIN HEADING */}
-    <motion.h2
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: 0.08 }}
-      className="font-[900] leading-[1.03] tracking-[-1.5px] text-[#0F2D7A] mb-3"
-      style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.6rem)" }}
-    >
-      Giving Every Learner
-      <br />
-      the{" "}
-      <span className="relative inline-block text-[#F4A623]">
-        Wings
-        <svg
-          className="absolute -bottom-1 left-0 w-full fill-none stroke-[#F4A623]/60"
-          style={{ height: "0.45em" }}
-          viewBox="0 0 100 10"
-          preserveAspectRatio="none"
+      {/* Subtle right-side veil — only over the cream area, left artwork fully untouched */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to left, rgba(250,248,244,0.7) 0%, rgba(250,248,244,0.3) 35%, transparent 55%)",
+        }}
+      />
+
+      {/* ── CONTENT CONTAINER — Right Side Only ── */}
+      <div
+        className="relative z-10 h-full flex flex-col justify-center pr-6 pl-4 sm:pr-10 xl:pr-16 ml-auto py-8"
+        style={{ maxWidth: "48%" }}
+      >
+        {/* EYEBROW LABEL */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-1.5 self-start rounded-full bg-[#DCEBFF] border border-[#B9D7FF] px-3 py-1 mb-3 shrink-0"
         >
-          <path d="M3,7 Q50,1 97,6 T50,4" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      </span>{" "}
-      to{" "}
-      <span className="text-[#F4A623] italic font-serif font-normal tracking-tight">
-        Rise.
-      </span>
-    </motion.h2>
+          <Sparkles size={10} className="text-[#0F2D7A]" />
+          <span className="text-[9px] font-bold tracking-[0.22em] text-[#0F2D7A] uppercase">
+            Our Mission
+          </span>
+        </motion.div>
 
-    {/* SUPPORTING PARAGRAPH */}
-    <motion.p
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: 0.16 }}
-      className="font-medium leading-[1.65] text-[#0F2D7A]/75 mb-6"
-      style={{ fontSize: "clamp(1rem, 1.1vw, 1.2rem)" }}
-    >
-      We believe education should feel personal, hopeful, accessible,
-      and deeply empowering—for students, teachers, parents, and
-      communities across the world.
-    </motion.p>
+        {/* MAIN HEADING */}
+        <motion.h2
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.08 }}
+          className="font-[900] leading-[1.03] tracking-[-1.5px] text-[#0F2D7A] mb-3 shrink-0"
+          style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.4rem)" }}
+        >
+          Transforming Education Through{" "}
+          <span className="relative inline-block text-[#F4A623]">
+            Innovation
+            <svg
+              className="absolute -bottom-1 left-0 w-full fill-none stroke-[#F4A623]/60"
+              style={{ height: "0.45em" }}
+              viewBox="0 0 100 10"
+              preserveAspectRatio="none"
+            >
+              <path d="M3,7 Q50,1 97,6 T50,4" strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          </span>{" "}
+          &{" "}
+          <span className="text-[#F4A623] italic font-serif font-normal tracking-tight">
+            Science.
+          </span>
+        </motion.h2>
 
-    {/* 2×2 PILLAR CARDS */}
-    <div className="grid grid-cols-2 gap-2.5">
+        {/* SCROLLABLE MISSION TEXT CONTAINER */}
+        {/* Custom scrollbar applied to cleanly accommodate the extended text on all aspect ratios */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.16 }}
+          className="space-y-3.5 overflow-y-auto max-h-[60vh] pr-3 scrollbar-thin scrollbar-thumb-[#0F2D7A]/20 scrollbar-track-transparent hover:scrollbar-thumb-[#0F2D7A]/40"
+        >
+          {/* Paragraph 1 - Core Mission */}
+          <p
+            className="font-semibold leading-relaxed text-[#0F2D7A]"
+            style={{ fontSize: "clamp(0.95rem, 0.95vw, 1.05rem)" }}
+          >
+            At i4iSciences, our mission is to transform education through innovation, scientific
+            excellence, and Artificial Intelligence, creating an inclusive global ecosystem where
+            every learner has the opportunity to reach their highest potential.
+          </p>
 
-      {/* ACCESS */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.22 }}
-        whileHover={{ y: -4 }}
-        className="bg-white/72 border border-white/65 backdrop-blur-md rounded-2xl p-3.5 space-y-2 group transition-colors hover:bg-white/90"
-      >
-        <div className="h-8 w-8 rounded-xl flex items-center justify-center border bg-blue-50 text-blue-600 border-blue-100 group-hover:scale-105 transition-transform">
-          <Globe2 size={16} />
+          {/* Paragraph 2 - Access & Tech */}
+          <p
+            className="font-normal leading-relaxed text-[#0F2D7A]/80"
+            style={{ fontSize: "clamp(0.9rem, 0.85vw, 0.95rem)" }}
+          >
+            We are committed to democratizing access to world-class education by developing
+            intelligent learning platforms, advanced educational technologies, and research-driven
+            training programs that remove geographical, financial, and institutional barriers.
+          </p>
+
+          {/* Paragraph 3 - Cultivating Learners */}
+          <p
+            className="font-normal leading-relaxed text-[#0F2D7A]/80"
+            style={{ fontSize: "clamp(0.9rem, 0.85vw, 0.95rem)" }}
+          >
+            Our mission is to cultivate individuals who think critically, innovate fearlessly, and act
+            with integrity. We believe education should develop not only knowledge and technical
+            expertise but also resilience, ethical leadership, empathy, collaboration, and a lifelong
+            commitment to solving real-world problems.
+          </p>
+
+          {/* Paragraph 4 - AI Integration */}
+          <p
+            className="font-normal leading-relaxed text-[#0F2D7A]/80"
+            style={{ fontSize: "clamp(0.9rem, 0.85vw, 0.95rem)" }}
+          >
+            By integrating Artificial Intelligence into learning, mentoring, assessment, research, and
+            career development, we aim to create personalized educational experiences that adapt
+            to each learner&#39;s strengths, accelerate mastery, and make high-quality education
+            accessible at scale.
+          </p>
+
+          {/* Paragraph 5 - Standards */}
+          <p
+            className="font-normal leading-relaxed text-[#0F2D7A]/80"
+            style={{ fontSize: "clamp(0.9rem, 0.85vw, 0.95rem)" }}
+          >
+            We are dedicated to maintaining rigorous academic standards through transparent
+            evaluation, evidence-based teaching methodologies, and globally relevant
+            competencies that prepare learners for an increasingly interconnected world.
+          </p>
+
+          {/* Paragraph 6 - Community */}
+          <p
+            className="font-normal leading-relaxed text-[#0F2D7A]/80"
+            style={{ fontSize: "clamp(0.9rem, 0.85vw, 0.95rem)" }}
+          >
+            Beyond education, we strive to build a global community of scientists, healthcare
+            professionals, innovators, educators, entrepreneurs, and leaders who collaborate
+            across disciplines to advance science, improve healthcare, drive technological
+            innovation, and address humanity&#39;s greatest challenges.
+          </p>
+
+          {/* Paragraph 7 - Guiding Purpose */}
+          <p
+            className="font-normal leading-relaxed text-[#0F2D7A]/80"
+            style={{ fontSize: "clamp(0.9rem, 0.85vw, 0.95rem)" }}
+          >
+            Every initiative we undertake is guided by one central purpose: to empower people with
+            knowledge, inspire them to create meaningful solutions, and enable them to make a
+            lasting positive impact on society.
+          </p>
+
+          {/* Paragraph 8 - Statement Highlight Box */}
+          <div className="mt-2 p-3.5 rounded-xl bg-white/70 border border-white/80 backdrop-blur-md shadow-sm relative overflow-hidden">
+            <div className="absolute top-2 right-2 opacity-10 text-[#0F2D7A]">
+              <Quote size={32} />
+            </div>
+            <p
+              className="font-black tracking-tight text-[#0F2D7A] leading-snug relative z-10"
+              style={{ fontSize: "clamp(0.86rem, 0.9vw, 1rem)" }}
+            >
+              We are not building a product that sells education. We are building the systems that
+              make it universal.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+
+    <section className="relative w-full py-20 px-6 sm:px-12 xl:px-24 bg-[#FAF8F4] select-none antialiased font-sans text-[#0F2D7A] overflow-hidden">
+      {/* Visual background glow elements */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#DCEBFF]/40 rounded-full filter blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#F4A623]/10 rounded-full filter blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* HEADER BLOCK */}
+        <div className="flex flex-col items-center text-center mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#DCEBFF] border border-[#B9D7FF] px-3.5 py-1 mb-4"
+          >
+            <Sparkles size={11} className="text-[#0F2D7A]" />
+            <span className="text-[10px] font-bold tracking-[0.22em] text-[#0F2D7A] uppercase">
+              Our Principles
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.08 }}
+            className="font-[900] leading-[1.08] tracking-[-1.5px] text-[#0F2D7A]"
+            style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
+          >
+            Our Core{" "}
+            <span className="relative inline-block text-[#F4A623]">
+              Values
+              <svg
+                className="absolute -bottom-1 left-0 w-full fill-none stroke-[#F4A623]/60"
+                style={{ height: "0.45em" }}
+                viewBox="0 0 100 10"
+                preserveAspectRatio="none"
+              >
+                <path d="M3,7 Q50,1 97,6 T50,4" strokeWidth="3" strokeLinecap="round" />
+              </svg>
+            </span>
+          </motion.h2>
         </div>
-        <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
-          Access
-        </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
-          Premium education pathways available to every learner, everywhere.
-        </p>
-      </motion.div>
 
-      {/* EMPOWERMENT */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.29 }}
-        whileHover={{ y: -4 }}
-        className="bg-white/72 border border-white/65 backdrop-blur-md rounded-2xl p-3.5 space-y-2 group transition-colors hover:bg-white/90"
-      >
-        <div className="h-8 w-8 rounded-xl flex items-center justify-center border bg-amber-50 text-amber-600 border-amber-100 group-hover:scale-105 transition-transform">
-          <Award size={16} />
+        {/* 12 VALUES GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {values.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={item.num}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.05 * index }}
+                whileHover={{ y: -5 }}
+                className="bg-white/80 border border-white/90 backdrop-blur-md rounded-2xl p-5 space-y-3 group transition-colors hover:bg-white/95 shadow-sm hover:shadow-md relative overflow-hidden"
+              >
+                <div className="flex items-center justify-between">
+                  <div
+                    className={`h-9 w-9 rounded-xl flex items-center justify-center border ${item.accent} group-hover:scale-110 transition-transform`}
+                  >
+                    <Icon size={18} />
+                  </div>
+                  <span className="text-xs font-extrabold tracking-wider text-[#0F2D7A]/30 font-mono">
+                    {item.num}
+                  </span>
+                </div>
+
+                <h3
+                  className="font-black tracking-tight text-[#0F2D7A]"
+                  style={{ fontSize: "clamp(0.95rem, 1.1vw, 1.1rem)" }}
+                >
+                  {item.title}
+                </h3>
+
+                <p
+                  className="font-medium leading-relaxed text-[#0F2D7A]/75"
+                  style={{ fontSize: "clamp(0.82rem, 0.88vw, 0.92rem)" }}
+                >
+                  {item.desc}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
-        <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
-          Empowerment
-        </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
-          Students and educators growing together with confidence and mentorship.
-        </p>
-      </motion.div>
+      </div>
+    </section>
 
-      {/* COMMUNITY */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.36 }}
-        whileHover={{ y: -4 }}
-        className="bg-white/72 border border-white/65 backdrop-blur-md rounded-2xl p-3.5 space-y-2 group transition-colors hover:bg-white/90"
-      >
-        <div className="h-8 w-8 rounded-xl flex items-center justify-center border bg-rose-50 text-rose-600 border-rose-100 group-hover:scale-105 transition-transform">
-          <Heart size={16} className="fill-rose-500/10" />
+    <section className="relative w-full py-20 px-6 sm:px-12 xl:px-24 bg-[#FAF8F4] select-none antialiased font-sans text-[#0F2D7A] border-t border-[#0F2D7A]/5">
+      <div className="max-w-7xl mx-auto space-y-20 relative z-10">
+        
+        {/* ── SECTION 1: OUR PHILOSOPHY ── */}
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#DCEBFF] border border-[#B9D7FF] px-3.5 py-1 mb-4"
+          >
+            <Sparkles size={11} className="text-[#0F2D7A]" />
+            <span className="text-[10px] font-bold tracking-[0.22em] text-[#0F2D7A] uppercase">
+              Our Philosophy
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.08 }}
+            className="font-[900] leading-[1.08] tracking-[-1.5px] text-[#0F2D7A] mb-8"
+            style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
+          >
+            Purpose Beyond{" "}
+            <span className="text-[#F4A623] italic font-serif font-normal">
+              Knowledge.
+            </span>
+          </motion.h2>
+
+          {/* Philosophy Statement Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="w-full bg-white/75 border border-white/90 backdrop-blur-md rounded-3xl p-8 sm:p-10 shadow-sm relative overflow-hidden text-center"
+          >
+            <Quote size={48} className="absolute top-4 left-6 text-[#0F2D7A]/5 pointer-events-none" />
+            <p
+              className="font-bold leading-relaxed text-[#0F2D7A] relative z-10"
+              style={{ fontSize: "clamp(1.1rem, 1.6vw, 1.45rem)" }}
+            >
+              Knowledge without purpose has limited value. At i4iSciences, we believe education
+              should inspire discovery, cultivate integrity, empower innovation, and create solutions
+              that advance humanity.
+            </p>
+          </motion.div>
         </div>
-        <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
-          Community
-        </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
-          Uniting families, schools, and tutoring networks in shared support.
-        </p>
-      </motion.div>
 
-      {/* INNOVATION */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.43 }}
-        whileHover={{ y: -4 }}
-        className="bg-white/72 border border-white/65 backdrop-blur-md rounded-2xl p-3.5 space-y-2 group transition-colors hover:bg-white/90"
-      >
-        <div className="h-8 w-8 rounded-xl flex items-center justify-center border bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:scale-105 transition-transform">
-          <Activity size={16} />
+        {/* ── SECTION 2: HOW WE PURSUE IT (THREE-COLUMN BLOCK) ── */}
+        <div>
+          <div className="flex flex-col items-center text-center mb-12">
+            
+
+            <motion.h3
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.08 }}
+              className="font-[900] leading-[1.08] tracking-[-1px] text-[#0F2D7A]"
+              style={{ fontSize: "clamp(1.75rem, 2.8vw, 2.5rem)" }}
+            >
+              How We{" "}
+              <span className="relative inline-block text-[#F4A623]">
+                Pursue It
+                <svg
+                  className="absolute -bottom-1 left-0 w-full fill-none stroke-[#F4A623]/60"
+                  style={{ height: "0.45em" }}
+                  viewBox="0 0 100 10"
+                  preserveAspectRatio="none"
+                >
+                  <path d="M3,7 Q50,1 97,6 T50,4" strokeWidth="3" strokeLinecap="round" />
+                </svg>
+              </span>
+            </motion.h3>
+          </div>
+
+          {/* 3 COLUMNS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {pillars.map((pillar, idx) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.12 * idx }}
+                  whileHover={{ y: -6 }}
+                  className="bg-white/80 border border-white/90 backdrop-blur-md rounded-3xl p-7 space-y-4 group transition-colors hover:bg-white/95 shadow-sm hover:shadow-md flex flex-col justify-between"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className={`h-11 w-11 rounded-2xl flex items-center justify-center border ${pillar.color} group-hover:scale-105 transition-transform`}>
+                        <Icon size={22} />
+                      </div>
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-[#0F2D7A]/40 bg-[#0F2D7A]/5 px-2.5 py-1 rounded-full">
+                        {pillar.subtitle}
+                      </span>
+                    </div>
+
+                    <h4
+                      className="font-black tracking-tight text-[#0F2D7A] pt-2"
+                      style={{ fontSize: "clamp(1.2rem, 1.4vw, 1.4rem)" }}
+                    >
+                      {pillar.title}
+                    </h4>
+
+                    <p
+                      className="font-medium leading-relaxed text-[#0F2D7A]/75"
+                      style={{ fontSize: "clamp(0.88rem, 0.95vw, 1rem)" }}
+                    >
+                      {pillar.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-        <h3 className="font-black tracking-tight text-[#0F2D7A] leading-none" style={{ fontSize: "clamp(0.7rem, 1vw, 0.88rem)" }}>
-          Innovation
-        </h3>
-        <p className="font-medium leading-snug text-[#0F2D7A]/65" style={{ fontSize: "clamp(0.8rem, 0.85vw, 0.75rem)" }}>
-          Responsible AI personalising learning without replacing its human core.
-        </p>
-      </motion.div>
 
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
+
 
 
     <section

@@ -176,9 +176,9 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="text-slate-400 font-semibold">© 2022 i4iSciences LLC.</span>
             <span className="hidden sm:inline text-slate-700">|</span>
-            <Link href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
+            <Link href="/privacy-policy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
             <span className="text-slate-800">•</span>
-            <Link href="#" className="hover:text-slate-300 transition-colors">Terms of Service</Link>
+            <Link href="/terms-of-service" className="hover:text-slate-300 transition-colors">Terms of Service</Link>
             <span className="text-slate-800">•</span>
             <Link href="#" className="hover:text-slate-300 transition-colors">Sitemap</Link>
           </div>
