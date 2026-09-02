@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Smile, Sparkles, Languages, Compass } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname === "/login") return null;
+
   return (
     <footer id="site-footer" className="relative bg-[#0F1922] text-[#E2E8F0] font-sans antialiased selection:bg-amber-400 selection:text-slate-900 border-t border-slate-800">
       

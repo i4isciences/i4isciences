@@ -433,34 +433,36 @@ export default function Navbar() {
           ))}
 
           {/* Login */}
-          <button
-            style={{
-              padding: "7px 20px",
-              borderRadius: 999,
-              background: isGlass ? "rgba(10,46,138,0.06)" : "rgba(255,255,255,0.10)",
-              border: isGlass
-                ? "1px solid rgba(10,46,138,0.18)"
-                : "1px solid rgba(255,255,255,0.22)",
-              fontFamily: "'Geist','Geist Variable',sans-serif",
-              fontSize: "0.82rem",
-              fontWeight: 600,
-              color: textColor,
-              cursor: "pointer",
-              transition: "background 0.2s",
-            }}
-            onMouseEnter={e =>
-              ((e.currentTarget as HTMLButtonElement).style.background = isGlass
-                ? "rgba(10,46,138,0.12)"
-                : "rgba(255,255,255,0.18)")
-            }
-            onMouseLeave={e =>
-              ((e.currentTarget as HTMLButtonElement).style.background = isGlass
-                ? "rgba(10,46,138,0.06)"
-                : "rgba(255,255,255,0.10)")
-            }
-          >
-            Login
-          </button>
+          <Link href="/login" style={{ textDecoration: "none" }}>
+            <button
+              style={{
+                padding: "7px 20px",
+                borderRadius: 999,
+                background: isGlass ? "rgba(10,46,138,0.06)" : "rgba(255,255,255,0.10)",
+                border: isGlass
+                  ? "1px solid rgba(10,46,138,0.18)"
+                  : "1px solid rgba(255,255,255,0.22)",
+                fontFamily: "'Geist','Geist Variable',sans-serif",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                color: textColor,
+                cursor: "pointer",
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={e =>
+                ((e.currentTarget as HTMLButtonElement).style.background = isGlass
+                  ? "rgba(10,46,138,0.12)"
+                  : "rgba(255,255,255,0.18)")
+              }
+              onMouseLeave={e =>
+                ((e.currentTarget as HTMLButtonElement).style.background = isGlass
+                  ? "rgba(10,46,138,0.06)"
+                  : "rgba(255,255,255,0.10)")
+              }
+            >
+              Login
+            </button>
+          </Link>
 
           {/* Book Demo — gold, stays the same in both modes */}
           <Link href="/contact">

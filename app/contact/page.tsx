@@ -172,12 +172,49 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", organization: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState<{ who?: string; name?: string; email?: string; message?: string }>({});
+  const whoGroupRef = useRef<HTMLDivElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
   const toggleChip = (value: string, current: string[], setter: (v: string[]) => void) => {
     setter(current.includes(value) ? current.filter((v) => v !== value) : [...current, value]);
   };
 
+  const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validate = () => {
+    const nextErrors: typeof errors = {};
+    if (selectedWho.length === 0) nextErrors.who = "Please select at least one option.";
+    if (!formData.name.trim()) nextErrors.name = "Please enter your name.";
+    if (!formData.email.trim()) nextErrors.email = "Please enter your email address.";
+    else if (!EMAIL_PATTERN.test(formData.email.trim())) nextErrors.email = "Please enter a valid email address.";
+    if (!formData.message.trim()) nextErrors.message = "Please tell us what you're hoping to achieve.";
+    return nextErrors;
+  };
+
+  const clearError = (field: keyof typeof errors) => {
+    setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
+  };
+
   const handleSubmit = async () => {
+    const nextErrors = validate();
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      const target = nextErrors.who
+        ? whoGroupRef.current
+        : nextErrors.name
+        ? nameInputRef.current
+        : nextErrors.email
+        ? emailInputRef.current
+        : messageInputRef.current;
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+      target?.focus({ preventScroll: true });
+      return;
+    }
+
+    setErrors({});
     setSubmitting(true);
     try {
       const response = await fetch("/api/contact", {
@@ -260,7 +297,6 @@ export default function ContactPage() {
           <div className="ticket">
             {/* ── STUB ── */}
             <div className="stub">
-              <div className="stub-glow" aria-hidden="true" />
               <span className="stub-eyebrow">Passenger info</span>
               <h3 className="stub-title">Prefer to skip the form?</h3>
               <p className="stub-desc">Reach us directly — wherever you&apos;re writing from.</p>
@@ -321,13 +357,16 @@ export default function ContactPage() {
                     <h3 className="main-title">Tell us about yourself</h3>
 
                     <div className="field-block">
-                      <span className="field-label">01 · I am a</span>
-                      <div className="tag-row">
+                      <span className="field-label">01 · I am a <span className="field-required">*</span></span>
+                      <div ref={whoGroupRef} tabIndex={-1} className={`tag-row ${errors.who ? "tag-row-error" : ""}`} role="group" aria-invalid={!!errors.who} aria-describedby={errors.who ? "who-error" : undefined}>
                         {whoOptions.map((opt, i) => (
                           <button
                             key={opt}
                             type="button"
-                            onClick={() => toggleChip(opt, selectedWho, setSelectedWho)}
+                            onClick={() => {
+                              toggleChip(opt, selectedWho, setSelectedWho);
+                              clearError("who");
+                            }}
                             className={`tag ${selectedWho.includes(opt) ? "tag-active" : ""}`}
                             style={{ transform: `rotate(${i % 2 === 0 ? -1 : 1}deg)` }}
                           >
@@ -336,6 +375,7 @@ export default function ContactPage() {
                           </button>
                         ))}
                       </div>
+                      {errors.who && <span id="who-error" className="field-error" role="alert">{errors.who}</span>}
                     </div>
 
                     <div className="field-block">
@@ -360,22 +400,67 @@ export default function ContactPage() {
                     <div className="field-block">
                       <span className="field-label">03 · Your details</span>
                       <div className="input-grid">
-                        <label className="input-box">
-                          <span>Name</span>
-                          <input type="text" placeholder="Your name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
-                        </label>
-                        <label className="input-box">
-                          <span>Email</span>
-                          <input type="email" placeholder="you@example.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
-                        </label>
+                        <div className="field-wrap">
+                          <label className={`input-box ${errors.name ? "input-box-error" : ""}`}>
+                            <span>Name <span className="field-required">*</span></span>
+                            <input
+                              ref={nameInputRef}
+                              type="text"
+                              placeholder="Your name"
+                              value={formData.name}
+                              aria-invalid={!!errors.name}
+                              aria-describedby={errors.name ? "name-error" : undefined}
+                              onChange={(e) => {
+                                setFormData({ ...formData, name: e.target.value });
+                                clearError("name");
+                              }}
+                            />
+                          </label>
+                          {errors.name && <span id="name-error" className="field-error" role="alert">{errors.name}</span>}
+                        </div>
+
+                        <div className="field-wrap">
+                          <label className={`input-box ${errors.email ? "input-box-error" : ""}`}>
+                            <span>Email <span className="field-required">*</span></span>
+                            <input
+                              ref={emailInputRef}
+                              type="email"
+                              placeholder="you@example.com"
+                              value={formData.email}
+                              aria-invalid={!!errors.email}
+                              aria-describedby={errors.email ? "email-error" : undefined}
+                              onChange={(e) => {
+                                setFormData({ ...formData, email: e.target.value });
+                                clearError("email");
+                              }}
+                            />
+                          </label>
+                          {errors.email && <span id="email-error" className="field-error" role="alert">{errors.email}</span>}
+                        </div>
+
                         <label className="input-box input-box-full">
                           <span>Organization</span>
                           <input type="text" placeholder="Where you work / study" value={formData.organization} onChange={(e) => setFormData({ ...formData, organization: e.target.value })} />
                         </label>
-                        <label className="input-box input-box-full">
-                          <span>Message</span>
-                          <textarea rows={4} placeholder="What are you hoping to achieve?" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} />
-                        </label>
+
+                        <div className="field-wrap field-wrap-full">
+                          <label className={`input-box ${errors.message ? "input-box-error" : ""}`}>
+                            <span>Message <span className="field-required">*</span></span>
+                            <textarea
+                              ref={messageInputRef}
+                              rows={4}
+                              placeholder="What are you hoping to achieve?"
+                              value={formData.message}
+                              aria-invalid={!!errors.message}
+                              aria-describedby={errors.message ? "message-error" : undefined}
+                              onChange={(e) => {
+                                setFormData({ ...formData, message: e.target.value });
+                                clearError("message");
+                              }}
+                            />
+                          </label>
+                          {errors.message && <span id="message-error" className="field-error" role="alert">{errors.message}</span>}
+                        </div>
                       </div>
                     </div>
 
@@ -444,6 +529,8 @@ export default function ContactPage() {
           --text-secondary: #5a6a8a;
           --text-muted: #8fa0bc;
           --border: #e2eaf4;
+          --error: #d93025;
+          --error-light: #fdedec;
           --font: var(--font-geist), "Geist", system-ui, sans-serif;
           --hand: var(--font-kalam), "Kalam", cursive;
         }
@@ -573,10 +660,6 @@ export default function ContactPage() {
           flex-direction: column;
           gap: 22px;
         }
-        .stub-glow {
-          position: absolute; top: -60px; right: -60px; width: 180px; height: 180px;
-          background: radial-gradient(circle, rgba(232,184,75,0.3) 0%, transparent 70%);
-        }
         .stub-eyebrow { font-family: var(--hand); font-size: 16px; font-weight: 700; color: var(--gold); position: relative; z-index: 1; }
         .stub-title { font-family: var(--font); font-size: 21px; font-weight: 800; line-height: 1.3; position: relative; z-index: 1; }
         .stub-desc { font-family: var(--font); font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.72); position: relative; z-index: 1; }
@@ -649,6 +732,21 @@ export default function ContactPage() {
           border: none; outline: none; font-family: var(--font); font-size: 15.5px; color: var(--blue-deep); resize: none; background: transparent;
         }
         .input-box input::placeholder, .input-box textarea::placeholder { color: var(--text-muted); }
+
+        .field-wrap { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+        .field-wrap-full { grid-column: 1 / -1; }
+        .field-required { color: var(--error); }
+        .input-box-error { border-color: var(--error) !important; background: var(--error-light); }
+        .field-error {
+          display: flex; align-items: center; gap: 6px;
+          font-family: var(--font); font-size: 12.5px; font-weight: 500; color: var(--error);
+        }
+        .field-error::before {
+          content: "!"; display: inline-flex; align-items: center; justify-content: center;
+          width: 14px; height: 14px; border-radius: 50%; background: var(--error); color: white;
+          font-size: 10px; font-weight: 800; flex-shrink: 0;
+        }
+        .tag-row-error { padding: 4px; border: 1.5px dashed var(--error); border-radius: 10px; }
 
         .board-footer { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; padding-top: 8px; }
         .btn-board {
