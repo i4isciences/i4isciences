@@ -132,7 +132,7 @@ export default function FinalCTASection() {
 
           {/* TERTIARY BUTTON: EXPLORE MODELS */}
           <a
-            href="/models"
+            href="/teach-the-teacher"
             className="
               group flex w-full items-center justify-center gap-3 rounded-full border border-transparent bg-[#EEF4FF] 
               px-10 py-5 text-lg font-bold text-[#0A2E8A]

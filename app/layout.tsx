@@ -17,7 +17,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://www.i4isciences.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "i4iSciences | AI Education, Teacher Training & Learning Platforms",
     template: "%s | i4iSciences",
@@ -71,6 +74,29 @@ export const metadata: Metadata = {
   authors: [{ name: "i4iSciences Team", url: "https://www.i4isciences.com" }],
 };
 
+const orgLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
+  name: "i4iSciences",
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo.svg`,
+  sameAs: [
+    "https://www.facebook.com/i4isciences",
+    "https://twitter.com/i4isciences",
+    "https://www.linkedin.com/company/i4isciences",
+  ],
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "i4iSciences",
+  url: siteUrl,
+  inLanguage: "en",
+  publisher: { "@id": `${siteUrl}/#organization` },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -81,6 +107,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
         <Navbar />
 
         <main id="page-top" className="overflow-x-hidden">
