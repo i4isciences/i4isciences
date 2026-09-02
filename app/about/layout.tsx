@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
 const siteUrl = "https://www.i4isciences.com/about";
+const pageTitle = "About Us";
 const title = "About Us | i4iSciences";
 const description = "Learn about our mission, leadership and global vision.";
 
 export const metadata: Metadata = {
-  title,
+  title: pageTitle,
   description,
   keywords: [
     "i4iSciences about",

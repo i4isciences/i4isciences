@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
 const siteUrl = "https://www.i4isciences.com/ai-ecosystem";
+const pageTitle = "AI Ecosystem";
 const title = "AI Ecosystem | i4iSciences";
 const description = "Explore the AI Ecosystem powering education, healthcare and innovation.";
 
 export const metadata: Metadata = {
-  title,
+  title: pageTitle,
   description,
   keywords: ["AI Ecosystem", "AI Olympiad", "AI programs for kids", "AI education", "i4iSciences"],
   alternates: {

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
 const siteUrl = "https://www.i4isciences.com/models/labtrick";
+const pageTitle = "LabTricks";
 const title = "LabTricks | i4iSciences";
 const description =
   "Bring science learning to life with practical lab simulations and interactive experiments.";
 
 export const metadata: Metadata = {
-  title,
+  title: pageTitle,
   description,
   keywords: ["LabTricks", "lab simulations", "science education", "virtual labs", "i4iSciences"],
   alternates: {

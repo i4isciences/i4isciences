@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
 const siteUrl = "https://www.i4isciences.com/models/teach-the-teacher";
+const pageTitle = "Teach The Teacher";
 const title = "Teach The Teacher | i4iSciences";
 const description = "Train, certify, and grow educators with professional development designed for lasting impact.";
 
 export const metadata: Metadata = {
-  title,
+  title: pageTitle,
   description,
   keywords: [
     "teacher training",

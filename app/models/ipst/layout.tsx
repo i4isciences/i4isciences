@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
 const siteUrl = "https://www.i4isciences.com/models/ipst";
+const pageTitle = "IPST";
 const title = "IPST | i4iSciences";
 const description =
   "Support immigrant families with practical tools, mentoring, and guidance for navigating education systems.";
 
 export const metadata: Metadata = {
-  title,
+  title: pageTitle,
   description,
   keywords: ["IPST", "immigrant support", "parent resources", "education navigation", "i4iSciences IPST"],
   alternates: {

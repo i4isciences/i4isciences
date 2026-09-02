@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
 const siteUrl = "https://www.i4isciences.com/models/onecent-tutors";
+const pageTitle = "OneCent Tutors";
 const title = "OneCent Tutors | i4iSciences";
 const description = "Connect learners with affordable, high-quality tutoring through a trusted marketplace.";
 
 export const metadata: Metadata = {
-  title,
+  title: pageTitle,
   description,
   keywords: ["OneCent Tutors", "tutors", "tutoring marketplace", "affordable tutors", "i4iSciences tutors"],
   alternates: {
