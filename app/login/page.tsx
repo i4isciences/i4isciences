@@ -270,6 +270,7 @@ export default function LoginPage() {
   const [extraErrors, setExtraErrors] = useState<FieldErrors>({});
 
   const [otpSent, setOtpSent] = useState(false);
+  const [otpToken, setOtpToken] = useState("");
   const [otpValue, setOtpValue] = useState("");
   const [otpError, setOtpError] = useState("");
   const [otpVerified, setOtpVerified] = useState(false);
@@ -301,6 +302,7 @@ export default function LoginPage() {
     setParentExtra({ organization: "" });
     setExtraErrors({});
     setOtpSent(false);
+    setOtpToken("");
     setOtpValue("");
     setOtpError("");
     setOtpVerified(false);
@@ -386,6 +388,7 @@ export default function LoginPage() {
       email: details.email.trim(),
       password: details.password,
       options: {
+        emailRedirectTo: `${window.location.origin}/dashboard`,
         data: {
           full_name: details.fullName.trim(),
           phone: details.phone.trim(),
@@ -471,6 +474,7 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (data.success) {
+        setOtpToken(data.token);
         setOtpSent(true);
         setResendCooldown(30);
       } else {
@@ -493,7 +497,7 @@ export default function LoginPage() {
       const res = await fetch("/api/auth/parent-otp/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: parent.email.trim(), token: otpValue }),
+        body: JSON.stringify({ email: parent.email.trim(), token: otpToken, code: otpValue }),
       });
       const data = await res.json();
       if (data.success && data.verified) {

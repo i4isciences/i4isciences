@@ -1,23 +1,23 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
+import { verifyOtpToken } from "@/lib/otp";
 
 export async function POST(req: Request) {
   try {
-    const { email, token } = await req.json();
+    const { email, token, code } = await req.json();
 
-    if (!email || !token) {
-      return NextResponse.json({ success: false, error: "Missing email or code." }, { status: 400 });
+    if (!email || !token || !code) {
+      return NextResponse.json({ success: false, verified: false, error: "Missing email, token, or code." }, { status: 400 });
     }
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    const { error } = await supabase.auth.verifyOtp({ email, token, type: "email" });
+    const result = verifyOtpToken(token, email, code);
 
-    if (error) {
-      console.error("parent-otp/verify:", error.message);
-      return NextResponse.json({ success: false, verified: false, error: "That code didn't match. Please try again." }, { status: 400 });
+    if (!result.valid) {
+      const message =
+        result.reason === "expired"
+          ? "That code has expired. Please request a new one."
+          : "That code didn't match. Please try again.";
+      return NextResponse.json({ success: false, verified: false, error: message }, { status: 400 });
     }
 
     return NextResponse.json({ success: true, verified: true });

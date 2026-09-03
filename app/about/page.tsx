@@ -338,7 +338,7 @@ const fadeUp = (delay = 0) => ({
 const TEAM = [
   {
     name: "Nishi Patel",
-    role: "Chief Operating Officer · Canada",
+    role: "Country Manager · Canada",
     line: "Builds the operational backbone that turns ambitious educational ideas into consistent global execution.",
     initials: "NP",
     hue: "#DCEBFF",
@@ -363,7 +363,7 @@ const TEAM = [
   },
   {
     name: "Sanjay Mishra",
-    role: "Chief Operating Officer · India",
+    role: "Senior Manager · India",
     line: "Leads execution across India, ensuring every initiative reaches learners efficiently.",
     initials: "SM",
     hue: "#FDECEC",
@@ -396,15 +396,6 @@ const TEAM = [
     hue: "#F3F4F6",
     textColor: "#374151",
   },
-
-  {
-    name: "Jaiprakash",
-    role: "Mathematics Teacher",
-    line: "Believes every mathematical concept becomes easier when students experience it with confidence.",
-    initials: "JP",
-    hue: "#F0FDF4",
-    textColor: "#166534",
-  },
   {
     name: "Krisha Patel",
     role: "STEM Teacher (Algebra & Biology) · USA",
@@ -413,14 +404,7 @@ const TEAM = [
     hue: "#ECFDF5",
     textColor: "#047857",
   },
-  {
-    name: "Isha",
-    role: "Biology Teacher",
-    line: "Inspires curiosity through hands-on biology education, helping students connect scientific concepts with the world around them.",
-    initials: "IS",
-    hue: "#ECFDF5",
-    textColor: "#047857",
-  },
+  
   {
     name: "Sudha Chauhan",
     role: "Social Outreach",
