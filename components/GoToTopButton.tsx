@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowUp } from "lucide-react";
 
+import { isAppShellRoute } from "@/lib/app-shell-routes";
+
 export default function GoToTopButton() {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
@@ -55,6 +57,8 @@ export default function GoToTopButton() {
       window.removeEventListener("resize", handleScroll);
     };
   }, [pathname]);
+
+  if (isAppShellRoute(pathname)) return null;
 
   const scrollToTop = () => {
     const pageTop = document.getElementById("page-top");

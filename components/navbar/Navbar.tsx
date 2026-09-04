@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
+import { isAppShellRoute } from "@/lib/app-shell-routes";
+
 export default function Navbar() {
   const [modelsOpen, setModelsOpen] = useState(false);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
@@ -50,6 +52,8 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [isHomepage]);
+
+  if (isAppShellRoute(pathname)) return null;
 
   // Glass mode = solid/blurred navbar with navy text.
   // True everywhere except the homepage hero.

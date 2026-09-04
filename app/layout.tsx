@@ -6,6 +6,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import GoToTopButton from "@/components/GoToTopButton";
+import AuthRedirectGuard from "@/components/AuthRedirectGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -109,6 +110,7 @@ export default function RootLayout({
       >
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
+        <AuthRedirectGuard />
         <Navbar />
 
         <main id="page-top" className="overflow-x-hidden">

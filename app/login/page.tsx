@@ -18,9 +18,14 @@ import {
   X,
 } from "lucide-react";
 
+import type { CountryCode } from "libphonenumber-js";
+
 import { createClient } from "@/utils/supabase/client";
 import LegalDocument from "@/components/legal/LegalDocument";
 import { termsOfServiceContent, privacyPolicyContent, type LegalContent } from "@/lib/legal-content";
+import { detectDefaultCountry } from "@/lib/countries";
+import CountryPhoneField, { isPhoneValid } from "@/components/auth/CountryPhoneField";
+import OtpInput from "@/components/auth/OtpInput";
 
 // ─────────────────────────────────────────────
 // STATIC DATA
@@ -34,9 +39,8 @@ const MODELS = [
 ];
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_PATTERN = /^[+]?[\d\s().-]{7,20}$/;
 
-type Mode = "login" | "signup";
+type Mode = "login" | "signup" | "reset";
 type Role = "student" | "parent" | "teacher";
 type SignupStep = "role" | "details" | "extra" | "success";
 
@@ -76,64 +80,6 @@ function ModelCarousel() {
           </motion.div>
         </AnimatePresence>
       </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────
-// OTP INPUT — 6 boxes, auto-advance, backspace-back, paste-splits
-// ─────────────────────────────────────────────
-
-function OtpInput({ value, onChange, disabled }: { value: string; onChange: (v: string) => void; disabled?: boolean }) {
-  const refs = useRef<Array<HTMLInputElement | null>>([]);
-  const digits = value.padEnd(6, " ").split("").slice(0, 6);
-
-  const setDigit = (i: number, d: string) => {
-    const next = value.split("");
-    next[i] = d;
-    onChange(next.join("").slice(0, 6));
-  };
-
-  const handleChange = (i: number, raw: string) => {
-    const d = raw.replace(/\D/g, "").slice(-1);
-    setDigit(i, d ?? "");
-    if (d && i < 5) refs.current[i + 1]?.focus();
-  };
-
-  const handleKeyDown = (i: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace" && !digits[i]?.trim() && i > 0) {
-      refs.current[i - 1]?.focus();
-    }
-  };
-
-  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
-    if (pasted.length > 1) {
-      e.preventDefault();
-      onChange(pasted);
-      refs.current[Math.min(pasted.length, 5)]?.focus();
-    }
-  };
-
-  return (
-    <div className="otp-row">
-      {digits.map((d, i) => (
-        <input
-          key={i}
-          ref={(el) => {
-            refs.current[i] = el;
-          }}
-          type="text"
-          inputMode="numeric"
-          maxLength={1}
-          className="otp-box"
-          value={d.trim()}
-          disabled={disabled}
-          onChange={(e) => handleChange(i, e.target.value)}
-          onKeyDown={(e) => handleKeyDown(i, e)}
-          onPaste={handlePaste}
-        />
-      ))}
     </div>
   );
 }
@@ -253,15 +199,119 @@ export default function LoginPage() {
   const [loginErrors, setLoginErrors] = useState<FieldErrors>({});
   const [loginSubmitting, setLoginSubmitting] = useState(false);
   const [loginNotice, setLoginNotice] = useState("");
-  const [showForgotNote, setShowForgotNote] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
+
+  const [showForgotForm, setShowForgotForm] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotError, setForgotError] = useState("");
+  const [forgotSubmitting, setForgotSubmitting] = useState(false);
+  const [forgotSent, setForgotSent] = useState(false);
+
+  // Password recovery state (arriving here via the "reset password" email link)
+  const [checkingRecovery, setCheckingRecovery] = useState(true);
+  const [recoveryInvalid, setRecoveryInvalid] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [resetError, setResetError] = useState("");
+  const [resetSubmitting, setResetSubmitting] = useState(false);
+  const [resetDone, setResetDone] = useState(false);
+
+  useEffect(() => {
+    // A password-recovery link lands the browser back here with a code/token
+    // in the URL that the Supabase client exchanges for a session automatically.
+    // We only treat this as a "reset" flow if the URL actually carries recovery
+    // params — otherwise a normal signed-out visit to /login would never show
+    // the login/signup tabs while this check resolves.
+    const url = new URL(window.location.href);
+    const looksLikeRecovery =
+      url.searchParams.get("type") === "recovery" ||
+      url.hash.includes("type=recovery") ||
+      url.searchParams.has("code");
+
+    if (!looksLikeRecovery) {
+      // Not a recovery link — nothing to await from Supabase, so there's no
+      // external event to hang this on. Deferred a tick so the state update
+      // happens in a microtask rather than synchronously inside the effect.
+      queueMicrotask(() => setCheckingRecovery(false));
+      return;
+    }
+
+    let settled = false;
+    const finish = (ready: boolean) => {
+      if (settled) return;
+      settled = true;
+      setRecoveryInvalid(!ready);
+      setCheckingRecovery(false);
+      setMode("reset");
+    };
+
+    // PASSWORD_RECOVERY is the authoritative signal — Supabase only fires it
+    // when the session was just established from a genuine recovery link, so
+    // we never mistake an already-signed-in browser session for a recovery.
+    const { data: subscription } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") finish(true);
+    });
+
+    // Fallback for the (unlikely) case where Supabase's client already
+    // exchanged the code before this listener attached. Safe here — and only
+    // here — because we've already confirmed the URL itself carries recovery
+    // params, so a session appearing now is the one this link just created.
+    const timeout = setTimeout(() => {
+      supabase.auth.getSession().then(({ data }) => finish(!!data.session));
+    }, 5000);
+
+    return () => {
+      subscription.subscription.unsubscribe();
+      clearTimeout(timeout);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleResetPassword = async () => {
+    if (!newPassword) {
+      setResetError("Please create a password.");
+      return;
+    }
+    if (newPassword.length < 8) {
+      setResetError("Password must be at least 8 characters.");
+      return;
+    }
+    if (newPassword !== confirmNewPassword) {
+      setResetError("Passwords don't match.");
+      return;
+    }
+
+    setResetError("");
+    setResetSubmitting(true);
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    setResetSubmitting(false);
+
+    if (error) {
+      setResetError(
+        error.code === "same_password"
+          ? "That's your current password — choose a different one."
+          : error.message || "We couldn't update your password. Please try again."
+      );
+      return;
+    }
+
+    setResetDone(true);
+    setTimeout(() => {
+      router.push("/dashboard");
+      router.refresh();
+    }, 1800);
+  };
 
   // Signup state
   const [step, setStep] = useState<SignupStep>("role");
   const [role, setRole] = useState<Role | null>(null);
   const [details, setDetails] = useState({ fullName: "", email: "", phone: "", password: "", confirmPassword: "" });
+  const [gender, setGender] = useState<"male" | "female" | "unspecified" | "">("");
   const [detailErrors, setDetailErrors] = useState<FieldErrors>({});
   const [showPassword, setShowPassword] = useState(false);
+  const [country, setCountry] = useState<CountryCode>(() => detectDefaultCountry());
+  const [parentCountry, setParentCountry] = useState<CountryCode>(() => detectDefaultCountry());
 
   const [age, setAge] = useState("");
   const [parent, setParent] = useState({ name: "", phone: "", email: "" });
@@ -296,6 +346,7 @@ export default function LoginPage() {
     setRole(null);
     setDetails({ fullName: "", email: "", phone: "", password: "", confirmPassword: "" });
     setDetailErrors({});
+    setGender("");
     setAge("");
     setParent({ name: "", phone: "", email: "" });
     setTeacherExtra({ organization: "", subject: "" });
@@ -313,6 +364,10 @@ export default function LoginPage() {
     setMode(next);
     setLoginErrors({});
     setLoginNotice("");
+    setShowForgotForm(false);
+    setForgotSent(false);
+    setForgotEmail("");
+    setForgotError("");
     resetSignup();
   };
 
@@ -338,12 +393,59 @@ export default function LoginPage() {
     setLoginSubmitting(false);
 
     if (error) {
-      setLoginNotice("Incorrect email or password. Please try again.");
+      if (error.code === "email_not_confirmed") {
+        setLoginNotice("Please confirm your email before signing in — check your inbox for the confirmation link we sent.");
+      } else {
+        setLoginNotice("Incorrect email or password. Please try again.");
+      }
       return;
     }
 
     router.push("/dashboard");
     router.refresh();
+  };
+
+  // ── FORGOT PASSWORD ──
+  const handleForgotPassword = async () => {
+    if (!forgotEmail.trim()) {
+      setForgotError("Please enter your email address.");
+      return;
+    }
+    if (!EMAIL_PATTERN.test(forgotEmail.trim())) {
+      setForgotError("Please enter a valid email address.");
+      return;
+    }
+
+    setForgotError("");
+    setForgotSubmitting(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail.trim(), {
+        redirectTo: `${window.location.origin}/login`,
+      });
+      setForgotSubmitting(false);
+
+      // A network-level failure never reached Supabase at all — that's a real
+      // problem to surface, not a privacy concern. Anything Supabase itself
+      // returned (including "no such user") stays silent, so the response
+      // never reveals which emails have accounts.
+      if (error && !error.status) {
+        setForgotError("We couldn't reach the server. Check your connection and try again.");
+        return;
+      }
+      if (error) console.error("resetPasswordForEmail:", error.message);
+      setForgotSent(true);
+    } catch (err) {
+      setForgotSubmitting(false);
+      setForgotError("We couldn't reach the server. Check your connection and try again.");
+      console.error("resetPasswordForEmail:", err);
+    }
+  };
+
+  const backToLogin = () => {
+    setShowForgotForm(false);
+    setForgotSent(false);
+    setForgotEmail("");
+    setForgotError("");
   };
 
   // ── SIGNUP: role ──
@@ -359,7 +461,7 @@ export default function LoginPage() {
     if (!details.email.trim()) errs.email = "Please enter your email address.";
     else if (!EMAIL_PATTERN.test(details.email.trim())) errs.email = "Please enter a valid email address.";
     if (!details.phone.trim()) errs.phone = "Please enter a phone number.";
-    else if (!PHONE_PATTERN.test(details.phone.trim())) errs.phone = "Please enter a valid phone number.";
+    else if (!isPhoneValid(details.phone.trim(), country)) errs.phone = "Please enter a valid phone number for the selected country.";
     if (!details.password) errs.password = "Please create a password.";
     else if (details.password.length < 8) errs.password = "Password must be at least 8 characters.";
     if (details.confirmPassword !== details.password) errs.confirmPassword = "Passwords don't match.";
@@ -392,6 +494,8 @@ export default function LoginPage() {
         data: {
           full_name: details.fullName.trim(),
           phone: details.phone.trim(),
+          country,
+          gender: gender || null,
           role,
           ...extraMetadata,
         },
@@ -446,7 +550,7 @@ export default function LoginPage() {
     if (!parent.name.trim()) errs.parentName = "Please enter your parent's full name.";
 
     if (!parent.phone.trim()) errs.parentPhone = "Please enter your parent's phone number.";
-    else if (!PHONE_PATTERN.test(parent.phone.trim())) errs.parentPhone = "Please enter a valid phone number.";
+    else if (!isPhoneValid(parent.phone.trim(), parentCountry)) errs.parentPhone = "Please enter a valid phone number for the selected country.";
     else if (normalizePhone(parent.phone) === normalizePhone(details.phone) && normalizePhone(details.phone).length > 0)
       errs.parentPhone = "Parent's phone number can't be the same as yours.";
 
@@ -516,6 +620,7 @@ export default function LoginPage() {
       age: Number(age),
       parent_name: parent.name.trim(),
       parent_phone: parent.phone.trim(),
+      parent_country: parentCountry,
       parent_email: parent.email.trim(),
       parent_verified: true,
     });
@@ -565,17 +670,124 @@ export default function LoginPage() {
           <span className="brand-tagline">AI Education Platform</span>
         </div>
 
-        <div className="tabs">
-          <button type="button" className={`tab ${mode === "login" ? "tab-active" : ""}`} onClick={() => switchMode("login")}>
-            Log in
-          </button>
-          <button type="button" className={`tab ${mode === "signup" ? "tab-active" : ""}`} onClick={() => switchMode("signup")}>
-            Sign up
-          </button>
-        </div>
+        {mode !== "reset" && (
+          <div className="tabs">
+            <button type="button" className={`tab ${mode === "login" ? "tab-active" : ""}`} onClick={() => switchMode("login")}>
+              Log in
+            </button>
+            <button type="button" className={`tab ${mode === "signup" ? "tab-active" : ""}`} onClick={() => switchMode("signup")}>
+              Sign up
+            </button>
+          </div>
+        )}
 
         <AnimatePresence mode="wait">
-          {mode === "login" ? (
+          {mode === "reset" ? (
+            <motion.div key="reset" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
+              {checkingRecovery ? (
+                <div className="reset-loading">
+                  <Loader2 className="spin" size={22} />
+                </div>
+              ) : recoveryInvalid ? (
+                <div className="success-block">
+                  <h3>This link has expired</h3>
+                  <p>Password reset links only work for a short time. Request a new one from the sign-in page.</p>
+                  <button
+                    type="button"
+                    className="link-btn"
+                    style={{ marginTop: 14 }}
+                    onClick={() => {
+                      setMode("login");
+                      setRecoveryInvalid(false);
+                    }}
+                  >
+                    Back to sign in
+                  </button>
+                </div>
+              ) : resetDone ? (
+                <div className="success-block">
+                  <div className="success-icon">
+                    <Check size={26} />
+                  </div>
+                  <h3>Password updated</h3>
+                  <p>Taking you to your dashboard…</p>
+                </div>
+              ) : (
+                <>
+                  <p className="notice" style={{ marginBottom: 18 }}>
+                    Choose a new password for your account.
+                  </p>
+
+                  <Field label="New password" error={resetError}>
+                    <div className="password-row">
+                      <input
+                        type={showNewPassword ? "text" : "password"}
+                        placeholder="At least 8 characters"
+                        value={newPassword}
+                        onChange={(e) => {
+                          setNewPassword(e.target.value);
+                          setResetError("");
+                        }}
+                      />
+                      <button type="button" className="eye-btn" onClick={() => setShowNewPassword((v) => !v)} aria-label="Toggle password visibility">
+                        {showNewPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                      </button>
+                    </div>
+                  </Field>
+
+                  <Field label="Confirm new password">
+                    <input
+                      type={showNewPassword ? "text" : "password"}
+                      placeholder="Re-enter your password"
+                      value={confirmNewPassword}
+                      onChange={(e) => {
+                        setConfirmNewPassword(e.target.value);
+                        setResetError("");
+                      }}
+                    />
+                  </Field>
+
+                  <button type="button" className="primary-btn" onClick={handleResetPassword} disabled={resetSubmitting}>
+                    {resetSubmitting ? <Loader2 className="spin" size={18} /> : "Update password"}
+                  </button>
+                </>
+              )}
+            </motion.div>
+          ) : mode === "login" && showForgotForm ? (
+            <motion.div key="forgot" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
+              <button type="button" className="back-btn" onClick={backToLogin}>
+                <ChevronLeft size={16} /> Back to sign in
+              </button>
+
+              {forgotSent ? (
+                <div className="success-block">
+                  <div className="success-icon">
+                    <Check size={26} />
+                  </div>
+                  <h3>Check your email</h3>
+                  <p>If an account exists for {forgotEmail}, we&apos;ve sent a link to reset your password.</p>
+                </div>
+              ) : (
+                <>
+                  <p className="notice">Enter your email and we&apos;ll send you a link to reset your password.</p>
+                  <Field label="Email" error={forgotError}>
+                    <input
+                      type="email"
+                      placeholder="you@example.com"
+                      value={forgotEmail}
+                      onChange={(e) => {
+                        setForgotEmail(e.target.value);
+                        setForgotError("");
+                      }}
+                    />
+                  </Field>
+                  <button type="button" className="primary-btn" onClick={handleForgotPassword} disabled={forgotSubmitting}>
+                    {forgotSubmitting ? <Loader2 className="spin" size={18} /> : "Send reset link"}
+                  </button>
+                </>
+              )}
+            </motion.div>
+          ) : mode === "login" ? (
             <motion.div key="login" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
               <Field label="Email" error={loginErrors.email}>
                 <input
@@ -607,11 +819,17 @@ export default function LoginPage() {
               </Field>
 
               <div className="forgot-row">
-                <button type="button" className="link-btn" onClick={() => setShowForgotNote((v) => !v)}>
+                <button
+                  type="button"
+                  className="link-btn"
+                  onClick={() => {
+                    setForgotEmail(loginData.email);
+                    setShowForgotForm(true);
+                  }}
+                >
                   Forgot password?
                 </button>
               </div>
-              {showForgotNote && <p className="notice">Password reset isn&apos;t available yet — please reach out via our contact page.</p>}
 
               {loginNotice && <p className="notice notice-error">{loginNotice}</p>}
 
@@ -672,17 +890,35 @@ export default function LoginPage() {
                       }}
                     />
                   </Field>
-                  <Field label="Phone number" error={detailErrors.phone}>
-                    <input
-                      type="tel"
-                      placeholder="+1 555 000 1111"
-                      value={details.phone}
-                      onChange={(e) => {
-                        setDetails({ ...details, phone: e.target.value });
-                        setDetailErrors((p) => ({ ...p, phone: undefined }));
-                      }}
-                    />
-                  </Field>
+                  <CountryPhoneField
+                    country={country}
+                    phone={details.phone}
+                    error={detailErrors.phone}
+                    onCountryChange={(c) => {
+                      setCountry(c);
+                      setParentCountry(c);
+                    }}
+                    onPhoneChange={(v) => {
+                      setDetails({ ...details, phone: v });
+                      setDetailErrors((p) => ({ ...p, phone: undefined }));
+                    }}
+                  />
+                  <div className="field">
+                    <span className="field-label">Gender (optional)</span>
+                    <div className="gender-row">
+                      {(["male", "female", "unspecified"] as const).map((g) => (
+                        <button
+                          key={g}
+                          type="button"
+                          className={`gender-pill ${gender === g ? "gender-pill-active" : ""}`}
+                          onClick={() => setGender(gender === g ? "" : g)}
+                        >
+                          {g === "male" ? "Male" : g === "female" ? "Female" : "Prefer not to say"}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
                   <Field label="Password" error={detailErrors.password}>
                     <div className="password-row">
                       <input
@@ -765,18 +1001,18 @@ export default function LoginPage() {
                             }}
                           />
                         </Field>
-                        <Field label="Parent's phone number" error={extraErrors.parentPhone}>
-                          <input
-                            type="tel"
-                            placeholder="+1 555 000 1111"
-                            value={parent.phone}
-                            disabled={otpSent}
-                            onChange={(e) => {
-                              setParent({ ...parent, phone: e.target.value });
-                              setExtraErrors((p) => ({ ...p, parentPhone: undefined }));
-                            }}
-                          />
-                        </Field>
+                        <CountryPhoneField
+                          label="Parent's phone number"
+                          country={parentCountry}
+                          phone={parent.phone}
+                          error={extraErrors.parentPhone}
+                          disabled={otpSent}
+                          onCountryChange={setParentCountry}
+                          onPhoneChange={(v) => {
+                            setParent({ ...parent, phone: v });
+                            setExtraErrors((p) => ({ ...p, parentPhone: undefined }));
+                          }}
+                        />
                         <Field label="Parent's email" error={extraErrors.parentEmail}>
                           <input
                             type="email"
@@ -998,6 +1234,11 @@ export default function LoginPage() {
         .field-error { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 500; color: #d93025; }
         .field-error::before { content: "!"; display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; background: #d93025; color: white; font-size: 10px; font-weight: 800; flex-shrink: 0; }
 
+        .gender-row { display: flex; flex-wrap: wrap; gap: 8px; }
+        .gender-pill { padding: 8px 14px; border-radius: 999px; border: 1.5px solid rgba(10,46,138,0.14); background: white; font-family: var(--font-geist-sans), "Geist", sans-serif; font-size: 0.82rem; font-weight: 600; color: rgba(16,32,78,0.6); cursor: pointer; transition: all 0.16s; }
+        .gender-pill:hover { border-color: #0a2e8a; color: #0a2e8a; }
+        .gender-pill-active { border-color: #0a2e8a; background: #0a2e8a; color: white; }
+
         .password-row { display: flex; align-items: center; gap: 8px; }
         .password-row input { flex: 1; }
         .eye-btn { background: none; border: none; padding: 0; cursor: pointer; color: rgba(16,32,78,0.45); display: flex; }
@@ -1046,6 +1287,7 @@ export default function LoginPage() {
         .emotional-note { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: rgba(16,163,74,0.08); border-radius: 12px; color: #0f6b3a; font-size: 14px; font-weight: 500; line-height: 1.5; }
         .emotional-note svg { flex-shrink: 0; color: #16a34a; }
 
+        .reset-loading { display: flex; justify-content: center; padding: 40px 0; color: #0a2e8a; }
         .success-block { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 24px 0 8px; }
         .success-icon { width: 52px; height: 52px; border-radius: 50%; background: rgba(16,163,74,0.12); color: #16a34a; display: flex; align-items: center; justify-content: center; }
         .success-block h3 { font-size: 1.25rem; font-weight: 800; color: #10204e; margin: 0; }

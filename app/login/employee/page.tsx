@@ -173,7 +173,7 @@ export default function EmployeeLoginPage() {
         </AnimatePresence>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .emp-root {
           position: relative;
           min-height: 100vh;
