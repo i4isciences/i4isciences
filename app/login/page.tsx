@@ -40,6 +40,12 @@ const MODELS = [
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function isDuplicateEmailError(error: { code?: string; message?: string } | null | undefined) {
+  if (!error) return false;
+  if (error.code === "user_already_exists") return true;
+  return /already registered|already exists/i.test(error.message || "");
+}
+
 type Mode = "login" | "signup" | "reset";
 type Role = "student" | "parent" | "teacher";
 type SignupStep = "role" | "details" | "extra" | "success";
@@ -330,6 +336,7 @@ export default function LoginPage() {
 
   const [creatingAccount, setCreatingAccount] = useState(false);
   const [successVariant, setSuccessVariant] = useState<"redirecting" | "confirm-email" | "minor-welcome">("redirecting");
+  const [duplicateEmailNotice, setDuplicateEmailNotice] = useState(false);
 
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
@@ -358,6 +365,7 @@ export default function LoginPage() {
     setOtpError("");
     setOtpVerified(false);
     setTermsAccepted(false);
+    setDuplicateEmailNotice(false);
   };
 
   const switchMode = (next: Mode) => {
@@ -460,8 +468,7 @@ export default function LoginPage() {
     if (!details.fullName.trim()) errs.fullName = "Please enter your full name.";
     if (!details.email.trim()) errs.email = "Please enter your email address.";
     else if (!EMAIL_PATTERN.test(details.email.trim())) errs.email = "Please enter a valid email address.";
-    if (!details.phone.trim()) errs.phone = "Please enter a phone number.";
-    else if (!isPhoneValid(details.phone.trim(), country)) errs.phone = "Please enter a valid phone number for the selected country.";
+    if (details.phone.trim() && !isPhoneValid(details.phone.trim(), country)) errs.phone = "Please enter a valid phone number for the selected country.";
     if (!details.password) errs.password = "Please create a password.";
     else if (details.password.length < 8) errs.password = "Password must be at least 8 characters.";
     if (details.confirmPassword !== details.password) errs.confirmPassword = "Passwords don't match.";
@@ -486,6 +493,7 @@ export default function LoginPage() {
     }
 
     setCreatingAccount(true);
+    setDuplicateEmailNotice(false);
     const { data, error } = await supabase.auth.signUp({
       email: details.email.trim(),
       password: details.password,
@@ -493,7 +501,7 @@ export default function LoginPage() {
         emailRedirectTo: `${window.location.origin}/dashboard`,
         data: {
           full_name: details.fullName.trim(),
-          phone: details.phone.trim(),
+          phone: details.phone.trim() || null,
           country,
           gender: gender || null,
           role,
@@ -504,7 +512,19 @@ export default function LoginPage() {
     setCreatingAccount(false);
 
     if (error) {
-      setExtraErrors({ form: error.message || "We couldn't create your account. Please try again." });
+      if (isDuplicateEmailError(error)) {
+        setDuplicateEmailNotice(true);
+      } else {
+        setExtraErrors({ form: error.message || "We couldn't create your account. Please try again." });
+      }
+      return;
+    }
+
+    // Supabase's email-enumeration protection: a repeat sign-up for an
+    // existing address returns success with no error, but an empty
+    // identities array — that's the only signal this email is already taken.
+    if (data.user && data.user.identities && data.user.identities.length === 0) {
+      setDuplicateEmailNotice(true);
       return;
     }
 
@@ -852,6 +872,27 @@ export default function LoginPage() {
                 </button>
               )}
 
+              {step === "extra" && duplicateEmailNotice && (
+                <div className="duplicate-notice">
+                  <span className="duplicate-notice-icon">!</span>
+                  <div className="duplicate-notice-body">
+                    <p>
+                      We already have an account registered with <strong>{details.email.trim()}</strong>.
+                    </p>
+                    <button
+                      type="button"
+                      className="link-btn"
+                      onClick={() => {
+                        setLoginData({ email: details.email.trim(), password: "" });
+                        switchMode("login");
+                      }}
+                    >
+                      Sign in instead
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {step === "role" && (
                 <div className="role-grid">
                   {roleCards.map((r) => (
@@ -891,6 +932,7 @@ export default function LoginPage() {
                     />
                   </Field>
                   <CountryPhoneField
+                    label="Phone number (optional)"
                     country={country}
                     phone={details.phone}
                     error={detailErrors.phone}
@@ -1279,6 +1321,12 @@ export default function LoginPage() {
         .role-sub { font-size: 12.5px; color: rgba(16,32,78,0.5); }
 
         .minor-note { font-size: 13px; color: rgba(16,32,78,0.6); line-height: 1.5; margin: 4px 0 16px; padding: 10px 14px; background: rgba(245,166,35,0.1); border-radius: 10px; }
+
+        .duplicate-notice { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 18px; padding: 13px 15px; background: #fdedec; border: 1px solid rgba(217,48,37,0.18); border-radius: 12px; }
+        .duplicate-notice-icon { flex-shrink: 0; width: 18px; height: 18px; margin-top: 1px; border-radius: 50%; background: #d93025; color: white; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+        .duplicate-notice-body { display: flex; flex-direction: column; gap: 4px; }
+        .duplicate-notice-body p { margin: 0; font-size: 13px; line-height: 1.5; color: #7a1f18; }
+        .duplicate-notice-body .link-btn { font-size: 12.5px; }
 
         .otp-row { display: flex; gap: 8px; margin: 10px 0 16px; }
         .otp-box { width: 44px; height: 52px; text-align: center; font-size: 1.3rem; font-weight: 700; color: #10204e; border: 1.5px solid rgba(10,46,138,0.18); border-radius: 12px; outline: none; }

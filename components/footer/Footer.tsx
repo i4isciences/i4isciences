@@ -37,22 +37,30 @@ export default function Footer() {
             <div className="space-y-6">
               {/* Premium Wordmark - Clean, structural type */}
               <div className="flex items-center gap-3">
-  <Image
-    src="/images/favicon.png"
-    alt="i4iSciences Logo"
-    width={60}
-    height={60}
-    className="h-12 w-auto object-contain"
-  />
+                <Image
+                  src="/images/favicon.png"
+                  alt="i4iSciences Logo"
+                  width={60}
+                  height={60}
+                  className="h-12 w-auto object-contain"
+                />
 
-  <span className="text-3xl font-bold tracking-tight text-[#ffffff]">
-    i4iSciences LLC
-  </span>
+                <span className="text-3xl font-semibold tracking-tight text-[#ffffff]">
+                  i4iSciences<sup className="text-sm align-super">&trade;</sup> LLC
+                </span>
 
-  <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
-    Est. 2022
-  </span>
-</div>
+                <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
+                  Est. 2022
+                </span>
+              </div>
+
+              <p className="italic font-serif text-lg text-amber-400 font-medium -mt-4">
+                Inspiration for Innovation. Impact for All.
+              </p>
+
+              <p className="font-serif text-sm leading-relaxed text-slate-400 max-w-lg">
+                &ldquo;© 2026 i4iSciences LLC dba i4iSciences. i4iSciences&trade; is a trademark of i4iSciences LLC. All rights reserved.&rdquo;
+              </p>
               <h3 className="text-2xl md:text-3xl font-normal leading-tight text-slate-100 font-serif max-w-md">
                 Where global learning meets <span className="underline decoration-amber-400 decoration-2 underline-offset-4 font-sans font-semibold">human mentorship</span>.
               </h3>

@@ -19,7 +19,7 @@ export const termsOfServiceContent: LegalContent = {
     {
       title: "1. Agreement to these terms",
       paragraphs: [
-        'These Terms of Service ("Terms") form a binding agreement between you and I4I Sciences LLC, a Missouri limited liability company doing business as i4iSciences ("i4iSciences," "we," "us," "our"), governing your access to and use of i4isciences.com, our regional sites, our platform, and every program operated under the i4iSciences name, including Teach the Teacher, OneCent Tutors, the Immigrant Parent Support Program (IPST), AI Olympiad, and LabTricks (collectively, the "Services").',
+        'These Terms of Service ("Terms") form a binding agreement between you and i4iSciences LLC, a Missouri limited liability company doing business as i4iSciences ("i4iSciences," "we," "us," "our"), governing your access to and use of i4isciences.com, our regional sites, our platform, and every program operated under the i4iSciences name, including Teach the Teacher, OneCent Tutors, the Immigrant Parent Support Program (IPST), AI Olympiad, and LabTricks (collectively, the "Services").',
         'By creating an account, enrolling a student, registering as an educator, submitting a job application, or otherwise using the Services, you accept these Terms. If you are accepting on behalf of a child, an organization, or another individual, you represent that you have the authority to do so, and "you" in these Terms refers to both you and the party you represent. If you do not agree, do not use the Services.',
         'We may update these Terms from time to time. We will post the revised version with a new "Last updated" date, and for changes that materially affect your rights — particularly anything touching a child\'s data or a subscription\'s cost — we will provide additional notice, such as an email or in-platform message, before the change takes effect. Continued use of the Services after a change takes effect constitutes acceptance of the revised Terms.',
       ],
@@ -266,7 +266,7 @@ export const privacyPolicyContent: LegalContent = {
     {
       title: "1. Who this policy covers",
       paragraphs: [
-        'This policy explains how I4I Sciences LLC, operating as i4iSciences ("i4iSciences," "we," "us," "our"), collects, uses, discloses, and protects information when you interact with:',
+        'This policy explains how i4iSciences LLC, operating as i4iSciences ("i4iSciences," "we," "us," "our"), collects, uses, discloses, and protects information when you interact with:',
       ],
       items: [
         "Our website at i4isciences.com and our regional sites (.in, .us, .ca);",

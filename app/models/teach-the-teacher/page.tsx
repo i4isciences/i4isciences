@@ -681,7 +681,7 @@ const teachingPillars = [
   { 
     icon: Cpu, 
     title: "Tools That Make Teaching Easier", 
-    body: "Teaching with i4i is supported by smart, AI-powered tools that handle the busywork so you can focus on students. Real-time feedback helps you see where a learner is struggling, scheduling tools keep your calendar full, and our matching system connects you with the students whoneed exactly what you teach. The technology supports you in the background. The teaching, the connection, and the credit stay entirely yours." 
+    body: "Teaching with i4iSciences is supported by smart, AI-powered tools that handle the busywork so you can focus on students. Real-time feedback helps you see where a learner is struggling, scheduling tools keep your calendar full, and our matching system connects you with the students whoneed exactly what you teach. The technology supports you in the background. The teaching, the connection, and the credit stay entirely yours." 
   },
   { 
     icon: Globe, 

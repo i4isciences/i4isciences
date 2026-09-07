@@ -493,7 +493,7 @@ function Hero() {
               columnRuleColor: "rgba(255,255,255,0.12)",
             }}>
             <p style={{ margin: "0 0 0.85rem" }}>
-              Your child is already curious about AI. They ask big questions, love figuring out how things work, and light up around a screen. The i4i AI Olympiad turns that curiosity into something real. Kids in elementary and middle school build their very own AI project, earn an official certificate, and the brightest young creators win scholarships.
+              Your child is already curious about AI. They ask big questions, love figuring out how things work, and light up around a screen. The i4iSciences AI Olympiad turns that curiosity into something real. Kids in elementary and middle school build their very own AI project, earn an official certificate, and the brightest young creators win scholarships.
             </p>
             <p style={{ margin: "0 0 0.85rem" }}>
               It is hands-on, it is fun, and no, your child does not need to be a coding genius to join. Curiosity is enough to start.
@@ -574,7 +574,7 @@ function AIOlympiadIntro() {
             fontFamily: "'Geist',sans-serif", fontSize: "1rem", lineHeight: 1.85,
             color: T.body, maxWidth: 820, marginBottom: "2.6rem",
           }}>
-            Every kid has a spark. Some love drawing, some love building, and some cannot stop asking how computers think. The i4i AI Olympiad is for that last group, the curious ones who want to create with technology instead of just using it. It is a fun, friendly competition where elementary and middle school students learn AI, build a project of their own, and get celebrated for it. Best of all, the top young creators walk away with scholarships and a real head start on their future.
+            Every kid has a spark. Some love drawing, some love building, and some cannot stop asking how computers think. The i4iSciences AI Olympiad is for that last group, the curious ones who want to create with technology instead of just using it. It is a fun, friendly competition where elementary and middle school students learn AI, build a project of their own, and get celebrated for it. Best of all, the top young creators walk away with scholarships and a real head start on their future.
           </p>
         </motion.div>
 
@@ -1119,7 +1119,7 @@ const REWARDS = [
   {
     eyebrow: "Recognition",
     title: "Earn an Official Certificate",
-    text: "Every child who takes part and builds a project earns an official i4i AI Olympiad certificate. It is more than a piece of paper. It is proof that your child learned something real, finished what they started, and built something with their own hands and ideas. For a young student, that kind of recognition is a huge confidence boost. It tells them their ideas matter and that they are capable of more than they thought. It also looks wonderful on future school and program applications, giving your child an early edge that grows with them.",
+    text: "Every child who takes part and builds a project earns an official i4iSciences AI Olympiad certificate. It is more than a piece of paper. It is proof that your child learned something real, finished what they started, and built something with their own hands and ideas. For a young student, that kind of recognition is a huge confidence boost. It tells them their ideas matter and that they are capable of more than they thought. It also looks wonderful on future school and program applications, giving your child an early edge that grows with them.",
     col: T.navy,
     Icon: IconCertificate,
     Seal: SealRibbon,

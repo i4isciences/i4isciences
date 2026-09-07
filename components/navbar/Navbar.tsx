@@ -4,12 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Globe } from "lucide-react";
 
 import { isAppShellRoute } from "@/lib/app-shell-routes";
 
 export default function Navbar() {
   const [modelsOpen, setModelsOpen] = useState(false);
+  const [countriesOpen, setCountriesOpen] = useState(false);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const pathname = usePathname();
   const isHomepage = pathname === "/";
@@ -91,6 +92,30 @@ export default function Navbar() {
     },
   ];
 
+  const countries = [
+    {
+      label: "🇮🇳 India",
+      href: "https://i4isciences.in/",
+      bg: "rgba(19, 136, 8, 0.15)",
+      border: "rgba(19, 136, 8, 0.35)",
+      hover: "rgba(19, 136, 8, 0.22)",
+    },
+    {
+      label: "🇺🇸 USA",
+      href: "https://i4isciences.us/",
+      bg: "rgba(178, 34, 52, 0.15)",
+      border: "rgba(178, 34, 52, 0.35)",
+      hover: "rgba(178, 34, 52, 0.22)",
+    },
+    {
+      label: "🇨🇦 Canada",
+      href: "https://i4isciences.ca/",
+      bg: "rgba(91, 75, 219, 0.15)",
+      border: "rgba(91, 75, 219, 0.35)",
+      hover: "rgba(91, 75, 219, 0.22)",
+    },
+  ];
+
   return (
     <header
       style={{
@@ -111,11 +136,11 @@ export default function Navbar() {
         style={{
           maxWidth: 1400,
           margin: "0 auto",
-          height: 72,
+          minHeight: 72,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0 clamp(20px, 4vw, 56px)",
+          padding: "10px clamp(20px, 4vw, 56px)",
         }}
       >
         {/* ── LOGO ── */}
@@ -123,30 +148,48 @@ export default function Navbar() {
           href="/"
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: 10,
+            flexDirection: "column",
+            justifyContent: "center",
             textDecoration: "none",
             flexShrink: 0,
           }}
         >
-          <Image
-            src={logoSrc}
-            alt="i4iSciences"
-            width={44}
-            height={44}
-            priority
-            style={{ width: 44, height: 44, objectFit: "contain" }}
-          />
+          <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <Image
+              src={logoSrc}
+              alt="i4iSciences"
+              width={44}
+              height={44}
+              priority
+              style={{ width: 44, height: 44, objectFit: "contain" }}
+            />
+            <span
+              style={{
+                fontFamily: "'Geist','Geist Variable',sans-serif",
+                fontWeight: 600,
+                fontSize: "1.15rem",
+                color: textColor,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              i4iSciences
+              <sup style={{ fontSize: "0.6rem", marginLeft: 1 }}>&trade;</sup>
+            </span>
+          </span>
           <span
             style={{
-              fontFamily: "'Geist','Geist Variable',sans-serif",
-              fontWeight: 700,
-              fontSize: "1.15rem",
-              color: textColor,
-              letterSpacing: "-0.02em",
+              fontFamily: "Georgia, 'Times New Roman', serif",
+              fontStyle: "italic",
+              fontWeight: 500,
+              fontSize: "0.7rem",
+              color: "#F5A623",
+              marginLeft: 54,
+              marginTop: -4,
+              lineHeight: 1,
+              whiteSpace: "nowrap",
             }}
           >
-            i4iSciences
+            Inspiration for Innovation. Impact for All.
           </span>
         </Link>
 
@@ -378,63 +421,113 @@ export default function Navbar() {
 
         {/* ── RIGHT SIDE ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          {[
-  {
-    label: "🇮🇳 India",
-    href: "https://i4isciences.in/",
-    bg: "rgba(19, 136, 8, 0.15)",
-    border: "rgba(19, 136, 8, 0.35)",
-    hover: "rgba(19, 136, 8, 0.22)",
-  },
-  {
-    label: "🇺🇸 USA",
-    href: "https://i4isciences.us/",
-    bg: "rgba(178, 34, 52, 0.15)",
-    border: "rgba(178, 34, 52, 0.35)",
-    hover: "rgba(178, 34, 52, 0.22)",
-  },
-  {
-    label: "🇨🇦 Canada",
-    href: "https://i4isciences.ca/",
-    bg: "rgba(91, 75, 219, 0.15)",
-    border: "rgba(91, 75, 219, 0.35)",
-    hover: "rgba(91, 75, 219, 0.22)",
-  },
-].map((c) => (
-            <Link
-              key={c.label}
-              href={c.href}
-              target="_blank"
-  rel="noopener noreferrer"
+          {/* Region selector */}
+          <div
+            style={{ position: "relative" }}
+            onMouseEnter={() => setCountriesOpen(true)}
+            onMouseLeave={() => setCountriesOpen(false)}
+          >
+            <button
+              aria-label="Select region"
+              aria-expanded={countriesOpen}
+              onClick={() => setCountriesOpen((v) => !v)}
               style={{
-                display: "inline-flex",
+                display: "flex",
                 alignItems: "center",
-                padding: "6px 14px",
-                borderRadius: 999,
-                background: c.bg,
-                border: `1px solid ${c.border}`,
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                fontFamily: "'Geist','Geist Variable',sans-serif",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                color: isGlass ? "#0A2E8A" : "#fff",
-                textDecoration: "none",
-                transition: "all 0.25s ease",
-                whiteSpace: "nowrap",
+                justifyContent: "center",
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                background: isGlass ? "rgba(10,46,138,0.06)" : "rgba(255,255,255,0.10)",
+                border: isGlass
+                  ? "1px solid rgba(10,46,138,0.18)"
+                  : "1px solid rgba(255,255,255,0.22)",
+                cursor: "pointer",
+                transition: "background 0.2s",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = c.hover;
-                e.currentTarget.style.transform = "translateY(-1px)";
+              onMouseEnter={e =>
+                ((e.currentTarget as HTMLButtonElement).style.background = isGlass
+                  ? "rgba(10,46,138,0.12)"
+                  : "rgba(255,255,255,0.18)")
+              }
+              onMouseLeave={e =>
+                ((e.currentTarget as HTMLButtonElement).style.background = isGlass
+                  ? "rgba(10,46,138,0.06)"
+                  : "rgba(255,255,255,0.10)")
+              }
+            >
+              <Globe size={18} color={textColor} />
+            </button>
+
+            {/* Invisible hover bridge */}
+            <div
+              style={{
+                position: "absolute",
+                right: -16,
+                top: "100%",
+                width: "calc(100% + 32px)",
+                height: 16,
               }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = c.bg;
-                e.currentTarget.style.transform = "translateY(0)";
+            />
+
+            {/* Dropdown panel — always dark glass regardless of navbar mode */}
+            <div
+              style={{
+                position: "absolute",
+                right: 0,
+                top: "calc(100% + 16px)",
+                transform: `translateY(${countriesOpen ? 0 : 8}px)`,
+                width: 176,
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+                background: "rgba(8,18,46,0.96)",
+                backdropFilter: "blur(18px)",
+                border: "1px solid rgba(255,255,255,0.10)",
+                borderRadius: 16,
+                padding: 10,
+                boxShadow: "0 20px 60px rgba(0,0,0,0.55)",
+                opacity: countriesOpen ? 1 : 0,
+                visibility: countriesOpen ? "visible" : "hidden",
+                transition:
+                  "opacity 0.25s ease, transform 0.25s ease, visibility 0.25s",
+                zIndex: 100,
               }}
             >
-              {c.label}
-            </Link>
-          ))}
+              {countries.map((c) => (
+                <Link
+                  key={c.label}
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "8px 14px",
+                    borderRadius: 999,
+                    background: c.bg,
+                    border: `1px solid ${c.border}`,
+                    fontFamily: "'Geist','Geist Variable',sans-serif",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    color: "#fff",
+                    textDecoration: "none",
+                    transition: "all 0.2s ease",
+                    whiteSpace: "nowrap",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = c.hover;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = c.bg;
+                  }}
+                >
+                  {c.label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           {/* Login */}
           <Link href="/login" style={{ textDecoration: "none" }}>
