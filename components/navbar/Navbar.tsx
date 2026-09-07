@@ -400,6 +400,27 @@ export default function Navbar() {
             AI Ecosystem
           </Link>
 
+          {/* PostDocWorks — upcoming product, teaser only */}
+          <Link
+            href="/postdocworks"
+            style={{
+              fontFamily: "'Geist','Geist Variable',sans-serif",
+              fontSize: "0.88rem",
+              fontWeight: 600,
+              color: textColorMuted,
+              textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={e =>
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColor)
+            }
+            onMouseLeave={e =>
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColorMuted)
+            }
+          >
+            PostDocWorks
+          </Link>
+
           {/* Careers */}
           <Link
             href="/careers"
@@ -421,26 +442,7 @@ export default function Navbar() {
             Careers
           </Link>
 
-          {/* PostDocWorks — upcoming product, teaser only */}
-          <Link
-            href="/postdocworks"
-            style={{
-              fontFamily: "'Geist','Geist Variable',sans-serif",
-              fontSize: "0.88rem",
-              fontWeight: 600,
-              color: textColorMuted,
-              textDecoration: "none",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color = textColor)
-            }
-            onMouseLeave={e =>
-              ((e.currentTarget as HTMLAnchorElement).style.color = textColorMuted)
-            }
-          >
-            PostDocWorks
-          </Link>
+
 
           {/* Contact Us */}
           <Link

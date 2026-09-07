@@ -613,7 +613,7 @@ export default function CareersPage() {
         .hero-bg-wrap { position: absolute; inset: 0; z-index: 0; }
         .hero-bg-image {
           position: absolute; inset: 0; width: 100%; height: 100%;
-          object-fit: contain; object-position: center;
+          object-fit: cover; object-position: center;
         }
         .hero-scrim {
           position: absolute; inset: 0; z-index: 0;
