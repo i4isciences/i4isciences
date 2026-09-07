@@ -140,7 +140,10 @@ export default function Navbar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "10px clamp(20px, 4vw, 56px)",
+          paddingTop: 10,
+          paddingBottom: 10,
+          paddingLeft: "clamp(12px, 1.4vw, 24px)",
+          paddingRight: "clamp(20px, 4vw, 56px)",
         }}
       >
         {/* ── LOGO ── */}
@@ -198,7 +201,7 @@ export default function Navbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "clamp(24px, 3vw, 44px)",
+            gap: "clamp(18px, 2.2vw, 34px)",
           }}
         >
           {/* About */}
@@ -395,6 +398,48 @@ export default function Navbar() {
             }
           >
             AI Ecosystem
+          </Link>
+
+          {/* Careers */}
+          <Link
+            href="/careers"
+            style={{
+              fontFamily: "'Geist','Geist Variable',sans-serif",
+              fontSize: "0.88rem",
+              fontWeight: 600,
+              color: textColorMuted,
+              textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={e =>
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColor)
+            }
+            onMouseLeave={e =>
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColorMuted)
+            }
+          >
+            Careers
+          </Link>
+
+          {/* PostDocWorks — upcoming product, teaser only */}
+          <Link
+            href="/postdocworks"
+            style={{
+              fontFamily: "'Geist','Geist Variable',sans-serif",
+              fontSize: "0.88rem",
+              fontWeight: 600,
+              color: textColorMuted,
+              textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={e =>
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColor)
+            }
+            onMouseLeave={e =>
+              ((e.currentTarget as HTMLAnchorElement).style.color = textColorMuted)
+            }
+          >
+            PostDocWorks
           </Link>
 
           {/* Contact Us */}

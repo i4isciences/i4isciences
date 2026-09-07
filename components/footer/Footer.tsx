@@ -46,7 +46,7 @@ export default function Footer() {
                 />
 
                 <span className="text-3xl font-semibold tracking-tight text-[#ffffff]">
-                  i4iSciences<sup className="text-sm align-super">&trade;</sup> LLC
+                  i4iSciences<sup className="text-sm align-super">&trade;</sup>
                 </span>
 
                 <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
@@ -59,7 +59,7 @@ export default function Footer() {
               </p>
 
               <p className="font-serif text-sm leading-relaxed text-slate-400 max-w-lg">
-                &ldquo;© 2026 i4iSciences LLC dba i4iSciences. i4iSciences&trade; is a trademark of i4iSciences LLC. All rights reserved.&rdquo;
+                &ldquo;© 2026 I4I Sciences LLC dba i4iSciences. i4iSciences&trade; is a trademark of I4I Sciences LLC. All rights reserved.&rdquo;
               </p>
               <h3 className="text-2xl md:text-3xl font-normal leading-tight text-slate-100 font-serif max-w-md">
                 Where global learning meets <span className="underline decoration-amber-400 decoration-2 underline-offset-4 font-sans font-semibold">human mentorship</span>.
@@ -127,6 +127,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 {[
                   { label: "About Us", href: "/about" },
+                  { label: "Careers", href: "/careers" },
                   { label: "Contact Us", href: "/contact" },
                 ].map((link, idx) => (
                   <li key={idx}>
