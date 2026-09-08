@@ -396,14 +396,6 @@ const TEAM = [
     hue: "#F3F4F6",
     textColor: "#374151",
   },
-  {
-    name: "Krisha Patel",
-    role: "STEM Teacher (Algebra & Biology) · USA",
-    line: "Empowers students in STEM subjects, including Algebra and Biology, with practical, inquiry-based teaching that builds confidence and curiosity.",
-    initials: "KP",
-    hue: "#ECFDF5",
-    textColor: "#047857",
-  },
   
   {
     name: "Sudha Chauhan",
