@@ -16,6 +16,14 @@ export async function POST(req) {
       who,
     } = body;
 
+    if (process.env.N8N_LEAD_WEBHOOK_URL) {
+      fetch(process.env.N8N_LEAD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, organization, message, interests, who }),
+      }).catch(() => {}); // n8n being down shouldn't block the form
+    }
+
     const { error } = await resend.emails.send({
       from: "i4iSciences <contact@i4isciences.com>",
       to: ["i4isciences@gmail.com"],
