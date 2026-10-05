@@ -4,13 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Globe, UserCheck, Eye } from "lucide-react";
+import { ChevronDown, Globe } from "lucide-react";
 
 import { isAppShellRoute } from "@/lib/app-shell-routes";
 
 export default function Navbar() {
   const [modelsOpen, setModelsOpen] = useState(false);
-  const [venturesOpen, setVenturesOpen] = useState(false);
   const [countriesOpen, setCountriesOpen] = useState(false);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const pathname = usePathname();
@@ -90,27 +89,6 @@ export default function Navbar() {
       label: "Lab Tricks",
       sub: "Science Experiments for Students",
       logo: "/images/LabTrickslogodark.jpg",
-    },
-  ];
-
-  const ventures = [
-    {
-      href: "/postdocworks",
-      label: "PostdocWorks",
-      sub: "Verified network for the next career step",
-      logo: "/images/postdocworks-mark.png",
-    },
-    {
-      href: "/postdocworks/doc2postdoc",
-      label: "Doc2Postdoc",
-      sub: "PhD-to-postdoc peer mentorship",
-      icon: UserCheck,
-    },
-    {
-      href: "/postdocworks/eyewee",
-      label: "Eyewee",
-      sub: "The AI agent behind every match",
-      icon: Eye,
     },
   ];
 
@@ -422,163 +400,23 @@ export default function Navbar() {
             AI Ecosystem
           </Link>
 
-          {/* Ventures dropdown — PostdocWorks, Doc2Postdoc, Eyewee */}
-          <div
-            style={{ position: "relative" }}
-            onMouseEnter={() => setVenturesOpen(true)}
-            onMouseLeave={() => setVenturesOpen(false)}
+          {/* Ventures — intentionally inert: no dropdown, no navigation */}
+          <span
+            aria-disabled="true"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              fontFamily: "'Geist','Geist Variable',sans-serif",
+              fontSize: "0.88rem",
+              fontWeight: 600,
+              color: textColorMuted,
+              cursor: "default",
+              userSelect: "none",
+            }}
           >
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 4,
-                fontFamily: "'Geist','Geist Variable',sans-serif",
-                fontSize: "0.88rem",
-                fontWeight: 600,
-                color: textColorMuted,
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={e =>
-                ((e.currentTarget as HTMLButtonElement).style.color = textColor)
-              }
-              onMouseLeave={e =>
-                ((e.currentTarget as HTMLButtonElement).style.color = textColorMuted)
-              }
-            >
-              Ventures
-              <ChevronDown
-                size={14}
-                style={{
-                  transition: "transform 0.25s",
-                  transform: venturesOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  color: chevronColor,
-                }}
-              />
-            </button>
-
-            {/* Invisible hover bridge */}
-            <div
-              style={{
-                position: "absolute",
-                left: -16,
-                top: "100%",
-                width: "calc(100% + 32px)",
-                height: 16,
-              }}
-            />
-
-            {/* Dropdown panel — always dark glass regardless of navbar mode,
-                since it floats over page content either way */}
-            <div
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "calc(100% + 16px)",
-                transform: `translateX(-50%) translateY(${venturesOpen ? 0 : 8}px)`,
-                width: 260,
-                background: "rgba(8,18,46,0.96)",
-                backdropFilter: "blur(18px)",
-                border: "1px solid rgba(255,255,255,0.10)",
-                borderRadius: 16,
-                padding: "8px 6px",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.55)",
-                opacity: venturesOpen ? 1 : 0,
-                visibility: venturesOpen ? "visible" : "hidden",
-                transition:
-                  "opacity 0.25s ease, transform 0.25s ease, visibility 0.25s",
-                zIndex: 100,
-              }}
-            >
-              {ventures.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 14,
-                    padding: "12px 14px",
-                    borderRadius: 12,
-                    textDecoration: "none",
-                    transition: "all .2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.07)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "transparent";
-                  }}
-                >
-                  {/* Logo / icon */}
-                  <div
-                    style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: 14,
-                      background: "rgba(255,255,255,0.08)",
-                      border: "1px solid rgba(255,255,255,0.10)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {item.logo ? (
-                      <Image
-                        src={item.logo}
-                        alt={item.label}
-                        width={42}
-                        height={42}
-                        style={{
-                          width: "42px",
-                          height: "42px",
-                          objectFit: "contain",
-                        }}
-                      />
-                    ) : item.icon ? (
-                      <item.icon size={22} color="rgba(255,255,255,0.85)" strokeWidth={1.8} />
-                    ) : null}
-                  </div>
-
-                  {/* Text */}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 2,
-                      flex: 1,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "'Geist','Geist Variable',sans-serif",
-                        fontWeight: 700,
-                        fontSize: "0.86rem",
-                        color: "#fff",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-
-                    <span
-                      style={{
-                        fontFamily: "'Geist','Geist Variable',sans-serif",
-                        fontSize: "0.72rem",
-                        color: "rgba(255,255,255,0.55)",
-                      }}
-                    >
-                      {item.sub}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+            Ventures
+          </span>
 
           {/* Careers */}
           <Link
