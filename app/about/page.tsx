@@ -338,7 +338,7 @@ const fadeUp = (delay = 0) => ({
 const TEAM = [
   {
     name: "Nishi Patel",
-    role: "Country Manager · Canada",
+    role: "Advisor · Canada",
     line: "Builds the operational backbone that turns ambitious educational ideas into consistent global execution.",
     initials: "NP",
     hue: "#DCEBFF",

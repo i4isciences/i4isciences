@@ -4,7 +4,7 @@ const siteUrl = "https://www.i4isciences.com/postdocworks";
 const pageTitle = "PostdocWorks";
 const title = "PostdocWorks | i4iSciences";
 const description =
-  "PostdocWorks connects postdoctoral researchers with real career pathways — translating academic achievement into industry opportunity, verified every step of the way.";
+  "PostdocWorks connects postdoctoral researchers with real career pathways — translating academic achievement into industry opportunity, every step of the way.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -18,6 +18,10 @@ export const metadata: Metadata = {
     "Doc2Postdoc",
     "i4iSciences",
   ],
+  robots: {
+    index: false,
+    nosnippet: true,
+  },
   alternates: {
     canonical: siteUrl,
   },
