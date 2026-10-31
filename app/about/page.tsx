@@ -337,14 +337,6 @@ const fadeUp = (delay = 0) => ({
 
 const TEAM = [
   {
-    name: "Nishi Patel",
-    role: "Advisor · Canada",
-    line: "Builds the operational backbone that turns ambitious educational ideas into consistent global execution.",
-    initials: "NP",
-    hue: "#DCEBFF",
-    textColor: "#0F2D7A",
-  },
-  {
     name: "Jerany Jackson",
     role: "Senior Advisor · USA",
     line: "Brings strategic guidance and global perspective to help shape long-term educational impact.",

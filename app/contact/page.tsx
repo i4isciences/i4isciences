@@ -311,7 +311,7 @@ export default function ContactPage() {
                 <div className="stub-row-group">
                   <span className="stub-row-label"><PhoneIcon /> Phone</span>
                   <a href="tel:+919414452952" className="stub-row"><span>+91 94144 52952</span><em>India</em></a>
-                  <a href="tel:+13145363631" className="stub-row"><span>+1 314-536-3631</span><em>USA</em></a>
+                  <a href="tel:+18267939105" className="stub-row"><span>+1-826-793-9105</span><em>USA</em></a>
                 </div>
                 <div className="stub-row-group">
                   <span className="stub-row-label"><WhatsAppIcon /> WhatsApp</span>

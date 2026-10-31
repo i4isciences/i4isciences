@@ -59,7 +59,7 @@ export default function Footer() {
               </p>
 
               <p className="font-serif text-sm leading-relaxed text-slate-400 max-w-lg">
-                &ldquo;© 2026 I4I Sciences LLC dba i4iSciences. i4iSciences&trade; is a trademark of I4I Sciences LLC. All rights reserved.&rdquo;
+                © 2026 I4I Sciences LLC dba i4iSciences. i4iSciences&trade; is a trademark of I4I Sciences LLC. All rights reserved.
               </p>
               <h3 className="text-2xl md:text-3xl font-normal leading-tight text-slate-100 font-serif max-w-md">
                 Where global learning meets <span className="underline decoration-amber-400 decoration-2 underline-offset-4 font-sans font-semibold">human mentorship</span>.

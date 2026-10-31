@@ -57,15 +57,6 @@ const personLd = {
     },
     {
       "@type": "Person",
-      "@id": "https://www.i4isciences.com/#nishi-patel",
-      name: "Nishi Patel",
-      jobTitle: "Chief Operating Officer",
-      worksFor: { "@id": orgId },
-      description:
-        "Helps lead operations and execution for i4iSciences across international education initiatives.",
-    },
-    {
-      "@type": "Person",
       "@id": "https://www.i4isciences.com/#jerany-jackson",
       name: "Jerany Jackson",
       jobTitle: "Senior Advisor",
