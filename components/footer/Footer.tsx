@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Smile, Sparkles, Languages, Compass } from "lucide-react";
 
 import { isAppShellRoute } from "@/lib/app-shell-routes";
+import { d2pLink } from "@/lib/d2p";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -49,9 +50,6 @@ export default function Footer() {
                   i4iSciences<sup className="text-sm align-super">&trade;</sup>
                 </span>
 
-                <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
-                  Est. 2022
-                </span>
               </div>
 
               <p className="italic font-serif text-lg text-amber-400 font-medium -mt-4">
@@ -60,6 +58,9 @@ export default function Footer() {
 
               <p className="font-serif text-sm leading-relaxed text-slate-400 max-w-lg">
                 © 2026 I4I Sciences LLC dba i4iSciences. i4iSciences&trade; is a trademark of I4I Sciences LLC. All rights reserved.
+              </p>
+              <p className="font-serif text-sm leading-relaxed text-slate-400 max-w-lg -mt-4">
+                Doc2Postdoc℠ and eyewee℠ are service marks of I4I Sciences LLC.
               </p>
               <h3 className="text-2xl md:text-3xl font-normal leading-tight text-slate-100 font-serif max-w-md">
                 Where global learning meets <span className="underline decoration-amber-400 decoration-2 underline-offset-4 font-sans font-semibold">human mentorship</span>.
@@ -104,6 +105,7 @@ export default function Footer() {
                   { label: "Immigrant Parent Support Training", href: "/models/ipst" },
                   { label: "LabTricks", href: "/models/labtrick" },
                   { label: "AI - Ecosystem", href: "/ai-ecosystem" },
+                  { label: "Doc2Postdoc℠", href: d2pLink("footer") },
                 ].map((link, idx) => (
                   <li key={idx}>
                     <Link 

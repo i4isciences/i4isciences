@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Globe } from "lucide-react";
 
 import { isAppShellRoute } from "@/lib/app-shell-routes";
+import { d2pLink } from "@/lib/d2p";
 
 export default function Navbar() {
   const [modelsOpen, setModelsOpen] = useState(false);
@@ -90,6 +91,13 @@ export default function Navbar() {
       sub: "Science Experiments for Students",
       logo: "/images/LabTrickslogodark.jpg",
     },
+    {
+      href: d2pLink("menu"),
+      label: "Doc2Postdoc",
+      sub: "Peer Matching for PhDs & Postdocs",
+      logo: "/d2p/d2p-mark-on-dark.svg",
+      badge: "NEW",
+    },
   ];
 
   const countries = [
@@ -120,7 +128,7 @@ export default function Navbar() {
     <header
       style={{
         position: "fixed",
-        top: 0,
+        top: "var(--d2p-bar-offset, 0px)",
         left: 0,
         right: 0,
         zIndex: 50,
@@ -362,6 +370,9 @@ export default function Navbar() {
                     }}
                   >
                     {item.label}
+                    {"badge" in item && item.badge && (
+                      <span className="d2p-badge">{item.badge}</span>
+                    )}
                   </span>
               
                   <span

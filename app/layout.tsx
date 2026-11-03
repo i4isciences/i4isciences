@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
+import "./d2p-site-kit.css";
+import D2PAnnouncementBar from "@/components/d2p/D2PAnnouncementBar";
 
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
@@ -111,6 +113,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
         <AuthRedirectGuard />
+        <D2PAnnouncementBar />
         <Navbar />
 
         <main id="page-top" className="overflow-x-hidden">

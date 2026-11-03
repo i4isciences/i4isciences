@@ -11,6 +11,7 @@ import TestimonialsSection from "@/components/home/Testimonials";
 import EnterprisePartnershipSection from "@/components/home/Partnerships";
 import FinalCTA from "@/components/home/FinalCTA";
 import Footer from "@/components/footer/Footer";
+import D2PBanner from "@/components/d2p/D2PBanner";
 
 export const metadata: Metadata = {
   title: "i4iSciences | Global AI Education Platform",
@@ -140,6 +141,7 @@ export default function HomePage() {
         <Navbar />
         <Hero />
         <Ecosystems />
+        <D2PBanner />
         <PlatformOverview />
         <RoleBasedExperience />
         <AIfeatures />

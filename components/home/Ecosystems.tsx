@@ -2,7 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, ChevronRight, Atom, FlaskConical } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
+
+import D2PEcosystemCard from "@/components/d2p/D2PEcosystemCard";
 
 // Shared easing curve for framer-motion transitions
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -647,38 +649,6 @@ function CTABtn({ href, primary, color, children }: { href: string; primary?: bo
 }
 
 /* ═══════════════════════════════════
-    SIDE-GAP DOODLE
-═══════════════════════════════════ */
-function SideDoodle({ icon, color, delay }: { icon: "atom" | "flask"; color: string; delay: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.6 }}
-      whileInView={{ opacity: 0.22, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay, ease: EASE }}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100%",
-        minHeight: "160px",
-      }}
-    >
-      <motion.div
-        animate={{ y: [0, -10, 0], rotate: [0, 6, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
-      >
-        {icon === "atom" ? (
-          <Atom size={44} color={color} strokeWidth={1.4} />
-        ) : (
-          <FlaskConical size={44} color={color} strokeWidth={1.4} />
-        )}
-      </motion.div>
-    </motion.div>
-  );
-}
-
-/* ═══════════════════════════════════
     MAIN EXPORT
 ═══════════════════════════════════ */
 export default function Ecosystems() {
@@ -714,10 +684,9 @@ export default function Ecosystems() {
         .eco-cell-1{ grid-column: 1 / 3; grid-row: 1; }
         .eco-cell-2{ grid-column: 3 / 5; grid-row: 1; }
         .eco-cell-3{ grid-column: 5 / 7; grid-row: 1; }
-        .eco-doodle-left{ grid-column: 1 / 2; grid-row: 2; }
-        .eco-cell-4{ grid-column: 2 / 4; grid-row: 2; }
-        .eco-cell-5{ grid-column: 4 / 6; grid-row: 2; }
-        .eco-doodle-right{ grid-column: 6 / 7; grid-row: 2; }
+        .eco-cell-4{ grid-column: 1 / 3; grid-row: 2; }
+        .eco-cell-5{ grid-column: 3 / 5; grid-row: 2; }
+        .eco-cell-6{ grid-column: 5 / 7; grid-row: 2; }
 
         /* Media adjustments to fall back cleanly when stacked vertically */
         @media (max-width: 1200px) {
@@ -744,14 +713,13 @@ export default function Ecosystems() {
 
         @media (max-width: 900px){
           .eco-grid{ grid-template-columns: repeat(2, 1fr); }
-          .eco-cell-1,.eco-cell-2,.eco-cell-3,.eco-cell-4,.eco-cell-5{
+          .eco-cell-1,.eco-cell-2,.eco-cell-3,.eco-cell-4,.eco-cell-5,.eco-cell-6{
             grid-column: span 2 !important; grid-row: auto !important;
           }
-          .eco-doodle-left,.eco-doodle-right{ display:none; }
         }
         @media (max-width: 600px){
           .eco-grid{ grid-template-columns: 1fr; }
-          .eco-cell-1,.eco-cell-2,.eco-cell-3,.eco-cell-4,.eco-cell-5{
+          .eco-cell-1,.eco-cell-2,.eco-cell-3,.eco-cell-4,.eco-cell-5,.eco-cell-6{
             grid-column: span 1 !important;
           }
         }
@@ -793,7 +761,7 @@ export default function Ecosystems() {
             }}>
               <Typewriter
                 segments={[
-                  { text: "Five Ecosystems ", color: "#0a2e8a" },
+                  { text: "Six Ecosystems ", color: "#0a2e8a" },
                   { text: "One", color: "#f5a623" },
                   { text: " Platform For All", color: "#0a2e8a" },
                 ]}
@@ -817,7 +785,7 @@ export default function Ecosystems() {
             }}
           >
             From certifying teachers to matching AI tutors — i4iSciences powers the full
-            global education lifecycle through five deeply integrated systems.
+            global education lifecycle through six deeply integrated systems.
           </motion.p>
         </div>
 
@@ -847,10 +815,6 @@ export default function Ecosystems() {
             </div>
           ))}
 
-          <div className="eco-doodle-left">
-            <SideDoodle icon="atom" color="#0a2e8a" delay={0.2} />
-          </div>
-
           {row2.map((card, i) => (
             <div key={card.id} className={`eco-cell-${i + 4}`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
               <motion.div
@@ -875,8 +839,8 @@ export default function Ecosystems() {
             </div>
           ))}
 
-          <div className="eco-doodle-right">
-            <SideDoodle icon="flask" color="#F5A623" delay={0.4} />
+          <div className="eco-cell-6" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+            <D2PEcosystemCard />
           </div>
         </div>
 
