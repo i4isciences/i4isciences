@@ -3,8 +3,6 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const MAX_RESUME_BYTES = 5 * 1024 * 1024; // 5MB
-
 export async function POST(req) {
   try {
     const formData = await req.formData();
@@ -14,28 +12,12 @@ export async function POST(req) {
     const industry = (formData.get("industry") || "").toString().trim();
     const role = (formData.get("role") || "").toString().trim();
     const message = (formData.get("message") || "").toString().trim();
-    const resume = formData.get("resume");
 
     if (!name || !email || !industry || !role) {
       return NextResponse.json(
         { success: false, error: "Missing required fields." },
         { status: 400 }
       );
-    }
-
-    const attachments = [];
-    if (resume && typeof resume === "object" && "arrayBuffer" in resume && resume.size > 0) {
-      if (resume.size > MAX_RESUME_BYTES) {
-        return NextResponse.json(
-          { success: false, error: "Resume must be under 5MB." },
-          { status: 400 }
-        );
-      }
-      const bytes = await resume.arrayBuffer();
-      attachments.push({
-        filename: resume.name || "resume.pdf",
-        content: Buffer.from(bytes),
-      });
     }
 
     const { error } = await resend.emails.send({
@@ -58,8 +40,6 @@ export async function POST(req) {
           <p>${message ? message.replace(/\n/g, "<br/>") : "—"}</p>
         </div>
       `,
-
-      attachments,
     });
 
     if (error) {

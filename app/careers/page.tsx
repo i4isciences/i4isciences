@@ -9,11 +9,8 @@ import {
   CheckCircle2,
   ChevronDown,
   Compass,
-  FileText,
   Loader2,
   MapPin,
-  UploadCloud,
-  X,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════
@@ -96,7 +93,6 @@ const ROLE_OPTIONS = [
 ];
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX_RESUME_BYTES = 5 * 1024 * 1024;
 
 /* ═══════════════════════════════════════════════════════
    REVEAL WRAPPER
@@ -201,83 +197,6 @@ function OptionSelect({
 }
 
 /* ═══════════════════════════════════════════════════════
-   RESUME UPLOAD
-   ═══════════════════════════════════════════════════════ */
-
-function ResumeUpload({
-  file,
-  onSelect,
-  onClear,
-  error,
-}: {
-  file: File | null;
-  onSelect: (f: File) => void;
-  onClear: () => void;
-  error?: string;
-}) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [dragOver, setDragOver] = useState(false);
-
-  const handleFiles = (files: FileList | null) => {
-    const f = files?.[0];
-    if (f) onSelect(f);
-  };
-
-  return (
-    <div className="career-field">
-      <span className="career-field-label">Resume / CV (PDF, optional)</span>
-
-      {!file ? (
-        <div
-          className={`career-dropzone ${dragOver ? "career-dropzone-active" : ""} ${error ? "career-field-error" : ""}`}
-          onClick={() => inputRef.current?.click()}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragOver(true);
-          }}
-          onDragLeave={() => setDragOver(false)}
-          onDrop={(e) => {
-            e.preventDefault();
-            setDragOver(false);
-            handleFiles(e.dataTransfer.files);
-          }}
-        >
-          <UploadCloud size={22} />
-          <div>
-            <p className="career-dropzone-title">Click to browse, or drag a PDF here</p>
-            <p className="career-dropzone-sub">Max 5MB · .pdf only</p>
-          </div>
-          <input
-            ref={inputRef}
-            type="file"
-            accept="application/pdf,.pdf"
-            hidden
-            onChange={(e) => handleFiles(e.target.files)}
-          />
-        </div>
-      ) : (
-        <div className="career-file-chip">
-          <FileText size={18} />
-          <div className="career-file-chip-info">
-            <span className="career-file-chip-name">{file.name}</span>
-            <span className="career-file-chip-size">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
-          </div>
-          <button type="button" className="career-file-chip-remove" onClick={onClear} aria-label="Remove file">
-            <X size={15} />
-          </button>
-        </div>
-      )}
-
-      {error && (
-        <span className="career-field-error-text" role="alert">
-          {error}
-        </span>
-      )}
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════
    MAIN PAGE
    ═══════════════════════════════════════════════════════ */
 
@@ -291,7 +210,6 @@ export default function CareersPage() {
   const [industryOther, setIndustryOther] = useState("");
   const [role, setRole] = useState("");
   const [roleOther, setRoleOther] = useState("");
-  const [resume, setResume] = useState<File | null>(null);
 
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -310,7 +228,6 @@ export default function CareersPage() {
     else if (industry === "Other" && !industryOther.trim()) errs.industry = "Please tell us your area of interest.";
     if (!role) errs.role = "Please select a role.";
     else if (role === "Other" && !roleOther.trim()) errs.role = "Please tell us the role you have in mind.";
-    if (resume && resume.size > MAX_RESUME_BYTES) errs.resume = "Resume must be under 5MB.";
     return errs;
   };
 
@@ -330,7 +247,6 @@ export default function CareersPage() {
       fd.append("industry", industry === "Other" ? `Other — ${industryOther.trim()}` : industry);
       fd.append("role", role === "Other" ? `Other — ${roleOther.trim()}` : role);
       fd.append("message", message.trim());
-      if (resume) fd.append("resume", resume);
 
       const res = await fetch("/api/careers", { method: "POST", body: fd });
       const data = await res.json();
@@ -344,7 +260,6 @@ export default function CareersPage() {
         setIndustryOther("");
         setRole("");
         setRoleOther("");
-        setResume(null);
       } else {
         setErrors({ form: "We couldn't send this. Please try again in a moment." });
       }
@@ -479,7 +394,7 @@ export default function CareersPage() {
                   </div>
                   <h3>Thank you — you&apos;re on our radar.</h3>
                   <p>
-                    We&apos;ve received your details and resume. Our team reviews every
+                    We&apos;ve received your details. Our team reviews every
                     submission personally and will reach out if there&apos;s a fit.
                   </p>
                 </motion.div>
@@ -556,19 +471,11 @@ export default function CareersPage() {
                           onChange={(e) => setMessage(e.target.value)}
                         />
                       </div>
+                      <p className="career-microcopy" style={{ marginTop: 8 }}>
+                        Please do not include your date of birth, photo, ID numbers or health details.
+                      </p>
                     </div>
 
-                    <div className="career-field career-field-full">
-                      <ResumeUpload
-                        file={resume}
-                        onSelect={(f) => {
-                          setResume(f);
-                          setErrors((p) => ({ ...p, resume: undefined }));
-                        }}
-                        onClear={() => setResume(null)}
-                        error={errors.resume}
-                      />
-                    </div>
                   </div>
 
                   {errors.form && <p className="career-form-error">{errors.form}</p>}
@@ -583,6 +490,9 @@ export default function CareersPage() {
                     )}
                   </button>
                   <p className="career-microcopy">We typically respond within 5 business days.</p>
+                  <p className="career-microcopy">
+                    See our <a href="/careers/privacy-notice" style={{ textDecoration: "underline" }}>Applicant Privacy Notice</a>.
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
