@@ -77,7 +77,7 @@ const personLd = {
       "@type": "Person",
       "@id": "https://www.i4isciences.com/#sanjay-mishra",
       name: "Sanjay Mishra",
-      jobTitle: "Chief Operating Officer",
+      jobTitle: "Advisor",
       worksFor: { "@id": orgId },
       description:
         "Supports execution and operational delivery across i4iSciences' India-based initiatives.",

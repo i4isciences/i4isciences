@@ -355,7 +355,7 @@ const TEAM = [
   },
   {
     name: "Sanjay Mishra",
-    role: "Senior Manager · India",
+    role: "Advisor · India",
     line: "Leads execution across India, ensuring every initiative reaches learners efficiently.",
     initials: "SM",
     hue: "#FDECEC",
