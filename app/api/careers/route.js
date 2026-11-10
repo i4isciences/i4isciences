@@ -7,6 +7,23 @@ export async function POST(req) {
   try {
     const formData = await req.formData();
 
+    // This endpoint does not accept files. Reject any upload outright.
+    for (const [, value] of formData.entries()) {
+      if (typeof value !== "string") {
+        return NextResponse.json(
+          { success: false, error: "File uploads are not accepted." },
+          { status: 400 }
+        );
+      }
+    }
+
+    if (formData.get("privacyConsent") !== "true") {
+      return NextResponse.json(
+        { success: false, error: "You must confirm you have read the Applicant Privacy Notice." },
+        { status: 400 }
+      );
+    }
+
     const name = (formData.get("name") || "").toString().trim();
     const email = (formData.get("email") || "").toString().trim();
     const industry = (formData.get("industry") || "").toString().trim();

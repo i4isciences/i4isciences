@@ -212,6 +212,7 @@ export default function CareersPage() {
   const [roleOther, setRoleOther] = useState("");
 
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -232,6 +233,7 @@ export default function CareersPage() {
   };
 
   const handleSubmit = async () => {
+    if (!consent) return;
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
@@ -247,6 +249,7 @@ export default function CareersPage() {
       fd.append("industry", industry === "Other" ? `Other — ${industryOther.trim()}` : industry);
       fd.append("role", role === "Other" ? `Other — ${roleOther.trim()}` : role);
       fd.append("message", message.trim());
+      fd.append("privacyConsent", "true");
 
       const res = await fetch("/api/careers", { method: "POST", body: fd });
       const data = await res.json();
@@ -260,6 +263,7 @@ export default function CareersPage() {
         setIndustryOther("");
         setRole("");
         setRoleOther("");
+        setConsent(false);
       } else {
         setErrors({ form: "We couldn't send this. Please try again in a moment." });
       }
@@ -375,7 +379,7 @@ export default function CareersPage() {
             <h2 className="section-title">We&apos;d genuinely like to know you</h2>
             <p className="form-subtext">
               One short form. No open req required — this reaches our team directly, and
-              we keep every submission on file for when a matching role opens.
+              we keep every submission on file for up to 24 months.
             </p>
           </FadeUp>
 
@@ -480,7 +484,23 @@ export default function CareersPage() {
 
                   {errors.form && <p className="career-form-error">{errors.form}</p>}
 
-                  <button type="button" className="btn-navy career-submit" onClick={handleSubmit} disabled={submitting}>
+                  <label className="career-consent">
+                    <input
+                      type="checkbox"
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      required
+                    />
+                    <span>
+                      I have read the{" "}
+                      <a href="/careers/privacy-notice" target="_blank" rel="noopener" style={{ textDecoration: "underline" }}>
+                        Applicant Privacy Notice
+                      </a>
+                      .
+                    </span>
+                  </label>
+
+                  <button type="button" className="btn-navy career-submit" onClick={handleSubmit} disabled={submitting || !consent}>
                     {submitting ? (
                       <Loader2 className="career-spin" size={18} />
                     ) : (
@@ -490,9 +510,6 @@ export default function CareersPage() {
                     )}
                   </button>
                   <p className="career-microcopy">We typically respond within 5 business days.</p>
-                  <p className="career-microcopy">
-                    See our <a href="/careers/privacy-notice" style={{ textDecoration: "underline" }}>Applicant Privacy Notice</a>.
-                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -694,7 +711,9 @@ export default function CareersPage() {
         }
         .career-file-chip-remove:hover { background: rgba(217,48,37,0.16); }
 
-        .career-submit { width: 100%; margin-top: 28px; }
+        .career-submit { width: 100%; margin-top: 16px; }
+        .career-consent { display: flex; align-items: flex-start; gap: 10px; margin-top: 24px; font-size: 14px; line-height: 1.5; color: #10204e; cursor: pointer; }
+        .career-consent input { margin-top: 3px; width: 17px; height: 17px; flex-shrink: 0; accent-color: #0a2e8a; cursor: pointer; }
         .career-spin { animation: career-spin 0.8s linear infinite; }
         @keyframes career-spin { to { transform: rotate(360deg); } }
         .career-microcopy { text-align: center; font-size: 13px; color: rgba(16,32,78,0.5); margin-top: 12px; }
