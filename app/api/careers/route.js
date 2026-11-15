@@ -3,6 +3,14 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Escape user-supplied text before it goes into the notification email's HTML.
+const esc = (v) =>
+  String(v)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
 export async function POST(req) {
   try {
     const formData = await req.formData();
@@ -29,6 +37,7 @@ export async function POST(req) {
     const industry = (formData.get("industry") || "").toString().trim();
     const role = (formData.get("role") || "").toString().trim();
     const message = (formData.get("message") || "").toString().trim();
+    const cvLink = (formData.get("cvLink") || "").toString().trim();
 
     if (!name || !email || !industry || !role) {
       return NextResponse.json(
@@ -37,24 +46,32 @@ export async function POST(req) {
       );
     }
 
+    if (cvLink && !/^https?:\/\/\S+\.\S+$/i.test(cvLink)) {
+      return NextResponse.json(
+        { success: false, error: "The CV or profile link must start with http:// or https://." },
+        { status: 400 }
+      );
+    }
+
     const { error } = await resend.emails.send({
       from: "i4iSciences Careers <careers@i4isciences.com>",
-      to: ["i4isciences@gmail.com"],
+      to: ["i4isciences@gmail.com", "hr@i4isciences.com"],
       replyTo: email,
 
-      subject: `New Career Interest — ${name}`,
+      subject: `New Career Interest — ${name.replace(/[\r\n]+/g, " ")}`,
 
       html: `
         <div style="font-family:Arial;padding:24px">
           <h2>New Career Interest Submission</h2>
           <hr/>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Career interest / industry:</strong> ${industry}</p>
-          <p><strong>Role:</strong> ${role}</p>
+          <p><strong>Name:</strong> ${esc(name)}</p>
+          <p><strong>Email:</strong> ${esc(email)}</p>
+          <p><strong>Career interest / industry:</strong> ${esc(industry)}</p>
+          <p><strong>Role:</strong> ${esc(role)}</p>
+          <p><strong>CV / profile link:</strong> ${cvLink ? `<a href="${esc(cvLink)}">${esc(cvLink)}</a>` : "—"}</p>
           <br/>
           <h3>Message</h3>
-          <p>${message ? message.replace(/\n/g, "<br/>") : "—"}</p>
+          <p>${message ? esc(message).replace(/\n/g, "<br/>") : "—"}</p>
         </div>
       `,
     });

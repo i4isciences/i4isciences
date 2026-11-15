@@ -13,6 +13,8 @@ import {
   MapPin,
 } from "lucide-react";
 
+import RolePosting from "@/components/careers/RolePosting";
+
 /* ═══════════════════════════════════════════════════════
    DESIGN TOKENS — matches the navbar / footer chrome
    ═══════════════════════════════════════════════════════ */
@@ -50,10 +52,15 @@ const VALUES = [
   },
 ];
 
-const LOCATIONS = [
+const LOCATIONS: { country: string; note: string; href?: string }[] = [
   { country: "India", note: "Core team & program operations" },
   { country: "United States", note: "Partnerships & education strategy" },
   { country: "Canada", note: "Program management" },
+  {
+    country: "Science & Technology (United States)",
+    note: "Computational and scientific roles that support our research and product work. Currently one role is in our pipeline, contingent on funding.",
+    href: "#computational-biology-ml-lead",
+  },
 ];
 
 const INDUSTRY_OPTIONS = [
@@ -68,6 +75,7 @@ const INDUSTRY_OPTIONS = [
   "Marketing & Communications",
   "Business Development & Partnerships",
   "Operations & Administration",
+  "Science & Technology",
   "Customer Success & Support",
   "Internships & Fellowships",
   "Other",
@@ -89,6 +97,7 @@ const ROLE_OPTIONS = [
   "Customer Support Specialist",
   "Operations Associate",
   "Intern / Fellow",
+  "Computational Biology / ML Lead (Contingent on Funding)",
   "Other",
 ];
 
@@ -212,6 +221,7 @@ export default function CareersPage() {
   const [roleOther, setRoleOther] = useState("");
 
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [cvLink, setCvLink] = useState("");
   const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -229,6 +239,8 @@ export default function CareersPage() {
     else if (industry === "Other" && !industryOther.trim()) errs.industry = "Please tell us your area of interest.";
     if (!role) errs.role = "Please select a role.";
     else if (role === "Other" && !roleOther.trim()) errs.role = "Please tell us the role you have in mind.";
+    if (cvLink.trim() && !/^https?:\/\/\S+\.\S+/i.test(cvLink.trim()))
+      errs.cvLink = "Please enter a full link starting with http:// or https://.";
     return errs;
   };
 
@@ -250,6 +262,7 @@ export default function CareersPage() {
       fd.append("role", role === "Other" ? `Other — ${roleOther.trim()}` : role);
       fd.append("message", message.trim());
       fd.append("privacyConsent", "true");
+      if (cvLink.trim()) fd.append("cvLink", cvLink.trim());
 
       const res = await fetch("/api/careers", { method: "POST", body: fd });
       const data = await res.json();
@@ -264,6 +277,7 @@ export default function CareersPage() {
         setRole("");
         setRoleOther("");
         setConsent(false);
+        setCvLink("");
       } else {
         setErrors({ form: "We couldn't send this. Please try again in a moment." });
       }
@@ -341,6 +355,11 @@ export default function CareersPage() {
                 <div>
                   <span className="location-country">{loc.country}</span>
                   <span className="location-note">{loc.note}</span>
+                  {loc.href && (
+                    <a href={loc.href} className="location-link">
+                      See the role
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -356,17 +375,17 @@ export default function CareersPage() {
           <div className="roles-icon">
             <Compass size={26} />
           </div>
-          <h2 className="roles-title">There are no open roles right now</h2>
+          <h2 className="roles-title">Open and upcoming roles</h2>
           <p className="roles-text">
-            We&apos;re a lean, deliberately small team — which means new openings are
-            infrequent, but real when they happen. If nothing above fits today, that
-            doesn&apos;t mean there&apos;s no fit at all. Tell us who you are and what
-            you&apos;re good at, and we&apos;ll reach out the moment something matches.
+            We have one role in our candidate pipeline, listed below. It is contingent on funding.
+            Other roles open infrequently; you can always introduce yourself through the form at the
+            bottom of this page.
           </p>
           <button type="button" className="btn-navy" onClick={scrollToForm}>
             Tell us about yourself <ArrowUpRight size={16} />
           </button>
         </FadeUp>
+        <RolePosting />
       </section>
 
       {/* ═══════════════════════════════════════════
@@ -477,6 +496,30 @@ export default function CareersPage() {
                       </div>
                       <p className="career-microcopy" style={{ marginTop: 8 }}>
                         Please do not include your date of birth, photo, ID numbers or health details.
+                      </p>
+                    </div>
+
+                    <div className="career-field career-field-full">
+                      <span className="career-field-label">
+                        Link to your CV or profile (LinkedIn, ORCID, Google Scholar, or personal site) (optional)
+                      </span>
+                      <div className={`career-input-box ${errors.cvLink ? "career-field-error" : ""}`}>
+                        <input
+                          type="text"
+                          inputMode="url"
+                          placeholder="https://"
+                          value={cvLink}
+                          onChange={(e) => {
+                            setCvLink(e.target.value);
+                            setErrors((p) => ({ ...p, cvLink: undefined }));
+                          }}
+                        />
+                      </div>
+                      {errors.cvLink && <span className="career-field-error-text">{errors.cvLink}</span>}
+                      <p className="career-microcopy" style={{ marginTop: 8 }}>
+                        To apply for the Computational Biology / ML Lead role, please email your CV to{" "}
+                        <a href="mailto:hr@i4isciences.com" style={{ textDecoration: "underline" }}>hr@i4isciences.com</a>.
+                        This form cannot take file attachments.
                       </p>
                     </div>
 
@@ -612,7 +655,8 @@ export default function CareersPage() {
         .locations-section { padding: 0 24px 96px; }
         .locations-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .locations-kicker { text-align: left; }
-        .locations-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .locations-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+        .location-link { display: inline-block; margin-top: 6px; font-size: 12.5px; font-weight: 700; color: #0A2E8A; text-decoration: underline; }
         .location-item {
           display: flex; align-items: flex-start; gap: 12px;
           padding: 20px 22px; border: 1px solid rgba(10,46,138,0.10); border-radius: 16px;
@@ -622,7 +666,17 @@ export default function CareersPage() {
         .location-note { display: block; font-size: 12.5px; color: rgba(16,32,78,0.55); margin-top: 2px; }
 
         /* ═══ OPEN ROLES ═══ */
-        .roles-section { padding: 20px 24px 100px; display: flex; justify-content: center; }
+        .roles-section { padding: 20px 24px 100px; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .role-posting-wrap { width: 100%; max-width: 760px; background: #fff; border: 1px solid rgba(10,46,138,0.10); border-radius: 18px; padding: 36px 32px; color: #10204e; line-height: 1.65; font-size: 15px; }
+        .role-posting-wrap h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 8px; }
+        .role-posting-wrap h2 span { font-weight: 500; color: rgba(16,32,78,0.6); }
+        .role-posting-wrap h3 { font-size: 17px; font-weight: 700; margin: 26px 0 8px; }
+        .role-posting-wrap p { margin: 10px 0; }
+        .role-posting-wrap ul { list-style: disc; padding-left: 22px; margin: 10px 0; }
+        .role-posting-wrap li { margin: 6px 0; }
+        .role-posting-wrap a { color: #0A2E8A; text-decoration: underline; }
+        .role-posting-wrap a.button { display: inline-block; background: #0A2E8A; color: #fff; text-decoration: none; font-weight: 700; padding: 12px 22px; border-radius: 999px; margin-top: 6px; }
+        .eoe-line { text-align: center; font-size: 13px; color: rgba(16,32,78,0.6); padding: 0 24px 40px; }
         .roles-card {
           max-width: 720px; width: 100%; text-align: center;
           background: linear-gradient(165deg, #eef3ff 0%, #f7f9fd 100%);
@@ -742,6 +796,7 @@ export default function CareersPage() {
           * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
       `}</style>
+      <p className="eoe-line">I4I Sciences LLC is an equal opportunity employer.</p>
     </main>
   );
 }
