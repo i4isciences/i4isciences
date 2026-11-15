@@ -10,17 +10,19 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async headers() {
+  async redirects() {
+    // Old PostdocWorks URLs now permanently redirect to the Doc2Postdoc pages.
     return [
+      // i4isciences.ai -> canonical .com site, same path (decision: always .com)
       {
-        source: "/postdocworks",
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value: "noindex, nosnippet",
-          },
-        ],
+        source: "/:path*",
+        has: [{ type: "host", value: "(www\\.)?i4isciences\\.ai" }],
+        destination: "https://www.i4isciences.com/:path*",
+        permanent: true,
       },
+      { source: "/postdocworks", destination: "/doc2postdoc", permanent: true },
+      { source: "/postdocworks/doc2postdoc", destination: "/doc2postdoc", permanent: true },
+      { source: "/postdocworks/eyewee", destination: "/eyewee", permanent: true },
     ];
   },
   typescript: {

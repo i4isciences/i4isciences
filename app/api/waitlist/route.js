@@ -25,23 +25,23 @@ export async function POST(req) {
           type: "waitlist",
           email,
           role: role || null,
-          source: source || "postdocworks",
+          source: source || "doc2postdoc",
         }),
       }).catch(() => {}); // n8n being down shouldn't block the signup
     }
 
     const { error } = await resend.emails.send({
       from: "i4iSciences <contact@i4isciences.com>",
-      to: ["ranjit@i4isciences.com"],
+      to: ["hello@doc2postdoc.com"],
       replyTo: email,
-      subject: `PostdocWorks waitlist signup${role ? ` — ${role}` : ""}`,
+      subject: `Doc2Postdoc waitlist signup${role ? ` — ${role}` : ""}`,
       html: `
         <div style="font-family:Arial;padding:24px">
           <h2>New waitlist signup</h2>
           <hr/>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Role:</strong> ${role || "Not specified"}</p>
-          <p><strong>Source:</strong> ${source || "postdocworks"}</p>
+          <p><strong>Source:</strong> ${source || "doc2postdoc"}</p>
         </div>
       `,
     });

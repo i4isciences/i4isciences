@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-const siteUrl = "https://www.i4isciences.com/postdocworks/doc2postdoc";
+const siteUrl = "https://www.i4isciences.com/doc2postdoc";
 const pageTitle = "Doc2Postdoc";
-const title = "Doc2Postdoc | PostdocWorks | i4iSciences";
+const title = "Doc2Postdoc | i4iSciences";
 const description =
   "Doc2Postdoc pairs every PhD facing the postdoc transition with peers and postdocs who've already made the same move — by field, career stage, and institution type.";
 
@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description,
   keywords: [
     "Doc2Postdoc",
-    "PostdocWorks",
     "PhD to postdoc transition",
     "peer mentoring",
     "postdoc mentorship",
@@ -39,7 +38,6 @@ const pageLd = {
   name: title,
   description,
   url: siteUrl,
-  brand: { "@type": "Brand", name: "PostdocWorks" },
 };
 
 export default function Doc2PostdocLayout({ children }: { children: React.ReactNode }) {

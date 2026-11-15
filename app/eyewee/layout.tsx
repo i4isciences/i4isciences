@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 
-const siteUrl = "https://www.i4isciences.com/postdocworks/eyewee";
+const siteUrl = "https://www.i4isciences.com/eyewee";
 const pageTitle = "Eyewee";
-const title = "Eyewee | PostdocWorks | i4iSciences";
+const title = "Eyewee | i4iSciences";
 const description =
-  "Eyewee is the AI agent behind PostdocWorks and Doc2Postdoc — it reads the record, checks the endorsement, connects the network, and reassesses over time.";
+  "Eyewee is the AI agent behind Doc2Postdoc — it reads the record, checks the endorsement, connects the network, and reassesses over time.";
 
 export const metadata: Metadata = {
   title: pageTitle,
   description,
   keywords: [
     "eyewee",
-    "PostdocWorks",
     "Doc2Postdoc",
     "AI research agent",
     "postdoc verification agent",
@@ -39,7 +38,6 @@ const pageLd = {
   name: title,
   description,
   url: siteUrl,
-  brand: { "@type": "Brand", name: "PostdocWorks" },
 };
 
 export default function EyeweeLayout({ children }: { children: React.ReactNode }) {

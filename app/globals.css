@@ -34,7 +34,7 @@ body {
 }
 
 /* ---------------------------------------------------------------- */
-/* The eyewee eye mark -- used on /postdocworks/eyewee */
+/* The eyewee eye mark -- used on /eyewee */
 /* ---------------------------------------------------------------- */
 
 .eye-svg .eye-lens, .eye-svg .eye-iris, .eye-svg .eye-pupil, .eye-svg .eye-spark { transform-box: fill-box; transform-origin: center; }

@@ -1,0 +1,27 @@
+/* i4iSciences World Clocks widget - CSS copied verbatim from i4i-world-clocks.html */
+  .i4i-wrap { font-family:Georgia,'Times New Roman',serif; text-align:center; }
+  .i4i-clocks { display:flex; flex-wrap:wrap; gap:10px 14px; justify-content:center; padding:10px 8px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .i4i-clocks:focus-visible { outline:3px solid #b8956a; outline-offset:2px; border-radius:12px; }
+  .i4i-clock { display:flex; }
+  .i4i-hint { margin:2px 0 6px; font-size:12px; color:#8b0000; user-select:none; }
+
+  .i4i-clock-card { width:92px; box-sizing:border-box; padding:6px 4px 5px; text-align:center; background:#fffaf0;
+    border:3px solid #8b0000; border-radius:10px; outline:1.5px solid #8b0000; outline-offset:3px; box-shadow:0 2px 6px rgba(0,0,0,.12);
+    transition:width .3s ease, padding .3s ease, border-radius .3s ease; }
+  .i4i-clock-card h3 { margin:0 0 4px; font-size:10px; line-height:1.15; font-weight:700; color:#8b0000; transition:font-size .3s ease; }
+  .i4i-clock-card svg { width:56px; height:56px; display:block; margin:0 auto; transition:width .3s ease, height .3s ease; }
+  .i4i-clock-digital { margin-top:4px; font-size:11px; font-weight:700; color:#3b1f1f; font-variant-numeric:tabular-nums; white-space:nowrap; transition:font-size .3s ease; }
+  .i4i-clock-digital span { font-size:9px; color:#8b0000; margin-left:2px; }
+  .i4i-clock-date { display:none; margin-top:4px; font-size:12px; color:#5a4a42; }
+  .i4i-num { font:700 11px Georgia,serif; fill:#8b0000; text-anchor:middle; dominant-baseline:central; }
+
+  /* Expanded state */
+  .i4i-clocks.open { gap:36px; padding:24px; }
+  .i4i-clocks.open .i4i-clock-card { width:192px; padding:16px 12px 14px; border-width:4px; border-radius:16px; outline-width:2px; outline-offset:4px; box-shadow:0 4px 12px rgba(0,0,0,.12); }
+  .i4i-clocks.open h3 { font-size:17px; margin-bottom:10px; }
+  .i4i-clocks.open svg { width:130px; height:130px; }
+  .i4i-clocks.open .i4i-clock-digital { font-size:20px; margin-top:10px; letter-spacing:.5px; }
+  .i4i-clocks.open .i4i-clock-digital span { font-size:13px; margin-left:4px; }
+  .i4i-clocks.open .i4i-clock-date { display:block; }
+  @media (max-width:720px) { .i4i-clocks.open { gap:24px 20px; padding:16px 8px; } .i4i-clocks.open .i4i-clock-card { width:150px; } .i4i-clocks.open svg { width:100px; height:100px; } }
+  @media (prefers-reduced-motion:reduce) { .i4i-clock-card, .i4i-clock-card h3, .i4i-clock-card svg, .i4i-clock-digital { transition:none; } }

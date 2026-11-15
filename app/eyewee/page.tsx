@@ -3,13 +3,13 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-import WaitlistForm from "@/components/postdocworks/WaitlistForm";
-import { Eye } from "@/components/postdocworks/eye/Eye";
+import WaitlistForm from "@/components/doc2postdoc/WaitlistForm";
+import { Eye } from "@/components/doc2postdoc/eye/Eye";
 
 /* ─────────────────────────────────────────────
-   TOKENS — matches app/postdocworks/page.tsx
+   TOKENS — matches app/doc2postdoc/page.tsx
    ───────────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -221,15 +221,6 @@ export default function EyeweePage() {
           ══════════════════════════════════════ */}
       <section style={{ background: `linear-gradient(180deg, ${C.white} 0%, ${C.bgAlt} 100%)`, paddingTop: "clamp(140px, 16vw, 180px)", paddingBottom: 72 }}>
         <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
-          <FadeIn>
-            <Link
-              href="/postdocworks"
-              style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: C.textMuted, textDecoration: "none", marginBottom: 28 }}
-            >
-              <ArrowLeft size={14} strokeWidth={2.5} /> PostdocWorks
-            </Link>
-          </FadeIn>
-
           <FadeIn delay={0.05}>
             <div style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
               <Eye state="idle" size={150} />
@@ -257,7 +248,7 @@ export default function EyeweePage() {
           <FadeIn delay={0.16}>
             <p style={{ fontSize: "clamp(15.5px, 1.5vw, 18px)", lineHeight: 1.65, color: C.textMuted, maxWidth: 600, margin: "0 auto 36px" }}>
               For the postdoc carrying someone else&rsquo;s unsolved dream project — alone, in a new country, with no
-              time left over. Eyewee is the AI agent working behind every match on PostdocWorks and Doc2Postdoc.
+              time left over. Eyewee is the AI agent working behind every match on Doc2Postdoc.
             </p>
           </FadeIn>
 
@@ -386,23 +377,8 @@ export default function EyeweePage() {
                   Find the person who has already made your transition. Doc2Postdoc matches PhD researchers with
                   credible postdocs for specific, human guidance when the stakes are highest.
                 </p>
-                <Link href="/postdocworks/doc2postdoc" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: 13, fontWeight: 700, color: C.navy, textDecoration: "none" }}>
+                <Link href="/doc2postdoc" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: 13, fontWeight: 700, color: C.navy, textDecoration: "none" }}>
                   Explore Doc2Postdoc <ArrowRight size={13} strokeWidth={2.5} />
-                </Link>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.12}>
-              <div style={{ flex: "1 1 380px", minWidth: 280, background: C.bgAlt, border: `1px solid ${C.border}`, borderRadius: 18, padding: 32, height: "100%" }}>
-                <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 12, letterSpacing: "0.1em", color: C.textFaint, marginBottom: 14 }}>02 / POSTDOCWORKS</div>
-                <h3 style={{ fontSize: 19, fontWeight: 700, color: C.ink, lineHeight: 1.35, margin: "0 0 14px" }}>
-                  Your record, finally read as a whole.
-                </h3>
-                <p style={{ fontSize: 14.5, lineHeight: 1.7, color: C.textMuted, margin: 0 }}>
-                  PostdocWorks gives institutions and researchers a more intelligent way to meet: verified
-                  credentials, meaningful context, and a career signal that goes beyond a title.
-                </p>
-                <Link href="/postdocworks" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: 13, fontWeight: 700, color: C.navy, textDecoration: "none" }}>
-                  About PostdocWorks <ArrowRight size={13} strokeWidth={2.5} />
                 </Link>
               </div>
             </FadeIn>
@@ -535,9 +511,9 @@ export default function EyeweePage() {
           ══════════════════════════════════════ */}
       <section style={{ background: C.bgAlt, padding: "28px 24px", borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 1080, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-          <span style={{ fontSize: 13, color: C.textMuted }}>© eyewee — a PostdocWorks venture of i4iSciences</span>
-          <Link href="/postdocworks" style={{ fontSize: 13, fontWeight: 700, color: C.navy, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 4 }}>
-            Visit PostdocWorks <ArrowRight size={13} strokeWidth={2.5} />
+          <span style={{ fontSize: 13, color: C.textMuted }}>© eyewee — a service of i4iSciences</span>
+          <Link href="/doc2postdoc" style={{ fontSize: 13, fontWeight: 700, color: C.navy, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 4 }}>
+            Visit Doc2Postdoc <ArrowRight size={13} strokeWidth={2.5} />
           </Link>
         </div>
       </section>

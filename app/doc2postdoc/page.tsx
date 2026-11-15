@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-import WaitlistForm from "@/components/postdocworks/WaitlistForm";
+import WaitlistForm from "@/components/doc2postdoc/WaitlistForm";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -37,7 +37,7 @@ const STEPS = [
   {
     n: "2",
     title: "Research credibility profile",
-    desc: "Your profile carries the same verification standard as the rest of PostdocWorks Navigator.",
+    desc: "Your profile carries a consistent, careful verification standard.",
   },
   {
     n: "3",
@@ -77,44 +77,6 @@ export default function Doc2PostdocPage() {
           ══════════════════════════════════════ */}
       <section style={{ background: C.white, paddingTop: "clamp(140px, 16vw, 180px)", paddingBottom: 88 }}>
         <div style={{ maxWidth: 780, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
-          <FadeIn>
-            <Link
-              href="/postdocworks"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                fontSize: 13,
-                fontWeight: 600,
-                color: C.textMuted,
-                textDecoration: "none",
-                marginBottom: 28,
-              }}
-            >
-              <ArrowLeft size={14} strokeWidth={2.5} /> PostdocWorks
-            </Link>
-          </FadeIn>
-
-          <FadeIn delay={0.05}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "6px 16px",
-                borderRadius: 999,
-                border: `1px solid ${C.border}`,
-                fontSize: 13,
-                fontWeight: 600,
-                color: C.textMuted,
-                marginBottom: 28,
-              }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.gold }} />
-              A PostdocWorks venture
-            </div>
-          </FadeIn>
-
           <FadeIn delay={0.1}>
             <h1
               style={{
@@ -142,7 +104,6 @@ export default function Doc2PostdocPage() {
             >
               Doc2Postdoc pairs every PhD facing the postdoc transition with peers and postdocs
               who&rsquo;ve already made the same move — by field, career stage, and institution type.
-              Launching inside PostdocWorks Navigator.
             </p>
           </FadeIn>
 
@@ -281,7 +242,7 @@ export default function Doc2PostdocPage() {
               Be first through when it opens.
             </h2>
             <p style={{ fontSize: 15.5, lineHeight: 1.6, color: C.textMuted, margin: "0 0 32px" }}>
-              Doc2Postdoc launches as the first visible capability inside PostdocWorks Navigator.
+              Join the waitlist and we will let you know the moment Doc2Postdoc opens.
             </p>
             <WaitlistForm source="doc2postdoc" role={role} buttonLabel="Notify me at launch" />
           </FadeIn>
@@ -303,9 +264,9 @@ export default function Doc2PostdocPage() {
             gap: 12,
           }}
         >
-          <span style={{ fontSize: 13, color: C.textMuted }}>© PostdocWorks — a venture of i4iSciences</span>
+          <span style={{ fontSize: 13, color: C.textMuted }}>© Doc2Postdoc — a service of i4iSciences</span>
           <Link
-            href="/postdocworks"
+            href="/eyewee"
             style={{
               fontSize: 13,
               fontWeight: 700,
@@ -316,7 +277,7 @@ export default function Doc2PostdocPage() {
               gap: 4,
             }}
           >
-            Visit PostdocWorks <ArrowRight size={13} strokeWidth={2.5} />
+            Meet eyewee <ArrowRight size={13} strokeWidth={2.5} />
           </Link>
         </div>
       </section>

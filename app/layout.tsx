@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 import "./d2p-site-kit.css";
-import D2PAnnouncementBar from "@/components/d2p/D2PAnnouncementBar";
+import "./i4i-world-clocks.css";
+import TopStrip from "@/components/top-strip/TopStrip";
 
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
@@ -113,7 +114,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
         <AuthRedirectGuard />
-        <D2PAnnouncementBar />
+        <TopStrip />
         <Navbar />
 
         <main id="page-top" className="overflow-x-hidden">

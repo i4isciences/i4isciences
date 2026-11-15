@@ -1,0 +1,109 @@
+<!--
+  i4iSciences World Clocks widget (compact banner, click to expand)
+  Prepared: Fri 2026-11-13, 17:50 CT; revised Fri 2026-11-13, 18:01 CT (America/Chicago)
+  Owner: i4iSciences / Ranjit Chauhan, Founder & CEO. All rights reserved.
+  Usage: paste this whole block where the clocks should appear (an HTML/Custom-code
+  block, or a page template). No libraries, no API keys, no external requests.
+  Default state: small banner. Click (or press Enter/Space) to enlarge; click again to shrink.
+  To start expanded, change class="i4i-clocks" to class="i4i-clocks open".
+  To add a city: add one <div class="i4i-clock" data-tz="IANA/Zone" data-label="Name Time"></div>
+-->
+<style>
+  .i4i-wrap { font-family:Georgia,'Times New Roman',serif; text-align:center; }
+  .i4i-clocks { display:flex; flex-wrap:wrap; gap:10px 14px; justify-content:center; padding:10px 8px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .i4i-clocks:focus-visible { outline:3px solid #b8956a; outline-offset:2px; border-radius:12px; }
+  .i4i-clock { display:flex; }
+  .i4i-hint { margin:2px 0 6px; font-size:12px; color:#8b0000; user-select:none; }
+
+  .i4i-clock-card { width:92px; box-sizing:border-box; padding:6px 4px 5px; text-align:center; background:#fffaf0;
+    border:3px solid #8b0000; border-radius:10px; outline:1.5px solid #8b0000; outline-offset:3px; box-shadow:0 2px 6px rgba(0,0,0,.12);
+    transition:width .3s ease, padding .3s ease, border-radius .3s ease; }
+  .i4i-clock-card h3 { margin:0 0 4px; font-size:10px; line-height:1.15; font-weight:700; color:#8b0000; transition:font-size .3s ease; }
+  .i4i-clock-card svg { width:56px; height:56px; display:block; margin:0 auto; transition:width .3s ease, height .3s ease; }
+  .i4i-clock-digital { margin-top:4px; font-size:11px; font-weight:700; color:#3b1f1f; font-variant-numeric:tabular-nums; white-space:nowrap; transition:font-size .3s ease; }
+  .i4i-clock-digital span { font-size:9px; color:#8b0000; margin-left:2px; }
+  .i4i-clock-date { display:none; margin-top:4px; font-size:12px; color:#5a4a42; }
+  .i4i-num { font:700 11px Georgia,serif; fill:#8b0000; text-anchor:middle; dominant-baseline:central; }
+
+  /* Expanded state */
+  .i4i-clocks.open { gap:36px; padding:24px; }
+  .i4i-clocks.open .i4i-clock-card { width:192px; padding:16px 12px 14px; border-width:4px; border-radius:16px; outline-width:2px; outline-offset:4px; box-shadow:0 4px 12px rgba(0,0,0,.12); }
+  .i4i-clocks.open h3 { font-size:17px; margin-bottom:10px; }
+  .i4i-clocks.open svg { width:130px; height:130px; }
+  .i4i-clocks.open .i4i-clock-digital { font-size:20px; margin-top:10px; letter-spacing:.5px; }
+  .i4i-clocks.open .i4i-clock-digital span { font-size:13px; margin-left:4px; }
+  .i4i-clocks.open .i4i-clock-date { display:block; }
+  @media (max-width:720px) { .i4i-clocks.open { gap:24px 20px; padding:16px 8px; } .i4i-clocks.open .i4i-clock-card { width:150px; } .i4i-clocks.open svg { width:100px; height:100px; } }
+  @media (prefers-reduced-motion:reduce) { .i4i-clock-card, .i4i-clock-card h3, .i4i-clock-card svg, .i4i-clock-digital { transition:none; } }
+</style>
+
+<div class="i4i-wrap">
+  <div class="i4i-clocks" id="i4iClocks" role="button" tabindex="0" aria-expanded="false" aria-label="World clocks. Activate to enlarge or shrink.">
+    <div class="i4i-clock" data-tz="America/Los_Angeles" data-label="San Francisco Time"></div>
+    <div class="i4i-clock" data-tz="America/Chicago"     data-label="Chicago Time"></div>
+    <div class="i4i-clock" data-tz="America/New_York"    data-label="New York Time"></div>
+    <div class="i4i-clock" data-tz="Asia/Kolkata"        data-label="New Delhi Time"></div>
+  </div>
+  <div class="i4i-hint" id="i4iHint">Click to enlarge &#9662;</div>
+</div>
+
+<script>
+(function () {
+  function build(el) {
+    var tz = el.getAttribute('data-tz'), label = el.getAttribute('data-label') || tz;
+    var nums = [['XII',50,17],['III',83,50],['VI',50,83],['IX',17,50]]
+      .map(function (n) { return '<text class="i4i-num" x="'+n[1]+'" y="'+n[2]+'">'+n[0]+'</text>'; }).join('');
+    el.innerHTML =
+      '<div class="i4i-clock-card"><h3></h3>' +
+      '<svg viewBox="0 0 100 100" role="img" aria-label="Analog clock">' +
+        '<circle cx="50" cy="50" r="47" fill="#fffdf7" stroke="#8b0000" stroke-width="3.5"/>' +
+        '<circle cx="50" cy="50" r="40" fill="none" stroke="#b8956a" stroke-width=".6"/>' + nums +
+        '<line class="h" x1="50" y1="50" x2="50" y2="31" stroke="#3b1f1f" stroke-width="3.2" stroke-linecap="round"/>' +
+        '<line class="m" x1="50" y1="50" x2="50" y2="22" stroke="#3b1f1f" stroke-width="2.2" stroke-linecap="round"/>' +
+        '<line class="s" x1="50" y1="56" x2="50" y2="18" stroke="#b8956a" stroke-width="1" stroke-linecap="round"/>' +
+        '<circle cx="50" cy="50" r="2.6" fill="#8b0000"/>' +
+      '</svg><div class="i4i-clock-digital"></div><div class="i4i-clock-date"></div></div>';
+    el.querySelector('h3').textContent = label;
+    el._tz = tz;
+  }
+
+  function parts(tz, now) {
+    var f = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, hourCycle: 'h23',
+      hour: 'numeric', minute: 'numeric', second: 'numeric' }).formatToParts(now), o = {};
+    f.forEach(function (p) { o[p.type] = parseInt(p.value, 10); });
+    return o;
+  }
+
+  function tick() {
+    var now = new Date();
+    document.querySelectorAll('.i4i-clock').forEach(function (el) {
+      var t = parts(el._tz, now), s = t.second, m = t.minute + s / 60, h = (t.hour % 12) + m / 60;
+      el.querySelector('.h').setAttribute('transform', 'rotate(' + (h * 30) + ' 50 50)');
+      el.querySelector('.m').setAttribute('transform', 'rotate(' + (m * 6) + ' 50 50)');
+      el.querySelector('.s').setAttribute('transform', 'rotate(' + (s * 6) + ' 50 50)');
+      var dp = {};
+      new Intl.DateTimeFormat('en-US', { timeZone: el._tz, hour12: true, hour: 'numeric', minute: '2-digit', second: '2-digit' })
+        .formatToParts(now).forEach(function (p) { dp[p.type] = p.value; });
+      el.querySelector('.i4i-clock-digital').innerHTML =
+        dp.hour + ':' + dp.minute + ':' + dp.second + '<span>' + String(dp.dayPeriod).replace(/\./g, '').toUpperCase() + '</span>';
+      el.querySelector('.i4i-clock-date').textContent =
+        new Intl.DateTimeFormat('en-US', { timeZone: el._tz, month: 'short', day: 'numeric', year: 'numeric' }).format(now);
+    });
+  }
+
+  var box = document.getElementById('i4iClocks'), hint = document.getElementById('i4iHint');
+  function sync() {
+    var open = box.classList.contains('open');
+    box.setAttribute('aria-expanded', open ? 'true' : 'false');
+    hint.innerHTML = open ? 'Click to shrink &#9652;' : 'Click to enlarge &#9662;';
+  }
+  function toggle() { box.classList.toggle('open'); sync(); }
+  box.addEventListener('click', toggle);
+  box.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+  });
+
+  document.querySelectorAll('.i4i-clock').forEach(build);
+  sync(); tick(); setInterval(tick, 1000);
+})();
+</script>

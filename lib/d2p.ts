@@ -5,7 +5,7 @@
 export const D2P_WAITLIST_URL =
   process.env.NEXT_PUBLIC_D2P_WAITLIST_URL ?? "https://doc2postdoc.com/waitlist";
 export const D2P_URL = process.env.NEXT_PUBLIC_D2P_URL ?? "";
-const HOME = D2P_URL ? `${D2P_URL}/` : "/postdocworks/doc2postdoc";
+const HOME = D2P_URL ? `${D2P_URL}/` : "/doc2postdoc";
 
 export type D2PMedium = "menu" | "card" | "banner" | "banner_learn" | "bar" | "footer";
 
