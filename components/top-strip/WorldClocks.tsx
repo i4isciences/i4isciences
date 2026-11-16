@@ -29,12 +29,12 @@ export default function WorldClocks() {
       el.innerHTML =
         '<div class="i4i-clock-card"><h3></h3>' +
         '<svg viewBox="0 0 100 100" role="img" aria-label="Analog clock">' +
-        '<circle cx="50" cy="50" r="47" fill="#fffdf7" stroke="#8b0000" stroke-width="3.5"/>' +
-        '<circle cx="50" cy="50" r="40" fill="none" stroke="#b8956a" stroke-width=".6"/>' + nums +
-        '<line class="h" x1="50" y1="50" x2="50" y2="31" stroke="#3b1f1f" stroke-width="3.2" stroke-linecap="round"/>' +
-        '<line class="m" x1="50" y1="50" x2="50" y2="22" stroke="#3b1f1f" stroke-width="2.2" stroke-linecap="round"/>' +
-        '<line class="s" x1="50" y1="56" x2="50" y2="18" stroke="#b8956a" stroke-width="1" stroke-linecap="round"/>' +
-        '<circle cx="50" cy="50" r="2.6" fill="#8b0000"/>' +
+        '<circle cx="50" cy="50" r="47" fill="#ffffff" stroke="#0A2E8A" stroke-width="3.5"/>' +
+        '<circle cx="50" cy="50" r="40" fill="none" stroke="#F5A623" stroke-width=".6"/>' + nums +
+        '<line class="h" x1="50" y1="50" x2="50" y2="31" stroke="#0A2E8A" stroke-width="3.2" stroke-linecap="round"/>' +
+        '<line class="m" x1="50" y1="50" x2="50" y2="22" stroke="#0A2E8A" stroke-width="2.2" stroke-linecap="round"/>' +
+        '<line class="s" x1="50" y1="56" x2="50" y2="18" stroke="#F5A623" stroke-width="1" stroke-linecap="round"/>' +
+        '<circle cx="50" cy="50" r="2.6" fill="#0A2E8A"/>' +
         '</svg><div class="i4i-clock-digital"></div><div class="i4i-clock-date"></div></div>';
       (el.querySelector("h3") as HTMLElement).textContent = label;
       el._tz = tz;
